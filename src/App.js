@@ -1,11 +1,10 @@
-import logo from './logo.svg';
 import './App.css';
 
 function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <img src="../turnuplogo.png" className="App-logo" alt="logo" />
+        <img src="../turnuplogo.svg" className="App-logo" alt="logo" />
         <h1>TURN UP</h1>
 
         <p>

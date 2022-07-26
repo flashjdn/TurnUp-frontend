@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="210mm"
+   height="297mm"
+   viewBox="0 0 210 297"
+   version="1.1"
+   id="svg5"
+   inkscape:export-filename="trustmebro.png"
+   inkscape:export-xdpi="85.521889"
+   inkscape:export-ydpi="85.521889"
+   inkscape:version="1.2.1 (9c6d41e410, 2022-07-14)"
+   sodipodi:docname="latest_version1.svg"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:xlink="http://www.w3.org/1999/xlink"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview7"
+     pagecolor="#ffffff"
+     bordercolor="#000000"
+     borderopacity="0.25"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     inkscape:document-units="mm"
+     showgrid="false"
+     inkscape:zoom="0.84142465"
+     inkscape:cx="357.13239"
+     inkscape:cy="465.87653"
+     inkscape:window-width="1920"
+     inkscape:window-height="1017"
+     inkscape:window-x="-8"
+     inkscape:window-y="-8"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="layer4">
+    <inkscape:grid
+       type="xygrid"
+       id="grid6249" />
+  </sodipodi:namedview>
+  <defs
+     id="defs2">
+    <linearGradient
+       inkscape:collect="always"
+       id="linearGradient104200">
+      <stop
+         style="stop-color:#2176ae;stop-opacity:1;"
+         offset="0"
+         id="stop104196" />
+      <stop
+         style="stop-color:#fbb13c;stop-opacity:1;"
+         offset="0.35457063"
+         id="stop104198" />
+    </linearGradient>
+    <linearGradient
+       inkscape:collect="always"
+       id="linearGradient104098">
+      <stop
+         style="stop-color:#2176ae;stop-opacity:1;"
+         offset="0.60664815"
+         id="stop104094" />
+      <stop
+         style="stop-color:#fbb13c;stop-opacity:1;"
+         offset="0.60941821"
+         id="stop104096" />
+    </linearGradient>
+    <linearGradient
+       inkscape:collect="always"
+       id="linearGradient100471">
+      <stop
+         style="stop-color:#fbb13c;stop-opacity:1;"
+         offset="1"
+         id="stop100469" />
+      <stop
+         style="stop-color:#2176ae;stop-opacity:1;"
+         offset="1"
+         id="stop100467" />
+    </linearGradient>
+    <linearGradient
+       inkscape:collect="always"
+       id="linearGradient95187">
+      <stop
+         style="stop-color:#2176ae;stop-opacity:1;"
+         offset="0"
+         id="stop95183" />
+      <stop
+         style="stop-color:#fbb13c;stop-opacity:1;"
+         offset="0.26869807"
+         id="stop95185" />
+    </linearGradient>
+    <symbol
+       id="UpArrow">
+      <title
+         id="title4882">Up Arrow</title>
+      <path
+         d="M 36,9 58,31 V 46 L 42,30 V 62 H 30 V 30 L 14,46 V 31 Z"
+         style="stroke:none"
+         id="path4884" />
+    </symbol>
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient100471"
+       id="linearGradient95189"
+       x1="26.990959"
+       y1="32.059898"
+       x2="103.08939"
+       y2="32.059898"
+       gradientUnits="userSpaceOnUse"
+       spreadMethod="pad" />
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient95187"
+       id="linearGradient99694"
+       gradientUnits="userSpaceOnUse"
+       x1="26.99096"
+       y1="32.059897"
+       x2="103.08939"
+       y2="32.059897"
+       gradientTransform="matrix(2.1239331,0,0,1.9221358,-21.21707,18.075125)" />
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient104200"
+       id="linearGradient99696"
+       gradientUnits="userSpaceOnUse"
+       x1="26.99096"
+       y1="32.059897"
+       x2="103.08939"
+       y2="32.059897"
+       gradientTransform="matrix(2.1239331,0,0,1.9221358,-21.21707,18.075125)" />
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient104098"
+       id="linearGradient104184"
+       gradientUnits="userSpaceOnUse"
+       x1="26.99096"
+       y1="32.059897"
+       x2="103.08939"
+       y2="32.059897"
+       gradientTransform="matrix(2.0205166,0,0,2.0205167,-20.18399,19.000266)" />
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient100471"
+       id="linearGradient4609"
+       gradientUnits="userSpaceOnUse"
+       x1="26.990959"
+       y1="32.059898"
+       x2="103.08939"
+       y2="32.059898"
+       spreadMethod="pad" />
+  </defs>
+  <g
+     inkscape:groupmode="layer"
+     id="layer4"
+     inkscape:label="Layer 4"
+     style="mix-blend-mode:normal;fill:url(#linearGradient95189);fill-opacity:1"
+     transform="translate(-15.879566,-6.4461606)">
+    <text
+       xml:space="preserve"
+       style="font-weight:bold;font-size:51.3211px;font-family:Corbel;-inkscape-font-specification:'Corbel Bold';fill:url(#linearGradient104184);fill-opacity:1;stroke-width:0.534595"
+       x="33.325268"
+       y="116.79569"
+       id="text114-5"
+       transform="scale(1.0511831,0.95130903)"><tspan
+         sodipodi:role="line"
+         id="tspan112-5"
+         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-family:'Lilita One';-inkscape-font-specification:'Lilita One Bold';fill:url(#linearGradient104184);fill-opacity:1;stroke-width:0.534595"
+         x="33.325268"
+         y="116.79569">turnUp</tspan></text>
+    <ellipse
+       style="fill:url(#linearGradient99694);fill-opacity:1;stroke-width:0.483521"
+       id="path326-2"
+       cx="161.55054"
+       cy="73.766693"
+       rx="5.8408155"
+       ry="1.6198643" />
+    <ellipse
+       style="fill:url(#linearGradient99696);fill-opacity:1;stroke-width:0.483521"
+       id="path326-7-0"
+       cx="161.55057"
+       cy="69.333374"
+       rx="5.8408155"
+       ry="1.6198643"
+       inkscape:label="path326-7" />
+    <use
+       xlink:href="#UpArrow"
+       style="fill:url(#linearGradient4609);fill-opacity:1;stroke:#000000"
+       id="use6227-2"
+       transform="matrix(0.96769826,0,0,0.50856507,126.71,34.483897)" />
+  </g>
+</svg>
