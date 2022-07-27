@@ -13,7 +13,7 @@ export default function LandingPage() {
             </video>
             <img src={logo} alt="turnup logo" className="logo"></img>
             <div className="text-card">
-                <p className="slogan">Free local events, all you have to do is turn up.</p>
+                <h4 className="slogan">Free local events, all you have to do is turn up.</h4>
                 <button className="sign-up">Sign Up!</button>
                 <p className="about-text">Click here to see what you're signing up for</p>
             </div>
