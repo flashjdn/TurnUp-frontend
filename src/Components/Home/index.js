@@ -8,7 +8,7 @@ import Promovid from "../../Assets/turnUp v5 promo - HD 1080p.mp4";
 export default function LandingPage() {
     return (
         <div>
-            <video loop autoPlay className="vid">
+            <video loop autoPlay muted className="vid">
                 <source src={Promovid} type='video/mp4' />
             </video>
             <img src={logo} alt="turnup logo" className="logo"></img>
