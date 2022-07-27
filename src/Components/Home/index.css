@@ -3,15 +3,16 @@
 
 .sign-up {
     font-size: 3rem;
+    /* text-shadow: 2px 2px black; */
     display: inline-block;
     padding: 10px 15px;
     cursor: pointer;
     text-decoration: none;
     color: white;
     background-color: #FBB13C;
-    border: none;
+    border-style: solid black;
     border-radius: 15px;
-    box-shadow: 0 9px #999;
+    box-shadow: 0 12px #999;
 }
 
 .sign-up:hover {
@@ -20,16 +21,18 @@
 
 .sign-up:active {
     background-color: #a37327;
-    box-shadow: 0 10px #666;
+    box-shadow: 0 5px #666;
     transform: translateY(4px);
 }
 
 .slogan {
     color: white;
+    text-shadow: 2px 2px black;
 }
 
 .about-text {
     color: white;
+    text-shadow: 2px 2px black;
 }
 
 .vid {
@@ -42,9 +45,9 @@
     z-index: -1;
 }
 
-.text-card {
+/* .text-card {
     background-color: rgba(100, 100, 100, 0.75);
     padding: 15px 25px;
     border: none;
     border-radius: 25%;
-}
+} */
