@@ -55,7 +55,7 @@ function MapContainer(props) {
         <MarkerF
           onLoad={onLoad}
           position={props.centerObj}
-          icon="https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png"
+          icon="https://i.postimg.cc/DfXqkmRL/human-location-svgrepo-com.png"
         />
       </GoogleMap>
     </LoadScript>
