@@ -1,5 +1,6 @@
 import React from "react";
 import { GoogleMap, LoadScript } from "@react-google-maps/api";
+import { Circle } from "@react-google-maps/api";
 
 /*passed to props:
  CenterCoord = {
@@ -12,13 +13,34 @@ function MapContainer(props) {
     position: "absolute",
   };
 
+  const options = {
+    strokeColor: "#FF0000",
+    strokeOpacity: 0.8,
+    strokeWeight: 2,
+    fillColor: "#FF0000",
+    fillOpacity: 0.35,
+    clickable: false,
+    draggable: false,
+    editable: false,
+    visible: true,
+    radius: 10000,
+    zIndex: 1,
+  };
+
   return (
     <LoadScript googleMapsApiKey="AIzaSyBfoRI7QkmzhSgXHoxVbguowVBzsWAn1G8">
       <GoogleMap
         mapContainerStyle={mapStyles}
-        zoom={18}
+        zoom={14}
         center={props.centerObj}
-      />
+      >
+        <Circle
+          // required
+          center={props.centerObj}
+          // required
+          options={options}
+        />
+      </GoogleMap>
     </LoadScript>
   );
 }
