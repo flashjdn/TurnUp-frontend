@@ -1,6 +1,6 @@
 import React from "react";
 import { GoogleMap, LoadScript } from "@react-google-maps/api";
-import { Circle, Marker } from "@react-google-maps/api";
+import { CircleF, MarkerF } from "@react-google-maps/api";
 
 /*passed to props:
  CenterCoord = {
@@ -8,36 +8,32 @@ import { Circle, Marker } from "@react-google-maps/api";
 };*/
 function MapContainer(props) {
   const mapStyles = {
-    height: "100%",
+    height: "94.5%",
     width: "100%",
     position: "absolute",
   };
 
   const options = {
-    strokeColor: "#FF0000",
+    strokeColor: "#006390",
     strokeOpacity: 0.8,
     strokeWeight: 2,
-    fillColor: "#FF0000",
-    fillOpacity: 0.35,
+    fillColor: "#fbb02d",
+    fillOpacity: 0.15,
     clickable: false,
     draggable: false,
     editable: false,
     visible: true,
-    radius: 10000,
+    radius: 4000,
     zIndex: 1,
   };
 
-  // const onLoad = circle => {
-  //   console.log('Circle onLoad circle: ', circle)
-  // }
+  const onLoad = (circle) => {
+    console.log("Circle onLoad circle: ", circle);
+  };
 
-  // const onUnmount = circle => {
-  //   console.log('Circle onUnmount circle: ', circle)
-  // }
-
-  const onLoad = marker => {
-    console.log('marker: ', marker)
-  }
+  const onUnmount = (circle) => {
+    console.log("Circle onUnmount circle: ", circle);
+  };
 
   return (
     <LoadScript googleMapsApiKey="AIzaSyBfoRI7QkmzhSgXHoxVbguowVBzsWAn1G8">
@@ -46,7 +42,7 @@ function MapContainer(props) {
         zoom={14}
         center={props.centerObj}
       >
-        {/* <Circle
+        <CircleF
           // optional
           onLoad={onLoad}
           // optional
@@ -55,17 +51,19 @@ function MapContainer(props) {
           center={props.centerObj}
           // required
           options={options}
-        /> */}
-        <Marker
+        />
+        <MarkerF
           onLoad={onLoad}
-          position={{ lat: 50.993625146749665, lng: - 0.11788521861601084 }}
+          position={props.centerObj}
+          icon="https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png"
         />
       </GoogleMap>
-
     </LoadScript>
   );
 }
 export default MapContainer;
+
+//{ lat: 50.993625146749665, lng: - 0.11788521861601084 }
 /*
 const { GoogleMap, LoadScript } = require("../../");
 const ScriptLoaded = require("../../docs/ScriptLoaded").default;
