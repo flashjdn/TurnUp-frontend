@@ -16,7 +16,7 @@ function MapContainer(props) {
     <LoadScript googleMapsApiKey="AIzaSyBfoRI7QkmzhSgXHoxVbguowVBzsWAn1G8">
       <GoogleMap
         mapContainerStyle={mapStyles}
-        zoom={13}
+        zoom={18}
         center={props.centerObj}
       />
     </LoadScript>
