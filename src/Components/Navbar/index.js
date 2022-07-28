@@ -24,13 +24,9 @@ function Navbar() {
   return (
     <div className="page-header">
       <nav id="navigation-bar" className="nav-bar">
-        <a className="active" href="#">
-          {" "}
-          HOME{" "}
-        </a>
-        <a href="#"> PROFILE </a>
-        <a href="#"> ABOUT </a>
-        <a href="#"> SIGN OUT </a>
+        <a href="/profile"> PROFILE </a>
+        <a href="/explore"> EXPLORE </a>
+        <a href="/"> SIGN OUT </a>
       </nav>
       <a id="menu-icon" className="menu-icon" onClick={onMenuClick}>
         <MenuIcon></MenuIcon>
