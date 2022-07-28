@@ -1,5 +1,6 @@
 import "./App.css";
 import Card from "../Card";
+import Navbar from "../Navbar";
 // import LandingPage from "../Home";
 import { eventObject } from "../../lib/dummy";
 
