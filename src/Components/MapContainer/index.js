@@ -35,6 +35,13 @@ function MapContainer(props) {
     console.log("Circle onUnmount circle: ", circle);
   };
 
+  /**********************************************DUMMY DATA ALERT************************************************ */
+  const events = [
+    { lat: 47.602508712234524, lng: 3.5412595468827868 },
+    { lat: 47.605623195531535, lng: 3.5208701897473174 },
+    { lat: 47.592604513995454, lng: 3.53192040563478 },
+  ];
+
   return (
     <LoadScript googleMapsApiKey="AIzaSyBfoRI7QkmzhSgXHoxVbguowVBzsWAn1G8">
       <GoogleMap
@@ -52,11 +59,23 @@ function MapContainer(props) {
           // required
           options={options}
         />
+
         <MarkerF
           onLoad={onLoad}
           position={props.centerObj}
           icon="https://i.postimg.cc/DfXqkmRL/human-location-svgrepo-com.png"
         />
+        {events.map(function (item, index) {
+          console.log(item);
+          return (
+            <MarkerF
+              key={index}
+              position={item}
+              onLoad={onLoad}
+              icon="https://i.postimg.cc/3x9Q98BD/placeholder-svgrepo-com.png"
+            />
+          );
+        })}
       </GoogleMap>
     </LoadScript>
   );
