@@ -1,7 +1,7 @@
 import logo from "../../Assets/turnuplogo.svg";
 import * as React from "react";
 import "./index.css";
-import Promovid from "../../Assets/turnUp v5 promo - HD 1080p.mp4";
+import Promovid from "../../Assets/turnUp-v5-promo.mp4";
 
 // Landing page code here
 
