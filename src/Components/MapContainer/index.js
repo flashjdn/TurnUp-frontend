@@ -1,6 +1,6 @@
 import React from "react";
 import { GoogleMap, LoadScript } from "@react-google-maps/api";
-import { Circle } from "@react-google-maps/api";
+import { Circle, Marker } from "@react-google-maps/api";
 
 /*passed to props:
  CenterCoord = {
@@ -27,6 +27,18 @@ function MapContainer(props) {
     zIndex: 1,
   };
 
+  // const onLoad = circle => {
+  //   console.log('Circle onLoad circle: ', circle)
+  // }
+
+  // const onUnmount = circle => {
+  //   console.log('Circle onUnmount circle: ', circle)
+  // }
+
+  const onLoad = marker => {
+    console.log('marker: ', marker)
+  }
+
   return (
     <LoadScript googleMapsApiKey="AIzaSyBfoRI7QkmzhSgXHoxVbguowVBzsWAn1G8">
       <GoogleMap
@@ -34,13 +46,22 @@ function MapContainer(props) {
         zoom={14}
         center={props.centerObj}
       >
-        <Circle
+        {/* <Circle
+          // optional
+          onLoad={onLoad}
+          // optional
+          onUnmount={onUnmount}
           // required
           center={props.centerObj}
           // required
           options={options}
+        /> */}
+        <Marker
+          onLoad={onLoad}
+          position={{ lat: 50.993625146749665, lng: - 0.11788521861601084 }}
         />
       </GoogleMap>
+
     </LoadScript>
   );
 }
