@@ -1,10 +1,13 @@
 import "./App.css";
 import Card from "../Card";
+
+import Navbar from "../Navbar";
 import LandingPage from "./Components/Home";
 import Explore from "./Components/Explore";
 import Profile from "./Components/Profile";
 import { eventObject } from "./lib/dummy";
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
+
 
 function App() {
   return (
