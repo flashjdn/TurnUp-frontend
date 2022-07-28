@@ -22,6 +22,13 @@ export default function Card({
 }) {
   const formattedDate = new Date(eventDate);
 
+  /**********************************DUMMY DATA ALERT************************************************** */
+  //WE CAN USE A STATE THAT FETCHES TAGS (OR WHATEVER WE WANT TO PUT IN THE CARD) AND SET IT TO TRUE UNTIL THE FETCH IS COMPLETED
+  //HERE ARE THE TEMPORARY VARIABLES, reverse their values to see different stuff on the cards
+  const isLoading = true;
+  const isRetrieved = false;
+  //________________________________________________________________________________________________________
+
   return (
     <Accordion>
       <AccordionSummary
@@ -49,7 +56,8 @@ export default function Card({
         </div>
       </AccordionSummary>
       <AccordionDetails style={{ backgroundColor: "rgba(77, 216, 242, 0.7)" }}>
-        <CircularProgress />
+        {isLoading && <CircularProgress />}
+        {isRetrieved && <p>What the hell are you doing here?</p>}
       </AccordionDetails>
     </Accordion>
   );
