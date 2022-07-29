@@ -1,6 +1,7 @@
 import MapContainer from "../MapContainer";
 import Navbar from "../Navbar";
 import { useState } from 'react';
+import { DefaultCardExample } from "../Card";
 
 
 export default function Explore() {
@@ -26,7 +27,8 @@ export default function Explore() {
   return (
     <div>
       <Navbar />
-      <MapContainer centerObj={location}></MapContainer>
+      {/* <MapContainer centerObj={location}></MapContainer> */}
+      <DefaultCardExample/>
     </div>
   );
 }

@@ -1,65 +1,52 @@
-import Accordion from "@mui/material/Accordion/Accordion";
-import AccordionDetails from "@mui/material/AccordionDetails/AccordionDetails";
-import AccordionSummary from "@mui/material/AccordionSummary/AccordionSummary";
-import Chip from "@mui/material/Chip";
-import CircularProgress from "@mui/material/CircularProgress/CircularProgress";
-import Typography from "@mui/material/Typography/Typography";
-import * as React from "react";
+import {
+  Card,
+  Image,
+  View,
+  Heading,
+  Flex,
+  Badge,
+  Text,
+  Button,
+  useTheme,
+} from "@aws-amplify/ui-react";
+import image from "../../Assets/road-to-milford-new-zealand-800w.jpeg";
 
-export default function Card({
-  eventId,
-  eventName,
-  eventDate,
-  eventTime,
-  eventLat,
-  eventLon,
-  eventLoc,
-  description,
-  eventOrganiser,
-  accessibility,
-  images,
-  tags,
-}) {
-  const formattedDate = new Date(eventDate);
-
-  /**********************************DUMMY DATA ALERT************************************************** */
-  //WE CAN USE A STATE THAT FETCHES TAGS (OR WHATEVER WE WANT TO PUT IN THE CARD) AND SET IT TO TRUE UNTIL THE FETCH IS COMPLETED
-  //HERE ARE THE TEMPORARY VARIABLES, reverse their values to see different stuff on the cards
-  const isLoading = true;
-  const isRetrieved = false;
-  //________________________________________________________________________________________________________
-
+export const DefaultCardExample = () => {
+  const { tokens } = useTheme();
   return (
-    <Accordion>
-      <AccordionSummary
-        style={{
-          marginTop: 30,
-          backgroundColor: "#4dd8f2",
-        }}
-      >
-        <div>
-          <Typography style={{ fontStyle: "bold" }} variant="h4">
-            {eventName}
-          </Typography>
-          <Typography style={{ fontStyle: "italic" }} variant="subtitle1">
-            Organiser: {eventOrganiser}
-          </Typography>
-          <Chip
-            variant="filled"
-            size="small"
-            label={formattedDate.toLocaleDateString()}
-            style={{ marginBottom: 10 }}
-          />
-          <Typography style={{ margin: 10 }} variant="h6">
-            {eventLoc}
-          </Typography>
-        </div>
-      </AccordionSummary>
-      <AccordionDetails style={{ backgroundColor: "rgba(77, 216, 242, 0.7)" }}>
-        {isLoading && <CircularProgress />}
-        {isRetrieved && <p>What the hell are you doing here?</p>}
-      </AccordionDetails>
-    </Accordion>
+    <View
+      backgroundColor={tokens.colors.background.secondary}
+      padding={tokens.space.medium}
+    >
+      <Card>
+        <Flex direction="row" alignItems="flex-start">
+          <Image alt="Road to milford sound" src={image} width="33%" />
+          <Flex
+            direction="column"
+            alignItems="flex-start"
+            gap={tokens.space.xs}
+          >
+            <Flex>
+              <Badge size="small" variation="info">
+                Plus
+              </Badge>
+              <Badge size="small" variation="success">
+                Verified
+              </Badge>
+            </Flex>
+
+            <Heading level={5}>
+              New Zealand White Water Outdoor Adventure
+            </Heading>
+
+            <Text as="span">
+              Join us on this beautiful outdoor adventure through the glittering
+              rivers through the snowy peaks on New Zealand.
+            </Text>
+            <Button variation="primary">Book it</Button>
+          </Flex>
+        </Flex>
+      </Card>
+    </View>
   );
-}
-//testio vestio
+};
