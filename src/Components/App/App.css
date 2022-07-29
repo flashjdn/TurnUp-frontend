@@ -1,6 +1,11 @@
 :root {
-  --main: #fbb02d;
+  --primary: #fbb02d;
   --secondary: #006390;
+  --fonts: "Raleway", sans-serif;
+}
+
+* {
+  font-family: var(--fonts);
 }
 
 .App {
