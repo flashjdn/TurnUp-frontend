@@ -4,7 +4,7 @@
 }
 
 .page-header {
-  background-color: #242582;
+  background-color: var(--secondary);
   padding: 1.3rem;
   display: flex;
   justify-content: flex-end;
@@ -15,6 +15,8 @@
   color: white;
   padding: 0 1.3rem;
   cursor: pointer;
+  text-decoration: none;
+  font-weight: bold;
 }
 
 /*.nav-bar a.active {
