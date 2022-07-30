@@ -1,10 +1,10 @@
 import "./App.css";
-import Card from "../Card";
-import Navbar from "../Navbar";
+// import Card from "../Card";
+// import Navbar from "../Navbar";
 import LandingPage from "../Home";
 import Explore from "../Explore";
 import Profile from "../Profile";
-import { eventObject } from "../../lib/dummy.js";
+// import { eventObject } from "../../lib/dummy.js";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 
 function App() {

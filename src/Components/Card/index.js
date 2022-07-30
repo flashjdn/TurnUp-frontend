@@ -1,65 +1,34 @@
-import Accordion from "@mui/material/Accordion/Accordion";
-import AccordionDetails from "@mui/material/AccordionDetails/AccordionDetails";
-import AccordionSummary from "@mui/material/AccordionSummary/AccordionSummary";
-import Chip from "@mui/material/Chip";
-import CircularProgress from "@mui/material/CircularProgress/CircularProgress";
-import Typography from "@mui/material/Typography/Typography";
-import * as React from "react";
+import "./index.css";
+import logo from "../../Assets/turnuplogo.svg";
+import Image from "../../Assets/road-to-milford-new-zealand-800w.jpeg";
 
-export default function Card({
-  eventId,
-  eventName,
-  eventDate,
-  eventTime,
-  eventLat,
-  eventLon,
-  eventLoc,
-  description,
-  eventOrganiser,
-  accessibility,
-  images,
-  tags,
-}) {
-  const formattedDate = new Date(eventDate);
-
-  /**********************************DUMMY DATA ALERT************************************************** */
-  //WE CAN USE A STATE THAT FETCHES TAGS (OR WHATEVER WE WANT TO PUT IN THE CARD) AND SET IT TO TRUE UNTIL THE FETCH IS COMPLETED
-  //HERE ARE THE TEMPORARY VARIABLES, reverse their values to see different stuff on the cards
-  const isLoading = true;
-  const isRetrieved = false;
-  //________________________________________________________________________________________________________
-
+export const Card = () => {
   return (
-    <Accordion>
-      <AccordionSummary
-        style={{
-          marginTop: 30,
-          backgroundColor: "#4dd8f2",
-        }}
-      >
-        <div>
-          <Typography style={{ fontStyle: "bold" }} variant="h4">
-            {eventName}
-          </Typography>
-          <Typography style={{ fontStyle: "italic" }} variant="subtitle1">
-            Organiser: {eventOrganiser}
-          </Typography>
-          <Chip
-            variant="filled"
-            size="small"
-            label={formattedDate.toLocaleDateString()}
-            style={{ marginBottom: 10 }}
-          />
-          <Typography style={{ margin: 10 }} variant="h6">
-            {eventLoc}
-          </Typography>
-        </div>
-      </AccordionSummary>
-      <AccordionDetails style={{ backgroundColor: "rgba(77, 216, 242, 0.7)" }}>
-        {isLoading && <CircularProgress />}
-        {isRetrieved && <p>What the hell are you doing here?</p>}
-      </AccordionDetails>
-    </Accordion>
+    <>
+      <div className="event-background">
+        <h1>Placeholder</h1>
+      </div>
+      <div>
+        <img src={logo} alt="turnup logo" className="event-logo"></img>
+        <input type="text" placeholder="Search..." className="input"></input>
+      </div>
+      <div className="card-list">
+        <h1 className="card-one">
+          <img src={Image} alt="card-one-pic" className="card-one-image"></img>
+          New Zealand White Water Outdoor Adventure
+          <p className="card-one-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim  veniam, quis nostrud exercitation ullamco laboris nisi ut </p>
+        </h1>
+        <h1 className="card-two">
+          <img src={Image} alt="card-two-pic" className="card-two-image"></img>
+          New Zealand White Water Outdoor Adventure
+          <p className="card-two-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim  veniam, quis nostrud exercitation ullamco laboris nisi ut </p>
+        </h1>
+        <h1 className="card-three">
+          <img src={Image} alt="card-three-pic" className="card-three-image"></img>
+          New Zealand White Water Outdoor Adventure
+          <p className="card-three-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim  veniam, quis nostrud exercitation ullamco laboris nisi ut </p>
+        </h1>
+      </div>
+    </>
   );
-}
-//testio vestio
+};

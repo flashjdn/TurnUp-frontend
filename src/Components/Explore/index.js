@@ -1,6 +1,7 @@
 import MapContainer from "../MapContainer";
 import Navbar from "../Navbar";
 import { useState } from 'react';
+import CardList from "../CardList/index.js";
 
 
 export default function Explore() {
@@ -27,6 +28,7 @@ export default function Explore() {
     <div>
       <Navbar />
       <MapContainer centerObj={location}></MapContainer>
+      <CardList />
     </div>
   );
 }
