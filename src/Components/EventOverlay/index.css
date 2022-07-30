@@ -4,6 +4,8 @@
   width: 35%;
   height: 94vh;
   opacity: 75%;
+  border-right: solid;
+  box-shadow: 12px 0 15px -4px var(--secondary);
 }
 
 .background-container {
