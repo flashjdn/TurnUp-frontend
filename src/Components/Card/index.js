@@ -1,52 +1,34 @@
-import {
-  Card,
-  Image,
-  View,
-  Heading,
-  Flex,
-  Badge,
-  Text,
-  Button,
-  useTheme,
-} from "@aws-amplify/ui-react";
-import image from "../../Assets/road-to-milford-new-zealand-800w.jpeg";
+import "./index.css";
+import logo from "../../Assets/turnuplogo.svg";
+import Image from "../../Assets/road-to-milford-new-zealand-800w.jpeg";
 
-export const DefaultCardExample = () => {
-  const { tokens } = useTheme();
+export const Card = () => {
   return (
-    <View
-      backgroundColor={tokens.colors.background.secondary}
-      padding={tokens.space.medium}
-    >
-      <Card>
-        <Flex direction="row" alignItems="flex-start">
-          <Image alt="Road to milford sound" src={image} width="33%" />
-          <Flex
-            direction="column"
-            alignItems="flex-start"
-            gap={tokens.space.xs}
-          >
-            <Flex>
-              <Badge size="small" variation="info">
-                Plus
-              </Badge>
-              <Badge size="small" variation="success">
-                Verified
-              </Badge>
-            </Flex>
-
-            <Heading level={5}>
-              New Zealand White Water Outdoor Adventure
-            </Heading>
-
-            <Text as="span">
-              Join us on this beautiful outdoor adventure through the glittering
-              rivers through the snowy peaks on New Zealand.
-            </Text>
-            <Button variation="primary">Book it</Button>
-          </Flex>
-        </Flex>
-      </Card>
-    </View>
+    <>
+      <div className="event-background">
+        <h1>Placeholder</h1>
+      </div>
+      <div>
+        <img src={logo} alt="turnup logo" className="event-logo"></img>
+        <input type="text" placeholder="Search..." className="input"></input>
+      </div>
+      <div className="card-list">
+        <h1 className="card-one">
+          <img src={Image} alt="card-one-pic" className="card-one-image"></img>
+          New Zealand White Water Outdoor Adventure
+          <p className="card-one-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim  veniam, quis nostrud exercitation ullamco laboris nisi ut </p>
+        </h1>
+        <h1 className="card-two">
+          <img src={Image} alt="card-two-pic" className="card-two-image"></img>
+          New Zealand White Water Outdoor Adventure
+          <p className="card-two-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim  veniam, quis nostrud exercitation ullamco laboris nisi ut </p>
+        </h1>
+        <h1 className="card-three">
+          <img src={Image} alt="card-three-pic" className="card-three-image"></img>
+          New Zealand White Water Outdoor Adventure
+          <p className="card-three-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim  veniam, quis nostrud exercitation ullamco laboris nisi ut </p>
+        </h1>
+      </div>
+    </>
   );
 };
