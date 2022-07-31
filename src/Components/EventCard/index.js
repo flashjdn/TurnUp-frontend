@@ -16,7 +16,9 @@ export const EventCard = ({ eventObj, key }) => {
         </div>
         <div className="bottom-event-section">
           <div className="left-event-section">
-            <p className="card-one-text">{eventObj.eventDescription}</p>
+            <div className="card-one-text">
+              <p>{eventObj.eventDescription}</p>
+            </div>
             <div className="tags-div">
               {" "}
               {eventObj.eventTags.map((item, index) => {
