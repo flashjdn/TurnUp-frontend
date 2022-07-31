@@ -37,7 +37,7 @@
 }
 
 .tag-box {
-  background-color: var(--secondary);
+  background-color: var(--supporting-blue);
   border-radius: 8%;
   padding: 0.4rem 0.4rem;
   text-align: center;
@@ -73,8 +73,8 @@
 
 .right-event-section p {
   margin-top: 0.5rem;
-  margin-right: 0.5rem;
   font-weight: bold;
+  justify-self: flex-end;
 }
 
 .bottom-event-section {

@@ -1,51 +1,54 @@
 .logo {
-    padding-top: 20vh;
+  margin-top: 10vh;
 }
 
 .sign-up {
-    font-size: 3rem;
-    /* text-shadow: 2px 2px black; */
-    display: inline-block;
-    padding: 10px 15px;
-    cursor: pointer;
-    text-decoration: none;
-    color: white;
-    background-color: #FBB13C;
-    border-style: solid black;
-    border-radius: 15px;
-    box-shadow: 0 12px #999;
+  margin-top: 1rem;
+  font-size: 3rem;
+  /* text-shadow: 2px 2px black; */
+  display: inline-block;
+  padding: 10px 15px;
+  cursor: pointer;
+  text-decoration: none;
+  color: white;
+  background-color: #fbb13c;
+  border-style: solid black;
+  border-radius: 15px;
+  box-shadow: 0 12px #999;
 }
 
 .sign-up:hover {
-    background-color: #dd9c33
+  background-color: #dd9c33;
 }
 
 .sign-up:active {
-    background-color: #a37327;
-    box-shadow: 0 5px #666;
-    transform: translateY(4px);
+  background-color: #a37327;
+  box-shadow: 0 5px #666;
+  transform: translateY(4px);
 }
 
 .slogan {
-    color: white;
-    text-shadow: 2px 2px black;
-    font-size: 2rem;
+  margin-top: 1rem;
+  color: white;
+  text-shadow: 2px 2px black;
+  font-size: 2rem;
 }
 
 .about-text {
-    color: white;
-    text-shadow: 2px 2px black;
-    font-size: 2rem;
+  margin-top: 1rem;
+  color: white;
+  text-shadow: 2px 2px black;
+  font-size: 2rem;
 }
 
 .vid {
-    position: absolute;
-    right: 0;
-    bottom: 0;
-    min-width: 100%;
-    min-height: 100%;
-    opacity: 75%;
-    z-index: -1;
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  min-width: 100%;
+  min-height: 100%;
+  opacity: 75%;
+  z-index: -1;
 }
 
 /* .text-card {

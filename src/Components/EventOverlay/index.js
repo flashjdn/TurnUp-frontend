@@ -23,7 +23,7 @@ export default function EventOverlay() {
         "Bring the stench of rotten cheese and farts with you. At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga. ",
       eventImg:
         "https://www.mensjournal.com/wp-content/uploads/mf/images-mf-210007-17933.jpg",
-      eventTags: ["dog friendly", "lgbt", "clean toilets"],
+      eventTags: ["dog friendly", "lgbt", "clean toilets", "accessibility"],
       eventDistance: "4km away",
       eventTime: "in 2 days",
     },
@@ -33,7 +33,7 @@ export default function EventOverlay() {
         "Banana bending workshop included. But I must explain to you how all this mistaken idea of denouncing pleasure and praising pain was born and I will give you a complete account of the system, and expound the actual teachings of the great explorer of the truth",
       eventImg:
         "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSdzY_Ofzzp1UTUR3hEGVPOu3urAajfCg2oRg&usqp=CAU",
-      eventTags: ["dog friendly", "lgbt", "clean toilets"],
+      eventTags: ["dog friendly", "lgbt", "workshop"],
       eventDistance: "10km away",
       eventTime: "in 3 days",
     },
@@ -43,7 +43,7 @@ export default function EventOverlay() {
         "Bring your own Nicholas Cage cardboard cutout. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat",
       eventImg:
         "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fwww.dailydot.com%2Fwp-content%2Fuploads%2Fa00%2Fb2%2Fb32e0d39036e2891848a4eed4ee81b72.jpg&f=1&nofb=1",
-      eventTags: ["Nick Cage", "lgbt", "clean toilets"],
+      eventTags: ["Nick Cage", "lgbt", "meeting"],
       eventDistance: "5km away",
       eventTime: "in 3 days",
     },
@@ -53,7 +53,7 @@ export default function EventOverlay() {
         "I'm too tired to think of anything funny. But I must explain to you how all this mistaken idea of denouncing pleasure and praising pain was born and I will give you a complete account of the system, and expound the actual teachings of the great explorer of the truth",
       eventImg:
         "https://p2d7x8x2.stackpathcdn.com/wordpress/wp-content/uploads/2014/10/Craft-Beer.jpg",
-      eventTags: ["dog friendly", "lgbt", "alcohol"],
+      eventTags: ["dog friendly", "lgbt", "alcohol", "festival"],
       eventDistance: "1km away",
       eventTime: "in 4 days",
     },
