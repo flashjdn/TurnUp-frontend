@@ -1,5 +1,4 @@
 import "./index.css";
-import Image from "../../Assets/road-to-milford-new-zealand-800w.jpeg";
 
 export const EventCard = ({ eventObj, key }) => {
   console.log(eventObj);
