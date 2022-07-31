@@ -18,13 +18,13 @@ export default function EventOverlay() {
       eventTime: "tommorow",
     },
     {
-      eventName: "Concert for pople who smell bad",
+      eventName: "The Melonator World Tour",
       eventDescription:
-        "Bring the stench of rotten cheese and farts with you. At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga. ",
+        "Embrace the melon, be the melon. At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga. ",
       eventImg:
-        "https://www.mensjournal.com/wp-content/uploads/mf/images-mf-210007-17933.jpg",
+        "https://runt-of-the-web.com/wordpress/wp-content/uploads/2016/04/melonator.jpg",
       eventTags: ["dog friendly", "lgbt", "clean toilets", "accessibility"],
-      eventDistance: "4km away",
+      eventDistance: "km away",
       eventTime: "in 2 days",
     },
     {

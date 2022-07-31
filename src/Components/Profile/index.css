@@ -1,0 +1,27 @@
+.profile-container {
+  display: flex;
+  justify-content: space-between;
+  height: 94vh;
+}
+
+.profile-left-side {
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.profile-right-side {
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.friends-list {
+  width: 70%;
+  height: 40vh;
+  background-color: var(--secondary);
+}
