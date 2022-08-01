@@ -1,10 +1,16 @@
 import "./index.css";
 
-export const EventCard = ({ eventObj, key }) => {
+export const EventCard = ({ eventObj, key, onClick }) => {
   console.log(eventObj);
   return (
     <>
-      <div className="card-one">
+      <div
+        className="card-one"
+        onClick={() => {
+          onClick({ lng: eventObj.lng, lat: eventObj.lat }, eventObj.eventId);
+        }}
+      >
+        {" "}
         <img
           src={eventObj.eventImg}
           alt="the event"
