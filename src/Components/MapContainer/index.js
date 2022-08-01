@@ -45,13 +45,13 @@ function MapContainer(props) {
     address: "6 Cocks Close",
   };
 
-  const onLoad = (circle) => {
+  /*const onLoad = (circle) => {
     console.log("Circle onLoad circle: ", circle);
   };
 
   const onUnmount = (circle) => {
     console.log("Circle onUnmount circle: ", circle);
-  };
+  };*/
 
   /**********************************************DUMMY DATA ALERT************************************************ */
   const events = [
@@ -72,9 +72,9 @@ function MapContainer(props) {
       >
         <CircleF
           // optional
-          onLoad={onLoad}
+          //onLoad={onLoad}
           // optional
-          onUnmount={onUnmount}
+          //onUnmount={onUnmount}
           // required
           center={props.centerObj}
           // required
@@ -82,17 +82,16 @@ function MapContainer(props) {
         />
 
         <MarkerF
-          onLoad={onLoad}
+          //onLoad={onLoad}
           position={props.centerObj}
           icon="https://i.postimg.cc/DfXqkmRL/human-location-svgrepo-com.png"
         />
         {events.map(function (item, index) {
-          console.log(item);
           return (
             <MarkerF
               key={index}
               position={item}
-              onLoad={onLoad}
+              //onLoad={onLoad}
               icon="https://i.postimg.cc/3x9Q98BD/placeholder-svgrepo-com.png"
             />
           );

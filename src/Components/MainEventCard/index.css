@@ -5,6 +5,9 @@
   padding: 1rem;
   border-style: solid;
   border-radius: 0.5rem;
+  position: absolute;
+  top: 10vh;
+  right: 2vh;
 }
 
 .main-tag-container {

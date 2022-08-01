@@ -112,7 +112,7 @@ export default function Explore() {
 
   //This function is passed down the tree to change the index of the even pop up
   function eventClickHandler(position, eventId) {
-    setPopUp(position);
+    setPopUp(eventId);
   }
 
   window.addEventListener("load", () => {
@@ -127,13 +127,14 @@ export default function Explore() {
     }
   });
 
-  console.log(eventsArr);
   return (
     <div>
       <Navbar />
       <MapContainer centerObj={location}></MapContainer>
       <EventOverlay onClick={eventClickHandler} eventsArr={eventsArr} />
-      {!undefined && <MainEventCard></MainEventCard>}
+      {popUp === !undefined && (
+        <MainEventCard eventObj={eventsArr[Number(popUp)]}></MainEventCard>
+      )}
     </div>
   );
 }

@@ -6,7 +6,6 @@ import { useState } from "react";
 import { ChildFriendly } from "@mui/icons-material";
 
 export default function EventOverlay({ onClick, eventsArr }) {
-  console.log(eventsArr);
   return (
     <>
       <div className="event-background"></div>

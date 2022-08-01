@@ -1,7 +1,8 @@
 import "./index.css";
 import StarIcon from "@mui/icons-material/Star";
 
-function MainEventCard({ eventObj, key }) {
+function MainEventCard({ eventObj }) {
+  console.log(eventObj);
   return (
     <div className="main-event-card">
       <header className="main-card-header">

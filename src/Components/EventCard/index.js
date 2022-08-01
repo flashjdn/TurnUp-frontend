@@ -1,7 +1,6 @@
 import "./index.css";
 
 export const EventCard = ({ eventObj, key, onClick }) => {
-  console.log(eventObj);
   return (
     <>
       <div
