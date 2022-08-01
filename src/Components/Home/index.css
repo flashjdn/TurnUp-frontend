@@ -3,8 +3,8 @@
 }
 
 .sign-up {
-  margin-top: 1rem;
-  font-size: 3rem;
+  margin-top: 2rem;
+  font-size: clamp(1.5rem, 3vw, 4rem);
   /* text-shadow: 2px 2px black; */
   display: inline-block;
   padding: 10px 15px;
@@ -31,29 +31,35 @@
   margin-top: 1rem;
   color: white;
   text-shadow: 2px 2px black;
-  font-size: 2rem;
+  font-size: clamp(1rem, 3vw, 2rem);
 }
 
 .about-text {
   margin-top: 1rem;
-  color: white;
-  text-shadow: 2px 2px black;
-  font-size: 2rem;
+  color: rgb(3, 89, 150);
+  /* text-shadow: 2px 2px rgb(255, 255, 255); */
+  font-size: clamp(0.5rem, 3vw, 1rem);
+  text-decoration: underline;
+  font-weight: 900;
 }
 
 .vid {
   position: absolute;
   right: 0;
   bottom: 0;
-  min-width: 100%;
-  min-height: 100%;
+  width: 100%;
+  height: 100vh;
   opacity: 75%;
   z-index: -1;
+  object-fit: cover;
 }
 
-/* .text-card {
-    background-color: rgba(100, 100, 100, 0.75);
-    padding: 15px 25px;
-    border: none;
-    border-radius: 25%;
-} */
+.content {
+  width: 100%;
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  object-fit: contain;
+}
