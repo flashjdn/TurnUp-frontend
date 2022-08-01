@@ -1,8 +1,6 @@
 import React from "react";
 import { GoogleMap, LoadScript } from "@react-google-maps/api";
 import { CircleF, MarkerF } from "@react-google-maps/api";
-import { OverlayView } from "@react-google-maps/api";
-import MainEventCard from "../MainEventCard";
 
 /*passed to props:
  CenterCoord = {
@@ -29,29 +27,13 @@ function MapContainer(props) {
     zIndex: 1,
   };
 
-  const dummyEvent = {
-    eventName: "Long Gameboy Advance enthusiasts meeting",
-    eventDescription: "Come see this long boi.",
-    mainDescription:
-      "On the other hand, we denounce with righteous indignation and dislike men who are so beguiled and demoralized by the charms of pleasure of the moment, so blinded by desire, that they cannot foresee the pain and trouble that are bound to ensue; and equal blame belongs to those who fail in their duty through weakness of will, which is the same as saying through shrinking from toil and pain.",
-    eventImg:
-      "https://images.nintendolife.com/c23e0dc684e6f/wide-gba.large.jpg",
-    eventTags: ["dog friendly", "lgbt", "clean toilets"],
-    eventDistance: "2km away",
-    eventTime: "tomorrow",
-    rating: 5,
-    organiser: "Ben",
-    email: "BenDover@gmail.com",
-    address: "6 Cocks Close",
-  };
-
-  /*const onLoad = (circle) => {
+  const onLoad = (circle) => {
     console.log("Circle onLoad circle: ", circle);
   };
 
   const onUnmount = (circle) => {
     console.log("Circle onUnmount circle: ", circle);
-  };*/
+  };
 
   /**********************************************DUMMY DATA ALERT************************************************ */
   const events = [
@@ -61,20 +43,20 @@ function MapContainer(props) {
     { lat: 47.592604513995454, lng: 3.53192040563478 },
   ];
 
-  const center = { lat: 51.50429287644996, lng: -0.07860452094441346 };
-
   return (
-    <LoadScript googleMapsApiKey="AIzaSyBfoRI7QkmzhSgXHoxVbguowVBzsWAn1G8">
+    <LoadScript googleMapsApiKey="AIzaSyDJresVS0RQllmIQivLkPz5xNeP19P4pOQ">
       <GoogleMap
         mapContainerStyle={mapStyles}
         zoom={14}
         center={props.centerObj}
       >
+        {console.log(props.centerObj)}
+        {console.log(props.userLocation)}
         <CircleF
           // optional
-          //onLoad={onLoad}
+          onLoad={onLoad}
           // optional
-          //onUnmount={onUnmount}
+          onUnmount={onUnmount}
           // required
           center={props.centerObj}
           // required
@@ -83,7 +65,7 @@ function MapContainer(props) {
 
         <MarkerF
           //onLoad={onLoad}
-          position={props.centerObj}
+          position={props.userLocation}
           icon="https://i.postimg.cc/DfXqkmRL/human-location-svgrepo-com.png"
         />
         {events.map(function (item, index) {

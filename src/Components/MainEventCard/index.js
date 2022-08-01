@@ -1,10 +1,15 @@
 import "./index.css";
 import StarIcon from "@mui/icons-material/Star";
+import CloseIcon from "@mui/icons-material/Close";
 
-function MainEventCard({ eventObj }) {
+function MainEventCard({ eventObj, xClick }) {
   console.log(eventObj);
   return (
     <div className="main-event-card">
+      <CloseIcon
+        sx={{ position: "absolute", right: "1rem", top: "1rem" }}
+        onClick={xClick}
+      ></CloseIcon>
       <header className="main-card-header">
         <img
           src={eventObj.eventImg}

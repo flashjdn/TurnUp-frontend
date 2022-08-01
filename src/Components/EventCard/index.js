@@ -1,6 +1,6 @@
 import "./index.css";
 
-export const EventCard = ({ eventObj, key, onClick }) => {
+export const EventCard = ({ eventObj, onClick }) => {
   return (
     <>
       <div
@@ -27,7 +27,7 @@ export const EventCard = ({ eventObj, key, onClick }) => {
               {" "}
               {eventObj.eventTags.map((item, index) => {
                 return (
-                  <div className="tag-box">
+                  <div className="tag-box" key={index}>
                     <p>{item}</p>
                   </div>
                 );

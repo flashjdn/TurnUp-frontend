@@ -5,15 +5,6 @@ import EventOverlay from "../EventOverlay/index.js";
 import MainEventCard from "../MainEventCard";
 
 export default function Explore() {
-  /**************************DUMMY DATA ALERT***************************** */
-  // const coordinates = { lat: 53.22738449126366, lng: 20.923854902697684 };
-  /*_______________________________________________________________________*/
-
-  const [location, setLocation] = useState({
-    lat: 47.60011001977801,
-    lng: 3.533434778585759,
-  });
-
   const [eventsArr, setEventsArr] = useState([
     {
       eventId: 0,
@@ -107,20 +98,46 @@ export default function Explore() {
     },
   ]);
 
-  //This state takes in the index of the event clicked in EventOverlay
+  /**************************DUMMY DATA ALERT***************************** */
+  // const coordinates = { lat: 53.22738449126366, lng: 20.923854902697684 };
+  /*_______________________________________________________________________*/
+
+  const [location, setLocation] = useState({
+    lat: 47.60011001977801,
+    lng: 3.533434778585759,
+  });
+
+  const [userLocation, setUserLocation] = useState({
+    lat: 47.60011001977801,
+    lng: 3.533434778585759,
+  });
+  //This state takes in the object of the event clicked in EventOverlay
   const [popUp, setPopUp] = useState(undefined);
 
   //This function is passed down the tree to change the index of the even pop up
   function eventClickHandler(position, eventId) {
-    setPopUp(eventId);
+    for (let i = 0; i < eventsArr.length; i++) {
+      if (eventsArr[i].eventId === eventId) {
+        setPopUp(eventsArr[i]);
+        setLocation({ lat: eventsArr[i].lat, lng: eventsArr[i].lng });
+      }
+    }
+  }
+
+  function xClickReset() {
+    setPopUp(undefined);
+    setLocation(userLocation);
   }
 
   window.addEventListener("load", () => {
     navigator.geolocation.getCurrentPosition(positionFound, positionNotFound);
     async function positionFound(position) {
-      const long = position.coords.longitude;
+      const lng = position.coords.longitude;
       const lat = position.coords.latitude;
-      setLocation({ lat: lat, lng: long });
+      setUserLocation({ lat: lat, lng: lng });
+      setLocation({ lat: lat, lng: lng });
+      console.log(location);
+      console.log(userLocation);
     }
     function positionNotFound(err) {
       console.log(err);
@@ -130,11 +147,19 @@ export default function Explore() {
   return (
     <div>
       <Navbar />
-      <MapContainer centerObj={location}></MapContainer>
-      <EventOverlay onClick={eventClickHandler} eventsArr={eventsArr} />
-      {popUp === !undefined && (
-        <MainEventCard eventObj={eventsArr[Number(popUp)]}></MainEventCard>
-      )}
+      <MapContainer
+        centerObj={location}
+        eventsArr={eventsArr}
+        userLocation={userLocation}
+      ></MapContainer>
+      <EventOverlay
+        onClick={eventClickHandler}
+        xClick={xClickReset}
+        eventsArr={eventsArr}
+      />
+      {popUp ? (
+        <MainEventCard eventObj={popUp} xClick={xClickReset}></MainEventCard>
+      ) : null}
     </div>
   );
 }

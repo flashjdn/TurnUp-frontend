@@ -1,8 +1,7 @@
 import Navbar from "../Navbar";
-// import EventList from "../EventList/index.js";
+import EventList from "../EventList/index.js";
 import { useState } from "react";
 import "./index.css";
-import MainEventCard from "../MainEventCard";
 
 export default function Profile() {
   const [organisedEvents, setOrganisedEvents] = useState([
@@ -55,7 +54,7 @@ export default function Profile() {
 
   return (
     <div>
-      {/* <Navbar></Navbar>
+      <Navbar></Navbar>
       <h1>Profile</h1>
       <div className="profile-container">
         <div className="profile-left-side">
@@ -71,11 +70,9 @@ export default function Profile() {
         </div>
         <div className="profile-right-side">
           <h2>Events you organise:</h2>
-          <EventList eventsArr={organisedEvents} /> 
-          <MainEventCard eventObj={organisedEvents(1)} />
+          <EventList eventsArr={organisedEvents} />
         </div>
-      </div> */}
-      <MainEventCard eventObj={organisedEvents[0]} />
+      </div>
     </div>
   );
 }

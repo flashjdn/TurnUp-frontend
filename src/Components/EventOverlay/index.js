@@ -2,8 +2,6 @@ import * as React from "react";
 import logo from "../../Assets/turnuplogo.svg";
 import "./index.css";
 import EventList from "../EventList";
-import { useState } from "react";
-import { ChildFriendly } from "@mui/icons-material";
 
 export default function EventOverlay({ onClick, eventsArr }) {
   return (
