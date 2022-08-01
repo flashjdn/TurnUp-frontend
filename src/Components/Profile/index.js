@@ -1,12 +1,13 @@
 import Navbar from "../Navbar";
-import EventList from "../EventList/index.js";
+// import EventList from "../EventList/index.js";
 import { useState } from "react";
 import "./index.css";
+import MainEventCard from "../MainEventCard";
 
 export default function Profile() {
   const [organisedEvents, setOrganisedEvents] = useState([
     {
-      eventName: "Concert for pople who smell bad",
+      eventName: "Concert for people who smell bad",
       eventDescription:
         "Bring the stench of rotten cheese and farts with you. At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga. ",
       eventImg:
@@ -39,7 +40,7 @@ export default function Profile() {
 
   return (
     <div>
-      <Navbar></Navbar>
+      {/* <Navbar></Navbar>
       <h1>Profile</h1>
       <div className="profile-container">
         <div className="profile-left-side">
@@ -49,15 +50,17 @@ export default function Profile() {
           </div>
           <div className="friends-list">
             <p>
-              this neds to be a separate components with separate friends cards
+              this needs to be a separate components with separate friends cards
             </p>
           </div>
         </div>
         <div className="profile-right-side">
           <h2>Events you organise:</h2>
-          <EventList eventsArr={organisedEvents} />
+          <EventList eventsArr={organisedEvents} /> 
+          <MainEventCard eventObj={organisedEvents(1)} />
         </div>
-      </div>
+      </div> */}
+      <MainEventCard eventObj={organisedEvents[1]} />
     </div>
   );
 }

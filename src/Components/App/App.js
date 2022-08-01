@@ -7,6 +7,7 @@ import Profile from "../Profile";
 // import { eventObject } from "../../lib/dummy.js";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 
+
 function App() {
   return (
     <div className="App">

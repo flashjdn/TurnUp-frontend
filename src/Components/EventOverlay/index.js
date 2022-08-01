@@ -10,7 +10,8 @@ export default function EventOverlay() {
     {
       eventName: "Long Gameboy Advance enthusiasts meeting",
       eventDescription:
-        "Come see this long boi. On the other hand, we denounce with righteous indignation and dislike men who are so beguiled and demoralized by the charms of pleasure of the moment, so blinded by desire, that they cannot foresee the pain and trouble that are bound to ensue; and equal blame belongs to those who fail in their duty through weakness of will, which is the same as saying through shrinking from toil and pain.",
+        "Come see this long boi.", 
+        mainDescription: "On the other hand, we denounce with righteous indignation and dislike men who are so beguiled and demoralized by the charms of pleasure of the moment, so blinded by desire, that they cannot foresee the pain and trouble that are bound to ensue; and equal blame belongs to those who fail in their duty through weakness of will, which is the same as saying through shrinking from toil and pain.",
       eventImg:
         "https://images.nintendolife.com/c23e0dc684e6f/wide-gba.large.jpg",
       eventTags: ["dog friendly", "lgbt", "clean toilets"],
@@ -20,7 +21,8 @@ export default function EventOverlay() {
     {
       eventName: "The Melonator World Tour",
       eventDescription:
-        "Embrace the melon, be the melon. At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga. ",
+        "Embrace the melon, be the melon.",
+        mainDescription: "At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga. ",
       eventImg:
         "https://runt-of-the-web.com/wordpress/wp-content/uploads/2016/04/melonator.jpg",
       eventTags: ["dog friendly", "lgbt", "clean toilets", "accessibility"],
@@ -30,7 +32,8 @@ export default function EventOverlay() {
     {
       eventName: "The return of the banana",
       eventDescription:
-        "Banana bending workshop included. But I must explain to you how all this mistaken idea of denouncing pleasure and praising pain was born and I will give you a complete account of the system, and expound the actual teachings of the great explorer of the truth",
+        "Banana bending workshop included.",
+        mainDescription: "But I must explain to you how all this mistaken idea of denouncing pleasure and praising pain was born and I will give you a complete account of the system, and expound the actual teachings of the great explorer of the truth",
       eventImg:
         "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSdzY_Ofzzp1UTUR3hEGVPOu3urAajfCg2oRg&usqp=CAU",
       eventTags: ["dog friendly", "lgbt", "workshop"],
@@ -40,7 +43,8 @@ export default function EventOverlay() {
     {
       eventName: "Nick Cage fanclub party",
       eventDescription:
-        "Bring your own Nicholas Cage cardboard cutout. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat",
+        "Bring your own Nicholas Cage cardboard cutout.",
+        mainDescription: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat",
       eventImg:
         "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fwww.dailydot.com%2Fwp-content%2Fuploads%2Fa00%2Fb2%2Fb32e0d39036e2891848a4eed4ee81b72.jpg&f=1&nofb=1",
       eventTags: ["Nick Cage", "lgbt", "meeting"],
@@ -50,7 +54,8 @@ export default function EventOverlay() {
     {
       eventName: "Beer Festival",
       eventDescription:
-        "I'm too tired to think of anything funny. But I must explain to you how all this mistaken idea of denouncing pleasure and praising pain was born and I will give you a complete account of the system, and expound the actual teachings of the great explorer of the truth",
+        "I'm too tired to think of anything funny.",
+        mainDescription: "But I must explain to you how all this mistaken idea of denouncing pleasure and praising pain was born and I will give you a complete account of the system, and expound the actual teachings of the great explorer of the truth",
       eventImg:
         "https://p2d7x8x2.stackpathcdn.com/wordpress/wp-content/uploads/2014/10/Craft-Beer.jpg",
       eventTags: ["dog friendly", "lgbt", "alcohol", "festival"],
