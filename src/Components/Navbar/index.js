@@ -1,10 +1,11 @@
 import "./index.css";
 import MenuIcon from "@mui/icons-material/Menu";
-import { Amplify, Auth } from 'aws-amplify';
-import awsconfig from '../../aws-exports';
-import { withAuthenticator } from '@aws-amplify/ui-react';
-import '@aws-amplify/ui-react/styles.css';
-import awsExports from '../../aws-exports'
+import { Amplify, Auth } from "aws-amplify";
+import awsconfig from "../../aws-exports";
+import { withAuthenticator } from "@aws-amplify/ui-react";
+import "@aws-amplify/ui-react/styles.css";
+import awsExports from "../../aws-exports";
+// import { loadLocation } from "../Explore";
 Amplify.configure(awsExports);
 Amplify.configure(awsconfig);
 
@@ -32,7 +33,7 @@ function Navbar() {
     try {
       await Auth.signOut();
     } catch (error) {
-      console.log('error signing out: ', error);
+      console.log("error signing out: ", error);
     }
   }
 
