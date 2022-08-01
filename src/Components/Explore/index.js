@@ -19,7 +19,7 @@ function Explore(signOut, user) {
     lat: 47.60011001977801,
     lng: 3.533434778585759,
   });
-  
+
   function loadLocation() {
     window.addEventListener("load", () => {
       navigator.geolocation.getCurrentPosition(positionFound, positionNotFound);
@@ -33,11 +33,11 @@ function Explore(signOut, user) {
       }
     });
     console.log("map loaded");
-};
+  };
 
-useEffect(() => {
-loadLocation()
-});
+  useEffect(() => {
+    loadLocation()
+  }, []);
 
   return (
     <div>
