@@ -1,0 +1,29 @@
+.event-background {
+  position: absolute;
+  background-color: #adcad6;
+  width: 35%;
+  height: 94vh;
+  opacity: 75%;
+  border-right: solid;
+  box-shadow: 12px 0 15px -4px var(--secondary);
+}
+
+.background-container {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+  width: 35%;
+  height: 94vh;
+  opacity: 100%;
+}
+.event-logo {
+  width: 15%;
+  height: auto;
+  width: 50%;
+}
+
+.search-input {
+  padding: 15px 25px;
+}

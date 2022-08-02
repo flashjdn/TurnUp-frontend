@@ -1,53 +1,65 @@
-/* .logo {
-} */
+.logo {
+  margin-top: 10vh;
+}
 
 .sign-up {
-    font-size: 3rem;
-    /* text-shadow: 2px 2px black; */
-    display: inline-block;
-    padding: 10px 15px;
-    cursor: pointer;
-    text-decoration: none;
-    color: white;
-    background-color: #FBB13C;
-    border-style: solid black;
-    border-radius: 15px;
-    box-shadow: 0 12px #999;
+  margin-top: 2rem;
+  font-size: clamp(1.5rem, 3vw, 4rem);
+  /* text-shadow: 2px 2px black; */
+  display: inline-block;
+  padding: 10px 15px;
+  cursor: pointer;
+  text-decoration: none;
+  color: white;
+  background-color: #fbb13c;
+  border-style: solid black;
+  border-radius: 15px;
+  box-shadow: 0 12px #999;
 }
 
 .sign-up:hover {
-    background-color: #dd9c33
+  background-color: #dd9c33;
 }
 
 .sign-up:active {
-    background-color: #a37327;
-    box-shadow: 0 5px #666;
-    transform: translateY(4px);
+  background-color: #a37327;
+  box-shadow: 0 5px #666;
+  transform: translateY(4px);
 }
 
 .slogan {
-    color: white;
-    text-shadow: 2px 2px black;
+  margin-top: 1rem;
+  color: white;
+  text-shadow: 2px 2px black;
+  font-size: clamp(1rem, 3vw, 2rem);
 }
 
 .about-text {
-    color: white;
-    text-shadow: 2px 2px black;
+  margin-top: 1rem;
+  color: rgb(3, 89, 150);
+  /* text-shadow: 2px 2px rgb(255, 255, 255); */
+  font-size: clamp(0.5rem, 3vw, 1rem);
+  text-decoration: underline;
+  font-weight: 900;
 }
 
 .vid {
-    position: absolute;
-    right: 0;
-    bottom: 0;
-    min-width: 100%;
-    min-height: 100%;
-    opacity: 75%;
-    z-index: -1;
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  width: 100%;
+  height: 100vh;
+  opacity: 75%;
+  z-index: -1;
+  object-fit: cover;
 }
 
-/* .text-card {
-    background-color: rgba(100, 100, 100, 0.75);
-    padding: 15px 25px;
-    border: none;
-    border-radius: 25%;
-} */
+.content {
+  width: 100%;
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  object-fit: contain;
+}
