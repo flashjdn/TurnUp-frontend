@@ -7,11 +7,11 @@ import awsconfig from "../../aws-exports";
 import { withAuthenticator } from "@aws-amplify/ui-react";
 import "@aws-amplify/ui-react/styles.css";
 import awsExports from "../../aws-exports";
+import MainEventCard from "../MainEventCard";
 Amplify.configure(awsExports);
 Amplify.configure(awsconfig);
-import MainEventCard from "../MainEventCard";
 
-export default function Explore() {
+function Explore(signOut, user) {
   const [eventsArr, setEventsArr] = useState([
     {
       eventId: 0,
@@ -105,9 +105,6 @@ export default function Explore() {
     },
   ]);
 
-
-function Explore(signOut, user) {
-
   /**************************DUMMY DATA ALERT***************************** */
   // const coordinates = { lat: 53.22738449126366, lng: 20.923854902697684 };
   /*_______________________________________________________________________*/
@@ -116,7 +113,6 @@ function Explore(signOut, user) {
     lat: 47.60011001977801,
     lng: 3.533434778585759,
   });
-
 
   const [userLocation, setUserLocation] = useState({
     lat: 47.60011001977801,
