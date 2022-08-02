@@ -11,12 +11,14 @@
   align-items: center;
 }
 
-.nav-bar a {
+.navbutton {
   color: white;
   padding: 0 1.3rem;
   cursor: pointer;
   text-decoration: none;
   font-weight: bold;
+  background-color: transparent;
+  
 }
 
 /*.nav-bar a.active {
@@ -51,10 +53,10 @@
   }
 }
 
-.navbutton {
+/* .navbutton {
   background-color: transparent;
   border: 0px;
-}
+} */
 
 a:hover {
   transition: 0.7s;
