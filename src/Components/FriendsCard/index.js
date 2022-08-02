@@ -4,25 +4,17 @@ export const FriendsCard = () => {
     return (
         <>
             <div
-                className="card-one">
+                className="friend-card-one">
                 {" "}
                 <div className="friend-name-box">
-                    <h2>friend Name</h2>
                 </div>
-                <div className="bottom-friend-section">
-                    <div className="left-friend-section">
-                        <div className="card-one-text">
-                            <p> friend </p>
-                        </div>
-                        <div className="tags-div">
-                            {" "}
-                        </div>
-                    </div>
-                    <div className="right-friend-section">
-                        <p></p>
-                        <p></p>
-                    </div>
+                <div className="card-one-text">
+
+                    <img src="https://images.statusfacebook.com/profile_pictures/cool_profile_pictures/cool_profile_picture_60.jpg" className="friend-pic" alt="friend-img">
+                    </img> <p className="friend-name"> Friend Name</p>
                 </div>
+            </div>
+            <div className="right-friend-section">
             </div>
         </>
     )
