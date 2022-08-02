@@ -1,10 +1,15 @@
 import "./index.css";
 
-export const EventCard = ({ eventObj, key }) => {
-  console.log(eventObj);
+export const EventCard = ({ eventObj, onClick }) => {
   return (
     <>
-      <div className="card-one">
+      <div
+        className="card-one"
+        onClick={() => {
+          onClick({ lng: eventObj.lng, lat: eventObj.lat }, eventObj.eventId);
+        }}
+      >
+        {" "}
         <img
           src={eventObj.eventImg}
           alt="the event"
@@ -22,7 +27,7 @@ export const EventCard = ({ eventObj, key }) => {
               {" "}
               {eventObj.eventTags.map((item, index) => {
                 return (
-                  <div className="tag-box">
+                  <div className="tag-box" key={index}>
                     <p>{item}</p>
                   </div>
                 );

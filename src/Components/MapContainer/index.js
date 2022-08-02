@@ -47,12 +47,14 @@ function MapContainer(props) {
   ];
 
   return (
-    <LoadScript googleMapsApiKey="AIzaSyBfoRI7QkmzhSgXHoxVbguowVBzsWAn1G8">
+    <LoadScript googleMapsApiKey="AIzaSyDJresVS0RQllmIQivLkPz5xNeP19P4pOQ">
       <GoogleMap
         mapContainerStyle={mapStyles}
         zoom={14}
         center={props.centerObj}
       >
+        {console.log(props.centerObj)}
+        {console.log(props.userLocation)}
         <CircleF
           // optional
           onLoad={onLoad}
@@ -65,17 +67,16 @@ function MapContainer(props) {
         />
 
         <MarkerF
-          onLoad={onLoad}
-          position={props.centerObj}
+          //onLoad={onLoad}
+          position={props.userLocation}
           icon="https://i.postimg.cc/DfXqkmRL/human-location-svgrepo-com.png"
         />
         {events.map(function (item, index) {
-          console.log(item);
           return (
             <MarkerF
               key={index}
               position={item}
-              onLoad={onLoad}
+              //onLoad={onLoad}
               icon="https://i.postimg.cc/3x9Q98BD/placeholder-svgrepo-com.png"
             />
           );
