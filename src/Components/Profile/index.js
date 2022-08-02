@@ -1,5 +1,7 @@
 import Navbar from "../Navbar";
 import EventList from "../EventList/index.js";
+import FriendsList from "../FriendsList";
+import { FriendsCard } from "../FriendsCard";
 import { useState } from "react";
 import "./index.css";
 import { Button } from "@mui/material";
@@ -63,9 +65,7 @@ export default function Profile() {
             <p>Email: xyz@gmail.com</p>
           </div>
           <div className="friends-list">
-            <p>
-              this needs to be a separate components with separate friends cards
-            </p>
+            <FriendsList />
           </div>
         </div>
         <div className="profile-right-side">

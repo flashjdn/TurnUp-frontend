@@ -1,1 +1,97 @@
-/* test
+.card-one {
+    background: radial-gradient(var(--primary), var(--secondary));
+    font-size: small;
+    width: 90%;
+    height: 10rem;
+    border-radius: 1rem;
+    margin-bottom: 1rem;
+    transition: all 0.5s;
+    box-shadow: 0px 6px 10px rgba(0, 0, 0, 0.25);
+}
+
+.card-one:hover {
+    box-shadow: 0px 6px 10px rgba(0, 0, 0, 0.4);
+    transform: scale(1.01);
+    height: 14rem;
+}
+
+.card-one-image {
+    width: 100%;
+    height: 40%;
+    object-fit: cover;
+    background-position: center, center;
+    border-top-right-radius: 0.7rem;
+    border-top-left-radius: 0.7rem;
+}
+
+.card-one-text {
+    overflow-y: hidden;
+    min-height: 1rem;
+    height: 100%;
+    width: 100%;
+    text-overflow: ellipsis;
+}
+
+.tags-div {
+    width: 100%;
+    height: 1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: x-small;
+    margin-left: 1rem;
+    margin-bottom: 0;
+    padding: 0.4rem 0.4rem;
+}
+
+.tag-box {
+    background-color: var(--supporting-blue);
+    height: auto;
+    border-radius: 8%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.2rem;
+}
+
+.tag-box p {
+    display: block;
+    font-weight: bold;
+    height: 100%;
+}
+
+.friend-name-box {
+    height: 1.5rem;
+    overflow-x: auto;
+    overflow-y: hidden;
+    margin-bottom: 0.3rem;
+}
+
+.left-friend-section {
+    width: 70%;
+    margin-left: 0.5rem;
+    display: flex;
+    flex-direction: column;
+}
+
+.right-friend-section {
+    width: 30%;
+    height: 2rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-end;
+    margin-right: 0.5rem;
+}
+
+.right-friend-section p {
+    margin-top: 0.5rem;
+    font-weight: bold;
+    justify-self: flex-end;
+}
+
+.bottom-friend-section {
+    display: flex;
+    justify-content: center;
+    height: 40%;
+}
