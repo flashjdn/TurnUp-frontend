@@ -2,7 +2,7 @@
   background: radial-gradient(var(--primary), var(--secondary));
   font-size: small;
   width: 90%;
-  height: 10rem;
+  height: 12rem;
   border-radius: 1rem;
   margin-bottom: 1rem;
   transition: all 0.5s;
@@ -22,14 +22,17 @@
   background-position: center, center;
   border-top-right-radius: 0.7rem;
   border-top-left-radius: 0.7rem;
+  margin-bottom: 0;
 }
 
 .card-one-text {
   overflow-y: hidden;
   min-height: 1rem;
-  height: 100%;
   width: 100%;
   text-overflow: ellipsis;
+  font-size: medium;
+  display: flex;
+  justify-content: center;
 }
 
 .tags-div {
@@ -61,17 +64,16 @@
 }
 
 .event-name-box {
-  height: 1.5rem;
   overflow-x: auto;
-  overflow-y: hidden;
-  margin-bottom: 0.3rem;
+  max-height: 3.5rem;
 }
 
 .left-event-section {
   width: 70%;
-  margin-left: 0.5rem;
   display: flex;
   flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
 }
 
 .right-event-section {
@@ -92,6 +94,12 @@
 
 .bottom-event-section {
   display: flex;
-  justify-content: center;
-  height: 40%;
+  flex-direction: column;
+  height: 53%;
+}
+
+.info-split {
+  display: flex;
+  width: 100%;
+  flex-grow: 1;
 }
