@@ -2,14 +2,14 @@ import MapContainer from "../MapContainer";
 import Navbar from "../Navbar";
 import { useEffect, useState } from "react";
 import EventOverlay from "../EventOverlay/index.js";
-import { Amplify } from "aws-amplify";
-import awsconfig from "../../aws-exports";
+// import { Amplify } from "aws-amplify";
+// import awsconfig from "../../aws-exports";
 import { withAuthenticator } from "@aws-amplify/ui-react";
 import "@aws-amplify/ui-react/styles.css";
-import awsExports from "../../aws-exports";
+// import awsExports from "../../aws-exports";
 import MainEventCard from "../MainEventCard";
-Amplify.configure(awsExports);
-Amplify.configure(awsconfig);
+// Amplify.configure(awsExports);
+// Amplify.configure(awsconfig);
 
 function Explore(signOut, user) {
   const [eventsArr, setEventsArr] = useState([
@@ -171,6 +171,7 @@ function Explore(signOut, user) {
   );
 }
 
-export default withAuthenticator(Explore);
+export default Explore;
+// export default withAuthenticator(Explore);
 // test
 // pushing to main
