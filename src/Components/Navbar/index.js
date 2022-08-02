@@ -30,6 +30,7 @@ function Navbar() {
 
   async function signOut() {
     try {
+      console.log("signing out")
       await Auth.signOut();
     } catch (error) {
       console.log("error signing out: ", error);
