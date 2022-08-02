@@ -51,4 +51,15 @@
   }
 }
 
+.navbutton {
+  background-color: transparent;
+  border: 0px;
+}
+
+a:hover {
+  transition: 0.7s;
+  background-color: var(--primary);
+  border-radius: 100%;
+}
+
 /*____________________________________________________________________________________________________*/

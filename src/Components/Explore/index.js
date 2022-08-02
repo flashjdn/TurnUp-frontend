@@ -1,7 +1,14 @@
 import MapContainer from "../MapContainer";
 import Navbar from "../Navbar";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import EventOverlay from "../EventOverlay/index.js";
+import { Amplify } from "aws-amplify";
+import awsconfig from "../../aws-exports";
+import { withAuthenticator } from "@aws-amplify/ui-react";
+import "@aws-amplify/ui-react/styles.css";
+import awsExports from "../../aws-exports";
+Amplify.configure(awsExports);
+Amplify.configure(awsconfig);
 import MainEventCard from "../MainEventCard";
 
 export default function Explore() {
@@ -98,6 +105,9 @@ export default function Explore() {
     },
   ]);
 
+
+function Explore(signOut, user) {
+
   /**************************DUMMY DATA ALERT***************************** */
   // const coordinates = { lat: 53.22738449126366, lng: 20.923854902697684 };
   /*_______________________________________________________________________*/
@@ -106,6 +116,7 @@ export default function Explore() {
     lat: 47.60011001977801,
     lng: 3.533434778585759,
   });
+
 
   const [userLocation, setUserLocation] = useState({
     lat: 47.60011001977801,
@@ -164,4 +175,5 @@ export default function Explore() {
   );
 }
 
+export default withAuthenticator(Explore);
 // test

@@ -10,11 +10,6 @@
       "StackName": "amplify-turnup-dev-115624",
       "StackId": "arn:aws:cloudformation:eu-west-2:024062005147:stack/amplify-turnup-dev-115624/981f26f0-0cd1-11ed-91b6-0641812e80c2",
       "AmplifyAppId": "d34lxgqix8ax7t"
-    },
-    "categories": {
-      "auth": {
-        "turnupd3f80cb0": {}
-      }
     }
   }
 }
