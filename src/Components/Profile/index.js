@@ -4,6 +4,7 @@ import FriendsList from "../FriendsList";
 import { FriendsCard } from "../FriendsCard";
 import { useState } from "react";
 import "./index.css";
+import { Button } from "@mui/material";
 
 export default function Profile() {
   const [organisedEvents, setOrganisedEvents] = useState([
@@ -57,7 +58,6 @@ export default function Profile() {
   return (
     <div>
       <Navbar></Navbar>
-      <h1>Profile</h1>
       <div className="profile-container">
         <div className="profile-left-side">
           <div className="profile-info">
@@ -70,6 +70,10 @@ export default function Profile() {
         </div>
         <div className="profile-right-side">
           <h2>Events you organise:</h2>
+          <div className="crea-atten-buttons">
+            <Button variant="contained">Events you attend</Button>
+            <Button variant="contained">Events you organise</Button>
+          </div>
           <EventList eventsArr={organisedEvents} />
         </div>
       </div>
