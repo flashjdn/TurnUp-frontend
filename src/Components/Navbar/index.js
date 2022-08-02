@@ -28,10 +28,16 @@ function Navbar() {
     });
   });*/
 
+  function redirect() {
+    window.location.href = "/"
+  };
+
   async function signOut() {
     try {
-      console.log("signing out")
-      await Auth.signOut();
+      console.log("signing out");
+      await Auth.signOut().then(
+        setTimeout(redirect,500)
+        );
     } catch (error) {
       console.log("error signing out: ", error);
     }
@@ -47,7 +53,8 @@ function Navbar() {
           <a href="/explore"> EXPLORE </a>
         </button>
         <button className="navbutton" onClick={signOut}>
-          <a href="/"> SIGN OUT </a>
+          Sign out
+          {/* <a href="/"> SIGN OUT </a> */}
         </button>
       </nav>
       <a id="menu-icon" className="menu-icon" onClick={onMenuClick}>

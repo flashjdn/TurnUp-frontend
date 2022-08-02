@@ -1,8 +1,8 @@
 import MapContainer from "../MapContainer";
 import Navbar from "../Navbar";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import EventOverlay from "../EventOverlay/index.js";
-import { Amplify } from "aws-amplify";
+import { Amplify, Auth } from "aws-amplify";
 import awsconfig from "../../aws-exports";
 import { withAuthenticator } from "@aws-amplify/ui-react";
 import "@aws-amplify/ui-react/styles.css";
