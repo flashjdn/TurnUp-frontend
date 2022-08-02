@@ -1,12 +1,12 @@
 import "./index.css";
 import MenuIcon from "@mui/icons-material/Menu";
 import { Amplify, Auth } from "aws-amplify";
-import awsconfig from "../../aws-exports";
+// import awsconfig from "../../aws-exports";
 import "@aws-amplify/ui-react/styles.css";
-import awsExports from "../../aws-exports";
+// import awsExports from "../../aws-exports";
 // import { loadLocation } from "../Explore";
-Amplify.configure(awsExports);
-Amplify.configure(awsconfig);
+// Amplify.configure(awsExports);
+// Amplify.configure(awsconfig);
 
 function Navbar() {
   function onMenuClick() {
@@ -28,6 +28,7 @@ function Navbar() {
     });
   });*/
 
+
   function redirectHome() {
     window.location.href = "/";
   }
@@ -47,6 +48,7 @@ function Navbar() {
     }
   }
 
+
   return (
     <div className="page-header">
       <nav id="navigation-bar" className="nav-bar">
@@ -56,9 +58,11 @@ function Navbar() {
         <button className="navbutton" onClick={redirectExplore}>
           EXPLORE
         </button>
+
         <button className="navbutton" onClick={signOut}>
           SIGN OUT
         </button>
+
       </nav>
       <a id="menu-icon" className="menu-icon" onClick={onMenuClick}>
         <MenuIcon></MenuIcon>
