@@ -1,0 +1,8 @@
+if( 
+
+    path = website/explore && map rendered?
+
+    yes = do nothing 
+
+    no = redirect to "/"
+)

@@ -1,12 +1,12 @@
 import "./index.css";
 import MenuIcon from "@mui/icons-material/Menu";
 import { Amplify, Auth } from "aws-amplify";
-import awsconfig from "../../aws-exports";
+// import awsconfig from "../../aws-exports";
 import "@aws-amplify/ui-react/styles.css";
-import awsExports from "../../aws-exports";
+// import awsExports from "../../aws-exports";
 // import { loadLocation } from "../Explore";
-Amplify.configure(awsExports);
-Amplify.configure(awsconfig);
+// Amplify.configure(awsExports);
+// Amplify.configure(awsconfig);
 
 function Navbar() {
   function onMenuClick() {
@@ -28,26 +28,41 @@ function Navbar() {
     });
   });*/
 
+
+  function redirectHome() {
+    window.location.href = "/";
+  }
+  function redirectProfile() {
+    window.location.href = "/profile";
+  }
+  function redirectExplore() {
+    window.location.href = "/explore";
+  }
+
   async function signOut() {
     try {
-      await Auth.signOut();
+      console.log("signing out");
+      await Auth.signOut().then(setTimeout(redirectHome, 500));
     } catch (error) {
       console.log("error signing out: ", error);
     }
   }
 
+
   return (
     <div className="page-header">
       <nav id="navigation-bar" className="nav-bar">
-        <button className="navbutton">
-          <a href="/profile"> PROFILE </a>
+        <button className="navbutton" onClick={redirectProfile}>
+          PROFILE
         </button>
-        <button className="navbutton">
-          <a href="/explore"> EXPLORE </a>
+        <button className="navbutton" onClick={redirectExplore}>
+          EXPLORE
         </button>
+
         <button className="navbutton" onClick={signOut}>
-          <a href="/"> SIGN OUT </a>
+          SIGN OUT
         </button>
+
       </nav>
       <a id="menu-icon" className="menu-icon" onClick={onMenuClick}>
         <MenuIcon></MenuIcon>
