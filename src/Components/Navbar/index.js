@@ -3,6 +3,7 @@ import MenuIcon from "@mui/icons-material/Menu";
 import { Amplify, Auth } from "aws-amplify";
 // import awsconfig from "../../aws-exports";
 import "@aws-amplify/ui-react/styles.css";
+import { Button } from "@mui/material";
 // import awsExports from "../../aws-exports";
 // import { loadLocation } from "../Explore";
 // Amplify.configure(awsExports);
@@ -28,7 +29,6 @@ function Navbar() {
     });
   });*/
 
-
   function redirectHome() {
     window.location.href = "/";
   }
@@ -48,21 +48,43 @@ function Navbar() {
     }
   }
 
-
   return (
     <div className="page-header">
       <nav id="navigation-bar" className="nav-bar">
-        <button className="navbutton" onClick={redirectProfile}>
+        <Button
+          className="navbutton"
+          onClick={redirectProfile}
+          sx={{
+            color: "white",
+            fontFamily: '"Raleway", sans-serif',
+            fontWeight: "Bold",
+          }}
+        >
           PROFILE
-        </button>
-        <button className="navbutton" onClick={redirectExplore}>
+        </Button>
+        <Button
+          className="navbutton"
+          onClick={redirectExplore}
+          sx={{
+            color: "white",
+            fontFamily: '"Raleway", sans-serif',
+            fontWeight: "Bold",
+          }}
+        >
           EXPLORE
-        </button>
+        </Button>
 
-        <button className="navbutton" onClick={signOut}>
+        <Button
+          className="navbutton"
+          onClick={signOut}
+          sx={{
+            color: "white",
+            fontFamily: '"Raleway", sans-serif',
+            fontWeight: "Bold",
+          }}
+        >
           SIGN OUT
-        </button>
-
+        </Button>
       </nav>
       <a id="menu-icon" className="menu-icon" onClick={onMenuClick}>
         <MenuIcon></MenuIcon>
