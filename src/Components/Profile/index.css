@@ -24,7 +24,7 @@
 .friends-list {
   width: 70%;
   max-height: 40vh;
-  background-color: var(--secondary);
+  border: solid;
 }
 
 .crea-atten-buttons {
