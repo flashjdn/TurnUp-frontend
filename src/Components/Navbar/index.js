@@ -1,12 +1,12 @@
 import "./index.css";
 import MenuIcon from "@mui/icons-material/Menu";
 import { Amplify, Auth } from "aws-amplify";
-import awsconfig from "../../aws-exports";
+// import awsconfig from "../../aws-exports";
 import "@aws-amplify/ui-react/styles.css";
-import awsExports from "../../aws-exports";
+// import awsExports from "../../aws-exports";
 // import { loadLocation } from "../Explore";
-Amplify.configure(awsExports);
-Amplify.configure(awsconfig);
+// Amplify.configure(awsExports);
+// Amplify.configure(awsconfig);
 
 function Navbar() {
   function onMenuClick() {
@@ -28,13 +28,13 @@ function Navbar() {
     });
   });*/
 
-  async function signOut() {
-    try {
-      await Auth.signOut();
-    } catch (error) {
-      console.log("error signing out: ", error);
-    }
-  }
+  // async function signOut() {
+  //   try {
+  //     await Auth.signOut();
+  //   } catch (error) {
+  //     console.log("error signing out: ", error);
+  //   }
+  // }
 
   return (
     <div className="page-header">
@@ -45,9 +45,9 @@ function Navbar() {
         <button className="navbutton">
           <a href="/explore"> EXPLORE </a>
         </button>
-        <button className="navbutton" onClick={signOut}>
+        {/* <button className="navbutton" onClick={signOut}>
           <a href="/"> SIGN OUT </a>
-        </button>
+        </button> */}
       </nav>
       <a id="menu-icon" className="menu-icon" onClick={onMenuClick}>
         <MenuIcon></MenuIcon>

@@ -2,6 +2,7 @@
   display: flex;
   justify-content: space-between;
   height: 94vh;
+  background-color: var(--supporting-blue);
 }
 
 .profile-left-side {
@@ -14,14 +15,31 @@
 
 .profile-right-side {
   width: 50%;
+  max-height: 94vh;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: space-around;
+  justify-content: center;
 }
 
 .friends-list {
   width: 70%;
-  height: 40vh;
-  background-color: var(--secondary);
+  max-height: 40vh;
+  border: solid;
+  box-shadow: 0px 6px 10px rgba(0, 0, 0, 0.25);
+  border-radius: 0.5rem;
+  background-color: white;
+}
+
+.crea-atten-buttons {
+  display: flex;
+  justify-content: space-between;
+  width: 82%;
+  margin-bottom: 1rem;
+}
+
+.profile-pic {
+  border-radius: 50%;
+  box-shadow: 0px 6px 10px rgba(0, 0, 0, 0.25);
+  height: 20vh;
 }
