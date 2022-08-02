@@ -124,6 +124,7 @@ export default function Explore() {
     }
   }
 
+  //function to close the pop up
   function xClickReset() {
     setPopUp(undefined);
     setLocation(userLocation);
@@ -134,10 +135,9 @@ export default function Explore() {
     async function positionFound(position) {
       const lng = position.coords.longitude;
       const lat = position.coords.latitude;
+      console.log("something");
       setUserLocation({ lat: lat, lng: lng });
       setLocation({ lat: lat, lng: lng });
-      console.log(location);
-      console.log(userLocation);
     }
     function positionNotFound(err) {
       console.log(err);
