@@ -55,14 +55,27 @@ export default function Profile() {
     },
   ]);
 
+  const [user, setUser] = useState({
+    id: 0,
+    image:
+      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT5GNLQ5Rq4_uCHZY7yxKiYXxjkkhro_aIbGQ&usqp=CAU",
+    username: "Billie",
+    email: "billie@microsoft.com",
+  });
   return (
     <div>
       <Navbar></Navbar>
       <div className="profile-container">
         <div className="profile-left-side">
           <div className="profile-info">
-            <p>Username: zyxxx123</p>
-            <p>Email: xyz@gmail.com</p>
+            <img
+              src={user.image}
+              alt="users profile"
+              className="profile-pic"
+            ></img>
+            <p>Username: {user.username}</p>
+            <p>Email: {user.email}</p>
+            <Button variant="contained">Create Event</Button>
           </div>
           <div className="friends-list">
             <FriendsList />
