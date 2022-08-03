@@ -34,8 +34,10 @@
 .crea-atten-buttons {
   display: flex;
   justify-content: space-between;
-  width: 82%;
+  width: 90%;
   margin-bottom: 1rem;
+  align-self: flex-start;
+  margin-left: 4%;
 }
 
 .profile-pic {
@@ -44,7 +46,7 @@
   height: 20vh;
 }
 
-.cards-container {
+.unleash-the-events {
   height: 70vh;
   width: 100%;
 }

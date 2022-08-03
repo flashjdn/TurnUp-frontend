@@ -195,7 +195,12 @@ export default function Profile() {
           </div>
         </div>
         <div className="profile-right-side">
-          <h2>Events you organise:</h2>
+          {organisedButtVariant === "contained" ? (
+            <h2>Events you attend:</h2>
+          ) : (
+            <h2>Events you organise:</h2>
+          )}
+
           <div className="crea-atten-buttons">
             <Button variant={attendedButtVariant} onClick={changeToAttended}>
               Events you attend
