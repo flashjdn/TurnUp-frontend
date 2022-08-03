@@ -183,7 +183,16 @@ function Explore(signOut, user) {
     for (let i = 0; i < eventsArr.length; i++) {
       if (eventsArr[i].eventId === eventId) {
         setPopUp(eventsArr[i]);
-        setLocation({ lat: eventsArr[i].lat, lng: eventsArr[i].lng });
+        setLocation(position);
+      }
+    }
+  }
+
+  function markerClickHandler(markerEventId) {
+    for (let i = 0; i < eventsArr.length; i++) {
+      if (eventsArr[i].eventId === markerEventId) {
+        setPopUp(eventsArr[i]);
+        setLocation(userLocation);
       }
     }
   }
@@ -215,6 +224,7 @@ function Explore(signOut, user) {
         centerObj={location}
         eventsArr={eventsArr}
         userLocation={userLocation}
+        markerOnClick={markerClickHandler}
       ></MapContainer>
       <EventOverlay
         onClick={eventClickHandler}
