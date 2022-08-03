@@ -1,34 +1,39 @@
-import SwipeableDrawer from '@mui/material/SwipeableDrawer';
-import { useState, useEffect } from 'react';
+import SwipeableDrawer from "@mui/material/SwipeableDrawer";
+import { useState } from "react";
 
-export default function Drawer(drawer) {
 
-  const [state, setState] = useState(true);
+export default function Drawer() {
+  const [drawerState, setDrawerState] = useState(false);
 
-  function toggleDrawer() {
-    drawer = false;
-    console.log(drawer)
-    // console.log("this function is running")
-    // setState(!state)
-    // drawer = state;
+  function handleOpen() {
+    setDrawerState(true);
   }
 
-  useEffect(() => {
+  function handleClose() {
+    setDrawerState(false);
+  }
 
-    console.log(state);
-  }, [state]);
+// const theme = createTheme()
+
+//   const useStyles = makeStyles({
+//     SwipeableDrawer: {
+//       backgroundColor: "#fadedd",
+//     },
+//   });
 
   return (
-
-    <SwipeableDrawer
-      open={drawer}
-      onClose={toggleDrawer}
-
-    >
-      <button onClick={toggleDrawer}>X</button>
-
-      <h1>Hey this totally works</h1>
-
-    </SwipeableDrawer >
-  )
+    <div>
+      <SwipeableDrawer
+        open={drawerState}
+        onOpen={handleOpen}
+        onClose={handleClose}
+        anchor="left"
+      >
+        <h1>Hey this totally works</h1>
+      </SwipeableDrawer>
+      <button className="about-text" onClick={handleOpen}>
+        What is this?
+      </button>
+    </div>
+  );
 }

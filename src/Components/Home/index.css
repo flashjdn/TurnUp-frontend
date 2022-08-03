@@ -40,7 +40,10 @@
   /* text-shadow: 2px 2px rgb(255, 255, 255); */
   font-size: clamp(0.5rem, 3vw, 1rem);
   text-decoration: underline;
-  font-weight: 900;
+  font-weight: bolder;
+  background-color: transparent;
+  border:none;
+  cursor: pointer;
 }
 
 .vid {
