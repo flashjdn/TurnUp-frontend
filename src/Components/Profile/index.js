@@ -20,8 +20,8 @@ export default function Profile() {
       eventTime: "tomorrow",
       rating: 5,
       organiser: "Ben",
-      email: "BenDover@gmail.com",
-      address: "6 Cocks Close",
+      email: "Ben@gmail.com",
+      address: "6 Crocs Close",
     },
     {
       eventName: "The Melonator World Tour",
@@ -204,7 +204,9 @@ export default function Profile() {
               Events you organise
             </Button>
           </div>
-          <EventList eventsArr={listDisplay} />
+          <div className="unleash-the-events">
+            <EventList eventsArr={listDisplay} />
+          </div>
         </div>
       </div>
     </div>
