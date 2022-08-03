@@ -67,6 +67,9 @@ function MapContainer(props) {
               position={{ lat: item.lat, lng: item.lng }}
               //onLoad={onLoad}
               icon="https://i.postimg.cc/3x9Q98BD/placeholder-svgrepo-com.png"
+              onClick={() => {
+                props.markerOnClick(item.eventId);
+              }}
             />
           );
         })}

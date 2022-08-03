@@ -188,6 +188,15 @@ function Explore(signOut, user) {
     }
   }
 
+  function markerClickHandler(markerEventId) {
+    for (let i = 0; i < eventsArr.length; i++) {
+      if (eventsArr[i].eventId === markerEventId) {
+        setPopUp(eventsArr[i]);
+        setLocation(userLocation);
+      }
+    }
+  }
+
   //function to close the pop up
   function xClickReset() {
     setPopUp(undefined);
@@ -215,6 +224,7 @@ function Explore(signOut, user) {
         centerObj={location}
         eventsArr={eventsArr}
         userLocation={userLocation}
+        markerOnClick={markerClickHandler}
       ></MapContainer>
       <EventOverlay
         onClick={eventClickHandler}
