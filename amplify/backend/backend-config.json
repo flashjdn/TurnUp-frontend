@@ -1,11 +1,18 @@
 {
   "auth": {
-    "projectturnupcf66545e": {
+    "projectturnupdb356fc8": {
       "service": "Cognito",
       "serviceType": "imported",
       "providerPlugin": "awscloudformation",
       "dependsOn": [],
       "customAuth": false
+    }
+  },
+  "hosting": {
+    "amplifyhosting": {
+      "service": "amplifyhosting",
+      "type": "cicd",
+      "lastPushTimeStamp": "2022-08-03T09:19:16.924Z"
     }
   }
 }

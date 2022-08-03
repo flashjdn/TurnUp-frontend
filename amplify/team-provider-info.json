@@ -12,8 +12,14 @@
       "AmplifyAppId": "d3hv43jagk7qg5"
     },
     "categories": {
+      "hosting": {
+        "amplifyhosting": {
+          "appId": "d3hv43jagk7qg5",
+          "type": "cicd"
+        }
+      },
       "auth": {
-        "projectturnupcf66545e": {
+        "projectturnupdb356fc8": {
           "userPoolId": "eu-west-2_XmRhcZ2aH",
           "userPoolName": "turnup",
           "webClientId": "4sbvk2i0hlsif6vr0jadkafetd",
