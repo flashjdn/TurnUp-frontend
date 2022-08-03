@@ -160,6 +160,61 @@ function Explore(signOut, user) {
       lat: 53.821110541196994,
       lng: -3.0136801746060935,
     },
+    {
+      eventId: 8,
+      eventName: "Pokemon Tai Chi for dogs",
+      eventDescription: "It's not a scam I swear. Bring your wallet.",
+      mainDescription:
+        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat",
+      eventImg:
+        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRRVb1kD5lR5H7GeRuA-af6Ig2XS-wg4bO0Ig&usqp=CAU",
+      eventTags: ["excercise", "dog friendly", "parking", "meeting"],
+      eventDistance: "2km away",
+      eventTime: "in 10 days",
+      rating: 1,
+      organiser: "Richard Champion",
+      email: "dick.champion@gmail.com",
+      address: "Plaza Del Charco",
+      lat: 28.41684109377287,
+      lng: -16.55081008870899,
+    },
+    {
+      eventId: 9,
+      eventName: "Hardcore Children Bloodbowl Competition",
+      eventDescription:
+        "Not for faint-hearted. Child endangerment at its finest.",
+      mainDescription:
+        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat",
+      eventImg:
+        "https://i.pinimg.com/originals/8d/b1/64/8db164c57814f594461b7a56b9522eee.jpg",
+      eventTags: ["cooking", "accessible", "meeting", "recurring"],
+      eventDistance: "5km away",
+      eventTime: "in 3 days",
+      rating: 1,
+      organiser: "Ignacy123",
+      email: "I.Lovski@hotmail.com",
+      address: "24 Folders Lane",
+      lat: 53.821110541196994,
+      lng: -3.0136801746060935,
+    },
+    {
+      eventId: 10,
+      eventName: "Bank Robbery",
+      eventDescription: "Looking for a crew, hit me up.",
+      mainDescription:
+        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat",
+      eventImg:
+        "https://www.deweybrinkleylaw.com/wp-content/uploads/2016/04/bigstock-Hooded-Robber-With-A-Gun-And-A-78546158-768x513.jpg",
+      eventTags: ["robbery", "accessible", "meeting", "recurring"],
+      eventDistance: "5km away",
+      eventTime: "in 3 days",
+      rating: 1,
+      organiser: "BePhucDat214",
+      email: "bpd@gmail.com",
+      address: "La Caixa Bank",
+      lat: 28.41635985131634,
+      lng: -16.547548522601453,
+    },
   ]);
 
   /**************************DUMMY DATA ALERT***************************** */

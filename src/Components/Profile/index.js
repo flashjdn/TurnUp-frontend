@@ -188,8 +188,12 @@ export default function Profile() {
               alt="users profile"
               className="profile-pic"
             ></img>
-            <p>Username: {user.username}</p>
-            <p>Email: {user.email}</p>
+            <p>
+              <strong>Username:</strong> {user.username}
+            </p>
+            <p>
+              <strong>Email:</strong> {user.email}
+            </p>
             <Button variant="contained">Create Event</Button>
           </div>
           <div className="friends-list">
