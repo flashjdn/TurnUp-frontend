@@ -3,15 +3,24 @@ import * as React from "react";
 import "./index.css";
 import Promovid from "../../Assets/turnUp-v5-promo.mp4";
 import Drawer from "../Drawer";
+import { useState, useEffect } from "react";
 
 
 // Landing page code here
 
 export default function LandingPage() {
 
+  const [drawer, setDrawer] = useState(false)
+
+
   function openDrawer() {
-    return
+    console.log("this function is running")
+    setDrawer(current => !current)
   }
+
+  useEffect(() => {
+    console.log(drawer);
+  }, [drawer]);
 
   return (
     <div>
@@ -30,8 +39,9 @@ export default function LandingPage() {
           What is this?
         </button>
 
+
       </div>
-      <Drawer open={openDrawer} />
+      {drawer ? <Drawer /> : null}
     </div>
   );
 }
