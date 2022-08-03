@@ -19,12 +19,7 @@
         }
       },
       "auth": {
-        "projectturnupdb356fc8": {
-          "userPoolId": "eu-west-2_XmRhcZ2aH",
-          "userPoolName": "turnup",
-          "webClientId": "4sbvk2i0hlsif6vr0jadkafetd",
-          "nativeClientId": "4sbvk2i0hlsif6vr0jadkafetd"
-        }
+        "projectturnupbc38c95e": {}
       }
     }
   }

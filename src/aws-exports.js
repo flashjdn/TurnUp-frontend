@@ -3,18 +3,21 @@
 
 const awsmobile = {
     "aws_project_region": "eu-west-2",
+    "aws_cognito_identity_pool_id": "eu-west-2:b75b7f34-7ff5-4f57-a000-5e7a7a5323bd",
     "aws_cognito_region": "eu-west-2",
-    "aws_user_pools_id": "eu-west-2_XmRhcZ2aH",
-    "aws_user_pools_web_client_id": "4sbvk2i0hlsif6vr0jadkafetd",
+    "aws_user_pools_id": "eu-west-2_NjCmQdmOC",
+    "aws_user_pools_web_client_id": "4778hrf64gf8i027bffv8msgl6",
     "oauth": {
-        "domain": "turnup.auth.eu-west-2.amazoncognito.com",
+        "domain": "projectturnupauth-dev.auth.eu-west-2.amazoncognito.com",
         "scope": [
+            "phone",
             "email",
             "openid",
-            "phone"
+            "profile",
+            "aws.cognito.signin.user.admin"
         ],
-        "redirectSignIn": "https://localhost:3000/explore/,https://main.d34lxgqix8ax7t.amplifyapp.com/explore/",
-        "redirectSignOut": "https://localhost:3000/,https://main.d34lxgqix8ax7t.amplifyapp.com/",
+        "redirectSignIn": "http://localhost:3000/explore/",
+        "redirectSignOut": "http://localhost:3000/",
         "responseType": "code"
     },
     "federationTarget": "COGNITO_USER_POOLS",
@@ -26,15 +29,12 @@ const awsmobile = {
         "EMAIL"
     ],
     "aws_cognito_mfa_configuration": "OFF",
-    "aws_cognito_mfa_types": [],
+    "aws_cognito_mfa_types": [
+        "SMS"
+    ],
     "aws_cognito_password_protection_settings": {
         "passwordPolicyMinLength": 8,
-        "passwordPolicyCharacters": [
-            "REQUIRES_LOWERCASE",
-            "REQUIRES_UPPERCASE",
-            "REQUIRES_NUMBERS",
-            "REQUIRES_SYMBOLS"
-        ]
+        "passwordPolicyCharacters": []
     },
     "aws_cognito_verification_mechanisms": [
         "EMAIL"
