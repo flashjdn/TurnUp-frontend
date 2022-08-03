@@ -55,6 +55,82 @@ export default function Profile() {
     },
   ]);
 
+  const [attendedEvents, setAttendedEvents] = useState([
+    {
+      eventId: 3,
+      eventName: "Nick Cage fanclub party",
+      eventDescription: "Bring your own Nicholas Cage cardboard cutout.",
+      mainDescription:
+        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat",
+      eventImg:
+        "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fwww.dailydot.com%2Fwp-content%2Fuploads%2Fa00%2Fb2%2Fb32e0d39036e2891848a4eed4ee81b72.jpg&f=1&nofb=1",
+      eventTags: ["Nick Cage", "lgbt", "meeting"],
+      eventDistance: "5km away",
+      eventTime: "in 3 days",
+      rating: 5,
+      organiser: "John",
+      email: "John@hotmail.com",
+      address: "24 Folders Lane",
+      lat: 47.592604513995454,
+      lng: 3.53192040563478,
+    },
+    {
+      eventId: 5,
+      eventName: "Landfill sightseeing adventure",
+      eventDescription: "Don't touch anything. Thieves will be prostituted.",
+      mainDescription:
+        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat",
+      eventImg:
+        "https://thumbs.dreamstime.com/b/pollution-concept-garbage-pile-trash-dump-landfill-birds-flying-around-91233936.jpg",
+      eventTags: ["museum", "lgbt", "dog friendly"],
+      eventDistance: "2km away",
+      eventTime: "in 5 days",
+      rating: 5,
+      organiser: "Al Cohol DeNaturated",
+      email: "a.c.DeNaturated@hotmail.com",
+      address: "1 Landfill Alley",
+      lat: 52.23300178597648,
+      lng: 20.904440714145675,
+    },
+    {
+      eventId: 6,
+      eventName: "Seated Gentle Excercise (online)",
+      eventDescription: "No violent movement and loud noises please.",
+      mainDescription:
+        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat",
+      eventImg:
+        "https://www.shape.com/thmb/q4wBNX2YPFL86grF-6_kgo7JX5A=/400x0/filters:no_upscale():max_bytes(150000):strip_icc()/happybabypose-edit_0-f9f1011e631d4954b4eeea6b43743776.png",
+      eventTags: ["excercise", "online", "meeting"],
+      eventDistance: "5km away",
+      eventTime: "in 3 days",
+      rating: 3,
+      organiser: "Diana Imogen Crave",
+      email: "D.I.Crave@gmail.com",
+      address: "online",
+      lat: 52.235042924247765,
+      lng: 20.886735810419843,
+    },
+    {
+      eventId: 7,
+      eventName: "Siberian food cookery school",
+      eventDescription:
+        "The magical thing about siberian food is that you'll only need a plate",
+      mainDescription:
+        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat",
+      eventImg:
+        "https://i.pinimg.com/originals/8d/b1/64/8db164c57814f594461b7a56b9522eee.jpg",
+      eventTags: ["cooking", "accessible", "meeting", "recurring"],
+      eventDistance: "5km away",
+      eventTime: "in 3 days",
+      rating: 1,
+      organiser: "Ignacy123",
+      email: "I.Lovski@hotmail.com",
+      address: "24 Folders Lane",
+      lat: 53.821110541196994,
+      lng: -3.0136801746060935,
+    },
+  ]);
+
   const [user, setUser] = useState({
     id: 0,
     image:
@@ -62,6 +138,43 @@ export default function Profile() {
     username: "Billie",
     email: "billie@microsoft.com",
   });
+
+  const [attendedButtVariant, setAttendedButtVariant] = useState("disabled");
+  const [organisedButtVariant, setOrganisedButtVariant] = useState("contained");
+  const [listDisplay, setListDisplay] = useState([
+    {
+      eventId: 7,
+      eventName: "Siberian food cookery school",
+      eventDescription:
+        "The magical thing about siberian food is that you'll only need a plate",
+      mainDescription:
+        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat",
+      eventImg:
+        "https://i.pinimg.com/originals/8d/b1/64/8db164c57814f594461b7a56b9522eee.jpg",
+      eventTags: ["cooking", "accessible", "meeting", "recurring"],
+      eventDistance: "5km away",
+      eventTime: "in 3 days",
+      rating: 1,
+      organiser: "Ignacy123",
+      email: "I.Lovski@hotmail.com",
+      address: "24 Folders Lane",
+      lat: 53.821110541196994,
+      lng: -3.0136801746060935,
+    },
+  ]);
+
+  function changeToAttended() {
+    setListDisplay(attendedEvents);
+    setAttendedButtVariant("disabled");
+    setOrganisedButtVariant("contained");
+  }
+
+  function changeToOrganised() {
+    setListDisplay(organisedEvents);
+    setOrganisedButtVariant("disabled");
+    setAttendedButtVariant("contained");
+  }
+
   return (
     <div>
       <Navbar></Navbar>
@@ -84,10 +197,14 @@ export default function Profile() {
         <div className="profile-right-side">
           <h2>Events you organise:</h2>
           <div className="crea-atten-buttons">
-            <Button variant="contained">Events you attend</Button>
-            <Button variant="contained">Events you organise</Button>
+            <Button variant={attendedButtVariant} onClick={changeToAttended}>
+              Events you attend
+            </Button>
+            <Button variant={organisedButtVariant} onClick={changeToOrganised}>
+              Events you organise
+            </Button>
           </div>
-          <EventList eventsArr={organisedEvents} />
+          <EventList eventsArr={listDisplay} />
         </div>
       </div>
     </div>
