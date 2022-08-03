@@ -14,7 +14,9 @@ export default function EventOverlay({ onClick, eventsArr }) {
           placeholder="Search..."
           className="search-input"
         ></input>
-        <EventList eventsArr={eventsArr} onClick={onClick}></EventList>
+        <div className="event-list-div">
+          <EventList eventsArr={eventsArr} onClick={onClick}></EventList>
+        </div>
       </div>
     </>
   );
