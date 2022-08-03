@@ -6,6 +6,8 @@ import { useState } from "react";
 import "./index.css";
 import { Button } from "@mui/material";
 
+//COMMENT FOR TESTING PURPOSES
+
 export default function Profile() {
   const [organisedEvents, setOrganisedEvents] = useState([
     {
