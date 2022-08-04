@@ -2,7 +2,7 @@ import MapContainer from "../MapContainer";
 import Navbar from "../Navbar";
 import { useEffect, useState } from "react";
 import EventOverlay from "../EventOverlay/index.js";
-import { Amplify, Auth } from "aws-amplify";
+import { Amplify } from "aws-amplify";
 import awsconfig from "../../aws-exports";
 import { dummyEvents } from "../../lib/dummyEvents";
 import { withAuthenticator } from "@aws-amplify/ui-react";
@@ -14,15 +14,26 @@ Amplify.configure(awsconfig);
 
 function Explore(signOut, user) {
   const [eventsArr, setEventsArr] = useState(dummyEvents);
+  const [userInput, setUserInput] = useState("");
 
   /**************************DUMMY DATA ALERT***************************** */
   // const coordinates = { lat: 53.22738449126366, lng: 20.923854902697684 };
   /*_______________________________________________________________________*/
-  const [userInput, setUserInput] = useState("");
   useEffect(() => {
-    //function that takes in input as params, for loop, if statement
-    //setEventsArr(newList)
+    let searchResults = [];
+    for (let i = 0; i < dummyEvents.length; i++) {
+      if (dummyEvents[i].eventName.toLowerCase().includes(userInput) === true) {
+        searchResults.push(dummyEvents[i])
+      } else if (dummyEvents[i].mainDescription.toLowerCase().includes(userInput) === true) {
+        searchResults.push(dummyEvents[i])
+      } else if (dummyEvents[i].eventDescription.toLowerCase().includes(userInput) === true) {
+        searchResults.push(dummyEvents[i])
+      }
+    }
+    setEventsArr(searchResults);
   }, [userInput]);
+
+
 
   const [location, setLocation] = useState({
     lat: 47.60011001977801,
@@ -88,6 +99,7 @@ function Explore(signOut, user) {
         onClick={eventClickHandler}
         xClick={xClickReset}
         eventsArr={eventsArr}
+        setUserInput={setUserInput}
       />
       {popUp ? (
         <MainEventCard eventObj={popUp} xClick={xClickReset}></MainEventCard>
