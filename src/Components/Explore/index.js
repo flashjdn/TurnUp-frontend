@@ -1,6 +1,6 @@
 import MapContainer from "../MapContainer";
 import Navbar from "../Navbar";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import EventOverlay from "../EventOverlay/index.js";
 import { Amplify, Auth } from "aws-amplify";
 import awsconfig from "../../aws-exports";
@@ -18,6 +18,11 @@ function Explore(signOut, user) {
   /**************************DUMMY DATA ALERT***************************** */
   // const coordinates = { lat: 53.22738449126366, lng: 20.923854902697684 };
   /*_______________________________________________________________________*/
+  const [userInput, setUserInput] = useState("");
+  useEffect(() => {
+    //function that takes in input as params, for loop, if statement
+    //setEventsArr(newList)
+  }, [userInput]);
 
   const [location, setLocation] = useState({
     lat: 47.60011001977801,
