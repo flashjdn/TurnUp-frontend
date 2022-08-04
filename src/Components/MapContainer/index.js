@@ -35,17 +35,6 @@ function MapContainer(props) {
     console.log("Circle onUnmount circle: ", circle);
   };
 
-  /**********************************************DUMMY DATA ALERT************************************************ */
-  const events = [
-    { lat: 51.50429287644996, lng: -0.07860452094441346 },
-    { lat: 47.602508712234524, lng: 3.5412595468827868 },
-    { lat: 47.605623195531535, lng: 3.5208701897473174 },
-    { lat: 47.592604513995454, lng: 3.53192040563478 },
-    { lat: 50.99075797195754, lng: -0.11725034060857974 },
-    { lat: 50.983936184261495, lng: -0.12410672996422818 },
-    { lat: 50.97968968132891, lng: -0.12598808661335983 },
-  ];
-
   return (
     <LoadScript googleMapsApiKey="AIzaSyDJresVS0RQllmIQivLkPz5xNeP19P4pOQ">
       <GoogleMap
@@ -71,13 +60,16 @@ function MapContainer(props) {
           position={props.userLocation}
           icon="https://i.postimg.cc/DfXqkmRL/human-location-svgrepo-com.png"
         />
-        {events.map(function (item, index) {
+        {props.eventsArr.map(function (item, index) {
           return (
             <MarkerF
               key={index}
-              position={item}
+              position={{ lat: item.lat, lng: item.lng }}
               //onLoad={onLoad}
               icon="https://i.postimg.cc/3x9Q98BD/placeholder-svgrepo-com.png"
+              onClick={() => {
+                props.markerOnClick(item.eventId);
+              }}
             />
           );
         })}

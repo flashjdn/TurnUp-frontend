@@ -104,6 +104,117 @@ function Explore(signOut, user) {
       lat: 47.596612205676706,
       lng: 3.5331182122558964,
     },
+
+    {
+      eventId: 5,
+      eventName: "Landfill sightseeing adventure",
+      eventDescription: "Don't touch anything. Thieves will be prostituted.",
+      mainDescription:
+        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat",
+      eventImg:
+        "https://thumbs.dreamstime.com/b/pollution-concept-garbage-pile-trash-dump-landfill-birds-flying-around-91233936.jpg",
+      eventTags: ["museum", "lgbt", "dog friendly"],
+      eventDistance: "2km away",
+      eventTime: "in 5 days",
+      rating: 5,
+      organiser: "Al Cohol DeNaturated",
+      email: "a.c.DeNaturated@hotmail.com",
+      address: "1 Landfill Alley",
+      lat: 52.23300178597648,
+      lng: 20.904440714145675,
+    },
+    {
+      eventId: 6,
+      eventName: "Seated Gentle Excercise (online)",
+      eventDescription: "No violent movement and loud noises please.",
+      mainDescription:
+        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat",
+      eventImg:
+        "https://www.shape.com/thmb/q4wBNX2YPFL86grF-6_kgo7JX5A=/400x0/filters:no_upscale():max_bytes(150000):strip_icc()/happybabypose-edit_0-f9f1011e631d4954b4eeea6b43743776.png",
+      eventTags: ["excercise", "online", "meeting"],
+      eventDistance: "5km away",
+      eventTime: "in 3 days",
+      rating: 3,
+      organiser: "Diana Imogen Crave",
+      email: "D.I.Crave@gmail.com",
+      address: "online",
+      lat: 52.235042924247765,
+      lng: 20.886735810419843,
+    },
+    {
+      eventId: 7,
+      eventName: "Siberian food cookery school",
+      eventDescription:
+        "The magical thing about siberian food is that you'll only need a plate",
+      mainDescription:
+        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat",
+      eventImg:
+        "https://i.pinimg.com/originals/8d/b1/64/8db164c57814f594461b7a56b9522eee.jpg",
+      eventTags: ["cooking", "accessible", "meeting", "recurring"],
+      eventDistance: "5km away",
+      eventTime: "in 3 days",
+      rating: 1,
+      organiser: "Ignacy123",
+      email: "I.Lovski@hotmail.com",
+      address: "24 Folders Lane",
+      lat: 53.821110541196994,
+      lng: -3.0136801746060935,
+    },
+    {
+      eventId: 8,
+      eventName: "Pokemon Tai Chi for dogs",
+      eventDescription: "It's not a scam I swear. Bring your wallet.",
+      mainDescription:
+        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat",
+      eventImg:
+        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRRVb1kD5lR5H7GeRuA-af6Ig2XS-wg4bO0Ig&usqp=CAU",
+      eventTags: ["excercise", "dog friendly", "parking", "meeting"],
+      eventDistance: "2km away",
+      eventTime: "in 10 days",
+      rating: 1,
+      organiser: "Richard Champion",
+      email: "dick.champion@gmail.com",
+      address: "Plaza Del Charco",
+      lat: 28.41684109377287,
+      lng: -16.55081008870899,
+    },
+    {
+      eventId: 9,
+      eventName: "Hardcore Children Bloodbowl Competition",
+      eventDescription:
+        "Not for faint-hearted. Child endangerment at its finest.",
+      mainDescription:
+        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat",
+      eventImg:
+        "https://i.pinimg.com/originals/8d/b1/64/8db164c57814f594461b7a56b9522eee.jpg",
+      eventTags: ["cooking", "accessible", "meeting", "recurring"],
+      eventDistance: "5km away",
+      eventTime: "in 3 days",
+      rating: 1,
+      organiser: "Ignacy123",
+      email: "I.Lovski@hotmail.com",
+      address: "24 Folders Lane",
+      lat: 53.821110541196994,
+      lng: -3.0136801746060935,
+    },
+    {
+      eventId: 10,
+      eventName: "Bank Robbery",
+      eventDescription: "Looking for a crew, hit me up.",
+      mainDescription:
+        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat",
+      eventImg:
+        "https://www.deweybrinkleylaw.com/wp-content/uploads/2016/04/bigstock-Hooded-Robber-With-A-Gun-And-A-78546158-768x513.jpg",
+      eventTags: ["robbery", "accessible", "meeting", "recurring"],
+      eventDistance: "5km away",
+      eventTime: "in 3 days",
+      rating: 1,
+      organiser: "BePhucDat214",
+      email: "bpd@gmail.com",
+      address: "La Caixa Bank",
+      lat: 28.41635985131634,
+      lng: -16.547548522601453,
+    },
   ]);
 
   /**************************DUMMY DATA ALERT***************************** */
@@ -127,7 +238,16 @@ function Explore(signOut, user) {
     for (let i = 0; i < eventsArr.length; i++) {
       if (eventsArr[i].eventId === eventId) {
         setPopUp(eventsArr[i]);
-        setLocation({ lat: eventsArr[i].lat, lng: eventsArr[i].lng });
+        setLocation(position);
+      }
+    }
+  }
+
+  function markerClickHandler(markerEventId) {
+    for (let i = 0; i < eventsArr.length; i++) {
+      if (eventsArr[i].eventId === markerEventId) {
+        setPopUp(eventsArr[i]);
+        setLocation(userLocation);
       }
     }
   }
@@ -159,6 +279,7 @@ function Explore(signOut, user) {
         centerObj={location}
         eventsArr={eventsArr}
         userLocation={userLocation}
+        markerOnClick={markerClickHandler}
       ></MapContainer>
       <EventOverlay
         onClick={eventClickHandler}
