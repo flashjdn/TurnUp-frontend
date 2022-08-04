@@ -5,10 +5,11 @@ import { FriendsCard } from "../FriendsCard";
 import { useState } from "react";
 import "./index.css";
 import { Button } from "@mui/material";
+import { withAuthenticator } from "@aws-amplify/ui-react";
 
 //COMMENT FOR TESTING PURPOSES
 
-export default function Profile() {
+function Profile() {
   const [organisedEvents, setOrganisedEvents] = useState([
     {
       eventName: "Long Gameboy Advance enthusiasts meeting",
@@ -223,3 +224,5 @@ export default function Profile() {
     </div>
   );
 }
+
+export default withAuthenticator(Profile);
