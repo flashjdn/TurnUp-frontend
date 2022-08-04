@@ -1,0 +1,9 @@
+.attending-scrollbar {
+}
+.small-profile-pic {
+  width: 5vh;
+  height: 5vh;
+  object-fit: cover;
+  background-position: center, center;
+  border-radius: 50%;
+}
