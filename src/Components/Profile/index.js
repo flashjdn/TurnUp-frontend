@@ -1,10 +1,13 @@
-import Navbar from "../Navbar";
-import EventList from "../EventList/index.js";
-import FriendsList from "../FriendsList";
-import { FriendsCard } from "../FriendsCard";
+// import Navbar from "../Navbar";
+// import EventList from "../EventList/index.js";
+// import FriendsList from "../FriendsList";
+// import { FriendsCard } from "../FriendsCard";
 import { useState } from "react";
 import "./index.css";
-import { Button } from "@mui/material";
+// import { Button } from "@mui/material";
+import NewEventForm from "../AddEventCard";
+
+//ANOTHER TEST COMMENT 
 
 export default function Profile() {
   const [organisedEvents, setOrganisedEvents] = useState([
@@ -64,10 +67,11 @@ export default function Profile() {
   });
   return (
     <div>
-      <Navbar></Navbar>
-      <div className="profile-container">
+  <NewEventForm />
+       {/* <Navbar></Navbar>
+        <div className="profile-container">
         <div className="profile-left-side">
-          <div className="profile-info">
+        <div className="profile-info">
             <img
               src={user.image}
               alt="users profile"
@@ -89,7 +93,7 @@ export default function Profile() {
           </div>
           <EventList eventsArr={organisedEvents} />
         </div>
-      </div>
-    </div>
+      </div> */}
+   </div>
   );
 }
