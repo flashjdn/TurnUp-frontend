@@ -1,7 +1,10 @@
 {
   "auth": {
-    "turnupd3f80cb0": {
+    "projectturnupbc38c95e": {
+      "service": "Cognito",
+      "providerPlugin": "awscloudformation",
       "dependsOn": [],
+      "customAuth": false,
       "frontendAuthConfig": {
         "socialProviders": [],
         "usernameAttributes": [
@@ -22,6 +25,13 @@
           "EMAIL"
         ]
       }
+    }
+  },
+  "hosting": {
+    "amplifyhosting": {
+      "service": "amplifyhosting",
+      "type": "cicd",
+      "lastPushTimeStamp": "2022-08-03T09:19:16.924Z"
     }
   }
 }
