@@ -186,7 +186,7 @@ function Explore(signOut, user) {
       mainDescription:
         "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat",
       eventImg:
-        "https://i.pinimg.com/originals/8d/b1/64/8db164c57814f594461b7a56b9522eee.jpg",
+        "https://images.squarespace-cdn.com/content/v1/52e3394ee4b0c76cfdc5ce16/1495598648833-G83JA57GJIJ9QW43OMBI/Screen+Shot+2017-05-24+at+12.03.16+PM.png?format=1500w",
       eventTags: ["cooking", "accessible", "meeting", "recurring"],
       eventDistance: "5km away",
       eventTime: "in 3 days",
