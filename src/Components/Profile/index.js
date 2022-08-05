@@ -166,6 +166,7 @@ function Profile() {
     },
   ]);
 
+  const [friendsList, setFriendsList] = useState(undefined);
   function changeToAttended() {
     setListDisplay(attendedEvents);
     setAttendedButtVariant("disabled");
@@ -180,6 +181,15 @@ function Profile() {
 
   function seeYouClicking() {
     console.log("I can se you clicking that card. Stop it.");
+  }
+
+  //FUNCTION TEMPLATE TO FETCH FRIENDS
+  async function FetchFriends() {
+    let response = await fetch(`urlurlurl ${user.userId}`);
+    let json = await response.json();
+    let dataArr = json.data;
+    //further in this function we need to have an if statement that checks if the user has any friends to begin with and if not, use setFriendsList to define it as undefined and offer him an add friend button that can be rendered on a card
+    //if the user has friends it just renders his list of friends
   }
 
   return (
