@@ -2,7 +2,7 @@
   background: var(--secondary);
   font-size: small;
   width: 90%;
-  height: 7rem;
+  min-height: 7rem;
   border-radius: 1rem;
   margin-bottom: 0.5rem;
   margin-top: 0.5rem;
@@ -22,16 +22,24 @@
 
 .friend-pic {
   width: auto;
-  height: 75%;
+  height: 5rem;
+  width: 5rem;
   align-items: center;
-  border-radius: 50%;
   object-fit: cover;
   background-position: center, center;
+  border-radius: 50%;
+}
+.friend-pic :hover {
+  transform: scale(1.1);
 }
 
 .friend-name {
   font-size: 1.75vh;
   color: white;
+}
+
+.friend-name-div {
+  width: 10rem;
 }
 
 @media only screen and (max-device-width: 375px) {

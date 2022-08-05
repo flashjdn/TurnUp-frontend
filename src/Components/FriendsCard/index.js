@@ -10,7 +10,9 @@ export const FriendsCard = ({ friend }) => {
           className="friend-pic"
           alt="friend-img"
         ></img>{" "}
-        <p className="friend-name">{friend.friendName}</p>
+        <div className="friend-name-div">
+          <p className="friend-name">{friend.friendName}</p>
+        </div>
         <Button
           variant="outlined"
           size="small"
