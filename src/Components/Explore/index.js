@@ -16,6 +16,7 @@ function Explore(signOut, user) {
 
   const [eventsArr, setEventsArr] = useState(dummyEvents);
   const [userInput, setUserInput] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
 
   /**************************DUMMY DATA ALERT***************************** */
   // const coordinates = { lat: 53.22738449126366, lng: 20.923854902697684 };
@@ -33,6 +34,7 @@ function Explore(signOut, user) {
     }
     setEventsArr(searchResults);
   }, [userInput]);
+
 
 
 
