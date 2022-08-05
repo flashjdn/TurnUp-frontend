@@ -134,7 +134,7 @@ export default function NewEventForm({ onClick }) {
               />
 
               <Box>
-                <Box className="tag-box">
+                <Box className="tag-area-box">
                   <FormControl>
                     <FormLabel>Event Tags</FormLabel>
                     <FormGroup row>
