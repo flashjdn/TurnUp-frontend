@@ -5,7 +5,12 @@
    --fonts: "Raleway", sans-serif;
  }
 
+ .whole-page {
+   background-color: var(--supporting-blue);
+ }
+
  .event-form-container {
+   position: fixed;
    height: 70vh;
    width: 50vw;
    margin-top: 15vh;
@@ -18,55 +23,85 @@
    border-radius: 0.5rem;
  }
 
- .tag-row {
-   display: flex;
-   width: 100%;
-   justify-content: space-evenly;
-   gap: 1px;
-   margin-bottom: 0.5rem;
+ .title-sum-desc-container {
+   /* margin-right: 35vh; */
  }
 
- .tag-checkbox {
-   width: 1.2rem;
-   height: 1.2rem;
- }
-
- #tags-field {
-   width: 100%;
-   display: flex;
-   flex-direction: column;
-   justify-content: center;
-   align-items: center;
+ .event-title-box {
    border-style: solid;
    border-width: 0.005rem;
    border-radius: 0.3rem;
    border-color: rgba(0, 0, 0, 0.3);
+   /* top: 35vh; */
+ }
+
+ .event-summary-box {
+   border-style: solid;
+   border-width: 0.005rem;
+   border-radius: 0.3rem;
+   border-color: rgba(0, 0, 0, 0.3);
+   /* margin-right: 10vh; */
+   top: 3.5vh;
+ }
+
+ .event-description-box {
+   border-style: solid;
+   border-width: 0.005rem;
+   border-radius: 0.3rem;
+   border-color: rgba(0, 0, 0, 0.3);
+   /* margin-right: 10vh; */
+   top: 7.5vh;
+ }
+
+ .tag-box {
+   border-style: solid;
+   border-width: 0.005rem;
+   border-radius: 0.3rem;
+   border-color: rgba(0, 0, 0, 0.3);
+   /* margin-top: 41vh; */
+   margin-left: 3.5vh;
+   width: 40rem;
+   margin-top: 11.5vh;
+ }
+
+ #event-summary-label {
+   font-size: 1.5rem;
+   /* margin-right: 35vh; */
+   top: 10vh;
+ }
+
+ .event-description-label {
+   font-size: 1.5rem;
+   /* margin-right: 35vh; */
+   top: 50vh;
  }
 
  .accessibility-label-form {
-   font-size: 1.5rem;
-   color: rgba(0, 0, 0, 0.6);
-   font-weight: 500;
+   font-size: 1.7rem;
  }
 
- #accessibility-field {
-   width: 100%;
+ .date-time-container {
+   /* margin-right: 2vh; */
+   top: 20vh;
+ }
+
+ .time {
    display: flex;
-   flex-direction: column;
-   justify-content: center;
-   align-items: center;
-   gap: 2rem;
+   width: 30rem;
+   border: solid;
+   /* margin-left: 60vh; */
  }
 
- #event-label {
-   font-size: 1.5rem;
- }
-
- #event-field {
+ .date {
    display: flex;
-   align-items: center;
-   justify-content: space-around;
-   width: 100%;
+   width: 30rem;
+   border: solid;
+   /* margin-left: 60vh; */
+
+ }
+
+ .create-event-card-container {
+   display: flex;
  }
 
  /*

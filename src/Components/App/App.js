@@ -4,6 +4,7 @@ import "./App.css";
 import LandingPage from "../Home";
 import Explore from "../Explore";
 import Profile from "../Profile";
+import NewEventForm from "../AddEventCard";
 // import { eventObject } from "../../lib/dummy.js";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 
@@ -17,6 +18,7 @@ function App() {
           <Route path="/" element={<LandingPage />} />
           <Route path="/explore" element={<Explore />} />
           <Route path="/profile" element={<Profile />} />
+          <Route path="/create-event" element={<NewEventForm></NewEventForm>} />
         </Routes>
       </BrowserRouter>
       {/* <Card path="/card"

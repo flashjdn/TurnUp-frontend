@@ -5,8 +5,10 @@ import { FriendsCard } from "../FriendsCard";
 import { useState } from "react";
 import "./index.css";
 import { Button } from "@mui/material";
+import NewEventForm from "../AddEventCard";
 import { withAuthenticator } from "@aws-amplify/ui-react";
 import dummyFriends from "../../lib/dummyFriends";
+
 
 //COMMENT FOR TESTING PURPOSES
 
@@ -200,7 +202,9 @@ function Profile() {
             <p>
               <strong>Email:</strong> {user.email}
             </p>
-            <Button variant="contained">Create Event</Button>
+            <a href="/create-event">
+              <Button variant="contained">Create Event</Button>
+            </a>
           </div>
           <div className="friends-list">
             <FriendsList friendsArr={dummyFriends} />
@@ -226,6 +230,7 @@ function Profile() {
           </div>
         </div>
       </div>
+      {/* {isClicked ? <NewEventForm onClick={onClickEventForm} /> : null} */}
     </div>
   );
 }
