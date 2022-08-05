@@ -18,8 +18,10 @@ export const FriendsCard = () => {
             borderColor: "#f99244",
             color: "#f99244",
             fontWeight: "bold",
-            marginLeft: "3rem",
+            marginLeft: "0",
+            size: "small",
           }}
+          className="delete-butt"
         >
           Remove
         </Button>

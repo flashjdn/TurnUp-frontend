@@ -33,3 +33,15 @@
   color: white;
   margin-left: 3vw;
 }
+
+@media only screen and (max-device-width: 375px) {
+  .friend-card-one {
+    height: 4rem;
+  }
+  .friend-name {
+    margin-left: 1vw;
+  }
+  .delete-butt {
+    display: none;
+  }
+}

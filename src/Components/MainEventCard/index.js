@@ -2,8 +2,24 @@ import "./index.css";
 import StarIcon from "@mui/icons-material/Star";
 import CloseIcon from "@mui/icons-material/Close";
 
+import Accordion from "@mui/material/Accordion";
+import AccordionDetails from "@mui/material/AccordionDetails";
+import AccordionSummary from "@mui/material/AccordionSummary";
+import Typography from "@mui/material/Typography";
+import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+import { useState } from "react";
+import FriendsAttending from "../FriendsAttending/index";
+import dummyFriends from "../../lib/dummyFriends";
+
 function MainEventCard({ eventObj, xClick }) {
   console.log(eventObj);
+  const [expanded, setExpanded] = useState(false);
+
+  const handleChange = (panel) => (event, isExpanded) => {
+    setExpanded(isExpanded ? panel : false);
+  };
+  const [friendsAttending, setFriendsAttending] = useState(dummyFriends);
+
   return (
     <div className="main-event-card">
       <CloseIcon
@@ -33,9 +49,24 @@ function MainEventCard({ eventObj, xClick }) {
           </div>
         </div>
         <div className="main-right-container">
-          <div className="another-div">
-            <p>{eventObj.mainDescription}</p>
-          </div>
+          <Accordion
+            expanded={expanded === "panel1"}
+            onChange={handleChange("panel1")}
+          >
+            <AccordionSummary
+              expandIcon={<ExpandMoreIcon />}
+              aria-controls="panel1bh-content"
+              id="panel1bh-header"
+            >
+              <Typography sx={{ color: "text.secondary" }}>
+                Description
+              </Typography>
+            </AccordionSummary>
+            <AccordionDetails>
+              <Typography>{eventObj.mainDescription}</Typography>
+            </AccordionDetails>
+          </Accordion>
+
           <div className="main-tag-container">
             {eventObj.eventTags.map((item, index) => {
               return (
@@ -44,6 +75,11 @@ function MainEventCard({ eventObj, xClick }) {
                 </div>
               );
             })}
+          </div>
+          <div className="main-friends-container">
+            <FriendsAttending
+              attendingFriends={friendsAttending}
+            ></FriendsAttending>
           </div>
         </div>
       </div>

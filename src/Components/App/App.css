@@ -3,6 +3,8 @@
   --secondary: #006390;
   --supporting-blue: #adcad6;
   --fonts: "Raleway", sans-serif;
+  --font-colour: white;
+  --font-colour-secondary: black;
 }
 
 * {
