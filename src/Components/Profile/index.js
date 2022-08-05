@@ -1,14 +1,11 @@
 import Navbar from "../Navbar";
 import EventList from "../EventList/index.js";
 import FriendsList from "../FriendsList";
-import { FriendsCard } from "../FriendsCard";
 import { useState } from "react";
 import "./index.css";
 import { Button } from "@mui/material";
-import NewEventForm from "../AddEventCard";
 import { withAuthenticator } from "@aws-amplify/ui-react";
 import dummyFriends from "../../lib/dummyFriends";
-
 
 //COMMENT FOR TESTING PURPOSES
 

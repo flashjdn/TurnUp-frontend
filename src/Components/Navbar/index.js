@@ -63,6 +63,7 @@ function Navbar() {
             fontFamily: '"Raleway", sans-serif',
             fontWeight: "Bold",
           }}
+          size="large"
         >
           PROFILE
         </Button>
@@ -74,6 +75,7 @@ function Navbar() {
             fontFamily: '"Raleway", sans-serif',
             fontWeight: "Bold",
           }}
+          size="large"
         >
           EXPLORE
         </Button>
@@ -86,6 +88,7 @@ function Navbar() {
             fontFamily: '"Raleway", sans-serif',
             fontWeight: "Bold",
           }}
+          size="large"
         >
           SIGN OUT
         </Button>

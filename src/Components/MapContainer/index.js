@@ -1,13 +1,12 @@
 import React from "react";
 import { GoogleMap, LoadScript } from "@react-google-maps/api";
 import { CircleF, MarkerF } from "@react-google-maps/api";
-import { useState } from "react";
+//import { useState } from "react";
 
 /*passed to props:
  CenterCoord = {
   centerObj: { lat: number; lng: number };
 };*/
-
 
 function MapContainer(props) {
   const mapStyles = {
@@ -15,7 +14,7 @@ function MapContainer(props) {
     width: "100%",
     position: "absolute",
   };
-  const [mapState, setMapState] = useState(null);
+  //const [mapState, setMapState] = useState(null);
 
   const options = {
     strokeColor: "#006390",
