@@ -1,16 +1,16 @@
 import { Button } from "@mui/material";
 import "./index.css";
 
-export const FriendsCard = () => {
+export const FriendsCard = ({ friend }) => {
   return (
     <>
       <div className="friend-card-one">
         <img
-          src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT5GNLQ5Rq4_uCHZY7yxKiYXxjkkhro_aIbGQ&usqp=CAU"
+          src={friend.profilePic}
           className="friend-pic"
           alt="friend-img"
         ></img>{" "}
-        <p className="friend-name"> Friend Name</p>
+        <p className="friend-name">{friend.friendName}</p>
         <Button
           variant="outlined"
           size="small"
@@ -18,8 +18,8 @@ export const FriendsCard = () => {
             borderColor: "#f99244",
             color: "#f99244",
             fontWeight: "bold",
-            marginLeft: "0",
             size: "small",
+            marginLeft: "0",
           }}
           className="delete-butt"
         >

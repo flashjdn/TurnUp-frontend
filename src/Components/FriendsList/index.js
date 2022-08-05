@@ -1,13 +1,12 @@
 import { FriendsCard } from "../FriendsCard";
 import "./index.css";
 
-function FriendsList() {
+function FriendsList({ friendsArr }) {
   return (
     <div className="friends-cards-container">
-      <FriendsCard />
-      <FriendsCard />
-      <FriendsCard />
-      <FriendsCard />
+      {friendsArr.map((item, index) => {
+        return <FriendsCard friend={item} key={index} />;
+      })}
     </div>
   );
 }
