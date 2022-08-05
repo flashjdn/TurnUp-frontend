@@ -5,6 +5,7 @@ import { FriendsCard } from "../FriendsCard";
 import { useState } from "react";
 import "./index.css";
 import { Button } from "@mui/material";
+import NewEventForm from "../AddEventCard";
 
 //COMMENT FOR TESTING PURPOSES
 
@@ -194,7 +195,9 @@ export default function Profile() {
             <p>
               <strong>Email:</strong> {user.email}
             </p>
-            <Button variant="contained">Create Event</Button>
+            <a href="/create-event">
+              <Button variant="contained">Create Event</Button>
+            </a>
           </div>
           <div className="friends-list">
             <FriendsList />
@@ -220,6 +223,7 @@ export default function Profile() {
           </div>
         </div>
       </div>
+      {/* {isClicked ? <NewEventForm onClick={onClickEventForm} /> : null} */}
     </div>
   );
 }
