@@ -9,6 +9,7 @@
   display: flex;
   justify-content: flex-end;
   align-items: center;
+  width: 100%;
 }
 
 .navbutton {
@@ -29,15 +30,28 @@
   cursor: pointer;
   display: none;
 }
+.navbar-logo {
+  display: none;
+}
+.logo-background {
+  display: none;
+  background-image: linear-gradient(
+    to right,
+    var(--supporting-blue),
+    var(--secondary)
+  );
+  width: 20vw;
+  height: 6vh;
+}
 
 @media screen and (max-width: 850px) {
   .menu-icon {
     display: block;
+    margin-right: 1rem;
   }
 
   .nav-bar {
     display: none;
-
     top: 3.7rem;
     left: 0;
     width: 100%;
@@ -47,8 +61,22 @@
 
   .nav-bar.responsive {
     display: flex;
-    justify-content: end;
+    justify-content: flex-end;
     align-items: center;
+  }
+  .logo-background {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    left: 0;
+    top: 0;
+  }
+  .navbar-logo {
+    height: 100%;
+    width: auto;
+    display: block;
+    left: 0;
   }
 }
 

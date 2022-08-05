@@ -12,7 +12,7 @@ export default function Drawer() {
   function handleClose() {
     setDrawerState(false);
   }
-  //something very small
+  //something very small, yet again
 
   return (
     <div className="drawer-wrapper">
@@ -29,10 +29,11 @@ export default function Drawer() {
             display: "flex",
             justifyContent: "center",
             alignItems: "center",
-            margin: "10px 10px 0px 10px",
+            margin: "2% 2% 0% 2%",
             padding: "5px 15px 5px 15px",
             textAlign: "justify",
             borderRadius: "10px",
+            fontSize: "clamp(1rem, 3vw, 2rem)",
           },
         }}
       >

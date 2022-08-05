@@ -6,10 +6,13 @@ import { useState } from "react";
 import "./index.css";
 import { Button } from "@mui/material";
 import NewEventForm from "../AddEventCard";
+import { withAuthenticator } from "@aws-amplify/ui-react";
+import dummyFriends from "../../lib/dummyFriends";
+
 
 //COMMENT FOR TESTING PURPOSES
 
-export default function Profile() {
+function Profile() {
   const [organisedEvents, setOrganisedEvents] = useState([
     {
       eventName: "Long Gameboy Advance enthusiasts meeting",
@@ -178,6 +181,10 @@ export default function Profile() {
     setAttendedButtVariant("contained");
   }
 
+  function seeYouClicking() {
+    console.log("I can se you clicking that card. Stop it.");
+  }
+
   return (
     <div>
       <Navbar></Navbar>
@@ -200,7 +207,7 @@ export default function Profile() {
             </a>
           </div>
           <div className="friends-list">
-            <FriendsList />
+            <FriendsList friendsArr={dummyFriends} />
           </div>
         </div>
         <div className="profile-right-side">
@@ -219,7 +226,7 @@ export default function Profile() {
             </Button>
           </div>
           <div className="unleash-the-events">
-            <EventList eventsArr={listDisplay} />
+            <EventList eventsArr={listDisplay} onClick={seeYouClicking} />
           </div>
         </div>
       </div>
@@ -227,3 +234,5 @@ export default function Profile() {
     </div>
   );
 }
+
+export default withAuthenticator(Profile);

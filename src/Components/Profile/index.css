@@ -50,3 +50,77 @@
   height: 70vh;
   width: 100%;
 }
+
+@media screen and (min-device-width: 375px) and (max-width: 850px) {
+  .profile-left-side {
+    width: 100%;
+    justify-content: center;
+    max-height: 47vh;
+  }
+
+  .profile-left-side P {
+    font-size: smaller;
+  }
+
+  .profile-right-side {
+    width: 100%;
+    max-height: 47vh;
+  }
+  .profile-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    height: 94vh;
+    background-color: var(--supporting-blue);
+  }
+  .friends-list {
+    margin-top: 3rem;
+    width: 70%;
+    max-height: 25vh;
+  }
+  .profile-pic {
+    height: 15vh;
+  }
+
+  .unleash-the-events {
+    height: 25vh;
+    width: 100%;
+  }
+}
+
+@media only screen and (max-device-width: 375px) {
+  .profile-left-side {
+    width: 100%;
+    justify-content: flex-start;
+    max-height: 47vh;
+  }
+
+  .profile-left-side P {
+    font-size: smaller;
+  }
+
+  .profile-right-side {
+    width: 100%;
+    max-height: 47vh;
+  }
+  .profile-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    height: 94vh;
+    background-color: var(--supporting-blue);
+  }
+  .friends-list {
+    margin-top: 1rem;
+    width: 90%;
+    max-height: 20vh;
+  }
+  .profile-pic {
+    height: 10vh;
+  }
+
+  .unleash-the-events {
+    height: 25vh;
+    width: 100%;
+  }
+}
