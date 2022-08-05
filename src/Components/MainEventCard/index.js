@@ -1,12 +1,15 @@
 import "./index.css";
 import StarIcon from "@mui/icons-material/Star";
 import CloseIcon from "@mui/icons-material/Close";
+
 import Accordion from "@mui/material/Accordion";
 import AccordionDetails from "@mui/material/AccordionDetails";
 import AccordionSummary from "@mui/material/AccordionSummary";
 import Typography from "@mui/material/Typography";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import { useState } from "react";
+import FriendsAttending from "../FriendsAttending/index";
+
 
 function MainEventCard({ eventObj, xClick }) {
   const [expanded, setExpanded] = useState(false);
@@ -14,6 +17,22 @@ function MainEventCard({ eventObj, xClick }) {
   const handleChange = (panel) => (event, isExpanded) => {
     setExpanded(isExpanded ? panel : false);
   };
+
+
+
+function MainEventCard({ eventObj, xClick }) {
+  console.log(eventObj);
+  const [friendsAttending, setFriendsAttending] = useState([
+    {
+      profilePic:
+        "https://i.pinimg.com/474x/fa/ba/54/faba5498b3167071dc93e22f3ce1e22a.jpg",
+    },
+    {
+      profilePic:
+        "https://i.pinimg.com/236x/63/a6/2d/63a62da7a2ad9a32e7db5f8079a770c9.jpg",
+    },
+  ]);
+
   return (
     <div className="main-event-card">
       <CloseIcon
@@ -69,6 +88,11 @@ function MainEventCard({ eventObj, xClick }) {
                 </div>
               );
             })}
+          </div>
+          <div className="main-friends-container">
+            <FriendsAttending
+              attendingFriends={friendsAttending}
+            ></FriendsAttending>
           </div>
         </div>
       </div>

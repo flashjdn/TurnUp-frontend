@@ -3,6 +3,8 @@ import "./index.css";
 
 function EventList({ eventsArr, onClick }) {
   const eventsArray = [...eventsArr];
+
+  
   return (
     <div className="cards-container">
       {eventsArray.map((item, index) => {

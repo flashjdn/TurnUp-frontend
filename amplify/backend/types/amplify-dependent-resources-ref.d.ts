@@ -1,6 +1,6 @@
 export type AmplifyDependentResourcesAttributes = {
     "auth": {
-        "turnupd3f80cb0": {
+        "projectturnupbc38c95e": {
             "IdentityPoolId": "string",
             "IdentityPoolName": "string",
             "HostedUIDomain": "string",
