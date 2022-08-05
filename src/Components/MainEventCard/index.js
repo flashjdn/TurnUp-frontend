@@ -9,29 +9,16 @@ import Typography from "@mui/material/Typography";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import { useState } from "react";
 import FriendsAttending from "../FriendsAttending/index";
-
+import dummyFriends from "../../lib/dummyFriends";
 
 function MainEventCard({ eventObj, xClick }) {
+  console.log(eventObj);
   const [expanded, setExpanded] = useState(false);
 
   const handleChange = (panel) => (event, isExpanded) => {
     setExpanded(isExpanded ? panel : false);
   };
-
-
-
-function MainEventCard({ eventObj, xClick }) {
-  console.log(eventObj);
-  const [friendsAttending, setFriendsAttending] = useState([
-    {
-      profilePic:
-        "https://i.pinimg.com/474x/fa/ba/54/faba5498b3167071dc93e22f3ce1e22a.jpg",
-    },
-    {
-      profilePic:
-        "https://i.pinimg.com/236x/63/a6/2d/63a62da7a2ad9a32e7db5f8079a770c9.jpg",
-    },
-  ]);
+  const [friendsAttending, setFriendsAttending] = useState(dummyFriends);
 
   return (
     <div className="main-event-card">
