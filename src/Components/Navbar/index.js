@@ -8,6 +8,7 @@ import { Button } from "@mui/material";
 // import { loadLocation } from "../Explore";
 // Amplify.configure(awsExports);
 // Amplify.configure(awsconfig);
+import logo from "../../Assets/turnuplogo.svg";
 
 function Navbar() {
   function onMenuClick() {
@@ -50,6 +51,9 @@ function Navbar() {
 
   return (
     <div className="page-header">
+      <div className="logo-background">
+        <img src={logo} alt="turnup logo" className="navbar-logo"></img>
+      </div>
       <nav id="navigation-bar" className="nav-bar">
         <Button
           className="navbutton"

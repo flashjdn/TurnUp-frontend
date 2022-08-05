@@ -13,6 +13,7 @@ Amplify.configure(awsExports);
 Amplify.configure(awsconfig);
 
 function Explore(signOut, user) {
+
   const [eventsArr, setEventsArr] = useState(dummyEvents);
   const [userInput, setUserInput] = useState("");
 

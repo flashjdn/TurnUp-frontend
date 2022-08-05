@@ -1,8 +1,24 @@
 import "./index.css";
 import StarIcon from "@mui/icons-material/Star";
 import CloseIcon from "@mui/icons-material/Close";
-import FriendsAttending from "../FriendsAttending/index";
+
+import Accordion from "@mui/material/Accordion";
+import AccordionDetails from "@mui/material/AccordionDetails";
+import AccordionSummary from "@mui/material/AccordionSummary";
+import Typography from "@mui/material/Typography";
+import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import { useState } from "react";
+import FriendsAttending from "../FriendsAttending/index";
+
+
+function MainEventCard({ eventObj, xClick }) {
+  const [expanded, setExpanded] = useState(false);
+
+  const handleChange = (panel) => (event, isExpanded) => {
+    setExpanded(isExpanded ? panel : false);
+  };
+
+
 
 function MainEventCard({ eventObj, xClick }) {
   console.log(eventObj);
@@ -16,6 +32,7 @@ function MainEventCard({ eventObj, xClick }) {
         "https://i.pinimg.com/236x/63/a6/2d/63a62da7a2ad9a32e7db5f8079a770c9.jpg",
     },
   ]);
+
   return (
     <div className="main-event-card">
       <CloseIcon
@@ -45,9 +62,24 @@ function MainEventCard({ eventObj, xClick }) {
           </div>
         </div>
         <div className="main-right-container">
-          <div className="another-div">
-            <p>{eventObj.mainDescription}</p>
-          </div>
+          <Accordion
+            expanded={expanded === "panel1"}
+            onChange={handleChange("panel1")}
+          >
+            <AccordionSummary
+              expandIcon={<ExpandMoreIcon />}
+              aria-controls="panel1bh-content"
+              id="panel1bh-header"
+            >
+              <Typography sx={{ color: "text.secondary" }}>
+                Description
+              </Typography>
+            </AccordionSummary>
+            <AccordionDetails>
+              <Typography>{eventObj.mainDescription}</Typography>
+            </AccordionDetails>
+          </Accordion>
+
           <div className="main-tag-container">
             {eventObj.eventTags.map((item, index) => {
               return (
