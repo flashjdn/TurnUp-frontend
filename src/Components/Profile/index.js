@@ -6,6 +6,7 @@ import { useState } from "react";
 import "./index.css";
 import { Button } from "@mui/material";
 import { withAuthenticator } from "@aws-amplify/ui-react";
+import dummyFriends from "../../lib/dummyFriends";
 
 //COMMENT FOR TESTING PURPOSES
 
@@ -178,6 +179,10 @@ function Profile() {
     setAttendedButtVariant("contained");
   }
 
+  function seeYouClicking() {
+    console.log("I can se you clicking that card. Stop it.");
+  }
+
   return (
     <div>
       <Navbar></Navbar>
@@ -198,7 +203,7 @@ function Profile() {
             <Button variant="contained">Create Event</Button>
           </div>
           <div className="friends-list">
-            <FriendsList />
+            <FriendsList friendsArr={dummyFriends} />
           </div>
         </div>
         <div className="profile-right-side">
@@ -217,7 +222,7 @@ function Profile() {
             </Button>
           </div>
           <div className="unleash-the-events">
-            <EventList eventsArr={listDisplay} />
+            <EventList eventsArr={listDisplay} onClick={seeYouClicking} />
           </div>
         </div>
       </div>
