@@ -5,10 +5,6 @@
    --fonts: "Raleway", sans-serif;
  }
 
- .whole-page {
-   background-color: var(--supporting-blue);
- }
-
  .event-form-container {
    position: fixed;
    height: 70vh;
