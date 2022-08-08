@@ -5,7 +5,7 @@
 
 .page-header {
   background-color: var(--secondary);
-  height: 6vh;
+  height: 6%;
   display: flex;
   justify-content: flex-end;
   align-items: center;
@@ -41,7 +41,7 @@
     var(--secondary)
   );
   width: 20vw;
-  height: 6vh;
+  height: 6%;
 }
 
 @media screen and (max-width: 850px) {
