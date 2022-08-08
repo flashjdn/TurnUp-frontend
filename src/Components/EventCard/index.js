@@ -14,7 +14,7 @@ export const EventCard = ({ eventObj, onClick }) => {
       >
         {" "}
         <img
-          src={eventObj.eventimg}
+          src={eventObj.img}
           alt="the event"
           className="card-one-image"
         ></img>
