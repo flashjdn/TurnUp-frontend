@@ -14,7 +14,7 @@
   flex-direction: column;
   align-items: center;
   justify-content: space-around;
-  width: 34%;
+  width: 34.5%;
   height: 94vh;
   opacity: 100%;
 }
@@ -23,8 +23,6 @@
   height: auto;
   width: 50%;
 }
-
-
 
 .event-list-div {
   height: 60vh;

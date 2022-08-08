@@ -1,11 +1,11 @@
 import Navbar from "../Navbar";
 import EventList from "../EventList/index.js";
 import FriendsList from "../FriendsList";
-import { FriendsCard } from "../FriendsCard";
 import { useState } from "react";
 import "./index.css";
 import { Button } from "@mui/material";
 import { withAuthenticator } from "@aws-amplify/ui-react";
+import dummyFriends from "../../lib/dummyFriends";
 
 //COMMENT FOR TESTING PURPOSES
 
@@ -166,6 +166,7 @@ function Profile() {
     },
   ]);
 
+  const [friendsList, setFriendsList] = useState(undefined);
   function changeToAttended() {
     setListDisplay(attendedEvents);
     setAttendedButtVariant("disabled");
@@ -176,6 +177,19 @@ function Profile() {
     setListDisplay(organisedEvents);
     setOrganisedButtVariant("disabled");
     setAttendedButtVariant("contained");
+  }
+
+  function seeYouClicking() {
+    console.log("I can se you clicking that card. Stop it.");
+  }
+
+  //FUNCTION TEMPLATE TO FETCH FRIENDS
+  async function FetchFriends() {
+    let response = await fetch(`urlurlurl ${user.userId}`);
+    let json = await response.json();
+    let dataArr = json.data;
+    //further in this function we need to have an if statement that checks if the user has any friends to begin with and if not, use setFriendsList to define it as undefined and offer him an add friend button that can be rendered on a card
+    //if the user has friends it just renders his list of friends
   }
 
   return (
@@ -195,10 +209,12 @@ function Profile() {
             <p>
               <strong>Email:</strong> {user.email}
             </p>
-            <Button variant="contained">Create Event</Button>
+            <a href="/create-event">
+              <Button variant="contained">Create Event</Button>
+            </a>
           </div>
           <div className="friends-list">
-            <FriendsList />
+            <FriendsList friendsArr={dummyFriends} />
           </div>
         </div>
         <div className="profile-right-side">
@@ -217,10 +233,11 @@ function Profile() {
             </Button>
           </div>
           <div className="unleash-the-events">
-            <EventList eventsArr={listDisplay} />
+            <EventList eventsArr={listDisplay} onClick={seeYouClicking} />
           </div>
         </div>
       </div>
+      {/* {isClicked ? <NewEventForm onClick={onClickEventForm} /> : null} */}
     </div>
   );
 }
