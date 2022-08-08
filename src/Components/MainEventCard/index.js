@@ -7,13 +7,31 @@ import AccordionDetails from "@mui/material/AccordionDetails";
 import AccordionSummary from "@mui/material/AccordionSummary";
 import Typography from "@mui/material/Typography";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import FriendsAttending from "../FriendsAttending/index";
 import dummyFriends from "../../lib/dummyFriends";
 
 function MainEventCard({ eventObj, xClick }) {
   console.log(eventObj);
   const [expanded, setExpanded] = useState(false);
+  const [tags, setTags] = useState(["kids", "dogs", "accessible"]);
+
+  useEffect(() => {
+    getTags(eventObj.eventid);
+  }, [, eventObj.eventid]);
+
+  const getTags = async (eventId) => {
+    const res = await fetch(
+      `https://turnupdb.herokuapp.com/events/tags/${eventId}`,
+      {
+        mode: "cors",
+      }
+    );
+    console.log(res);
+    const data = await res.json();
+    console.log("here are the tags: ", data);
+    setTags(data);
+  };
 
   const handleChange = (panel) => (event, isExpanded) => {
     setExpanded(isExpanded ? panel : false);
@@ -68,10 +86,10 @@ function MainEventCard({ eventObj, xClick }) {
           </Accordion>
 
           <div className="main-tag-container">
-            {tagsArray.map((item, index) => {
+            {tags.map((item, index) => {
               return (
                 <div className="main-tag-box" key={index}>
-                  <p>{item}</p>
+                  <p>{item.tagname}</p>
                 </div>
               );
             })}
