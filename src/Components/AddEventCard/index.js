@@ -1,5 +1,6 @@
 import "./index.css";
 import { useState } from "react";
+
 import Navbar from "../Navbar";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
@@ -83,6 +84,7 @@ export default function NewEventForm({ onClick }) {
   //   window.location.reload();
   // }
   function hideForm() {
+
     document.querySelector(".event-form-container").classList.add("hidden");
   }
 
@@ -204,11 +206,13 @@ export default function NewEventForm({ onClick }) {
 
           <Button
             sx={{ top: "3rem", left: "3rem" }}
+
             variant="contained"
             type="submit"
           >
             Submit
           </Button>
+
         </form>
         <a href="/profile">
           <Button
@@ -227,3 +231,4 @@ export default function NewEventForm({ onClick }) {
 }
 
 // testy
+
