@@ -1,4 +1,3 @@
-
 import Navbar from "../Navbar";
 import EventList from "../EventList/index.js";
 import FriendsList from "../FriendsList";
@@ -8,8 +7,10 @@ import { Button } from "@mui/material";
 import { withAuthenticator } from "@aws-amplify/ui-react";
 import dummyFriends from "../../lib/dummyFriends";
 
-
 //COMMENT FOR TESTING PURPOSES
+
+//HAS TO BE FETCHED FROM THE BACKEND WITH THE HELP OF AUTHENTICATOR
+const userId = 1;
 
 function Profile() {
   const [organisedEvents, setOrganisedEvents] = useState([
@@ -196,10 +197,10 @@ function Profile() {
 
   return (
     <div>
-        <Navbar></Navbar>
-        <div className="profile-container">
+      <Navbar></Navbar>
+      <div className="profile-container">
         <div className="profile-left-side">
-        <div className="profile-info">
+          <div className="profile-info">
             <img
               src={user.image}
               alt="users profile"
@@ -238,11 +239,9 @@ function Profile() {
             <EventList eventsArr={listDisplay} onClick={seeYouClicking} />
           </div>
         </div>
-
       </div>
       {/* {isClicked ? <NewEventForm onClick={onClickEventForm} /> : null} */}
     </div>
-
   );
 }
 

@@ -1,15 +1,23 @@
 import "./index.css";
+import haversineDistance from "../../Models/haversineDistance.js";
 
-export const EventCard = ({ eventObj, onClick }) => {
-
-  const tagsArray = ["kids", "dogs", "accessible"]
-
+export const EventCard = ({ eventObj, onClick, userLoc }) => {
+  const tagsArray = ["kids", "dogs", "accessible"];
+  let userDistance = haversineDistance(
+    [eventObj.lng, eventObj.lat],
+    [userLoc.lng, userLoc.lat],
+    false
+  );
+  //CALCULATE DISTANCE BETWEEN THE USER AND THE EVENT
   return (
     <>
       <div
         className="card-one"
         onClick={() => {
-          onClick({ lng: eventObj.lng, lat: eventObj.lat }, eventObj.eventid);
+          onClick(
+            { lng: Number(eventObj.lng), lat: Number(eventObj.lat) },
+            eventObj.eventid
+          );
         }}
       >
         {" "}
@@ -39,8 +47,8 @@ export const EventCard = ({ eventObj, onClick }) => {
               </div>
             </div>
             <div className="right-event-section">
-              <p>{eventObj.distance}</p>
-              <p>{eventObj.time}</p>
+              <p>{userDistance.toFixed(1)} km away</p>
+              <p>{eventObj.time.substring(0, 5)}</p>
             </div>
           </div>
         </div>
