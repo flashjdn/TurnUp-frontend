@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import EventOverlay from "../EventOverlay/index.js";
 import { Amplify } from "aws-amplify";
 import awsconfig from "../../aws-exports";
-import { dummyEvents } from "../../lib/dummyEvents";
+// import { dummyEvents } from "../../lib/dummyEvents";
 import { withAuthenticator } from "@aws-amplify/ui-react";
 import "@aws-amplify/ui-react/styles.css";
 import awsExports from "../../aws-exports";
@@ -14,28 +14,52 @@ Amplify.configure(awsconfig);
 
 function Explore(signOut, user) {
 
-  const [eventsArr, setEventsArr] = useState(dummyEvents);
+  const [eventsArr, setEventsArr] = useState([{
+    eventId: 10,
+    eventName: "Bank Robbery",
+    eventDescription: "Looking for a crew, hit me up.",
+    mainDescription:
+      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat",
+    eventImg:
+      "https://www.deweybrinkleylaw.com/wp-content/uploads/2016/04/bigstock-Hooded-Robber-With-A-Gun-And-A-78546158-768x513.jpg",
+    eventTags: ["robbery", "accessible", "meeting", "recurring"],
+    eventDistance: "5km away",
+    eventTime: "in 3 days",
+    rating: 1,
+    organiser: "BePhucDat214",
+    email: "bpd@gmail.com",
+    address: "La Caixa Bank",
+    lat: 28.41635985131634,
+    lng: -16.547548522601453,
+  }]);
   const [userInput, setUserInput] = useState("");
   const [isLoading, setIsLoading] = useState(false);
 
   /**************************DUMMY DATA ALERT***************************** */
   // const coordinates = { lat: 53.22738449126366, lng: 20.923854902697684 };
   /*_______________________________________________________________________*/
-  useEffect(() => {
-    let searchResults = [];
-    for (let i = 0; i < dummyEvents.length; i++) {
-      if (dummyEvents[i].eventName.toLowerCase().includes(userInput) === true) {
-        searchResults.push(dummyEvents[i])
-      } else if (dummyEvents[i].mainDescription.toLowerCase().includes(userInput) === true) {
-        searchResults.push(dummyEvents[i])
-      } else if (dummyEvents[i].eventDescription.toLowerCase().includes(userInput) === true) {
-        searchResults.push(dummyEvents[i])
-      }
-    }
-    setEventsArr(searchResults);
-  }, [userInput]);
+  // useEffect(() => {
+  //   let searchResults = [];
+  //   for (let i = 0; i < dummyEvents.length; i++) {
+  //     if (dummyEvents[i].eventName.toLowerCase().includes(userInput) === true) {
+  //       searchResults.push(dummyEvents[i])
+  //     } else if (dummyEvents[i].mainDescription.toLowerCase().includes(userInput) === true) {
+  //       searchResults.push(dummyEvents[i])
+  //     } else if (dummyEvents[i].eventDescription.toLowerCase().includes(userInput) === true) {
+  //       searchResults.push(dummyEvents[i])
+  //     }
+  //   }
+  //   setEventsArr(searchResults);
+  // }, [userInput]);
 
-
+  const getEvents = async () => {
+    const res = await fetch(`https://turnupdb.herokuapp.com/events/all`, { mode: 'cors' });
+    const data = await res.json();
+    console.log(data);
+    const allEvents = data.payload;
+    setEventsArr(allEvents);
+  };
+  getEvents();
 
 
   const [location, setLocation] = useState({
