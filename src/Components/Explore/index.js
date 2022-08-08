@@ -52,14 +52,17 @@ function Explore(signOut, user) {
   //   setEventsArr(searchResults);
   // }, [userInput]);
 
+  useEffect(() => {
+    getEvents();
+  }, []);
+
   const getEvents = async () => {
     const res = await fetch(`https://turnupdb.herokuapp.com/events/all`, { mode: 'cors' });
+    console.log(res);
     const data = await res.json();
     console.log(data);
-    const allEvents = data.payload;
-    setEventsArr(allEvents);
+    setEventsArr(data);
   };
-  getEvents();
 
 
   const [location, setLocation] = useState({
