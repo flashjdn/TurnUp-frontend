@@ -38,6 +38,8 @@ function MapContainer(props) {
     console.log("Circle onUnmount circle: ", circle);
   };
 
+
+
   return (
     <LoadScript googleMapsApiKey="AIzaSyDJresVS0RQllmIQivLkPz5xNeP19P4pOQ">
       <GoogleMap
@@ -67,7 +69,7 @@ function MapContainer(props) {
           return (
             <MarkerF
               key={index}
-              position={{ lat: item.lat, lng: item.lng }}
+              position={{ lat: Number(item.lat), lng: Number(item.lng) }}
               //onLoad={onLoad}
               icon="https://i.postimg.cc/3x9Q98BD/placeholder-svgrepo-com.png"
               onClick={() => {

@@ -19,7 +19,7 @@ function MainEventCard({ eventObj, xClick }) {
     setExpanded(isExpanded ? panel : false);
   };
   const [friendsAttending, setFriendsAttending] = useState(dummyFriends);
-
+  const tagsArray = ["kids", "dogs", "accessible"];
   return (
     <div className="main-event-card">
       <CloseIcon
@@ -28,21 +28,21 @@ function MainEventCard({ eventObj, xClick }) {
       ></CloseIcon>
       <header className="main-card-header">
         <img
-          src={eventObj.eventImg}
+          src={eventObj.img}
           alt="the event"
           className="main-card-image"
         ></img>
 
-        <h2>{eventObj.eventName}</h2>
+        <h2>{eventObj.eventname}</h2>
       </header>
 
       <div className="main-bottom">
         <div className="main-info-bar">
-          <p className="rating-style">{eventObj.eventDistance}</p>
-          <p className="rating-style">{eventObj.eventTime}</p>
+          <p className="rating-style">{eventObj.date.substring(0, 10)}</p>
+          <p className="rating-style">{eventObj.time.substring(0, 5)}</p>
           <p className="rating-style">{eventObj.organiser}</p>
           <p className="rating-style">{eventObj.email}</p>
-          <p className="rating-style">{eventObj.address}</p>
+          <p className="rating-style">{eventObj.locname}</p>
           <div className="rating-style">
             <p>{eventObj.rating}</p>
             <StarIcon />
@@ -63,12 +63,12 @@ function MainEventCard({ eventObj, xClick }) {
               </Typography>
             </AccordionSummary>
             <AccordionDetails>
-              <Typography>{eventObj.mainDescription}</Typography>
+              <Typography>{eventObj.maindescription}</Typography>
             </AccordionDetails>
           </Accordion>
 
           <div className="main-tag-container">
-            {eventObj.eventTags.map((item, index) => {
+            {tagsArray.map((item, index) => {
               return (
                 <div className="main-tag-box" key={index}>
                   <p>{item}</p>

@@ -4,7 +4,12 @@ import "./index.css";
 import EventList from "../EventList";
 import Searchbar from "../Searchbar";
 
-export default function EventOverlay({ onClick, eventsArr, setUserInput }) {
+export default function EventOverlay({
+  onClick,
+  eventsArr,
+  setUserInput,
+  userLoc,
+}) {
   return (
     <>
       <div className="event-background"></div>
@@ -12,7 +17,11 @@ export default function EventOverlay({ onClick, eventsArr, setUserInput }) {
         <img src={logo} alt="turnup logo" className="event-logo"></img>
         <Searchbar setUserInput={setUserInput} />
         <div className="event-list-div">
-          <EventList eventsArr={eventsArr} onClick={onClick}></EventList>
+          <EventList
+            eventsArr={eventsArr}
+            onClick={onClick}
+            userLoc={userLoc}
+          ></EventList>
         </div>
       </div>
     </>
