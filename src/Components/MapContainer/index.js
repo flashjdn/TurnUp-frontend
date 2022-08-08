@@ -10,7 +10,7 @@ import { CircleF, MarkerF } from "@react-google-maps/api";
 
 function MapContainer(props) {
   const mapStyles = {
-    height: "94vh",
+    height: "94%",
     width: "100%",
     position: "absolute",
   };
