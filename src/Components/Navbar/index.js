@@ -1,7 +1,7 @@
 import "./index.css";
 import MenuIcon from "@mui/icons-material/Menu";
 import { Amplify, Auth } from "aws-amplify";
-// import awsconfig from "../../aws-exports";
+import { useAuthenticator } from "@aws-amplify/ui-react";
 import "@aws-amplify/ui-react/styles.css";
 import { Button } from "@mui/material";
 // import awsExports from "../../aws-exports";
@@ -9,6 +9,7 @@ import { Button } from "@mui/material";
 // Amplify.configure(awsExports);
 // Amplify.configure(awsconfig);
 import logo from "../../Assets/turnuplogo.svg";
+import { useNavigate } from "react-router-dom";
 
 function Navbar() {
   function onMenuClick() {
@@ -30,20 +31,15 @@ function Navbar() {
     });
   });*/
 
-  function redirectHome() {
-    window.location.href = "/";
-  }
-  function redirectProfile() {
-    window.location.href = "/profile";
-  }
-  function redirectExplore() {
-    window.location.href = "/explore";
-  }
+  // function redirectExplore() {
+  //   window.location.href = "/explore";
+  // }
+  const navigate = useNavigate();
 
   async function signOut() {
     try {
       console.log("signing out");
-      await Auth.signOut().then(setTimeout(redirectHome, 500));
+      await Auth.signOut().then(navigate("/"));
     } catch (error) {
       console.log("error signing out: ", error);
     }
@@ -57,7 +53,7 @@ function Navbar() {
       <nav id="navigation-bar" className="nav-bar">
         <Button
           className="navbutton"
-          onClick={redirectProfile}
+          onClick={() => navigate("/profile")}
           sx={{
             color: "white",
             fontFamily: '"Raleway", sans-serif',
@@ -69,7 +65,7 @@ function Navbar() {
         </Button>
         <Button
           className="navbutton"
-          onClick={redirectExplore}
+          onClick={() => navigate("/explore")}
           sx={{
             color: "white",
             fontFamily: '"Raleway", sans-serif',
