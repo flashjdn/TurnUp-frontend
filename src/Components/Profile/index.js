@@ -196,8 +196,7 @@ function Profile() {
 
   return (
     <div>
-  <NewEventForm />
-       {/* <Navbar></Navbar>
+        <Navbar></Navbar>
         <div className="profile-container">
         <div className="profile-left-side">
         <div className="profile-info">
