@@ -28,7 +28,7 @@ export default function Places() {
   return <Map />;
 
   function Map() {
-    const center = useMemo(() => ({ lat: 43.43, lng: -80.49 }), {});
+    const center = useMemo(() => ({ lat: 43.43, lng: -80.49 }), []);
     const [selected, setSelected] = useState(null);
 
     const mapStyles = {
@@ -39,7 +39,7 @@ export default function Places() {
     return (
       <>
         <div className="places-container">
-          <PlacesAutocomplete setSelected={setSelected} />
+          {/*<PlacesAutocomplete setSelected={setSelected} />*/}
         </div>
         <LoadScript googleMapsApiKey="AIzaSyDJresVS0RQllmIQivLkPz5xNeP19P4pOQ">
           <GoogleMap
