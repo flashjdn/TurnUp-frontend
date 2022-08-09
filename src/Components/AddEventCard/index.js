@@ -25,64 +25,62 @@ export default function NewEventForm({ onClick }) {
     }
   }
 
-  // function handleDropdownChange(e) {
-  //     setEventValue(e.target.value)
-  // }
-  // async function handleSubmission(e) {
-  //     e.preventDefault()
-  //     // ADAPT ALL OF THE BELOW TO MATCH OUR DATA 
-  //     document.querySelector(".notes-form-container").classList.add("hidden");
-  //     let noteObj = {
-  //       tags: [],
-  //       week: document.getElementById("week-input").value,
-  //       day: document.getElementById("day-input").value,
-  //       note: document.getElementById("noteArea").value,
-  //     };
-  //     let newResourceObj = {
-  //       topicID: eventValue,
-  //       tags: [],
-  //       link: document.getElementById("resources-input").value,
-  //       rating: 3,
-  //     };
-  // //    /Grabs the 6 current tags to idenitfy checked status. happy to help checkbox is also included but
-  //     //is ignored as is handled later.
-  //     let tagArr = document.getElementsByClassName("tag-checkbox");
-  //     for (let i = 0; i < tagArr.length - 1; i++) {
-  //       if (tagArr[i].checked) {
-  //         noteObj.tags = [...noteObj.tags, tagArr[i].name];
-  //         newResourceObj.tags = [...newResourceObj.tags, tagArr[i].name];
-  //       }
-  //     }
-  //All elements have been searched, ready to post the data to the server and database.
-  // await fetch(`http://localhost:3001/notes?email=${user.email}`, {
-  //   method: "POST",
-  //   headers: {
-  //     "Content-Type": "application/json",
-  //   },
-  //   body: JSON.stringify(noteObj),
-  // });
-  // if (document.getElementById("resources-input").value !== "") {
-  //   await fetch(`http://localhost:3001/resource`, {
-  //     method: "POST",
-  //     headers: {
-  //       "Content-Type": "application/json",
-  //     },
-  //     body: JSON.stringify(newResourceObj),
-  //   });
-  // }
-  // if (document.getElementById("happy-to-help-input").checked) {
-  //   await fetch(`http://localhost:3001/help?email=${user.email}`, {
-  //     method: "POST",
-  //     headers: {
-  //       "Content-Type": "application/json",
-  //     },
-  //     body: JSON.stringify(newResourceObj),
-  //   });
-  // }
-  //Resets form and then reloads page
-  //   document.querySelector("#notes-input-field").reset();
-  //   window.location.reload();
-  // }
+  async function handleSubmission(e) {
+    e.preventDefault()
+    // ADAPT ALL OF THE BELOW TO MATCH OUR DATA 
+    document.querySelector(".event-form-container").classList.add("hidden");
+    let eventObj = {
+      eventName: document.getElementsByClassName("event-title-box").value,
+      eventDescription: document.getElementsByClassName("event-summary-box").value,
+      mainDescription: document.getElementsByClassName("event-description-box").value,
+      date: document.getElementsByClassName("date-time-container").value,
+      time: document.getElementsByClassName("time").value,
+    };
+    let tagObj = {
+      topicID: eventValue,
+      tags: [],
+      link: document.getElementById("resources-input").value,
+      rating: 3,
+    };
+    //    /Grabs the 6 current tags to idenitfy checked status. happy to help checkbox is also included but
+    //is ignored as is handled later.
+    let tagArr = document.getElementsByClassName("tag-checkbox");
+    for (let i = 0; i < tagArr.length - 1; i++) {
+      if (tagArr[i].checked) {
+        noteObj.tags = [...noteObj.tags, tagArr[i].name];
+        newResourceObj.tags = [...newResourceObj.tags, tagArr[i].name];
+      }
+    }
+    //  All elements have been searched, ready to post the data to the server and database.
+    await fetch(`http://localhost:3001/notes?email=${user.email}`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(noteObj),
+    });
+    if (document.getElementById("resources-input").value !== "") {
+      await fetch(`http://localhost:3001/resource`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(newResourceObj),
+      });
+    }
+    if (document.getElementById("happy-to-help-input").checked) {
+      await fetch(`http://localhost:3001/help?email=${user.email}`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(newResourceObj),
+      });
+    }
+    //  Resets form and then reloads page
+    document.querySelector("#notes-input-field").reset();
+    window.location.reload();
+  }
   function hideForm() {
 
     document.querySelector(".event-form-container").classList.add("hidden");
@@ -95,7 +93,7 @@ export default function NewEventForm({ onClick }) {
         <form
           id="event-input-field"
           onSubmit={(e) => {
-            // handleSubmission(e);
+            handleSubmission(e);
           }}
         >
           <div className="create-event-card-container">
