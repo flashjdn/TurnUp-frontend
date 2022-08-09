@@ -47,7 +47,7 @@ export default function NewEventForm({ onClick }) {
       eventName: document.getElementsByClassName("event-title-box").value,
       eventDescription:
         document.getElementsByClassName("event-summary-box").value,
-      mainDescription: document.getElemen("event-description-box")
+      mainDescription: document.getElementsByClassName("event-description-box")
         .value,
       date: document.getElementsByClassName("date-time-container").value,
       time: document.getElementsByClassName("time").value,
@@ -80,6 +80,9 @@ export default function NewEventForm({ onClick }) {
       cache: "no-cache", // *default, no-cache, reload, force-cache, only-if-cached
       credentials: "same-origin", // include, *same-origin, omit
       headers: {
+        "Accept": "application/json",
+        "Access-Control-Allow-Origin": "*",
+        "Access-Control-Allow-Methods": "*",
         "Content-Type": "application/json",
         // 'Content-Type': 'application/x-www-form-urlencoded',
       },
