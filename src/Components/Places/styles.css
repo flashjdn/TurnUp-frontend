@@ -1,0 +1,29 @@
+.App {
+  font-family: Raleway;
+  text-align: center;
+  padding: 16px;
+  height: calc(100vh - 32px);
+  display: flex;
+  justify-content: flex-start;
+  flex-direction: column;
+}
+
+.places-search {
+  width: 50%;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+.selected-place {
+  padding: 20px 0;
+}
+
+small {
+  color: grey;
+}

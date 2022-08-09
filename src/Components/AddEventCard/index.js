@@ -245,8 +245,9 @@ export default function NewEventForm({ onClick }) {
           </Button>
         </a>
       </section>
+      <Places />
     </div>
   );
 }
 
-// testy
+
