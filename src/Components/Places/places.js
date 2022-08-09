@@ -15,7 +15,7 @@ import {
 import "@reach/combobox/styles.css";
 
 
-export default Places() {
+export default function Places() {
 
   const { isLoaded } = useLoadScript({
     googleMapsApiKey: "AIzaSyDJresVS0RQllmIQivLkPz5xNeP19P4pOQ",
@@ -44,6 +44,15 @@ export default Places() {
 }
 
 const PlacesAutocomplete = ({ setSelected }) => {
-  const { } =
-  return <></>
+  const {
+    ready,
+    value,
+    setValue,
+    suggestions: { status, data },
+    clearSuggestions,
+  } = usePlacesAutocomplete();
+  return
+  <Combobox>
+    <ComboboxInput value={value} onChange={e => setValue(e.targe.value)} disabled={!ready} />
+  </Combobox>;
 }
