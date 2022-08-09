@@ -224,7 +224,6 @@ export default function NewEventForm({ onClick }) {
               </div>
             </div>
           </div>
-          <Places />
 
           <Button
             sx={{ top: "3rem", left: "3rem" }}

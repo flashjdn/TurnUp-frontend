@@ -16,9 +16,8 @@ import {
   ComboboxPopover,
   ComboboxList,
   ComboboxOption,
-} from "react-widgets/Combobox";
-import "react-widgets/Combobox/styles.css";
-
+} from "@reach/combobox";
+import "@reach/combobox/styles.css";
 export default function Places() {
   const { isLoaded } = useLoadScript({
     googleMapsApiKey: "AIzaSyDJresVS0RQllmIQivLkPz5xNeP19P4pOQ",
@@ -32,19 +31,26 @@ export default function Places() {
     const center = useMemo(() => ({ lat: 43.43, lng: -80.49 }), {});
     const [selected, setSelected] = useState(null);
 
+    const mapStyles = {
+      height: "100%",
+      width: "100%",
+      position: "absolute",
+    };
     return (
       <>
         <div className="places-container">
           <PlacesAutocomplete setSelected={setSelected} />
         </div>
-
-        <GoogleMap
-          zoom={10}
-          centre={center}
-          mapContainerClassName="map-container"
-        >
-          {selected && <MarkerF position={selected} />}
-        </GoogleMap>
+        <LoadScript googleMapsApiKey="AIzaSyDJresVS0RQllmIQivLkPz5xNeP19P4pOQ">
+          <GoogleMap
+            zoom={10}
+            centre={center}
+            mapContainerClassName="map-container"
+            mapContainerStyle={mapStyles}
+          >
+            {selected && <MarkerF position={selected} />}
+          </GoogleMap>
+        </LoadScript>
       </>
     );
   }
