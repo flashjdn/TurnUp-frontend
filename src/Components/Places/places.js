@@ -25,7 +25,7 @@ export default function Places() {
   }, [geocodeByAddress, getLatLng, value, setCoord]);
 
   return (
-    <div className="App">
+    <div className="Places">
       <pre>
         Coordinates: {coord.lat}, {coord.lng}
       </pre>
