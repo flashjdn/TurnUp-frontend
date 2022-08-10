@@ -15,7 +15,11 @@ import {
 import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
 import { LocalizationProvider, StaticDatePicker } from "@mui/x-date-pickers";
 import { StaticTimePicker } from "@mui/x-date-pickers/StaticTimePicker";
+
 import { DocumentScanner } from "@mui/icons-material";
+
+import Places from "../Places/places";
+
 
 export default function NewEventForm({ onClick }) {
   //Form submission function that reads each input type and adds it to the object to be sent to the server if needed.
@@ -37,6 +41,7 @@ export default function NewEventForm({ onClick }) {
       setTags(tags.filter((tag) => tag !== e.target.value));
     }
   };
+
 
   function handleName(event) {
     // This function tracks the string information typed into the input field.
@@ -131,6 +136,7 @@ export default function NewEventForm({ onClick }) {
 
     return response.json();
   }
+
   // if (document.getElementById("resources-input").value !== "") {
   //   await fetch(`http://localhost:3001/resource`, {
   //     method: "POST",
@@ -175,7 +181,9 @@ export default function NewEventForm({ onClick }) {
           <div className="create-event-card-container">
             <div className="title-sum-desc-container">
               <TextField
+
                 onChange={handleName}
+
                 className="event-title-box"
                 sx={{
                   width: "40rem",
@@ -193,7 +201,9 @@ export default function NewEventForm({ onClick }) {
               />
 
               <TextField
+
                 onChange={handleSummary}
+
                 className="event-summary-box"
                 sx={{
                   width: "40rem",
@@ -211,7 +221,9 @@ export default function NewEventForm({ onClick }) {
               />
 
               <TextField
+
                 onChange={handleDescription}
+
                 className="event-description-box"
                 sx={{
                   width: "40rem",
@@ -318,8 +330,10 @@ export default function NewEventForm({ onClick }) {
           </Button>
         </a>
       </section>
+
+      <Places />
+
     </div>
   );
 }
 
-// testy
