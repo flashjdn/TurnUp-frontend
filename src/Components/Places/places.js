@@ -8,13 +8,22 @@ import "./styles.css";
 
 //==================WORKING SEARCHBAR WITH AUTOCOMPLETE========================
 
-export default function Places() {
+export default function Places({ setCoordFunction }) {
   let lat;
   let lng;
   const [rows, setRows] = useState([]);
   const [value, setValue] = useState();
   const [coord, setCoord] = useState({ lat: 0, lng: 0 });
+
+
+
   const LatLng = { lat, lng }
+
+  useEffect(() => {
+    setCoordFunction(coord)
+
+  }, [coord])
+
 
   useEffect(() => {
     if (value) {

@@ -1,5 +1,5 @@
 import "./index.css";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 import Navbar from "../Navbar";
 import TextField from "@mui/material/TextField";
@@ -31,6 +31,10 @@ export default function NewEventForm({ onClick }) {
   const [summary, setSummary] = useState("");
   const [date, setDate] = useState("");
   const [time, setTime] = useState("");
+  const [coord, setCoord] = useState({ lat: 0, lng: 0 });
+
+  console.log("these are the coords", coord);
+
 
   console.log(tags);
   const handleTagChange = (e) => {
@@ -67,7 +71,7 @@ export default function NewEventForm({ onClick }) {
     const newVal = Date().toLocaleString(value)
     setDate(newVal);
   }
-  
+
 
   function handleTime(event) {
     // This function tracks the string information typed into the input field.
@@ -171,6 +175,7 @@ export default function NewEventForm({ onClick }) {
   return (
     <div>
       <Navbar></Navbar>
+
       <section className="event-form-container">
         <form
           id="event-input-field"
@@ -331,7 +336,7 @@ export default function NewEventForm({ onClick }) {
         </a>
       </section>
 
-      <Places />
+      <Places setCoordFunction={setCoord} />
 
     </div>
   );
