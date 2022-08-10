@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
-import ReactDOM from "react-dom";
-import GooglePlacesAutocomplete, { geocodeByAddress, getLatLng } from "react-google-places-autocomplete";
-import usePlacesAutocomplete from "use-places-autocomplete";
+import GooglePlacesAutocomplete, {
+  geocodeByAddress,
+  getLatLng,
+} from "react-google-places-autocomplete";
 
 import "./styles.css";
 // import "react-google-places-autocomplete/dist/assets/index.css";
@@ -13,25 +14,23 @@ export default function Places({ setCoordFunction }) {
   let lng;
   const [rows, setRows] = useState([]);
   const [value, setValue] = useState();
-  const [coord, setCoord] = useState({ lat: 0, lng: 0 });
+  const [coord, setCoord] = useState({ lat: 0, lng: 0, address: "" });
 
-
-
-  const LatLng = { lat, lng }
+  const LatLng = { lat, lng };
 
   useEffect(() => {
-    setCoordFunction(coord)
-
-  }, [coord])
-
+    setCoordFunction(coord);
+  }, [coord]);
 
   useEffect(() => {
     if (value) {
       geocodeByAddress(value.label).then((result) => {
-        getLatLng(result[0]).then((googleCoord) => setCoord(googleCoord));
+        getLatLng(result[0]).then((googleCoord) =>
+          setCoord({ ...googleCoord, address: value.value.description })
+        );
       });
     }
-  }, [geocodeByAddress, getLatLng, value, setCoord]);
+  }, [value]);
 
   return (
     <div className="Places">
@@ -39,18 +38,16 @@ export default function Places({ setCoordFunction }) {
         Coordinates: {coord.lat}, {coord.lng}
       </pre>
       <div className="places-search">
-
         <GooglePlacesAutocomplete
           apiKey={"AIzaSyDJresVS0RQllmIQivLkPz5xNeP19P4pOQ"}
           placeholder="Type in an address"
           minLength={2}
-          returnKeyType={'default'}
+          returnKeyType={"default"}
           selectProps={{
             value,
-            onChange: setValue
+            onChange: setValue,
           }}
-
-          onSelect={result => {
+          onSelect={(result) => {
             const { description, place_id } = result;
             setRows([{ description, place_id }, ...rows]);
           }}
@@ -61,9 +58,6 @@ export default function Places({ setCoordFunction }) {
   );
 }
 //============================================================================
-
-
-
 
 //====================COMBOBOX EXAMPLE============================================
 
@@ -87,7 +81,6 @@ export default function Places({ setCoordFunction }) {
 //   ComboboxOption,
 // } from "@reach/combobox";
 // import "@reach/combobox/styles.css";
-
 
 // export default function Places() {
 //   // const { isLoaded } = useLoadScript({
@@ -165,4 +158,3 @@ export default function Places({ setCoordFunction }) {
 //     </Combobox>
 //   );
 // }
-
