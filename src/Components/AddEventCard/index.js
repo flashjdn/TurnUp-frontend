@@ -15,13 +15,19 @@ import {
 import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
 import { LocalizationProvider, StaticDatePicker } from "@mui/x-date-pickers";
 import { StaticTimePicker } from "@mui/x-date-pickers/StaticTimePicker";
+import { DocumentScanner } from "@mui/icons-material";
 
 export default function NewEventForm({ onClick }) {
   //Form submission function that reads each input type and adds it to the object to be sent to the server if needed.
 
   const [value, setValue] = useState("");
-
   const [tags, setTags] = useState([""]);
+  const [name, setName] = useState("");
+  const [description, setDescription] = useState("");
+  const [summary, setSummary] = useState("");
+  const [date, setDate] = useState("");
+  const [time, setTime] = useState("");
+
   console.log(tags);
   const handleTagChange = (e) => {
     const index = tags.indexOf(e.target.value);
@@ -32,32 +38,62 @@ export default function NewEventForm({ onClick }) {
     }
   };
 
+  function handleName(event) {
+    // This function tracks the string information typed into the input field.
+    const value = event.target.value;
+    setName(value);
+  }
+
+  function handleDescription(event) {
+    // This function tracks the string information typed into the input field.
+    const value = event.target.value;
+    setDescription(value);
+  }
+
+  function handleSummary(event) {
+    // This function tracks the string information typed into the input field.
+    const value = event.target.value;
+    setSummary(value);
+  }
+
+  function handleDate(event) {
+    // This function tracks the string information typed into the input field.
+    const value = event.target.value;
+    const newVal = Date().toLocaleString(value)
+    setDate(newVal);
+  }
+  
+
+  function handleTime(event) {
+    // This function tracks the string information typed into the input field.
+    const value = event.target.value;
+    setTime(value);
+  }
+
+  let user = {
+    username: "Jordan",
+    email: "jordan@jordan.com",
+    img: "https://sm.askmen.com/t/askmen_in/article/f/facebook-p/facebook-profile-picture-affects-chances-of-gettin_fr3n.1200.jpg",
+  };
+
+  let eventObj = {
+    eventName: name,
+    eventDescription: summary,
+    mainDescription: description,
+    date: date,
+    time: time,
+    organiser: user.username,
+    lat: 0,
+    lng: 0,
+    address: "placeholder",
+    img: "url to go here, ask untrodden member",
+    email: user.email,
+  };
+
   async function handleSubmission(e) {
     e.preventDefault();
     // ADAPT ALL OF THE BELOW TO MATCH OUR DATA
     document.querySelector(".event-form-container").classList.add("hidden");
-
-    let user = {
-      username: "Jordan",
-      email: "jordan@jordan.com",
-      img: "https://sm.askmen.com/t/askmen_in/article/f/facebook-p/facebook-profile-picture-affects-chances-of-gettin_fr3n.1200.jpg",
-    };
-
-    let eventObj = {
-      eventName: document.getElementsByClassName("event-title-box").value,
-      eventDescription:
-        document.getElementsByClassName("event-summary-box").value,
-      mainDescription: document.getElementsByClassName("event-description-box")
-        .value,
-      date: document.getElementsByClassName("date-time-container").value,
-      time: document.getElementsByClassName("time").value,
-      organiser: user.username,
-      lat: 0,
-      lng: 0,
-      address: "placeholder",
-      img: "url to go here, ask untrodden member",
-      email: user.email,
-    };
 
     console.log(eventObj);
 
@@ -74,13 +110,14 @@ export default function NewEventForm({ onClick }) {
     // let tagObj = {tagArr}
 
     //  All elements have been searched, ready to post the data to the server and database.
-    const response = await fetch(`https://turnupdb.herokuapp.com/events/all/`, {
+    const response = await fetch(`localhost:3005/events/all`, {
+      // https://turnupdb.herokuapp.com/events/all/
       method: "POST", // *GET, POST, PUT, DELETE, etc.
       mode: "cors", // no-cors, *cors, same-origin
       cache: "no-cache", // *default, no-cache, reload, force-cache, only-if-cached
       credentials: "same-origin", // include, *same-origin, omit
       headers: {
-        "Accept": "application/json",
+        Accept: "application/json",
         "Access-Control-Allow-Origin": "*",
         "Access-Control-Allow-Methods": "*",
         "Content-Type": "application/json",
@@ -120,6 +157,11 @@ export default function NewEventForm({ onClick }) {
     document.querySelector(".event-form-container").classList.add("hidden");
   }
 
+  function test() {
+    console.log(eventObj);
+    console.log(document.getElementsByClassName("event-title-box").value);
+  }
+
   return (
     <div>
       <Navbar></Navbar>
@@ -133,6 +175,7 @@ export default function NewEventForm({ onClick }) {
           <div className="create-event-card-container">
             <div className="title-sum-desc-container">
               <TextField
+                onChange={handleName}
                 className="event-title-box"
                 sx={{
                   width: "40rem",
@@ -150,6 +193,7 @@ export default function NewEventForm({ onClick }) {
               />
 
               <TextField
+                onChange={handleSummary}
                 className="event-summary-box"
                 sx={{
                   width: "40rem",
@@ -167,6 +211,7 @@ export default function NewEventForm({ onClick }) {
               />
 
               <TextField
+                onChange={handleDescription}
                 className="event-description-box"
                 sx={{
                   width: "40rem",
@@ -224,9 +269,10 @@ export default function NewEventForm({ onClick }) {
                   <StaticDatePicker
                     orientation="landscape"
                     openTo="day"
-                    value={value}
-                    onChange={(newValue) => {
-                      setValue(newValue);
+                    value={date}
+                    inputFormat="dd.MM.yyyy"
+                    onChange={(newDate) => {
+                      setDate(newDate);
                     }}
                     renderInput={(params) => <TextField {...params} />}
                   />
@@ -236,12 +282,13 @@ export default function NewEventForm({ onClick }) {
               <div className="time">
                 <LocalizationProvider dateAdapter={AdapterDateFns}>
                   <StaticTimePicker
-                    ampm
+                    // ampmInClock="false"
                     orientation="landscape"
-                    openTo="minutes"
-                    value={value}
-                    onChange={(newValue) => {
-                      setValue(newValue);
+                    openTo="hours"
+                    inputFormat="hh:mm"
+                    value={time}
+                    onChange={(newTime) => {
+                      setTime(newTime);
                     }}
                     renderInput={(params) => <TextField {...params} />}
                   />
@@ -254,7 +301,7 @@ export default function NewEventForm({ onClick }) {
             sx={{ top: "3rem", left: "3rem" }}
             variant="contained"
             type="submit"
-            onClick={handleSubmission}
+            onClick={test}
           >
             Submit
           </Button>
