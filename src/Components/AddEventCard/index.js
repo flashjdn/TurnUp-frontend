@@ -115,8 +115,8 @@ export default function NewEventForm({ onClick }) {
     // let tagObj = {tagArr}
 
     //  All elements have been searched, ready to post the data to the server and database.
-    const response = await fetch(`localhost:3005/events/all`, {
-      // https://turnupdb.herokuapp.com/events/all/
+    const response = await fetch(`https://turnupdb.herokuapp.com/events/all/`, {
+      // 
       method: "POST", // *GET, POST, PUT, DELETE, etc.
       mode: "cors", // no-cors, *cors, same-origin
       cache: "no-cache", // *default, no-cache, reload, force-cache, only-if-cached
