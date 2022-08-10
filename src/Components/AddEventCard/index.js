@@ -16,10 +16,9 @@ import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
 import { LocalizationProvider, StaticDatePicker } from "@mui/x-date-pickers";
 import { StaticTimePicker } from "@mui/x-date-pickers/StaticTimePicker";
 
-import { DocumentScanner } from "@mui/icons-material";
+import { CodeRounded, DocumentScanner } from "@mui/icons-material";
 
 import Places from "../Places/places";
-
 
 export default function NewEventForm({ onClick }) {
   //Form submission function that reads each input type and adds it to the object to be sent to the server if needed.
@@ -35,7 +34,6 @@ export default function NewEventForm({ onClick }) {
 
   console.log("these are the coords", coord);
 
-
   console.log(tags);
   const handleTagChange = (e) => {
     const index = tags.indexOf(e.target.value);
@@ -45,7 +43,6 @@ export default function NewEventForm({ onClick }) {
       setTags(tags.filter((tag) => tag !== e.target.value));
     }
   };
-
 
   function handleName(event) {
     // This function tracks the string information typed into the input field.
@@ -68,10 +65,9 @@ export default function NewEventForm({ onClick }) {
   function handleDate(event) {
     // This function tracks the string information typed into the input field.
     const value = event.target.value;
-    const newVal = Date().toLocaleString(value)
+    const newVal = Date().toLocaleString(value);
     setDate(newVal);
   }
-
 
   function handleTime(event) {
     // This function tracks the string information typed into the input field.
@@ -85,50 +81,30 @@ export default function NewEventForm({ onClick }) {
     img: "https://sm.askmen.com/t/askmen_in/article/f/facebook-p/facebook-profile-picture-affects-chances-of-gettin_fr3n.1200.jpg",
   };
 
-  let eventObj = {
-    eventName: name,
-    eventDescription: summary,
-    mainDescription: description,
-    date: date,
-    time: time,
-    organiser: user.username,
-    lat: 0,
-    lng: 0,
-    address: "placeholder",
-    img: "url to go here, ask untrodden member",
-    email: user.email,
-  };
-
   async function handleSubmission(e) {
     e.preventDefault();
-    // ADAPT ALL OF THE BELOW TO MATCH OUR DATA
-    document.querySelector(".event-form-container").classList.add("hidden");
-
-    console.log(eventObj);
-
-    //    /Grabs the 6 current tags to idenitfy checked status. happy to help checkbox is also included but
-    //is ignored as is handled later.
-    // let tagArr = document.getElementsByClassName("tag-checkbox");
-    // for (let i = 0; i < tagArr.length - 1; i++) {
-    //   if (tagArr[i].checked) {
-    //     noteObj.tags = [...noteObj.tags, tagArr[i].name];
-    //     newResourceObj.tags = [...newResourceObj.tags, tagArr[i].name];
-    //   }
-    // }
-
-    // let tagObj = {tagArr}
 
     //  All elements have been searched, ready to post the data to the server and database.
-    const response = await fetch(`https://turnupdb.herokuapp.com/events/all/`, {
-      // 
+    let eventObj = {
+      eventName: name,
+      eventDescription: summary,
+      mainDescription: description,
+      date: date,
+      time: time,
+      organiser: user.username,
+      lat: coord.lat,
+      lng: coord.lng,
+      address: coord.address,
+      img: "https://i2-prod.dailystar.co.uk/incoming/article19359395.ece/ALTERNATES/s1227b/0_httpscdnimagesdailystarcoukdynamic122photos140000900x7381364140",
+      email: user.email,
+    };
+
+    const response = await fetch(`https://turnupdb.herokuapp.com/events/all`, {
+      //
       method: "POST", // *GET, POST, PUT, DELETE, etc.
-      mode: "cors", // no-cors, *cors, same-origin
-      cache: "no-cache", // *default, no-cache, reload, force-cache, only-if-cached
-      credentials: "same-origin", // include, *same-origin, omit
+      mode: "cors",
       headers: {
-        Accept: "application/json",
         "Access-Control-Allow-Origin": "*",
-        "Access-Control-Allow-Methods": "*",
         "Content-Type": "application/json",
         // 'Content-Type': 'application/x-www-form-urlencoded',
       },
@@ -141,34 +117,11 @@ export default function NewEventForm({ onClick }) {
     return response.json();
   }
 
-  // if (document.getElementById("resources-input").value !== "") {
-  //   await fetch(`http://localhost:3001/resource`, {
-  //     method: "POST",
-  //     headers: {
-  //       "Content-Type": "application/json",
-  //     },
-  //     body: JSON.stringify(newResourceObj),
-  //   });
-  // }
-  // if (document.getElementById("happy-to-help-input").checked) {
-  //   await fetch(`http://localhost:3001/help?email=${user.email}`, {
-  //     method: "POST",
-  //     headers: {
-  //       "Content-Type": "application/json",
-  //     },
-  //     body: JSON.stringify(newResourceObj),
-  //   });
-  // }
-  //  Resets form and then reloads page
-  // document.querySelector("#notes-input-field").reset();
-  // window.location.reload();
-  // }
   function hideForm() {
     document.querySelector(".event-form-container").classList.add("hidden");
   }
 
   function test() {
-    console.log(eventObj);
     console.log(document.getElementsByClassName("event-title-box").value);
   }
 
@@ -186,9 +139,7 @@ export default function NewEventForm({ onClick }) {
           <div className="create-event-card-container">
             <div className="title-sum-desc-container">
               <TextField
-
                 onChange={handleName}
-
                 className="event-title-box"
                 sx={{
                   width: "40rem",
@@ -206,9 +157,7 @@ export default function NewEventForm({ onClick }) {
               />
 
               <TextField
-
                 onChange={handleSummary}
-
                 className="event-summary-box"
                 sx={{
                   width: "40rem",
@@ -226,9 +175,7 @@ export default function NewEventForm({ onClick }) {
               />
 
               <TextField
-
                 onChange={handleDescription}
-
                 className="event-description-box"
                 sx={{
                   width: "40rem",
@@ -318,7 +265,7 @@ export default function NewEventForm({ onClick }) {
             sx={{ top: "3rem", left: "3rem" }}
             variant="contained"
             type="submit"
-            onClick={test}
+            onClick={handleSubmission}
           >
             Submit
           </Button>
@@ -337,8 +284,6 @@ export default function NewEventForm({ onClick }) {
       </section>
 
       <Places setCoordFunction={setCoord} />
-
     </div>
   );
 }
-
