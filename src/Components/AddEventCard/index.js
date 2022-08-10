@@ -4,10 +4,18 @@ import { useState } from "react";
 import Navbar from "../Navbar";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
-import { Box, FormControlLabel, Checkbox, FormControl, FormLabel, FormGroup } from "@mui/material";
-import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
-import { LocalizationProvider, StaticDatePicker } from '@mui/x-date-pickers';
-import { StaticTimePicker } from '@mui/x-date-pickers/StaticTimePicker';
+import {
+  Box,
+  FormControlLabel,
+  Checkbox,
+  FormControl,
+  FormLabel,
+  FormGroup,
+} from "@mui/material";
+import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
+import { LocalizationProvider, StaticDatePicker } from "@mui/x-date-pickers";
+import { StaticTimePicker } from "@mui/x-date-pickers/StaticTimePicker";
+import Places from "../Places/places";
 
 export default function NewEventForm({ onClick }) {
   //Form submission function that reads each input type and adds it to the object to be sent to the server if needed.
@@ -17,20 +25,20 @@ export default function NewEventForm({ onClick }) {
   const [tags, setTags] = useState([""]);
   console.log(tags);
   const handleTagChange = (e) => {
-    const index = tags.indexOf(e.target.value)
+    const index = tags.indexOf(e.target.value);
     if (index === -1) {
-      setTags([...tags, e.target.value])
+      setTags([...tags, e.target.value]);
     } else {
-      setTags(tags.filter((tag) => tag !== e.target.value))
+      setTags(tags.filter((tag) => tag !== e.target.value));
     }
-  }
+  };
 
   // function handleDropdownChange(e) {
   //     setEventValue(e.target.value)
   // }
   // async function handleSubmission(e) {
   //     e.preventDefault()
-  //     // ADAPT ALL OF THE BELOW TO MATCH OUR DATA 
+  //     // ADAPT ALL OF THE BELOW TO MATCH OUR DATA
   //     document.querySelector(".notes-form-container").classList.add("hidden");
   //     let noteObj = {
   //       tags: [],
@@ -84,7 +92,6 @@ export default function NewEventForm({ onClick }) {
   //   window.location.reload();
   // }
   function hideForm() {
-
     document.querySelector(".event-form-container").classList.add("hidden");
   }
 
@@ -100,8 +107,13 @@ export default function NewEventForm({ onClick }) {
         >
           <div className="create-event-card-container">
             <div className="title-sum-desc-container">
-              <TextField className="event-title-box"
-                sx={{ width: "40rem", height: "5rem", background: "var(--supporting-blue)", }}
+              <TextField
+                className="event-title-box"
+                sx={{
+                  width: "40rem",
+                  height: "5rem",
+                  background: "var(--supporting-blue)",
+                }}
                 label="Event title:"
                 multiline
                 rows={2}
@@ -112,8 +124,13 @@ export default function NewEventForm({ onClick }) {
                 inputProps={{ maxLength: "40" }}
               />
 
-              <TextField className="event-summary-box"
-                sx={{ width: "40rem", height: "9.2rem", background: "var(--supporting-blue)", }}
+              <TextField
+                className="event-summary-box"
+                sx={{
+                  width: "40rem",
+                  height: "9.2rem",
+                  background: "var(--supporting-blue)",
+                }}
                 label="Event Summary:"
                 multiline
                 rows={5}
@@ -124,8 +141,13 @@ export default function NewEventForm({ onClick }) {
                 inputProps={{ maxLength: "80" }}
               />
 
-              <TextField className="event-description-box"
-                sx={{ width: "40rem", height: "15rem", background: "var(--supporting-blue)", }}
+              <TextField
+                className="event-description-box"
+                sx={{
+                  width: "40rem",
+                  height: "15rem",
+                  background: "var(--supporting-blue)",
+                }}
                 label="Event Description:"
                 multiline
                 rows={9}
@@ -196,8 +218,7 @@ export default function NewEventForm({ onClick }) {
                     onChange={(newValue) => {
                       setValue(newValue);
                     }}
-                    renderInput={(params) => <TextField {...params}
-                    />}
+                    renderInput={(params) => <TextField {...params} />}
                   />
                 </LocalizationProvider>
               </div>
@@ -206,13 +227,11 @@ export default function NewEventForm({ onClick }) {
 
           <Button
             sx={{ top: "3rem", left: "3rem" }}
-
             variant="contained"
             type="submit"
           >
             Submit
           </Button>
-
         </form>
         <a href="/profile">
           <Button
@@ -225,10 +244,10 @@ export default function NewEventForm({ onClick }) {
             X
           </Button>
         </a>
-      </section >
+      </section>
+      <Places />
     </div>
   );
 }
 
-// testy
 
