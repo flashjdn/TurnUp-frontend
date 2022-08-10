@@ -1,10 +1,8 @@
 import React, { useState, useEffect } from "react";
-import ReactDOM from "react-dom";
 import GooglePlacesAutocomplete, {
   geocodeByAddress,
   getLatLng,
 } from "react-google-places-autocomplete";
-import usePlacesAutocomplete from "use-places-autocomplete";
 
 import "./styles.css";
 // import "react-google-places-autocomplete/dist/assets/index.css";
