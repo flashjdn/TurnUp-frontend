@@ -84,15 +84,17 @@ export default function NewEventForm({ onClick }) {
   async function handleSubmission(e) {
     e.preventDefault();
 
-    console.log("date: ", date.toLocaleDateString());
-    console.log("time: ", time.toLocaleTimeString());
+    const [day, month, year] = date.toLocaleDateString().split("/");
+
+    const adjustedDate = [year, month, day].join("-");
+    const adjustedTime = time.toLocaleTimeString();
     //  All elements have been searched, ready to post the data to the server and database.
     let eventObj = {
       eventName: name,
       eventDescription: summary,
       mainDescription: description,
-      date: date.toLocaleDateString(),
-      time: time.toLocaleTimeString(),
+      date: adjustedDate, //date.toLocaleDateString(),
+      time: adjustedTime, //time.toLocaleTimeString(),
       organiser: user.username,
       lat: coord.lat,
       lng: coord.lng,
@@ -236,7 +238,7 @@ export default function NewEventForm({ onClick }) {
                     orientation="landscape"
                     openTo="day"
                     value={date}
-                    inputFormat="yyyy-MM-dd"
+                    inputFormat="YYYY-MM-DD"
                     onChange={(newDate) => {
                       setDate(newDate);
                     }}
