@@ -53,7 +53,7 @@ export default function Places({ setCoordFunction }) {
           }}
         />
       </div>
-      <pre>{JSON.stringify(value, null, 2)}</pre>
+      <pre hidden>{JSON.stringify(value, null, 2)}</pre>
     </div>
   );
 }

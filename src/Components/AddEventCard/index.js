@@ -300,7 +300,7 @@ export default function NewEventForm({ onClick }) {
               variant="contained"
               type="submit"
               size="large"
-              onClick={handleSubmission}
+              onClick={test}
             >
               Submit
             </Button>
