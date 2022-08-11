@@ -96,8 +96,8 @@ function Explore(signOut, user) {
   };
 
   const [location, setLocation] = useState({
-    lat: 47.60011001977801,
-    lng: 3.533434778585759,
+    lat: 51.496681,
+    lng: -0.050417,
   });
 
   const [userLocation, setUserLocation] = useState({
