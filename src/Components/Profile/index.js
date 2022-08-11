@@ -102,12 +102,12 @@ function Profile() {
 
   const getOrganisedEvents = async (organiserId) => {
     const res = await fetch(
-      `https://turnupdb.herokuapp.com/events/event-org/2"`,
+      `https://turnupdb.herokuapp.com/events/event-org/2`,
       {
         mode: "cors",
       }
     );
-
+    console.log("res fetched", res);
     const data = await res.json();
     console.log("organised fetched", data);
     setOrganisedEvents(data);
