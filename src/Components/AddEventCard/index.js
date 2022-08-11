@@ -21,7 +21,6 @@ import CreateEventTitle from "../CreateEventTitle/index.js";
 import { CodeRounded, DocumentScanner } from "@mui/icons-material";
 
 import Places from "../Places/places";
-import ImageUpload from "../ImageUpload";
 
 export default function NewEventForm({ onClick }) {
   //Form submission function that reads each input type and adds it to the object to be sent to the server if needed.
@@ -33,7 +32,6 @@ export default function NewEventForm({ onClick }) {
   const [date, setDate] = useState("");
   const [time, setTime] = useState("");
   const [coord, setCoord] = useState({ lat: 0, lng: 0 });
-  const [url, setUrl] = useState("");
 
   // console.log("these are the coords", coord);
 
@@ -75,10 +73,10 @@ export default function NewEventForm({ onClick }) {
     setDate(newVal);
   }
 
-  function handleUrl(event) {
+  function handleTime(event) {
     // This function tracks the string information typed into the input field.
     const value = event.target.value;
-    setUrl(value);
+    setTime(value);
   }
 
   let user = {
@@ -114,7 +112,23 @@ export default function NewEventForm({ onClick }) {
     //  All elements have been searched, ready to post the data to the server and database.
 
     let eventObj = 
-    
+    // {
+      
+    //   eventName: "Hardcore Children Bloodbowl Competition",
+    //   eventDescription:
+    //     "Not for faint-hearted. Child endangerment at its finest.",
+    //   mainDescription:
+    //     "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat",
+    //   img: "https://i.pinimg.com/originals/8d/b1/64/8db164c57814f594461b7a56b9522eee.jpg",
+    //   date: "2022-08-09",
+    //   time: "09:00:00",
+    //   rating: 1,
+    //   organiser: 1,
+    //   email: "I.Lovski@hotmail.com",
+    //   address: "24 Folders Lane",
+    //   lat: 53.821110541196994,
+    //   lng: -3.0136801746060935,
+    // }
     {
       eventName: name,
       eventDescription: summary,
@@ -167,7 +181,7 @@ export default function NewEventForm({ onClick }) {
       lat: coord.lat,
       lng: coord.lng,
       address: coord.address,
-      img: url,
+      img: "https://www.gardeningknowhow.com/wp-content/uploads/2020/12/lonely-japanese-cherry.jpg",
       email: user.email,
     }
     console.log(eventObj);
@@ -291,43 +305,66 @@ export default function NewEventForm({ onClick }) {
                 // }}
                 />
 
-                <FormControlLabel
-                  label="Family-Friendly"
-                  control={<Checkbox value="family-friendly" />}
-                  onChange={handleTagChange}
-                />
-              </FormGroup>
-            </FormControl>
-          </div>
-            <TextField
-              label="Image URL"
-              onChange={handleUrl}
-              defaultValue=""
-            />
-          <div className="buttons">
-            <Button
-              sx={{
-                margin: "auto",
-              }}
-              variant="contained"
-              size="large"
-              color="error"
-              type="submit"
-              onClick={() => navigate("/profile")}
-            >
-              Cancel
-            </Button>
-            <Button
-              sx={{
-                margin: "auto",
-              }}
-              variant="contained"
-              type="submit"
-              size="large"
-              onClick={handleSubmission}
-            >
-              Submit
-            </Button>
+              </LocalizationProvider>
+            </div>
+            <div className="tag-area-box">
+              <FormControl>
+                <FormLabel>Event Tags</FormLabel>
+                <FormGroup row>
+                  <FormControlLabel
+                    label="Pet-Friendly"
+                    control={<Checkbox value="pet-friendly" />}
+                    onChange={handleTagChange}
+                  />
+                  <FormControlLabel
+                    label="18+"
+                    control={<Checkbox value="18+" />}
+                    onChange={handleTagChange}
+                  />
+                  <FormControlLabel
+                    label="Outdoors"
+                    control={<Checkbox value="outdoors" />}
+                    onChange={handleTagChange}
+                  />
+                  <FormControlLabel
+                    label="Parking"
+                    control={<Checkbox value="parking" />}
+                    onChange={handleTagChange}
+                  />
+                  <FormControlLabel
+                    label="Family-Friendly"
+                    control={<Checkbox value="family-friendly" />}
+                    onChange={handleTagChange}
+                  />
+                </FormGroup>
+              </FormControl>
+            </div>
+            <div className="buttons">
+              <Button
+                sx={{
+                  margin: "auto",
+                }}
+                variant="contained"
+                size="large"
+                color="error"
+                type="submit"
+                onClick={() => navigate("/profile")}
+              >
+                Cancel
+              </Button>
+              <Button
+                sx={{
+                  margin: "auto",
+                }}
+                variant="contained"
+                type="submit"
+                size="large"
+                onClick={test}
+              >
+                Submit
+              </Button>
+            </div>
+
           </div>
         </div>
       </div>
