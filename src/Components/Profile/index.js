@@ -10,49 +10,21 @@ import dummyFriends from "../../lib/dummyFriends";
 //COMMENT FOR TESTING PURPOSES
 
 //HAS TO BE FETCHED FROM THE BACKEND WITH THE HELP OF AUTHENTICATOR, FOR NOW HARDCODED:
-const userId = 5;
 
 function Profile() {
   //state that holds info about the user
+  const userId = 4;
   const [user, setUser] = useState({
-    id: 0,
-    image:
-      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT5GNLQ5Rq4_uCHZY7yxKiYXxjkkhro_aIbGQ&usqp=CAU",
+    userid: 3,
+    img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT5GNLQ5Rq4_uCHZY7yxKiYXxjkkhro_aIbGQ&usqp=CAU",
     username: "Billie",
     email: "billie@microsoft.com",
   });
 
   const [profileUserLocation, setProfileUserLocation] = useState([]);
 
-  //function that fetches all the user information provided it has the userId, if we want to retrieve the info by email or username, we need to change it in the back end too.
-  const getUser = async (id) => {
-    const res = await fetch(
-      `https://turnupdb.herokuapp.com/events/user/${id}`,
-      {
-        mode: "cors",
-      }
-    );
-    const data = await res.json();
-    setUser(data);
-    console.log("loaded user: ", user);
-  };
-
-  useEffect(() => {
-    getUser(userId);
-  }, []);
-
-  window.addEventListener("load", () => {
-    navigator.geolocation.getCurrentPosition(positionFound, positionNotFound);
-    async function positionFound(position) {
-      const lng = position.coords.longitude;
-      const lat = position.coords.latitude;
-      console.log("something");
-      setProfileUserLocation({ lat: lat, lng: lng });
-    }
-    function positionNotFound(err) {
-      console.log(err);
-    }
-  });
+  const [attendedButtVariant, setAttendedButtVariant] = useState("disabled");
+  const [organisedButtVariant, setOrganisedButtVariant] = useState("contained");
 
   const [organisedEvents, setOrganisedEvents] = useState([
     {
@@ -72,25 +44,7 @@ function Profile() {
       lat: 47.602508712234524,
       lng: 3.5412595468827868,
     },
-    {
-      eventId: 2,
-      eventname: "The return of the banana",
-      eventdescription: "Banana bending workshop included.",
-      maindescription:
-        "But I must explain to you how all this mistaken idea of denouncing pleasure and praising pain was born and I will give you a complete account of the system, and expound the actual teachings of the great explorer of the truth",
-      img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSdzY_Ofzzp1UTUR3hEGVPOu3urAajfCg2oRg&usqp=CAU",
-      eventtags: ["dog friendly", "lgbt", "workshop"],
-      date: "2022-08-12",
-      time: "12:00:00",
-      rating: 3,
-      organiser: 3,
-      email: "ben@gmail.com",
-      address: "6 Corgi Close",
-      lat: 47.605623195531535,
-      lng: 3.5208701897473174,
-    },
   ]);
-
   const [attendedEvents, setAttendedEvents] = useState([
     {
       eventId: 5,
@@ -110,30 +64,66 @@ function Profile() {
       lng: 20.904440714145675,
     },
   ]);
+  const [listDisplay, setListDisplay] = useState([]);
+  //function that fetches all the user information provided it has the userId, if we want to retrieve the info by email or username, we need to change it in the back end too.
+  const getUser = async (id) => {
+    const res = await fetch(
+      `https://turnupdb.herokuapp.com/events/user/${id}`,
+      {
+        mode: "cors",
+      }
+    );
+    const data = await res.json();
+    setUser(data[0]);
+  };
+  useEffect(() => {
+    getUser(userId);
+  }, []);
 
-  const [attendedButtVariant, setAttendedButtVariant] = useState("disabled");
-  const [organisedButtVariant, setOrganisedButtVariant] = useState("contained");
-  const [listDisplay, setListDisplay] = useState([
-    {
-      eventId: 5,
-      eventName: "Landfill sightseeing adventure",
-      eventDescription: "Don't touch anything. Thieves will be prostituted.",
-      mainDescription:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat",
-      img: "https://thumbs.dreamstime.com/b/pollution-concept-garbage-pile-trash-dump-landfill-birds-flying-around-91233936.jpg",
-      eventTags: ["museum", "lgbt", "dog friendly"],
-      date: "2022-08-09",
-      time: "09:00:00",
-      rating: 5,
-      organiser: 3,
-      email: "a.c.DeNaturated@hotmail.com",
-      address: "1 Landfill Alley",
-      lat: 52.23300178597648,
-      lng: 20.904440714145675,
-    },
-  ]);
+  useEffect(() => {
+    getOrganisedEvents(user.userid);
+    getAttendedEvents(user.userid);
 
-  const [friendsList, setFriendsList] = useState(undefined);
+    console.log("Org in useffect: ", organisedEvents);
+    console.log("Att in useffect ", attendedEvents);
+  }, [user]);
+
+  window.addEventListener("load", () => {
+    navigator.geolocation.getCurrentPosition(positionFound, positionNotFound);
+    async function positionFound(position) {
+      const lng = position.coords.longitude;
+      const lat = position.coords.latitude;
+      setProfileUserLocation({ lat: lat, lng: lng });
+    }
+    function positionNotFound(err) {
+      console.log(err);
+    }
+  });
+
+  const getOrganisedEvents = async (organiserId) => {
+    const res = await fetch(
+      `https://turnupdb.herokuapp.com/events/event-org/4"`,
+      {
+        mode: "cors",
+      }
+    );
+    console.log("organised fetched");
+    const data = await res.json();
+    setOrganisedEvents(data);
+  };
+
+  const getAttendedEvents = async (attendeeId) => {
+    const res = await fetch(
+      `https://turnupdb.herokuapp.com/events/att/${attendeeId}`,
+      {
+        mode: "cors",
+      }
+    );
+    console.log("attended fetched");
+    const data = await res.json();
+    setAttendedEvents(data);
+  };
+
   function changeToAttended() {
     setListDisplay(attendedEvents);
     setAttendedButtVariant("disabled");
@@ -147,17 +137,17 @@ function Profile() {
   }
 
   function seeYouClicking() {
-    console.log("I can se you clicking that card. Stop it.");
+    console.log("I can see you clicking that card. Stop it.");
   }
 
   //FUNCTION TEMPLATE TO FETCH FRIENDS
-  async function FetchFriends() {
-    let response = await fetch(`urlurlurl ${user.userid}`);
-    let json = await response.json();
-    let dataArr = json.data;
-    //further in this function we need to have an if statement that checks if the user has any friends to begin with and if not, use setFriendsList to define it as undefined and offer him an add friend button that can be rendered on a card
-    //if the user has friends it just renders his list of friends
-  }
+  // async function FetchFriends() {
+  //   let response = await fetch(`urlurlurl ${user.userid}`);
+  //   let json = await response.json();
+  //   let dataArr = json.data;
+  //further in this function we need to have an if statement that checks if the user has any friends to begin with and if not, use setFriendsList to define it as undefined and offer him an add friend button that can be rendered on a card
+  //if the user has friends it just renders his list of friends
+  //}
 
   return (
     <div>
@@ -165,6 +155,7 @@ function Profile() {
       <div className="profile-container">
         <div className="profile-left-side">
           <div className="profile-info">
+            {console.log("loaded user: ", user)}
             <img
               src={user.img}
               alt="users profile"
@@ -200,6 +191,8 @@ function Profile() {
             </Button>
           </div>
           <div className="unleash-the-events">
+            {console.log("attendedEvents at the moment: ", attendedEvents)}
+            {console.log("organisedEvents at the moment: ", organisedEvents)}
             {profileUserLocation === [] ? null : (
               <EventList
                 eventsArr={listDisplay}
@@ -210,7 +203,6 @@ function Profile() {
           </div>
         </div>
       </div>
-      {/* {isClicked ? <NewEventForm onClick={onClickEventForm} /> : null} */}
     </div>
   );
 }

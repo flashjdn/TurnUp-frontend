@@ -48,7 +48,7 @@ function MainEventCard({ eventObj, xClick }) {
     console.log(res);
     const data = await res.json();
     console.log("This guy stinks: ", data);
-    setOrganiser(data);
+    setOrganiser(data[0]);
   };
 
   const handleChange = (panel) => (event, isExpanded) => {
