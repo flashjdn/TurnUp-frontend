@@ -209,6 +209,7 @@ export default function NewEventForm({ onClick }) {
           {/* <div className="buffer"> </div> */}
         </div>
         <div className="top-right">
+          <Places setCoordFunction={setCoord} />
           <div className="date-time-container">
             <LocalizationProvider dateAdapter={AdapterDateFns}>
               <DatePicker
