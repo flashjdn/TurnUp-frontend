@@ -1,6 +1,7 @@
+
 # TurnUp
 
-A short description about the project and/or client.
+TurnUp is an app that allows users to search for free events either nearby or from a search query.
 
 ## Getting Started
 
