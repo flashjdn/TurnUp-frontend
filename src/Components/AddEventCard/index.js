@@ -110,9 +110,7 @@ export default function NewEventForm({ onClick }) {
     const adjustedTime = time.toLocaleTimeString();
     //  All elements have been searched, ready to post the data to the server and database.
 
-    let eventObj = 
-    
-    {
+    let eventObj = {
       eventName: name,
       eventDescription: summary,
       mainDescription: description,
@@ -122,7 +120,7 @@ export default function NewEventForm({ onClick }) {
       lat: coord.lat,
       lng: coord.lng,
       address: coord.address,
-      img: "https://www.gardeningknowhow.com/wp-content/uploads/2020/12/lonely-japanese-cherry.jpg",
+      img: url,
       email: user.email,
     };
 
@@ -278,7 +276,6 @@ export default function NewEventForm({ onClick }) {
                   //   height: "auto",
                   // }}
                 />
-
               </LocalizationProvider>
             </div>
             <div className="tag-area-box">
@@ -313,6 +310,10 @@ export default function NewEventForm({ onClick }) {
                 </FormGroup>
               </FormControl>
             </div>
+            <TextField 
+              onChange={handleUrl}
+              label="Image URL"
+            />
             <div className="buttons">
               <Button
                 sx={{
@@ -338,7 +339,6 @@ export default function NewEventForm({ onClick }) {
                 Submit
               </Button>
             </div>
-
           </div>
         </div>
       </div>
