@@ -15,9 +15,14 @@ function MainEventCard({ eventObj, xClick }) {
   console.log(eventObj);
   const [expanded, setExpanded] = useState(false);
   const [tags, setTags] = useState(["kids", "dogs", "accessible"]);
+  const [organiser, setOrganiser] = useState({
+    username: "unknown",
+    email: "unknown",
+  });
 
   useEffect(() => {
     getTags(eventObj.eventid);
+    getOrganiser(eventObj.organiser);
   }, [, eventObj.eventid]);
 
   const getTags = async (eventId) => {
@@ -33,11 +38,23 @@ function MainEventCard({ eventObj, xClick }) {
     setTags(data);
   };
 
+  const getOrganiser = async (organiserId) => {
+    const res = await fetch(
+      `https://turnupdb.herokuapp.com/events/organiser/${organiserId}`,
+      {
+        mode: "cors",
+      }
+    );
+    console.log(res);
+    const data = await res.json();
+    console.log("This guy stinks: ", data);
+    setOrganiser(data);
+  };
+
   const handleChange = (panel) => (event, isExpanded) => {
     setExpanded(isExpanded ? panel : false);
   };
   const [friendsAttending, setFriendsAttending] = useState(dummyFriends);
-  const tagsArray = ["kids", "dogs", "accessible"];
   return (
     <div className="main-event-card">
       <CloseIcon
@@ -58,9 +75,9 @@ function MainEventCard({ eventObj, xClick }) {
         <div className="main-info-bar">
           <p className="rating-style">{eventObj.date.substring(0, 10)}</p>
           <p className="rating-style">{eventObj.time.substring(0, 5)}</p>
-          <p className="rating-style">{eventObj.organiser}</p>
-          <p className="rating-style">{eventObj.email}</p>
-          <p className="rating-style">{eventObj.locname}</p>
+          <p className="rating-style">{organiser.username}</p>
+          <p className="rating-style">{organiser.email}</p>
+          <p className="rating-style">{eventObj.address}</p>
           <div className="rating-style">
             <p>{eventObj.rating}</p>
             <StarIcon />
