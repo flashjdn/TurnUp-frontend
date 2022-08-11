@@ -80,6 +80,7 @@ export default function NewEventForm({ onClick }) {
   }
 
   let user = {
+    userId: 2,
     username: "Jordan",
     email: "jordan@jordan.com",
     img: "https://sm.askmen.com/t/askmen_in/article/f/facebook-p/facebook-profile-picture-affects-chances-of-gettin_fr3n.1200.jpg",
@@ -110,17 +111,35 @@ export default function NewEventForm({ onClick }) {
     const adjustedTime = time.toLocaleTimeString();
     //  All elements have been searched, ready to post the data to the server and database.
 
-    let eventObj = {
+    let eventObj = 
+    // {
+      
+    //   eventName: "Hardcore Children Bloodbowl Competition",
+    //   eventDescription:
+    //     "Not for faint-hearted. Child endangerment at its finest.",
+    //   mainDescription:
+    //     "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat",
+    //   img: "https://i.pinimg.com/originals/8d/b1/64/8db164c57814f594461b7a56b9522eee.jpg",
+    //   date: "2022-08-09",
+    //   time: "09:00:00",
+    //   rating: 1,
+    //   organiser: 1,
+    //   email: "I.Lovski@hotmail.com",
+    //   address: "24 Folders Lane",
+    //   lat: 53.821110541196994,
+    //   lng: -3.0136801746060935,
+    // }
+    {
       eventName: name,
       eventDescription: summary,
       mainDescription: description,
       date: adjustedDate, //date.toLocaleDateString(),
       time: adjustedTime, //time.toLocaleTimeString(),
-      organiser: user.username,
+      organiser: user.userId,
       lat: coord.lat,
       lng: coord.lng,
       address: coord.address,
-      img: "https://i2-prod.dailystar.co.uk/incoming/article19359395.ece/ALTERNATES/s1227b/0_httpscdnimagesdailystarcoukdynamic122photos140000900x7381364140",
+      img: "https://www.gardeningknowhow.com/wp-content/uploads/2020/12/lonely-japanese-cherry.jpg",
       email: user.email,
     };
 
@@ -162,7 +181,7 @@ export default function NewEventForm({ onClick }) {
       lat: coord.lat,
       lng: coord.lng,
       address: coord.address,
-      img: "https://images-gmi-pmc.edge-generalmills.com/087d17eb-500e-4b26-abd1-4f9ffa96a2c6.jpg",
+      img: "https://www.gardeningknowhow.com/wp-content/uploads/2020/12/lonely-japanese-cherry.jpg",
       email: user.email,
     }
     console.log(eventObj);
@@ -345,6 +364,7 @@ export default function NewEventForm({ onClick }) {
                 Submit
               </Button>
             </div>
+
           </div>
         </div>
       </div>
