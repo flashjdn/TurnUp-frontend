@@ -37,7 +37,6 @@ export default function NewEventForm({ onClick }) {
 
   // console.log("these are the coords", coord);
 
-
   const navigate = useNavigate();
   // console.log(tags);
 
@@ -93,7 +92,6 @@ export default function NewEventForm({ onClick }) {
 
     // ADAPT ALL OF THE BELOW TO MATCH OUR DATA
 
-
     // console.log(eventObj);
 
     //    /Grabs the 6 current tags to idenitfy checked status. happy to help checkbox is also included but
@@ -106,28 +104,43 @@ export default function NewEventForm({ onClick }) {
     //   }
     // }
 
-
     const [day, month, year] = date.toLocaleDateString().split("/");
 
     const adjustedDate = [year, month, day].join("-");
     const adjustedTime = time.toLocaleTimeString();
     //  All elements have been searched, ready to post the data to the server and database.
 
-    let eventObj = 
-    
-    {
-      eventName: name,
-      eventDescription: summary,
-      mainDescription: description,
-      date: adjustedDate, //date.toLocaleDateString(),
-      time: adjustedTime, //time.toLocaleTimeString(),
-      organiser: user.userId,
-      lat: coord.lat,
-      lng: coord.lng,
-      address: coord.address,
-      img: "https://www.gardeningknowhow.com/wp-content/uploads/2020/12/lonely-japanese-cherry.jpg",
-      email: user.email,
-    };
+    let eventObj =
+      // {
+
+      //   eventName: "Hardcore Children Bloodbowl Competition",
+      //   eventDescription:
+      //     "Not for faint-hearted. Child endangerment at its finest.",
+      //   mainDescription:
+      //     "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat",
+      //   img: "https://i.pinimg.com/originals/8d/b1/64/8db164c57814f594461b7a56b9522eee.jpg",
+      //   date: "2022-08-09",
+      //   time: "09:00:00",
+      //   rating: 1,
+      //   organiser: 1,
+      //   email: "I.Lovski@hotmail.com",
+      //   address: "24 Folders Lane",
+      //   lat: 53.821110541196994,
+      //   lng: -3.0136801746060935,
+      // }
+      {
+        eventName: name,
+        eventDescription: summary,
+        mainDescription: description,
+        date: adjustedDate, //date.toLocaleDateString(),
+        time: adjustedTime, //time.toLocaleTimeString(),
+        organiser: user.userId,
+        lat: coord.lat,
+        lng: coord.lng,
+        address: coord.address,
+        img: "https://www.gardeningknowhow.com/wp-content/uploads/2020/12/lonely-japanese-cherry.jpg",
+        email: user.email,
+      };
 
     const response = await fetch(`https://turnupdb.herokuapp.com/events/all`, {
       //
@@ -169,9 +182,8 @@ export default function NewEventForm({ onClick }) {
       address: coord.address,
       img: url,
       email: user.email,
-    }
+    };
     console.log(eventObj);
-
   }
 
   return (
@@ -240,6 +252,7 @@ export default function NewEventForm({ onClick }) {
             {/* <div className="buffer"> </div> */}
           </div>
           <div className="top-right">
+            <p className="start">Start typing your event location...</p>
             <Places setCoordFunction={setCoord} />
             <div className="date-time-container">
               <LocalizationProvider dateAdapter={AdapterDateFns}>
@@ -251,20 +264,15 @@ export default function NewEventForm({ onClick }) {
                   inputFormat="dd.MM.yyyy"
                   onChange={(newDate) => {
                     setDate(newDate);
-
                   }}
                   renderInput={(params) => (
-                    <TextField
-                      sx={{ backgroundColor: 'white' }}
-                      {...params}
-                    />
+                    <TextField sx={{ backgroundColor: "white" }} {...params} />
                   )}
-                // sx={{
-                //   width: "auto",
-                //   height: "auto",
-                // }}
+                  // sx={{
+                  //   width: "auto",
+                  //   height: "auto",
+                  // }}
                 />
-
               </LocalizationProvider>
 
               <LocalizationProvider dateAdapter={AdapterDateFns}>
@@ -277,57 +285,75 @@ export default function NewEventForm({ onClick }) {
                   value={time}
                   onChange={(newTime) => {
                     setTime(newTime);
-
                   }}
                   renderInput={(params) => (
-                    <TextField
-                      sx={{ backgroundColor: 'white' }}
-                      {...params}
-                    />
+                    <TextField sx={{ backgroundColor: "white" }} {...params} />
                   )}
-                // sx={{
-                //   width: "auto",
-                //   height: "auto",
-                // }}
+                  // sx={{
+                  //   width: "auto",
+                  //   height: "auto",
+                  // }}
                 />
-
-                <FormControlLabel
-                  label="Family-Friendly"
-                  control={<Checkbox value="family-friendly" />}
-                  onChange={handleTagChange}
-                />
-              </FormGroup>
-            </FormControl>
-          </div>
-            <TextField
-              label="Image URL"
-              onChange={handleUrl}
-              defaultValue=""
-            />
-          <div className="buttons">
-            <Button
-              sx={{
-                margin: "auto",
-              }}
-              variant="contained"
-              size="large"
-              color="error"
-              type="submit"
-              onClick={() => navigate("/profile")}
-            >
-              Cancel
-            </Button>
-            <Button
-              sx={{
-                margin: "auto",
-              }}
-              variant="contained"
-              type="submit"
-              size="large"
-              onClick={handleSubmission}
-            >
-              Submit
-            </Button>
+              </LocalizationProvider>
+            </div>
+            <div className="tag-area-box">
+              <FormControl>
+                <FormLabel>Event Tags</FormLabel>
+                <FormGroup row>
+                  <FormControlLabel
+                    label="Pet-Friendly"
+                    control={<Checkbox value="pet-friendly" />}
+                    onChange={handleTagChange}
+                  />
+                  <FormControlLabel
+                    label="18+"
+                    control={<Checkbox value="18+" />}
+                    onChange={handleTagChange}
+                  />
+                  <FormControlLabel
+                    label="Outdoors"
+                    control={<Checkbox value="outdoors" />}
+                    onChange={handleTagChange}
+                  />
+                  <FormControlLabel
+                    label="Parking"
+                    control={<Checkbox value="parking" />}
+                    onChange={handleTagChange}
+                  />
+                  <FormControlLabel
+                    label="Family-Friendly"
+                    control={<Checkbox value="family-friendly" />}
+                    onChange={handleTagChange}
+                  />
+                </FormGroup>
+              </FormControl>
+            </div>
+            <TextField label="Image URL" onChange={handleUrl} />
+            <div className="buttons">
+              <Button
+                sx={{
+                  margin: "auto",
+                }}
+                variant="contained"
+                size="large"
+                color="error"
+                type="submit"
+                onClick={() => navigate("/profile")}
+              >
+                Cancel
+              </Button>
+              <Button
+                sx={{
+                  margin: "auto",
+                }}
+                variant="contained"
+                type="submit"
+                size="large"
+                onClick={handleSubmission}
+              >
+                Submit
+              </Button>
+            </div>
           </div>
         </div>
       </div>
