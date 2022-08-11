@@ -110,37 +110,21 @@ export default function NewEventForm({ onClick }) {
     const adjustedTime = time.toLocaleTimeString();
     //  All elements have been searched, ready to post the data to the server and database.
 
-    let eventObj =
-      // {
-
-      //   eventName: "Hardcore Children Bloodbowl Competition",
-      //   eventDescription:
-      //     "Not for faint-hearted. Child endangerment at its finest.",
-      //   mainDescription:
-      //     "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat",
-      //   img: "https://i.pinimg.com/originals/8d/b1/64/8db164c57814f594461b7a56b9522eee.jpg",
-      //   date: "2022-08-09",
-      //   time: "09:00:00",
-      //   rating: 1,
-      //   organiser: 1,
-      //   email: "I.Lovski@hotmail.com",
-      //   address: "24 Folders Lane",
-      //   lat: 53.821110541196994,
-      //   lng: -3.0136801746060935,
-      // }
-      {
-        eventName: name,
-        eventDescription: summary,
-        mainDescription: description,
-        date: adjustedDate, //date.toLocaleDateString(),
-        time: adjustedTime, //time.toLocaleTimeString(),
-        organiser: user.userId,
-        lat: coord.lat,
-        lng: coord.lng,
-        address: coord.address,
-        img: "https://www.gardeningknowhow.com/wp-content/uploads/2020/12/lonely-japanese-cherry.jpg",
-        email: user.email,
-      };
+    let eventObj = 
+    
+    {
+      eventName: name,
+      eventDescription: summary,
+      mainDescription: description,
+      date: adjustedDate, //date.toLocaleDateString(),
+      time: adjustedTime, //time.toLocaleTimeString(),
+      organiser: user.userId,
+      lat: coord.lat,
+      lng: coord.lng,
+      address: coord.address,
+      img: "https://www.gardeningknowhow.com/wp-content/uploads/2020/12/lonely-japanese-cherry.jpg",
+      email: user.email,
+    };
 
     const response = await fetch(`https://turnupdb.herokuapp.com/events/all`, {
       //
@@ -294,6 +278,7 @@ export default function NewEventForm({ onClick }) {
                   //   height: "auto",
                   // }}
                 />
+
               </LocalizationProvider>
             </div>
             <div className="tag-area-box">
@@ -328,7 +313,6 @@ export default function NewEventForm({ onClick }) {
                 </FormGroup>
               </FormControl>
             </div>
-            <TextField label="Image URL" onChange={handleUrl} />
             <div className="buttons">
               <Button
                 sx={{
@@ -354,6 +338,7 @@ export default function NewEventForm({ onClick }) {
                 Submit
               </Button>
             </div>
+
           </div>
         </div>
       </div>
