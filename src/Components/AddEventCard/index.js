@@ -111,9 +111,9 @@ export default function NewEventForm({ onClick }) {
     const adjustedTime = time.toLocaleTimeString();
     //  All elements have been searched, ready to post the data to the server and database.
 
-    let eventObj = 
+    let eventObj =
     // {
-      
+
     //   eventName: "Hardcore Children Bloodbowl Competition",
     //   eventDescription:
     //     "Not for faint-hearted. Child endangerment at its finest.",
@@ -254,6 +254,7 @@ export default function NewEventForm({ onClick }) {
             {/* <div className="buffer"> </div> */}
           </div>
           <div className="top-right">
+            <p className="start">Start typing your event location...</p>
             <Places setCoordFunction={setCoord} />
             <div className="date-time-container">
               <LocalizationProvider dateAdapter={AdapterDateFns}>
