@@ -24,7 +24,6 @@ import Places from "../Places/places";
 export default function NewEventForm({ onClick }) {
   //Form submission function that reads each input type and adds it to the object to be sent to the server if needed.
 
-  const [value, setValue] = useState("");
   const [tags, setTags] = useState([""]);
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
@@ -89,7 +88,7 @@ export default function NewEventForm({ onClick }) {
     e.preventDefault();
 
     // ADAPT ALL OF THE BELOW TO MATCH OUR DATA
-    document.querySelector(".event-form-container").classList.add("hidden");
+
 
     // console.log(eventObj);
 
@@ -136,18 +135,35 @@ export default function NewEventForm({ onClick }) {
       redirect: "follow", // manual, *follow, error
       referrerPolicy: "no-referrer", // no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
       body: JSON.stringify(eventObj), // body data type must match "Content-Type" header
-    });
+    }).then(navigate("/profile"));
     console.log("Submission complete");
 
     return response.json();
   }
 
-  function hideForm() {
-    document.querySelector(".event-form-container").classList.add("hidden");
-  }
+  // function hideForm() {
+  //   document.querySelector(".event-form-container").classList.add("hidden");
+  // }
 
   function test() {
+    const [day, month, year] = date.toLocaleDateString().split("/");
 
+    const adjustedDate = [year, month, day].join("-");
+    const adjustedTime = time.toLocaleTimeString();
+
+    let eventObj = {
+      eventName: name,
+      eventDescription: summary,
+      mainDescription: description,
+      date: adjustedDate,
+      time: adjustedTime,
+      organiser: user.username,
+      lat: coord.lat,
+      lng: coord.lng,
+      address: coord.address,
+      img: "https://images-gmi-pmc.edge-generalmills.com/087d17eb-500e-4b26-abd1-4f9ffa96a2c6.jpg",
+      email: user.email,
+    }
     console.log(eventObj);
 
   }
