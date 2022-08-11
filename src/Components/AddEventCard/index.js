@@ -170,182 +170,180 @@ export default function NewEventForm({ onClick }) {
   }
 
   return (
-    <div>
+    <div className="behind-form">
       <Navbar></Navbar>
-      <div className="behind-form">
-        <div className="form-container">
-          <div className="outer-div">
-            <CreateEventTitle />
+      <div className="form-container">
+        <div className="outer-div">
+          <CreateEventTitle />
+        </div>
+        <div className="add-event-card-body">
+          <div className="top-left">
+            <TextField
+              onChange={handleName}
+              className="event-title-box"
+              sx={{
+                width: "35vw",
+                height: "5rem",
+                // background: "var(--supporting-blue)",
+                margin: "auto",
+                display: "inline-flex",
+              }}
+              label="Event title"
+              multiline
+              rows={2}
+              cols={100}
+              defaultValue=""
+              id="titleArea"
+              required
+              inputProps={{ maxLength: "40" }}
+            />
+
+            <TextField
+              onChange={handleSummary}
+              className="event-summary-box"
+              sx={{
+                width: "35vw",
+                height: "9.2rem",
+                // background: "var(--supporting-blue)",
+              }}
+              label="Event Summary"
+              multiline
+              rows={5}
+              cols={100}
+              defaultValue=""
+              id="summaryArea"
+              required
+              inputProps={{ maxLength: "80" }}
+            />
+
+            <TextField
+              onChange={handleDescription}
+              className="event-description-box"
+              sx={{
+                width: "35vw",
+                height: "15rem",
+                // background: "var(--supporting-blue)",
+              }}
+              label="Event Description"
+              multiline
+              rows={9}
+              cols={100}
+              defaultValue=""
+              id="decriptionArea"
+              required
+            />
+            {/* <div className="buffer"> </div> */}
           </div>
-          <div className="add-event-card-body">
-            <div className="top-left">
-              <TextField
-                onChange={handleName}
-                className="event-title-box"
-                sx={{
-                  width: "35vw",
-                  height: "5rem",
-                  // background: "var(--supporting-blue)",
-                  margin: "auto",
-                  display: "inline-flex",
-                }}
-                label="Event title"
-                multiline
-                rows={2}
-                cols={100}
-                defaultValue=""
-                id="titleArea"
-                required
-                inputProps={{ maxLength: "40" }}
-              />
+          <div className="top-right">
+            <Places setCoordFunction={setCoord} />
+            <div className="date-time-container">
+              <LocalizationProvider dateAdapter={AdapterDateFns}>
+                <DatePicker
+                  label="Event date"
+                  orientation="landscape"
+                  openTo="day"
+                  value={date}
+                  inputFormat="dd.MM.yyyy"
+                  onChange={(newDate) => {
+                    setDate(newDate);
 
-              <TextField
-                onChange={handleSummary}
-                className="event-summary-box"
-                sx={{
-                  width: "35vw",
-                  height: "9.2rem",
-                  // background: "var(--supporting-blue)",
-                }}
-                label="Event Summary"
-                multiline
-                rows={5}
-                cols={100}
-                defaultValue=""
-                id="summaryArea"
-                required
-                inputProps={{ maxLength: "80" }}
-              />
+                  }}
+                  renderInput={(params) => (
+                    <TextField
+                      sx={{ backgroundColor: 'white' }}
+                      {...params}
+                    />
+                  )}
+                // sx={{
+                //   width: "auto",
+                //   height: "auto",
+                // }}
+                />
 
-              <TextField
-                onChange={handleDescription}
-                className="event-description-box"
-                sx={{
-                  width: "35vw",
-                  height: "15rem",
-                  // background: "var(--supporting-blue)",
-                }}
-                label="Event Description"
-                multiline
-                rows={9}
-                cols={100}
-                defaultValue=""
-                id="decriptionArea"
-                required
-              />
-              {/* <div className="buffer"> </div> */}
+              </LocalizationProvider>
+
+              <LocalizationProvider dateAdapter={AdapterDateFns}>
+                <TimePicker
+                  // ampmInClock="false"
+                  label="Start time"
+                  orientation="landscape"
+                  openTo="hours"
+                  inputFormat="hh:mm"
+                  value={time}
+                  onChange={(newTime) => {
+                    setTime(newTime);
+
+                  }}
+                  renderInput={(params) => (
+                    <TextField
+                      sx={{ backgroundColor: 'white' }}
+                      {...params}
+                    />
+                  )}
+                // sx={{
+                //   width: "auto",
+                //   height: "auto",
+                // }}
+                />
+
+              </LocalizationProvider>
             </div>
-            <div className="top-right">
-              <Places setCoordFunction={setCoord} />
-              <div className="date-time-container">
-                <LocalizationProvider dateAdapter={AdapterDateFns}>
-                  <DatePicker
-                    label="Event date"
-                    orientation="landscape"
-                    openTo="day"
-                    value={date}
-                    inputFormat="dd.MM.yyyy"
-                    onChange={(newDate) => {
-                      setDate(newDate);
-
-                    }}
-                    renderInput={(params) => (
-                      <TextField
-                        sx={{ backgroundColor: 'white' }}
-                        {...params}
-                      />
-                    )}
-                  // sx={{
-                  //   width: "auto",
-                  //   height: "auto",
-                  // }}
+            <div className="tag-area-box">
+              <FormControl>
+                <FormLabel>Event Tags</FormLabel>
+                <FormGroup row>
+                  <FormControlLabel
+                    label="Pet-Friendly"
+                    control={<Checkbox value="pet-friendly" />}
+                    onChange={handleTagChange}
                   />
-
-                </LocalizationProvider>
-
-                <LocalizationProvider dateAdapter={AdapterDateFns}>
-                  <TimePicker
-                    // ampmInClock="false"
-                    label="Start time"
-                    orientation="landscape"
-                    openTo="hours"
-                    inputFormat="hh:mm"
-                    value={time}
-                    onChange={(newTime) => {
-                      setTime(newTime);
-
-                    }}
-                    renderInput={(params) => (
-                      <TextField
-                        sx={{ backgroundColor: 'white' }}
-                        {...params}
-                      />
-                    )}
-                  // sx={{
-                  //   width: "auto",
-                  //   height: "auto",
-                  // }}
+                  <FormControlLabel
+                    label="18+"
+                    control={<Checkbox value="18+" />}
+                    onChange={handleTagChange}
                   />
-
-                </LocalizationProvider>
-              </div>
-              <div className="tag-area-box">
-                <FormControl>
-                  <FormLabel>Event Tags</FormLabel>
-                  <FormGroup row>
-                    <FormControlLabel
-                      label="Pet-Friendly"
-                      control={<Checkbox value="pet-friendly" />}
-                      onChange={handleTagChange}
-                    />
-                    <FormControlLabel
-                      label="18+"
-                      control={<Checkbox value="18+" />}
-                      onChange={handleTagChange}
-                    />
-                    <FormControlLabel
-                      label="Outdoors"
-                      control={<Checkbox value="outdoors" />}
-                      onChange={handleTagChange}
-                    />
-                    <FormControlLabel
-                      label="Parking"
-                      control={<Checkbox value="parking" />}
-                      onChange={handleTagChange}
-                    />
-                    <FormControlLabel
-                      label="Family-Friendly"
-                      control={<Checkbox value="family-friendly" />}
-                      onChange={handleTagChange}
-                    />
-                  </FormGroup>
-                </FormControl>
-              </div>
-              <div className="buttons">
-                <Button
-                  sx={{
-                    margin: "auto",
-                  }}
-                  variant="contained"
-                  size="large"
-                  color="error"
-                  type="submit"
-                  onClick={() => navigate("/profile")}
-                >
-                  Cancel
-                </Button>
-                <Button
-                  sx={{
-                    margin: "auto",
-                  }}
-                  variant="contained"
-                  type="submit"
-                  size="large"
-                  onClick={test}
-                >
-                  Submit
-                </Button>
-              </div>
+                  <FormControlLabel
+                    label="Outdoors"
+                    control={<Checkbox value="outdoors" />}
+                    onChange={handleTagChange}
+                  />
+                  <FormControlLabel
+                    label="Parking"
+                    control={<Checkbox value="parking" />}
+                    onChange={handleTagChange}
+                  />
+                  <FormControlLabel
+                    label="Family-Friendly"
+                    control={<Checkbox value="family-friendly" />}
+                    onChange={handleTagChange}
+                  />
+                </FormGroup>
+              </FormControl>
+            </div>
+            <div className="buttons">
+              <Button
+                sx={{
+                  margin: "auto",
+                }}
+                variant="contained"
+                size="large"
+                color="error"
+                type="submit"
+                onClick={() => navigate("/profile")}
+              >
+                Cancel
+              </Button>
+              <Button
+                sx={{
+                  margin: "auto",
+                }}
+                variant="contained"
+                type="submit"
+                size="large"
+                onClick={test}
+              >
+                Submit
+              </Button>
             </div>
           </div>
         </div>
