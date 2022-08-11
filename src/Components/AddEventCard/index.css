@@ -43,7 +43,7 @@
    background-color: white;
    border: solid;
    border-radius: 0.5rem;
-   background-color: var(--secondary);
+   /* background-color: var(--secondary); */
    box-shadow: 0px 6px 75px rgba(0, 0, 0, 0.5);
  }
 
@@ -166,7 +166,7 @@
  }
 
  .behind-form {
-   background-color: var(--supporting-blue);
+   /* background-color: var(--supporting-blue); */
    position: absolute;
    left: 0;
    right: 0;

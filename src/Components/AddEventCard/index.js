@@ -21,6 +21,7 @@ import CreateEventTitle from "../CreateEventTitle/index.js";
 import { CodeRounded, DocumentScanner } from "@mui/icons-material";
 
 import Places from "../Places/places";
+import ImageUpload from "../ImageUpload";
 
 export default function NewEventForm({ onClick }) {
   //Form submission function that reads each input type and adds it to the object to be sent to the server if needed.
@@ -32,9 +33,9 @@ export default function NewEventForm({ onClick }) {
   const [date, setDate] = useState("");
   const [time, setTime] = useState("");
   const [coord, setCoord] = useState({ lat: 0, lng: 0 });
+  const [url, setUrl] = useState("");
 
   // console.log("these are the coords", coord);
-
 
   const navigate = useNavigate();
   // console.log(tags);
@@ -73,10 +74,10 @@ export default function NewEventForm({ onClick }) {
     setDate(newVal);
   }
 
-  function handleTime(event) {
+  function handleUrl(event) {
     // This function tracks the string information typed into the input field.
     const value = event.target.value;
-    setTime(value);
+    setUrl(value);
   }
 
   let user = {
@@ -91,7 +92,6 @@ export default function NewEventForm({ onClick }) {
 
     // ADAPT ALL OF THE BELOW TO MATCH OUR DATA
 
-
     // console.log(eventObj);
 
     //    /Grabs the 6 current tags to idenitfy checked status. happy to help checkbox is also included but
@@ -104,31 +104,14 @@ export default function NewEventForm({ onClick }) {
     //   }
     // }
 
-
     const [day, month, year] = date.toLocaleDateString().split("/");
 
     const adjustedDate = [year, month, day].join("-");
     const adjustedTime = time.toLocaleTimeString();
     //  All elements have been searched, ready to post the data to the server and database.
 
-    let eventObj =
-    // {
-
-    //   eventName: "Hardcore Children Bloodbowl Competition",
-    //   eventDescription:
-    //     "Not for faint-hearted. Child endangerment at its finest.",
-    //   mainDescription:
-    //     "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat",
-    //   img: "https://i.pinimg.com/originals/8d/b1/64/8db164c57814f594461b7a56b9522eee.jpg",
-    //   date: "2022-08-09",
-    //   time: "09:00:00",
-    //   rating: 1,
-    //   organiser: 1,
-    //   email: "I.Lovski@hotmail.com",
-    //   address: "24 Folders Lane",
-    //   lat: 53.821110541196994,
-    //   lng: -3.0136801746060935,
-    // }
+    let eventObj = 
+    
     {
       eventName: name,
       eventDescription: summary,
@@ -181,11 +164,10 @@ export default function NewEventForm({ onClick }) {
       lat: coord.lat,
       lng: coord.lng,
       address: coord.address,
-      img: "https://www.gardeningknowhow.com/wp-content/uploads/2020/12/lonely-japanese-cherry.jpg",
+      img: url,
       email: user.email,
-    }
+    };
     console.log(eventObj);
-
   }
 
   return (
@@ -266,20 +248,15 @@ export default function NewEventForm({ onClick }) {
                   inputFormat="dd.MM.yyyy"
                   onChange={(newDate) => {
                     setDate(newDate);
-
                   }}
                   renderInput={(params) => (
-                    <TextField
-                      sx={{ backgroundColor: 'white' }}
-                      {...params}
-                    />
+                    <TextField sx={{ backgroundColor: "white" }} {...params} />
                   )}
-                // sx={{
-                //   width: "auto",
-                //   height: "auto",
-                // }}
+                  // sx={{
+                  //   width: "auto",
+                  //   height: "auto",
+                  // }}
                 />
-
               </LocalizationProvider>
 
               <LocalizationProvider dateAdapter={AdapterDateFns}>
@@ -292,18 +269,14 @@ export default function NewEventForm({ onClick }) {
                   value={time}
                   onChange={(newTime) => {
                     setTime(newTime);
-
                   }}
                   renderInput={(params) => (
-                    <TextField
-                      sx={{ backgroundColor: 'white' }}
-                      {...params}
-                    />
+                    <TextField sx={{ backgroundColor: "white" }} {...params} />
                   )}
-                // sx={{
-                //   width: "auto",
-                //   height: "auto",
-                // }}
+                  // sx={{
+                  //   width: "auto",
+                  //   height: "auto",
+                  // }}
                 />
 
               </LocalizationProvider>
