@@ -13,8 +13,9 @@ import {
   FormGroup,
 } from "@mui/material";
 import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
-import { LocalizationProvider, StaticDatePicker } from "@mui/x-date-pickers";
-import { StaticTimePicker } from "@mui/x-date-pickers/StaticTimePicker";
+import { LocalizationProvider, DatePicker } from "@mui/x-date-pickers";
+import { TimePicker } from "@mui/x-date-pickers/TimePicker";
+import { useNavigate } from "react-router-dom";
 
 import { CodeRounded, DocumentScanner } from "@mui/icons-material";
 
@@ -32,9 +33,12 @@ export default function NewEventForm({ onClick }) {
   const [time, setTime] = useState("");
   const [coord, setCoord] = useState({ lat: 0, lng: 0 });
 
-  console.log("these are the coords", coord);
+  // console.log("these are the coords", coord);
 
-  console.log(tags);
+
+  const navigate = useNavigate();
+  // console.log(tags);
+
   const handleTagChange = (e) => {
     const index = tags.indexOf(e.target.value);
     if (index === -1) {
@@ -84,11 +88,28 @@ export default function NewEventForm({ onClick }) {
   async function handleSubmission(e) {
     e.preventDefault();
 
+    // ADAPT ALL OF THE BELOW TO MATCH OUR DATA
+    document.querySelector(".event-form-container").classList.add("hidden");
+
+    // console.log(eventObj);
+
+    //    /Grabs the 6 current tags to idenitfy checked status. happy to help checkbox is also included but
+    //is ignored as is handled later.
+    // let tagArr = document.getElementsByClassName("tag-checkbox");
+    // for (let i = 0; i < tagArr.length - 1; i++) {
+    //   if (tagArr[i].checked) {
+    //     noteObj.tags = [...noteObj.tags, tagArr[i].name];
+    //     newResourceObj.tags = [...newResourceObj.tags, tagArr[i].name];
+    //   }
+    // }
+
+
     const [day, month, year] = date.toLocaleDateString().split("/");
 
     const adjustedDate = [year, month, day].join("-");
     const adjustedTime = time.toLocaleTimeString();
     //  All elements have been searched, ready to post the data to the server and database.
+
     let eventObj = {
       eventName: name,
       eventDescription: summary,
@@ -126,168 +147,177 @@ export default function NewEventForm({ onClick }) {
   }
 
   function test() {
-    console.log(document.getElementsByClassName("event-title-box").value);
+
+    console.log(eventObj);
+
   }
 
   return (
     <div>
       <Navbar></Navbar>
 
-      <section className="event-form-container">
-        <form
-          id="event-input-field"
-          onSubmit={(e) => {
-            handleSubmission(e);
-          }}
-        >
-          <div className="create-event-card-container">
-            <div className="title-sum-desc-container">
-              <TextField
-                onChange={handleName}
-                className="event-title-box"
-                sx={{
-                  width: "40rem",
-                  height: "5rem",
-                  background: "var(--supporting-blue)",
+
+      <div className="form-container">
+        <div className="top-left">
+          <TextField
+            onChange={handleName}
+            className="event-title-box"
+            sx={{
+              width: "35vw",
+              height: "5rem",
+              // background: "var(--supporting-blue)",
+              margin: "auto",
+              display: "inline-flex",
+            }}
+            label="Event title"
+            multiline
+            rows={2}
+            cols={100}
+            defaultValue=""
+            id="titleArea"
+            required
+            inputProps={{ maxLength: "40" }}
+          />
+
+          <TextField
+            onChange={handleSummary}
+            className="event-summary-box"
+            sx={{
+              width: "35vw",
+              height: "9.2rem",
+              // background: "var(--supporting-blue)",
+            }}
+            label="Event Summary"
+            multiline
+            rows={5}
+            cols={100}
+            defaultValue=""
+            id="summaryArea"
+            required
+            inputProps={{ maxLength: "80" }}
+          />
+
+          <TextField
+            onChange={handleDescription}
+            className="event-description-box"
+            sx={{
+              width: "35vw",
+              height: "15rem",
+              // background: "var(--supporting-blue)",
+            }}
+            label="Event Description"
+            multiline
+            rows={6}
+            cols={100}
+            defaultValue=""
+            id="decriptionArea"
+            required
+          />
+          {/* <div className="buffer"> </div> */}
+        </div>
+        <div className="top-right">
+          <Places setCoordFunction={setCoord} />
+          <div className="date-time-container">
+            <LocalizationProvider dateAdapter={AdapterDateFns}>
+              <DatePicker
+                label="Event date"
+                orientation="landscape"
+                openTo="day"
+                value={date}
+                inputFormat="dd.MM.yyyy"
+                onChange={(newDate) => {
+                  setDate(newDate);
+
                 }}
-                label="Event title:"
-                multiline
-                rows={2}
-                cols={100}
-                defaultValue=""
-                id="titleArea"
-                required
-                inputProps={{ maxLength: "40" }}
+                renderInput={(params) => <TextField {...params} />}
+                // sx={{
+                //   width: "auto",
+                //   height: "auto",
+                // }}
               />
 
-              <TextField
-                onChange={handleSummary}
-                className="event-summary-box"
-                sx={{
-                  width: "40rem",
-                  height: "9.2rem",
-                  background: "var(--supporting-blue)",
+            </LocalizationProvider>
+
+            <LocalizationProvider dateAdapter={AdapterDateFns}>
+              <TimePicker
+                // ampmInClock="false"
+                label="Start time"
+                orientation="landscape"
+                openTo="hours"
+                inputFormat="hh:mm"
+                value={time}
+                onChange={(newTime) => {
+                  setTime(newTime);
+
                 }}
-                label="Event Summary:"
-                multiline
-                rows={5}
-                cols={100}
-                defaultValue=""
-                id="summaryArea"
-                required
-                inputProps={{ maxLength: "80" }}
+                renderInput={(params) => <TextField {...params} />}
+                // sx={{
+                //   width: "auto",
+                //   height: "auto",
+                // }}
               />
 
-              <TextField
-                onChange={handleDescription}
-                className="event-description-box"
-                sx={{
-                  width: "40rem",
-                  height: "15rem",
-                  background: "var(--supporting-blue)",
-                }}
-                label="Event Description:"
-                multiline
-                rows={9}
-                cols={100}
-                defaultValue=""
-                id="decriptionArea"
-                required
-              />
-
-              <Box>
-                <Box className="tag-area-box">
-                  <FormControl>
-                    <FormLabel>Event Tags</FormLabel>
-                    <FormGroup row>
-                      <FormControlLabel
-                        label="Pet-Friendly"
-                        control={<Checkbox value="pet-friendly" />}
-                        onChange={handleTagChange}
-                      />
-                      <FormControlLabel
-                        label="18+"
-                        control={<Checkbox value="18+" />}
-                        onChange={handleTagChange}
-                      />
-                      <FormControlLabel
-                        label="Outdoors"
-                        control={<Checkbox value="outdoors" />}
-                        onChange={handleTagChange}
-                      />
-                      <FormControlLabel
-                        label="Parking"
-                        control={<Checkbox value="parking" />}
-                        onChange={handleTagChange}
-                      />
-                      <FormControlLabel
-                        label="Family-Friendly"
-                        control={<Checkbox value="family-friendly" />}
-                        onChange={handleTagChange}
-                      />
-                    </FormGroup>
-                  </FormControl>
-                </Box>
-              </Box>
-            </div>
-
-            <div className="date-time-container">
-              <div className="date">
-                <LocalizationProvider dateAdapter={AdapterDateFns}>
-                  <StaticDatePicker
-                    orientation="landscape"
-                    openTo="day"
-                    value={date}
-                    inputFormat="YYYY-MM-DD"
-                    onChange={(newDate) => {
-                      setDate(newDate);
-                    }}
-                    renderInput={(params) => <TextField {...params} />}
-                  />
-                </LocalizationProvider>
-              </div>
-
-              <div className="time">
-                <LocalizationProvider dateAdapter={AdapterDateFns}>
-                  <StaticTimePicker
-                    // ampmInClock="false"
-                    orientation="landscape"
-                    openTo="hours"
-                    inputFormat="hh:mm"
-                    value={time}
-                    onChange={(newTime) => {
-                      setTime(newTime);
-                    }}
-                    renderInput={(params) => <TextField {...params} />}
-                  />
-                </LocalizationProvider>
-              </div>
-            </div>
+            </LocalizationProvider>
           </div>
-
-          <Button
-            sx={{ top: "3rem", left: "3rem" }}
-            variant="contained"
-            type="submit"
-            onClick={handleSubmission}
-          >
-            Submit
-          </Button>
-        </form>
-        <a href="/profile">
-          <Button
-            sx={{ bottom: "26rem", right: "4.5vh" }}
-            id="exit-button-form"
-            variant="contained"
-            aria-label="Cancel and hide current event submission form"
-            onClick={onClick}
-          >
-            X
-          </Button>
-        </a>
-      </section>
-
-      <Places setCoordFunction={setCoord} />
+          <div className="tag-area-box">
+            <FormControl>
+              <FormLabel>Event Tags</FormLabel>
+              <FormGroup row>
+                <FormControlLabel
+                  label="Pet-Friendly"
+                  control={<Checkbox value="pet-friendly" />}
+                  onChange={handleTagChange}
+                />
+                <FormControlLabel
+                  label="18+"
+                  control={<Checkbox value="18+" />}
+                  onChange={handleTagChange}
+                />
+                <FormControlLabel
+                  label="Outdoors"
+                  control={<Checkbox value="outdoors" />}
+                  onChange={handleTagChange}
+                />
+                <FormControlLabel
+                  label="Parking"
+                  control={<Checkbox value="parking" />}
+                  onChange={handleTagChange}
+                />
+                <FormControlLabel
+                  label="Family-Friendly"
+                  control={<Checkbox value="family-friendly" />}
+                  onChange={handleTagChange}
+                />
+              </FormGroup>
+            </FormControl>
+          </div>
+          <div className="buttons">
+            <Button
+              sx={{
+                margin: "auto",
+              }}
+              variant="contained"
+              size="large"
+              color="error"
+              type="submit"
+              onClick={() => navigate("/profile")}
+            >
+              Cancel
+            </Button>
+            <Button
+              sx={{
+                margin: "auto",
+              }}
+              variant="contained"
+              type="submit"
+              size="large"
+              onClick={test}
+            >
+              Submit
+            </Button>
+          </div>
+        </div>
+      </div>
     </div>
   );
 }

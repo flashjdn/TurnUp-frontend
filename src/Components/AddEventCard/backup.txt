@@ -1,0 +1,48 @@
+return( 
+<div>
+<Navbar></Navbar>
+
+<div className="form-container">
+  <div className="top-left">
+    <TextField></TextField>
+    <TextField></TextField>
+    <TextField></TextField>
+  </div>
+  <div className="top-right">
+    <div className="date-time-container">
+      <div className="date">
+        <LocalizationProvider dateAdapter={AdapterDateFns}>
+          <StaticDatePicker
+            orientation="landscape"
+            openTo="day"
+            value={date}
+            inputFormat="dd.MM.yyyy"
+            onChange={(newDate) => {
+              setDate(newDate);
+            }}
+            renderInput={(params) => <TextField {...params} />}
+          />
+        </LocalizationProvider>
+      </div>
+
+      <div className="time">
+        <LocalizationProvider dateAdapter={AdapterDateFns}>
+          <StaticTimePicker
+            // ampmInClock="false"
+            orientation="landscape"
+            openTo="hours"
+            inputFormat="hh:mm"
+            value={time}
+            onChange={(newTime) => {
+              setTime(newTime);
+            }}
+            renderInput={(params) => <TextField {...params} />}
+          />
+        </LocalizationProvider>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+);
+}

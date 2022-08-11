@@ -1,8 +1,14 @@
 import React, { useState, useEffect } from "react";
+
+import ReactDOM from "react-dom";
+
 import GooglePlacesAutocomplete, {
   geocodeByAddress,
   getLatLng,
 } from "react-google-places-autocomplete";
+
+import usePlacesAutocomplete from "use-places-autocomplete";
+
 
 import "./styles.css";
 // import "react-google-places-autocomplete/dist/assets/index.css";
@@ -34,7 +40,7 @@ export default function Places({ setCoordFunction }) {
 
   return (
     <div className="Places">
-      <pre>
+      <pre hidden>
         Coordinates: {coord.lat}, {coord.lng}
       </pre>
       <div className="places-search">
@@ -53,7 +59,7 @@ export default function Places({ setCoordFunction }) {
           }}
         />
       </div>
-      <pre>{JSON.stringify(value, null, 2)}</pre>
+      <pre hidden>{JSON.stringify(value, null, 2)}</pre>
     </div>
   );
 }

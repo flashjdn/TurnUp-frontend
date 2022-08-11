@@ -21,11 +21,8 @@
   background-color: #dd9c33;
 }
 
-.sign-up:active {
-  background-color: #a37327;
-  box-shadow: 0 5px #666;
-  transform: translateY(4px);
-}
+/* 
+} */
 
 .slogan {
   margin-top: 1rem;
@@ -66,3 +63,4 @@
   justify-content: center;
   object-fit: contain;
 }
+
