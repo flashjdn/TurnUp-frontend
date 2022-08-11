@@ -16,7 +16,8 @@ import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
 import { LocalizationProvider, DatePicker } from "@mui/x-date-pickers";
 import { TimePicker } from "@mui/x-date-pickers/TimePicker";
 import { useNavigate } from "react-router-dom";
-import { DocumentScanner } from "@mui/icons-material";
+
+import { CodeRounded, DocumentScanner } from "@mui/icons-material";
 
 import Places from "../Places/places";
 
@@ -34,8 +35,10 @@ export default function NewEventForm({ onClick }) {
 
   // console.log("these are the coords", coord);
 
+
   const navigate = useNavigate();
   // console.log(tags);
+
   const handleTagChange = (e) => {
     const index = tags.indexOf(e.target.value);
     if (index === -1) {
@@ -82,22 +85,9 @@ export default function NewEventForm({ onClick }) {
     img: "https://sm.askmen.com/t/askmen_in/article/f/facebook-p/facebook-profile-picture-affects-chances-of-gettin_fr3n.1200.jpg",
   };
 
-  let eventObj = {
-    eventName: name,
-    eventDescription: summary,
-    mainDescription: description,
-    date: date,
-    time: time,
-    organiser: user.username,
-    lat: 0,
-    lng: 0,
-    address: "placeholder",
-    img: "url to go here, ask untrodden member",
-    email: user.email,
-  };
-
   async function handleSubmission(e) {
     e.preventDefault();
+
     // ADAPT ALL OF THE BELOW TO MATCH OUR DATA
     document.querySelector(".event-form-container").classList.add("hidden");
 
@@ -113,19 +103,33 @@ export default function NewEventForm({ onClick }) {
     //   }
     // }
 
-    // let tagObj = {tagArr}
 
+    const [day, month, year] = date.toLocaleDateString().split("/");
+
+    const adjustedDate = [year, month, day].join("-");
+    const adjustedTime = time.toLocaleTimeString();
     //  All elements have been searched, ready to post the data to the server and database.
-    const response = await fetch(`https://turnupdb.herokuapp.com/events/all/`, {
+
+    let eventObj = {
+      eventName: name,
+      eventDescription: summary,
+      mainDescription: description,
+      date: adjustedDate, //date.toLocaleDateString(),
+      time: adjustedTime, //time.toLocaleTimeString(),
+      organiser: user.username,
+      lat: coord.lat,
+      lng: coord.lng,
+      address: coord.address,
+      img: "https://i2-prod.dailystar.co.uk/incoming/article19359395.ece/ALTERNATES/s1227b/0_httpscdnimagesdailystarcoukdynamic122photos140000900x7381364140",
+      email: user.email,
+    };
+
+    const response = await fetch(`https://turnupdb.herokuapp.com/events/all`, {
       //
       method: "POST", // *GET, POST, PUT, DELETE, etc.
-      mode: "cors", // no-cors, *cors, same-origin
-      cache: "no-cache", // *default, no-cache, reload, force-cache, only-if-cached
-      credentials: "same-origin", // include, *same-origin, omit
+      mode: "cors",
       headers: {
-        Accept: "application/json",
         "Access-Control-Allow-Origin": "*",
-        "Access-Control-Allow-Methods": "*",
         "Content-Type": "application/json",
         // 'Content-Type': 'application/x-www-form-urlencoded',
       },
@@ -143,12 +147,15 @@ export default function NewEventForm({ onClick }) {
   }
 
   function test() {
+
     console.log(eventObj);
+
   }
 
   return (
     <div>
       <Navbar></Navbar>
+
 
       <div className="form-container">
         <div className="top-left">
@@ -220,6 +227,7 @@ export default function NewEventForm({ onClick }) {
                 inputFormat="dd.MM.yyyy"
                 onChange={(newDate) => {
                   setDate(newDate);
+
                 }}
                 renderInput={(params) => <TextField {...params} />}
                 // sx={{
@@ -227,6 +235,7 @@ export default function NewEventForm({ onClick }) {
                 //   height: "auto",
                 // }}
               />
+
             </LocalizationProvider>
 
             <LocalizationProvider dateAdapter={AdapterDateFns}>
@@ -239,6 +248,7 @@ export default function NewEventForm({ onClick }) {
                 value={time}
                 onChange={(newTime) => {
                   setTime(newTime);
+
                 }}
                 renderInput={(params) => <TextField {...params} />}
                 // sx={{
@@ -246,6 +256,7 @@ export default function NewEventForm({ onClick }) {
                 //   height: "auto",
                 // }}
               />
+
             </LocalizationProvider>
           </div>
           <div className="tag-area-box">

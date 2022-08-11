@@ -26,7 +26,7 @@ function MapContainer(props) {
     draggable: false,
     editable: false,
     visible: true,
-    radius: 4000,
+    radius: 2000,
     zIndex: 1,
   };
 
@@ -44,7 +44,7 @@ function MapContainer(props) {
     <LoadScript googleMapsApiKey="AIzaSyDJresVS0RQllmIQivLkPz5xNeP19P4pOQ">
       <GoogleMap
         mapContainerStyle={mapStyles}
-        zoom={14}
+        zoom={15}
         center={props.centerObj}
       >
         {console.log(props.centerObj)}

@@ -1,10 +1,14 @@
 import React, { useState, useEffect } from "react";
+
 import ReactDOM from "react-dom";
+
 import GooglePlacesAutocomplete, {
   geocodeByAddress,
   getLatLng,
 } from "react-google-places-autocomplete";
+
 import usePlacesAutocomplete from "use-places-autocomplete";
+
 
 import "./styles.css";
 // import "react-google-places-autocomplete/dist/assets/index.css";
@@ -16,7 +20,7 @@ export default function Places({ setCoordFunction }) {
   let lng;
   const [rows, setRows] = useState([]);
   const [value, setValue] = useState();
-  const [coord, setCoord] = useState({ lat: 0, lng: 0 });
+  const [coord, setCoord] = useState({ lat: 0, lng: 0, address: "" });
 
   const LatLng = { lat, lng };
 
@@ -27,10 +31,12 @@ export default function Places({ setCoordFunction }) {
   useEffect(() => {
     if (value) {
       geocodeByAddress(value.label).then((result) => {
-        getLatLng(result[0]).then((googleCoord) => setCoord(googleCoord));
+        getLatLng(result[0]).then((googleCoord) =>
+          setCoord({ ...googleCoord, address: value.value.description })
+        );
       });
     }
-  }, [geocodeByAddress, getLatLng, value, setCoord]);
+  }, [value]);
 
   return (
     <div className="Places">
