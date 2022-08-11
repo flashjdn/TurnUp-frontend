@@ -11,8 +11,13 @@ const buttonStyle = {
   "&:hover": {
     backgroundColor: "#a37327",
     boxShadow: "0 5px #666",
-    transform: "translateY(4px)",
+    transform: "translateY(10px)",
   },
+
+  ':before': { borderBottomColor: 'white' },
+  // underline when selected
+  ':after': { borderBottomColor: 'white' },
+
   marginTop: "2rem",
   fontSize: "clamp(1.5rem, 3vw, 4rem)",
   /* text-shadow: 2px 2px black; */
@@ -46,9 +51,10 @@ export default function LandingPage({ handleOpen }) {
           Free local events, all you have to do is turn up.
         </h4>
         <a href="/explore">
-          <Button variant="contained" sx={buttonStyle}>
+          <button className="sign-up">Get Started</button>
+          {/* <Button variant="contained" sx={buttonStyle}>
             Get Started
-          </Button>
+          </Button> */}
         </a>
       </div>
       <Drawer />
