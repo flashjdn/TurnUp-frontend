@@ -1,0 +1,17 @@
+.create-event-title-title {
+    width: auto;
+    height: 5vh;
+}
+
+.create-title {
+    text-align: center;
+    font-family: var(--fonts);
+    font-style: italic;
+    font-weight: 100;
+    letter-spacing: 1px;
+    font-size: 4rem;
+    text-transform: uppercase;
+    color: white;
+    letter-spacing: 0.05em;
+    font-weight: 900;
+}
