@@ -5,17 +5,48 @@
    --fonts: "Raleway", sans-serif;
  }
 
- .event-form-container {
+.top-left {
+  justify-content: space-around;
+  height: auto;
+  width: 45%;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-content: space-around;
+  flex-wrap: wrap;
+  /* gap: 5px 30px; */
+  margin-left: 0;
 
-   position: fixed;
+}
+.top-right {
+  justify-content: center;
+  height: auto;
+  width: 50%;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+  flex-wrap: wrap;
+  gap: 50px 30px;
+  margin: auto;
+  
+}
 
-   height: 70vh;
-   width: 50vw;
-   margin-top: 15vh;
-   margin-left: 45vh;
+.buffer {
+  display: block;
+  height: 3vh;
+  width: auto;
+}
+
+ .form-container {
+
+   position: absolute;
+   height: 70%;
+   width: 90%;
+   margin: 4% 4% 4% 5%;
    display: flex;
-   justify-content: center;
-   place-items: center;
+   justify-content: space-around;
+   align-items: center;
    background-color: white;
    border: solid;
    border-radius: 0.5rem;
@@ -27,7 +58,7 @@
    border-width: 0.005rem;
    border-radius: 0.3rem;
    border-color: rgba(0, 0, 0, 0.3);
-   /* top: 35vh; */
+  margin-top: 3%;
  }
 
  .event-summary-box {
@@ -54,11 +85,12 @@
    border-width: 0.005rem;
    border-radius: 0.3rem;
    border-color: rgba(0, 0, 0, 0.3);
+  margin: auto;
+   width: 30vw;
+   align-items: center;
+   justify-content: center;
 
-   /* margin-top: 41vh; */
-   margin-left: 3.5vh;
-   width: 40rem;
-   margin-top: 11.5vh;
+
  }
 
  #event-summary-label {
@@ -79,7 +111,11 @@
 
  .date-time-container {
    /* margin-right: 2vh; */
-   top: 20vh;
+   /* top: 20vh; */
+   display: flex;
+   column-gap: 50px;
+   margin: auto;
+   
  }
 
  .time {
@@ -101,8 +137,17 @@
    display: flex;
 
  }
-
+.buttons {
+  display: inline-flex;
+  align-items: flex-end;
+  justify-content: baseline;
+  margin: auto;
+  gap: 50px;
+  /* margin-top: 7vh; */
+}
  /*
   .hidden {
     display: none;
     /* making it hidden by default */
+
+    

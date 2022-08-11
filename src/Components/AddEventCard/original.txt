@@ -1,0 +1,156 @@
+return (
+<section className="form-container">
+  <form
+    id="event-input-field"
+    onSubmit={(e) => {
+      handleSubmission(e);
+    }}
+  >
+    <div className="create-event-card-container">
+      <div className="top-left">
+        <TextField
+          onChange={handleName}
+          className="event-title-box"
+          sx={{
+            width: "30vw",
+            height: "5rem",
+            background: "var(--supporting-blue)",
+            // margin: "auto"
+          }}
+          label="Event title:"
+          multiline
+          rows={2}
+          cols={100}
+          defaultValue=""
+          id="titleArea"
+          required
+          inputProps={{ maxLength: "40" }}
+        />
+
+        <TextField
+          onChange={handleSummary}
+          className="event-summary-box"
+          sx={{
+            width: "40rem",
+            height: "9.2rem",
+            background: "var(--supporting-blue)",
+          }}
+          label="Event Summary:"
+          multiline
+          rows={5}
+          cols={100}
+          defaultValue=""
+          id="summaryArea"
+          required
+          inputProps={{ maxLength: "80" }}
+        />
+
+        <TextField
+          onChange={handleDescription}
+          className="event-description-box"
+          sx={{
+            width: "40rem",
+            height: "15rem",
+            background: "var(--supporting-blue)",
+          }}
+          label="Event Description:"
+          multiline
+          rows={9}
+          cols={100}
+          defaultValue=""
+          id="decriptionArea"
+          required
+        />
+
+        <Box>
+          <Box className="tag-area-box">
+            <FormControl>
+              <FormLabel>Event Tags</FormLabel>
+              <FormGroup row>
+                <FormControlLabel
+                  label="Pet-Friendly"
+                  control={<Checkbox value="pet-friendly" />}
+                  onChange={handleTagChange}
+                />
+                <FormControlLabel
+                  label="18+"
+                  control={<Checkbox value="18+" />}
+                  onChange={handleTagChange}
+                />
+                <FormControlLabel
+                  label="Outdoors"
+                  control={<Checkbox value="outdoors" />}
+                  onChange={handleTagChange}
+                />
+                <FormControlLabel
+                  label="Parking"
+                  control={<Checkbox value="parking" />}
+                  onChange={handleTagChange}
+                />
+                <FormControlLabel
+                  label="Family-Friendly"
+                  control={<Checkbox value="family-friendly" />}
+                  onChange={handleTagChange}
+                />
+              </FormGroup>
+            </FormControl>
+          </Box>
+        </Box>
+      </div>
+
+      <div className="date-time-container">
+        <div className="date">
+          <LocalizationProvider dateAdapter={AdapterDateFns}>
+            <StaticDatePicker
+              orientation="landscape"
+              openTo="day"
+              value={date}
+              inputFormat="dd.MM.yyyy"
+              onChange={(newDate) => {
+                setDate(newDate);
+              }}
+              renderInput={(params) => <TextField {...params} />}
+            />
+          </LocalizationProvider>
+        </div>
+
+        <div className="time">
+          <LocalizationProvider dateAdapter={AdapterDateFns}>
+            <StaticTimePicker
+              // ampmInClock="false"
+              orientation="landscape"
+              openTo="hours"
+              inputFormat="hh:mm"
+              value={time}
+              onChange={(newTime) => {
+                setTime(newTime);
+              }}
+              renderInput={(params) => <TextField {...params} />}
+            />
+          </LocalizationProvider>
+        </div>
+      </div>
+    </div>
+
+    <Button
+      sx={{ top: "3rem", left: "3rem" }}
+      variant="contained"
+      type="submit"
+      onClick={test}
+    >
+      Submit
+    </Button>
+  </form>
+  <a href="/profile">
+    <Button
+      sx={{ bottom: "26rem", right: "4.5vh" }}
+      id="exit-button-form"
+      variant="contained"
+      aria-label="Cancel and hide current event submission form"
+      onClick={onClick}
+    >
+      X
+    </Button>
+  </a>
+</section>
+)};
