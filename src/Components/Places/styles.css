@@ -7,15 +7,14 @@
   justify-content: center;
   flex-direction: column;
   align-items: center;
-  z-index: 100;
+  /* z-index: 200; */
   width: 100%;
 }
 
 .places-search {
   width: 80%;
+  z-index: 101;
 }
-
-
 
 .selected-place {
   padding: 20px 0;
