@@ -8,19 +8,14 @@
   flex-direction: column;
   align-items: center;
   z-index: 100;
+  width: 100%;
 }
 
 .places-search {
-  width: 50%;
+  width: 80%;
 }
 
-html,
-body,
-#root {
-  height: 100%;
-  margin: 0;
-  padding: 0;
-}
+
 
 .selected-place {
   padding: 20px 0;

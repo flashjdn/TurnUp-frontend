@@ -9,7 +9,7 @@
   display: flex;
   justify-content: flex-end;
   align-items: center;
-  width: 100%;
+  width: 100vw;
 }
 
 .navbutton {
@@ -31,7 +31,7 @@
   display: none;
 }
 .navbar-logo {
-  display: none;
+  display: initial;
 }
 .logo-background {
   display: none;
