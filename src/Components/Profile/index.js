@@ -21,10 +21,13 @@ function Profile() {
     email: "billie@microsoft.com",
   });
 
-  const [profileUserLocation, setProfileUserLocation] = useState([]);
+  const [profileUserLocation, setProfileUserLocation] = useState([
+    { lat: 1, lng: 1 },
+  ]);
 
   const [attendedButtVariant, setAttendedButtVariant] = useState("disabled");
   const [organisedButtVariant, setOrganisedButtVariant] = useState("contained");
+  const [friends, setFriends] = useState([{ friend: 1 }]);
 
   const [organisedEvents, setOrganisedEvents] = useState([
     {
@@ -83,9 +86,8 @@ function Profile() {
   useEffect(() => {
     getOrganisedEvents(user.userid);
     getAttendedEvents(user.userid);
-
-    console.log("Org in useffect: ", organisedEvents);
-    console.log("Att in useffect ", attendedEvents);
+    getFriends(user.userid);
+    console.log("friends: ", friends);
   }, [user]);
 
   window.addEventListener("load", () => {
@@ -107,9 +109,7 @@ function Profile() {
         mode: "cors",
       }
     );
-    console.log("res fetched", res);
     const data = await res.json();
-    console.log("organised fetched", data);
     setOrganisedEvents(data);
   };
 
@@ -120,7 +120,6 @@ function Profile() {
         mode: "cors",
       }
     );
-    console.log("attended fetched");
     const data = await res.json();
     setAttendedEvents(data);
   };
@@ -142,13 +141,18 @@ function Profile() {
   }
 
   //FUNCTION TEMPLATE TO FETCH FRIENDS
-  // async function FetchFriends() {
-  //   let response = await fetch(`urlurlurl ${user.userid}`);
-  //   let json = await response.json();
-  //   let dataArr = json.data;
-  //further in this function we need to have an if statement that checks if the user has any friends to begin with and if not, use setFriendsList to define it as undefined and offer him an add friend button that can be rendered on a card
-  //if the user has friends it just renders his list of friends
-  //}
+  async function getFriends(userId) {
+    const res = await fetch(
+      `https://turnupdb.herokuapp.com/events/friends/${userId}`,
+      {
+        mode: "cors",
+      }
+    );
+    const data = await res.json();
+    // further in this function we need to have an if statement that checks if the user has any friends to begin with and if not, use setFriendsList to define it as undefined and offer him an add friend button that can be rendered on a card
+    // if the user has friends it just renders his list of friends
+    setFriends(data);
+  }
 
   return (
     <div>
@@ -173,7 +177,8 @@ function Profile() {
             </a>
           </div>
           <div className="friends-list">
-            <FriendsList friendsArr={dummyFriends} />
+            {console.log("friends array: ", friends)}
+            <FriendsList friendsArr={friends} />
           </div>
         </div>
         <div className="profile-right-side">
@@ -192,8 +197,6 @@ function Profile() {
             </Button>
           </div>
           <div className="unleash-the-events">
-            {console.log("attendedEvents at the moment: ", attendedEvents)}
-            {console.log("organisedEvents at the moment: ", organisedEvents)}
             {profileUserLocation === [] ? null : (
               <EventList
                 eventsArr={listDisplay}

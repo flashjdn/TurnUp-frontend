@@ -79,7 +79,7 @@
   .friends-list {
     margin-top: 3rem;
     width: 70%;
-    max-height: 25vh;
+    height: 40vh;
   }
   .profile-pic {
     height: 15vh;
