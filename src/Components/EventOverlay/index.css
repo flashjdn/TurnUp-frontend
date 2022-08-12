@@ -2,7 +2,7 @@
   position: absolute;
   background-color: #adcad6;
   width: 35%;
-  height: 94vh;
+  height: 100%;
   opacity: 75%;
   border-right: solid;
   box-shadow: 12px 0 15px -4px var(--secondary);
