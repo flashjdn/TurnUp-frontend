@@ -173,24 +173,25 @@ export default function NewEventForm({ onClick }) {
       <Navbar></Navbar>
       <div className="form-container">
         <div className="outer-div">
-          <CreateEventTitle />
+        <h1>New Event</h1>
+          {/* <CreateEventTitle /> */}
         </div>
         <div className="add-event-card-body">
           <div className="top-left">
             <TextField
               onChange={handleName}
               className="event-title-box"
+              fullWidth
               sx={{
-                width: "35vw",
-                height: "5rem",
+                width: "90%",
                 // background: "var(--supporting-blue)",
-                margin: "auto",
-                display: "inline-flex",
+                // margin: "auto",
+                // display: "inline-flex",
               }}
               label="Event title"
               multiline
               rows={2}
-              cols={100}
+
               defaultValue=""
               id="titleArea"
               required
@@ -200,15 +201,15 @@ export default function NewEventForm({ onClick }) {
             <TextField
               onChange={handleSummary}
               className="event-summary-box"
+              fullWidth
               sx={{
-                width: "35vw",
-                height: "9.2rem",
+                width: "90%",
+                // height: "9.2rem",
                 // background: "var(--supporting-blue)",
               }}
               label="Event Summary"
               multiline
-              rows={5}
-              cols={100}
+              rows={3}
               defaultValue=""
               id="summaryArea"
               required
@@ -218,15 +219,14 @@ export default function NewEventForm({ onClick }) {
             <TextField
               onChange={handleDescription}
               className="event-description-box"
+              fullWidth
               sx={{
-                width: "35vw",
-                height: "15rem",
+                width: "90%",
                 // background: "var(--supporting-blue)",
               }}
               label="Event Description"
               multiline
-              rows={9}
-              cols={100}
+              rows={5}
               defaultValue=""
               id="decriptionArea"
               required

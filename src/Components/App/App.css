@@ -9,6 +9,8 @@
 
 * {
   font-family: var(--fonts);
+  margin: 0;
+  padding: 0;
 }
 
 .App {
