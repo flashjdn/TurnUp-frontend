@@ -9,6 +9,8 @@ import { withAuthenticator } from "@aws-amplify/ui-react";
 import "@aws-amplify/ui-react/styles.css";
 import awsExports from "../../aws-exports";
 import MainEventCard from "../MainEventCard";
+import { Auth } from "aws-amplify";
+
 Amplify.configure(awsExports);
 Amplify.configure(awsconfig);
 
@@ -56,9 +58,12 @@ function Explore(signOut, user) {
     },
   ]);
 
-  /**************************DUMMY DATA ALERT***************************** */
-  // const coordinates = { lat: 53.22738449126366, lng: 20.923854902697684 };
-  /*_______________________________________________________________________*/
+  async function getUserFromAuth() {
+    let userInfo = await Auth.currentUserInfo();
+    console.log("User info:", userInfo);
+  }
+  getUserFromAuth();
+
   useEffect(() => {
     let searchResults = [];
     for (let i = 0; i < loadedEvents.length; i++) {
@@ -89,12 +94,9 @@ function Explore(signOut, user) {
     const res = await fetch(`https://turnupdb.herokuapp.com/events/all`, {
       mode: "cors",
     });
-    console.log(res);
     const data = await res.json();
-    console.log(data);
     setEventsArr(data);
     setLoadedEvents(data);
-    console.log("loaded events: ", loadedEvents);
   };
 
   const [location, setLocation] = useState({
@@ -122,15 +124,9 @@ function Explore(signOut, user) {
   function markerClickHandler(markerEventId) {
     for (let i = 0; i < eventsArr.length; i++) {
       if (eventsArr[i].eventid === markerEventId) {
-        console.log(
-          "this is the object that should go to popUp ",
-          eventsArr[i]
-        );
         setPopUp(eventsArr[i]);
-        // setLocation(userLocation);
       }
     }
-    console.log("yes, clicked");
   }
 
   //function to close the pop up
@@ -144,7 +140,6 @@ function Explore(signOut, user) {
     async function positionFound(position) {
       const lng = position.coords.longitude;
       const lat = position.coords.latitude;
-      console.log("something");
       setUserLocation({ lat: lat, lng: lng });
       setLocation({ lat: lat, lng: lng });
     }
@@ -169,7 +164,6 @@ function Explore(signOut, user) {
         setUserInput={setUserInput}
         userLoc={userLocation}
       />
-      {console.log("This is a popUp: ", popUp)}
       {popUp ? (
         <MainEventCard eventObj={popUp} xClick={xClickReset}></MainEventCard>
       ) : null}
