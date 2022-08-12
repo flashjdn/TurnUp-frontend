@@ -34,6 +34,8 @@ function Explore(signOut, user) {
     },
   ]);
   const [userInput, setUserInput] = useState("");
+
+  //this is the state that holds ALL the events loaded from the database. eventsArr is the one that is getting modified by search
   const [loadedEvents, setLoadedEvents] = useState([
     {
       eventid: 10,
@@ -120,10 +122,15 @@ function Explore(signOut, user) {
   function markerClickHandler(markerEventId) {
     for (let i = 0; i < eventsArr.length; i++) {
       if (eventsArr[i].eventid === markerEventId) {
+        console.log(
+          "this is the object that should go to popUp ",
+          eventsArr[i]
+        );
         setPopUp(eventsArr[i]);
-        setLocation(userLocation);
+        // setLocation(userLocation);
       }
     }
+    console.log("yes, clicked");
   }
 
   //function to close the pop up
@@ -162,6 +169,7 @@ function Explore(signOut, user) {
         setUserInput={setUserInput}
         userLoc={userLocation}
       />
+      {console.log("This is a popUp: ", popUp)}
       {popUp ? (
         <MainEventCard eventObj={popUp} xClick={xClickReset}></MainEventCard>
       ) : null}
