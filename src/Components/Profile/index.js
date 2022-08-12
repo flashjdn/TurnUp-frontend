@@ -6,6 +6,7 @@ import "./index.css";
 import { Button } from "@mui/material";
 import { withAuthenticator } from "@aws-amplify/ui-react";
 import dummyFriends from "../../lib/dummyFriends";
+import { Auth } from "aws-amplify";
 
 //COMMENT FOR TESTING PURPOSES
 
@@ -13,7 +14,13 @@ import dummyFriends from "../../lib/dummyFriends";
 
 function Profile() {
   //state that holds info about the user
-  const userId = 4;
+  async function getUserFromAuth() {
+    let userInfo = await Auth.currentUserInfo();
+    console.log("User info:", userInfo);
+  }
+  getUserFromAuth();
+
+  const userEmail = "yas123@microsoft.com";
   const [user, setUser] = useState({
     userid: 3,
     img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT5GNLQ5Rq4_uCHZY7yxKiYXxjkkhro_aIbGQ&usqp=CAU",
@@ -69,9 +76,9 @@ function Profile() {
   ]);
   const [listDisplay, setListDisplay] = useState([]);
   //function that fetches all the user information provided it has the userId, if we want to retrieve the info by email or username, we need to change it in the back end too.
-  const getUser = async (id) => {
+  const getUser = async (email) => {
     const res = await fetch(
-      `https://turnupdb.herokuapp.com/events/user/${id}`,
+      `https://turnupdb.herokuapp.com/events/userem/${email}`,
       {
         mode: "cors",
       }
@@ -80,7 +87,7 @@ function Profile() {
     setUser(data[0]);
   };
   useEffect(() => {
-    getUser(userId);
+    getUser(userEmail);
   }, []);
 
   useEffect(() => {
