@@ -23,6 +23,7 @@ function MainEventCard({ eventObj, xClick }) {
   useEffect(() => {
     getTags(eventObj.eventid);
     getOrganiser(eventObj.organiser);
+    getPeopleAttending(eventObj.eventid);
   }, [, eventObj.eventid]);
 
   const getTags = async (eventId) => {
@@ -45,16 +46,25 @@ function MainEventCard({ eventObj, xClick }) {
         mode: "cors",
       }
     );
-    console.log(res);
     const data = await res.json();
-    console.log("This guy stinks: ", data);
     setOrganiser(data[0]);
   };
 
   const handleChange = (panel) => (event, isExpanded) => {
     setExpanded(isExpanded ? panel : false);
   };
-  const [friendsAttending, setFriendsAttending] = useState(dummyFriends);
+  const [peopleAttending, setPeopleAttending] = useState(dummyFriends);
+
+  const getPeopleAttending = async (eventId) => {
+    const res = await fetch(
+      `https://turnupdb.herokuapp.com/events/attendees/${eventId}`,
+      {
+        mode: "cors",
+      }
+    );
+    const data = await res.json();
+    setPeopleAttending(data);
+  };
   return (
     <div className="main-event-card">
       <CloseIcon
@@ -113,7 +123,7 @@ function MainEventCard({ eventObj, xClick }) {
           </div>
           <div className="main-friends-container">
             <FriendsAttending
-              attendingFriends={friendsAttending}
+              attendingGuests={peopleAttending}
             ></FriendsAttending>
           </div>
         </div>

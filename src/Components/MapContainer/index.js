@@ -38,8 +38,6 @@ function MapContainer(props) {
     console.log("Circle onUnmount circle: ", circle);
   };
 
-
-
   return (
     <LoadScript googleMapsApiKey="AIzaSyDJresVS0RQllmIQivLkPz5xNeP19P4pOQ">
       <GoogleMap
@@ -55,7 +53,7 @@ function MapContainer(props) {
           // optional
           onUnmount={onUnmount}
           // required
-          center={props.centerObj}
+          center={props.userLocation}
           // required
           options={options}
         />
@@ -73,7 +71,7 @@ function MapContainer(props) {
               //onLoad={onLoad}
               icon="https://i.postimg.cc/3x9Q98BD/placeholder-svgrepo-com.png"
               onClick={() => {
-                props.markerOnClick(item.eventId);
+                props.markerOnClick(item.eventid);
               }}
             />
           );

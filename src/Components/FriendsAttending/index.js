@@ -1,18 +1,21 @@
 import "./index.css";
 
-function FriendsAttending({ attendingFriends }) {
+function FriendsAttending({ attendingGuests }) {
   return (
     <div>
       <div className="friends-text">Attending: </div>
       <div className="attending-scrollbar">
         {" "}
-        {attendingFriends.map((item, index) => {
+        {attendingGuests.map((item, index) => {
           return (
-            <img
-              src={item.profilePic}
-              alt="a persons face"
-              className="small-profile-pic"
-            />
+            <div className="attendee-div">
+              <img
+                src={item.img}
+                alt="a persons face"
+                className="small-profile-pic"
+              />
+              <p className="attendee-name">{item.username}</p>
+            </div>
           );
         })}
       </div>
