@@ -44,6 +44,7 @@ export default function Places({ setCoordFunction }) {
         Coordinates: {coord.lat}, {coord.lng}
       </pre>
       <div className="places-search">
+      <p> Enter your event location:</p>
         <GooglePlacesAutocomplete
           apiKey={"AIzaSyDJresVS0RQllmIQivLkPz5xNeP19P4pOQ"}
           placeholder="Type in an address"

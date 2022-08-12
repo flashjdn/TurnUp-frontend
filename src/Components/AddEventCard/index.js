@@ -173,9 +173,11 @@ export default function NewEventForm({ onClick }) {
       <Navbar></Navbar>
       <div className="form-container">
         <div className="outer-div">
-        <h1>New Event</h1>
+          <h1>New Event</h1>
+
           {/* <CreateEventTitle /> */}
         </div>
+        <Places setCoordFunction={setCoord} />
         <div className="add-event-card-body">
           <div className="top-left">
             <TextField
@@ -191,7 +193,6 @@ export default function NewEventForm({ onClick }) {
               label="Event title"
               multiline
               rows={2}
-
               defaultValue=""
               id="titleArea"
               required
@@ -234,13 +235,12 @@ export default function NewEventForm({ onClick }) {
             {/* <div className="buffer"> </div> */}
           </div>
           <div className="top-right">
-            <p className="start">Start typing your event location...</p>
-            <Places setCoordFunction={setCoord} />
+            {/* <Places setCoordFunction={setCoord} /> */}
             <div className="date-time-container">
               <LocalizationProvider dateAdapter={AdapterDateFns}>
                 <DatePicker
                   label="Event date"
-                  orientation="landscape"
+                  orientation="portrait"
                   openTo="day"
                   value={date}
                   inputFormat="dd.MM.yyyy"
@@ -261,7 +261,7 @@ export default function NewEventForm({ onClick }) {
                 <TimePicker
                   // ampmInClock="false"
                   label="Start time"
-                  orientation="landscape"
+                  orientation="portrait"
                   openTo="hours"
                   inputFormat="hh:mm"
                   value={time}
@@ -310,10 +310,7 @@ export default function NewEventForm({ onClick }) {
                 </FormGroup>
               </FormControl>
             </div>
-            <TextField 
-              onChange={handleUrl}
-              label="Image URL"
-            />
+            <TextField onChange={handleUrl} label="Image URL" />
             <div className="buttons">
               <Button
                 sx={{
