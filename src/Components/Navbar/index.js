@@ -31,9 +31,9 @@ function Navbar() {
     });
   });*/
 
-  // function redirectExplore() {
-  //   window.location.href = "/explore";
-  // }
+  function redirectExplore() {
+    window.location.href = "/explore";
+  }
   const navigate = useNavigate();
 
   async function signOut() {
@@ -65,7 +65,9 @@ function Navbar() {
         </Button>
         <Button
           className="navbutton"
-          onClick={() => navigate("/explore")}
+          onClick=
+          // {() => navigate("/explore")}
+          {redirectExplore}
           sx={{
             color: "white",
             fontFamily: '"Raleway", sans-serif',
