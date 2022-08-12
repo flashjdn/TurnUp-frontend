@@ -103,8 +103,8 @@ function Explore(signOut, user) {
   });
 
   const [userLocation, setUserLocation] = useState({
-    lat: 47.60011001977801,
-    lng: 3.533434778585759,
+    lat: 51.496681,
+    lng: -0.050417,
   });
   //This state takes in the object of the event clicked in EventOverlay
   const [popUp, setPopUp] = useState(undefined);
