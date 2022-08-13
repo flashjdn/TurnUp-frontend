@@ -35,7 +35,7 @@ const buttonStyle = {
 
 export default function LandingPage({ handleOpen }) {
   return (
-    <div>
+    <div className="homepage">
       <video loop autoPlay muted className="vid">
         <source src={Promovid} type="video/mp4" />
       </video>
