@@ -190,17 +190,17 @@ function Profile() {
         </div>
         <div className="profile-right-side">
           {organisedButtVariant === "contained" ? (
-            <h2>Events you attend:</h2>
+            <h2>Attending Events:</h2>
           ) : (
-            <h2>Events you organise:</h2>
+            <h2>Organised Events:</h2>
           )}
 
           <div className="crea-atten-buttons">
             <Button variant={attendedButtVariant} onClick={changeToAttended}>
-              Events you attend
+              Attending Events
             </Button>
             <Button variant={organisedButtVariant} onClick={changeToOrganised}>
-              Events you organise
+              Organised Events
             </Button>
           </div>
           <div className="unleash-the-events">
