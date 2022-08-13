@@ -179,7 +179,7 @@ function Profile() {
             <p>
               <strong>Email:</strong> {user.email}
             </p>
-            <a href="/create-event">
+            <a href="/create-event" style={{ textDecoration: 'none' }}>
               <Button variant="contained">Create Event</Button>
             </a>
           </div>
