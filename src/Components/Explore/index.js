@@ -163,24 +163,26 @@ function Explore(signOut, user) {
   return (
     <>
       <Mask loaded={userLocation.lat ? true : false} />
-      <Navbar />
-      <MapContainer
-        centerObj={location}
-        eventsArr={eventsArr}
-        userLocation={userLocation}
-        markerOnClick={markerClickHandler}
-      ></MapContainer>
-      <EventOverlay
-        onClick={eventClickHandler}
-        xClick={xClickReset}
-        eventsArr={eventsArr}
-        setUserInput={setUserInput}
-        userLoc={userLocation}
-      />
-      {console.log("This is a popUp: ", popUp)}
-      {popUp ? (
-        <MainEventCard eventObj={popUp} xClick={xClickReset}></MainEventCard>
-      ) : null}
+      <div className="explore">
+        <Navbar />
+        <MapContainer
+          centerObj={location}
+          eventsArr={eventsArr}
+          userLocation={userLocation}
+          markerOnClick={markerClickHandler}
+        ></MapContainer>
+        <EventOverlay
+          onClick={eventClickHandler}
+          xClick={xClickReset}
+          eventsArr={eventsArr}
+          setUserInput={setUserInput}
+          userLoc={userLocation}
+        />
+        {console.log("This is a popUp: ", popUp)}
+        {popUp ? (
+          <MainEventCard eventObj={popUp} xClick={xClickReset}></MainEventCard>
+        ) : null}
+      </div>
     </>
   );
 }

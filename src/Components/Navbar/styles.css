@@ -10,6 +10,8 @@
   justify-content: flex-end;
   align-items: center;
   width: 100vw;
+  z-index: 2;
+
 }
 
 .navbutton {
