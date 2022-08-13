@@ -5,7 +5,6 @@ import { useEffect, useState } from "react";
 import "./index.css";
 import { Button } from "@mui/material";
 import { withAuthenticator } from "@aws-amplify/ui-react";
-import dummyFriends from "../../lib/dummyFriends";
 import { Auth } from "aws-amplify";
 
 //COMMENT FOR TESTING PURPOSES
@@ -16,11 +15,11 @@ function Profile() {
   //state that holds info about the user
   async function getUserFromAuth() {
     let userInfo = await Auth.currentUserInfo();
-    console.log("User info:", userInfo);
+    setUserEmail(userInfo.attributes.email);
   }
-  getUserFromAuth();
 
-  const userEmail = "yas123@microsoft.com";
+  const [userEmail, setUserEmail] = useState("billie@microsoft.com");
+
   const [user, setUser] = useState({
     userid: 3,
     img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT5GNLQ5Rq4_uCHZY7yxKiYXxjkkhro_aIbGQ&usqp=CAU",
@@ -94,7 +93,6 @@ function Profile() {
     getOrganisedEvents(user.userid);
     getAttendedEvents(user.userid);
     getFriends(user.userid);
-    console.log("friends: ", friends);
   }, [user]);
 
   window.addEventListener("load", () => {

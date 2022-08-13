@@ -2,6 +2,9 @@
   --primary: #fbb02d;
   --secondary: #006390;
   --supporting-blue: #adcad6;
+  --primary-opaque: rgb(251, 176, 45, 0.75);
+  --secondary-opaque: rgb(0, 99, 144, 0.75);
+  --supporting-blue-opaque: rgb(173, 202, 214, 0.75);
   --fonts: "Raleway", sans-serif;
   --font-colour: white;
   --font-colour-secondary: black;

@@ -1,6 +1,6 @@
 .event-background {
   position: absolute;
-  background-color: #adcad6;
+  background-color: var(--supporting-blue-opaque);
   width: 35%;
   height: 94vh;
   opacity: 75%;
