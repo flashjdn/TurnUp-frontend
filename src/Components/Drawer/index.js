@@ -37,14 +37,12 @@ export default function Drawer() {
           },
         }}
       >
-        <h1>Turn up, for what? 🤨</h1>
-        <p>
-          Et ipsum tempor ullamco voluptate sunt. Ut id eu occaecat officia
-          aliqua excepteur laboris do velit. Veniam minim pariatur qui ex.
-          Labore voluptate Lorem fugiat nisi nostrud officia anim nostrud
-          voluptate proident nulla in aute. Exercitation incididunt consequat
-          occaecat aliquip ipsum fugiat ex do. Ut commodo non quis aute aliqua
-          mollit in do nisi nulla.
+        <h1 className="for-what">Turn up, for what? 🤨</h1>
+        <p className="about-us">
+          Find free events near you, invite your friends, turn up!
+        </p>
+        <p className="about-us">
+          Or if you're looking to put on a free event, set up an account and use our create event form to add the details for other users to find and get in contact with you!
         </p>
       </SwipeableDrawer>
       <button className="about-text" onClick={handleOpen}>
