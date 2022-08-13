@@ -10,6 +10,7 @@ import "@aws-amplify/ui-react/styles.css";
 import awsExports from "../../aws-exports";
 import MainEventCard from "../MainEventCard";
 import { Auth } from "aws-amplify";
+import { NewInfoBox } from "../NewInfoBox/index.js";
 
 Amplify.configure(awsExports);
 Amplify.configure(awsconfig);
@@ -57,13 +58,33 @@ function Explore(signOut, user) {
       lng: -16.547548522601453,
     },
   ]);
-
+  const [newUser, setNewUser] = useState(false);
+  const [userEmail, setUserEmail] = useState("nothing to see");
   async function getUserFromAuth() {
     let userInfo = await Auth.currentUserInfo();
-    console.log("User info:", userInfo);
+    setUserEmail(userInfo.attributes.email);
   }
-  getUserFromAuth();
 
+  async function isUserNew(email) {
+    if (userEmail !== "nothing to see") {
+      const res = await fetch(
+        `https://turnupdb.herokuapp.com/events/userem/${email}`,
+        {
+          mode: "cors",
+        }
+      );
+      const data = await res.json();
+      if (data.length === 0) {
+        setNewUser(true);
+      }
+    }
+  }
+
+  useEffect(() => {
+    console.log(userEmail);
+    getUserFromAuth();
+    isUserNew(userEmail);
+  });
   useEffect(() => {
     let searchResults = [];
     for (let i = 0; i < loadedEvents.length; i++) {
@@ -149,8 +170,9 @@ function Explore(signOut, user) {
   });
 
   return (
-    <div>
+    <div id="explore-page-main-div">
       <Navbar />
+      {newUser ? <NewInfoBox /> : null}
       <MapContainer
         centerObj={location}
         eventsArr={eventsArr}
