@@ -12,7 +12,10 @@
 }
 
 .friends-text {
-  margin-top: 1rem;
+  font-size: small;
+  margin-top: 2rem;
+  margin-bottom: 0px;
+  padding: 0px;
 }
 .attending-scrollbar::-webkit-scrollbar {
   width: 0.5rem;
