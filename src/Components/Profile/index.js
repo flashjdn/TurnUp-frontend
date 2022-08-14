@@ -13,18 +13,19 @@ import { Auth } from "aws-amplify";
 
 function Profile() {
   //state that holds info about the user
+
+  const [userEmail, setUserEmail] = useState("");
   async function getUserFromAuth() {
     let userInfo = await Auth.currentUserInfo();
-    setUserEmail(userInfo.attributes.email);
+    console.log("user info: ", userInfo);
+    getUser(userInfo.attributes.email);
   }
 
-  const [userEmail, setUserEmail] = useState("billie@microsoft.com");
-
   const [user, setUser] = useState({
-    userid: 3,
-    img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT5GNLQ5Rq4_uCHZY7yxKiYXxjkkhro_aIbGQ&usqp=CAU",
-    username: "Billie",
-    email: "billie@microsoft.com",
+    userid: 0,
+    img: "https://external-content.duckduckgo.com/iu/?u=http%3A%2F%2Fwww.wired.com%2Fwp-content%2Fuploads%2F2016%2F03%2FMIT-Web-Loading.jpg&f=1&nofb=1",
+    username: "loading...",
+    email: "loading...",
   });
 
   const [profileUserLocation, setProfileUserLocation] = useState([
@@ -76,19 +77,23 @@ function Profile() {
   const [listDisplay, setListDisplay] = useState([]);
   //function that fetches all the user information provided it has the userId, if we want to retrieve the info by email or username, we need to change it in the back end too.
   const getUser = async (email) => {
-    const res = await fetch(
-      `https://turnupdb.herokuapp.com/events/userem/${email}`,
-      {
-        mode: "cors",
-      }
-    );
-    const data = await res.json();
-    setUser(data[0]);
+    console.log("this is the email ", email);
+    if (email !== undefined && email !== "") {
+      const res = await fetch(
+        `https://turnupdb.herokuapp.com/events/userem/${email}`,
+        {
+          mode: "cors",
+        }
+      );
+      const data = await res.json();
+      console.log("this is the data: ", data);
+      setUser(data[0]);
+    }
   };
   useEffect(() => {
+    getUserFromAuth();
     getUser(userEmail);
   }, []);
-
   useEffect(() => {
     getOrganisedEvents(user.userid);
     getAttendedEvents(user.userid);
@@ -165,7 +170,6 @@ function Profile() {
       <div className="profile-container">
         <div className="profile-left-side">
           <div className="profile-info">
-            {console.log("loaded user: ", user)}
             <img
               src={user.img}
               alt="users profile"
@@ -182,7 +186,6 @@ function Profile() {
             </a>
           </div>
           <div className="friends-list">
-            {console.log("friends array: ", friends)}
             <FriendsList friendsArr={friends} />
           </div>
         </div>

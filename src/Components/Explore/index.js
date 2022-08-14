@@ -22,7 +22,11 @@ function Explore(signOut, user) {
     let userInfo = await Auth.currentUserInfo();
     setUserEmail(userInfo.attributes.email);
   }
-
+  useEffect(() => {
+    console.log(userEmail);
+    getUserFromAuth();
+    isUserNew(userEmail);
+  }, []);
   async function isUserNew(email) {
     if (userEmail !== "nothing to see") {
       const res = await fetch(
@@ -38,11 +42,6 @@ function Explore(signOut, user) {
     }
   }
 
-  useEffect(() => {
-    console.log(userEmail);
-    getUserFromAuth();
-    isUserNew(userEmail);
-  }, []);
   function submitNewUser() {
     setNewUser(false);
   }
@@ -177,7 +176,9 @@ function Explore(signOut, user) {
   return (
     <div id="explore-page-main-div">
       <Navbar />
-      {newUser ? <NewInfoBox closingFunction={submitNewUser} /> : null}
+      {newUser ? (
+        <NewInfoBox closingFunction={submitNewUser} newUserEmail={userEmail} />
+      ) : null}
       <MapContainer
         centerObj={location}
         eventsArr={eventsArr}
