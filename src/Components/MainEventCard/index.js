@@ -10,9 +10,10 @@ import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import { useEffect, useState } from "react";
 import FriendsAttending from "../FriendsAttending/index";
 import dummyFriends from "../../lib/dummyFriends";
+import { Auth } from "aws-amplify";
+import { Button } from "@mui/material";
 
-function MainEventCard({ eventObj, xClick }) {
-  console.log(eventObj);
+function MainEventCard({ eventObj, xClick, userId }) {
   const [expanded, setExpanded] = useState(false);
   const [tags, setTags] = useState(["kids", "dogs", "accessible"]);
   const [organiser, setOrganiser] = useState({
@@ -35,7 +36,6 @@ function MainEventCard({ eventObj, xClick }) {
     );
     console.log(res);
     const data = await res.json();
-    console.log("here are the tags: ", data);
     setTags(data);
   };
 
@@ -65,6 +65,20 @@ function MainEventCard({ eventObj, xClick }) {
     const data = await res.json();
     setPeopleAttending(data);
   };
+
+  async function handleAttendance(eventId, userId) {
+    if (userId !== undefined && eventId !== undefined) {
+      const attendeeObj = { eventid: eventId, userid: userId };
+
+      await fetch(`https://turnupdb.herokuapp.com/events/newatt`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(attendeeObj),
+      });
+    }
+  }
   return (
     <div className="main-event-card">
       <CloseIcon
@@ -121,7 +135,13 @@ function MainEventCard({ eventObj, xClick }) {
               );
             })}
           </div>
-          <button className="attending-btn">I'll be there!</button>
+          <Button
+            variant="contained"
+            onClick={handleAttendance}
+            className="attending-btn"
+          >
+            I'll be there!
+          </Button>
           <div className="main-friends-container">
             <FriendsAttending
               attendingGuests={peopleAttending}
