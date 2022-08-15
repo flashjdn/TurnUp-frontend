@@ -27,12 +27,10 @@ function Explore(signOut, user) {
     getUserFromAuth();
   }, []);
 
-  useEffect(() => {
-    isUserNew(userEmail);
-  }, [userEmail]);
   async function isUserNew(email) {
     console.log("this is working");
     if (email !== "") {
+      console.log(email)
       const res = await fetch(
         `https://turnupdb.herokuapp.com/events/userem/${email}`,
         {
@@ -47,6 +45,10 @@ function Explore(signOut, user) {
       }
     }
   }
+
+  useEffect(() => {
+    isUserNew(userEmail);
+  }, [userEmail]);
 
   function submitNewUser() {
     setNewUser(false);
@@ -190,8 +192,11 @@ function Explore(signOut, user) {
       <div className="explore">
         <Navbar />
         {newUser ? (
-        <NewInfoBox closingFunction={submitNewUser} newUserEmail={userEmail} />
-      ) : null}
+          <NewInfoBox
+            closingFunction={submitNewUser}
+            newUserEmail={userEmail}
+          />
+        ) : null}
         <MapContainer
           centerObj={location}
           eventsArr={eventsArr}
