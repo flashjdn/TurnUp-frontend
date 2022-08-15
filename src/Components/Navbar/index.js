@@ -1,4 +1,4 @@
-import "./index.css";
+import "./styles.css";
 import MenuIcon from "@mui/icons-material/Menu";
 import { Amplify, Auth } from "aws-amplify";
 import { useAuthenticator } from "@aws-amplify/ui-react";
