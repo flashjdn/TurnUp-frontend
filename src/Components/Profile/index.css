@@ -22,6 +22,11 @@
   justify-content: space-around;
 }
 
+.profile-right-side h3 {
+  font-size: 2.8rem;
+  font-family: var(--fonts);
+}
+
 .friends-list {
   width: 70%;
   max-height: 40vh;
@@ -47,6 +52,30 @@
   width: 20vh;
   object-fit: cover;
   background-position: center, center;
+  align-self: center;
+}
+
+.profile-info {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  font-size: 1.5rem;
+
+
+}
+
+.profile-info p {
+  font-weight: 700;
+}
+
+.strong {
+  font-weight: bolder;
+  /* color: red */
+}
+
+.create-button {
+  align-self: center;
+  
 }
 
 .unleash-the-events {

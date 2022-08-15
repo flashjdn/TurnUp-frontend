@@ -125,7 +125,7 @@ function Profile() {
 
   return (
     <>
-      {/* <Mask loaded={(user.userid === 4) ?  true : false} /> */}
+      <Mask loaded={(user.userid === 0) ?  false : true} />
       <div>
         <Navbar></Navbar>
         <div className="profile-container">
@@ -137,13 +137,18 @@ function Profile() {
                 className="profile-pic"
               ></img>
               <p>
-                <strong>Username:</strong> {user.username}
+                <strong className="strong">Username:</strong> {user.username}
               </p>
               <p>
-                <strong>Email:</strong> {user.email}
+                <strong className="strong">Email:</strong> {user.email}
               </p>
-              <a href="/create-event" style={{ textDecoration: "none" }}>
-                <Button variant="contained">Create Event</Button>
+              <a className="create-button" href="/create-event" style={{ textDecoration: "none" }}>
+                <Button className="create-button" 
+                sx={{backgroundColor: "#fbb02d",
+                color:"black"}}
+                variant="contained">
+                  Create Event
+                </Button>
               </a>
             </div>
             <div className="friends-list">
@@ -152,9 +157,9 @@ function Profile() {
           </div>
           <div className="profile-right-side">
             {toggleVariant ? (
-              <h2>Attending Events:</h2>
+              <h3>Attending Events:</h3>
             ) : (
-              <h2>Organised Events:</h2>
+              <h3>Organised Events:</h3>
             )}
 
             <div className="crea-atten-buttons">
