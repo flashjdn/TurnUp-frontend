@@ -91,17 +91,19 @@ function Profile() {
     console.log("event toggled", bool);
     if (bool === true) {
       setToggleVariant(false);
-      setListDisplay(attendedEvents);
+      setListDisplay(organisedEvents);
     } else {
       setToggleVariant(true);
-      setListDisplay(organisedEvents);
+      setListDisplay(attendedEvents);
     }
   }
   useEffect(() => {
     getOrgansiedAttendedAndFriendsEvents(user.userid);
+    // setListDisplay(organisedEvents);
   }, [user]);
 
   useEffect(() => {
+    toggleEvents(false);
     getUserFromAuth();
     getUser(userEmail);
   }, []);

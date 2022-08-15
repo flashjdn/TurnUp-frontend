@@ -147,7 +147,21 @@ function NewEventForm(signOut, user) {
     const adjustedTime = time.toLocaleTimeString();
     //  All elements have been searched, ready to post the data to the server and database.
 
-    let eventObj = {
+    let eventObj = 
+    // {
+    //   eventName: name,
+    //   eventDescription: summary,
+    //   mainDescription: description,
+    //   date: adjustedDate, //date.toLocaleDateString(),
+    //   time: adjustedTime, //time.toLocaleTimeString(),
+    //   organiser: userDB.userid,
+    //   lat: coord.lat,
+    //   lng: coord.lng,
+    //   address: coord.address,
+    //   img: url,
+    //   email: userDB.email,
+    // };
+    {
       eventName: name,
       eventDescription: summary,
       mainDescription: description,
