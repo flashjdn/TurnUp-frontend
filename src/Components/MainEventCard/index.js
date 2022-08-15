@@ -121,6 +121,7 @@ function MainEventCard({ eventObj, xClick }) {
               );
             })}
           </div>
+          <button className="attending-btn">I'll be there!</button>
           <div className="main-friends-container">
             <FriendsAttending
               attendingGuests={peopleAttending}

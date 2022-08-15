@@ -11,7 +11,8 @@ import awsExports from "../../aws-exports";
 import MainEventCard from "../MainEventCard";
 import { Auth } from "aws-amplify";
 import { NewInfoBox } from "../NewInfoBox/index.js";
-
+import Mask from "../Mask";
+import "./styles.css";
 Amplify.configure(awsExports);
 Amplify.configure(awsconfig);
 
@@ -116,9 +117,20 @@ function Explore(signOut, user) {
     setEventsArr(searchResults);
   }, [userInput]);
 
-  useEffect(() => {
-    getEvents();
-  }, []);
+  function loadPosition() {
+    console.log("start of function for location");
+    navigator.geolocation.getCurrentPosition(positionFound, positionNotFound);
+    async function positionFound(position) {
+      const lng = position.coords.longitude;
+      const lat = position.coords.latitude;
+      console.log("something");
+      setUserLocation({ lat: lat, lng: lng });
+      setLocation({ lat: lat, lng: lng });
+    }
+    function positionNotFound(err) {
+      console.log(err);
+    }
+  }
 
   const getEvents = async () => {
     const res = await fetch(`https://turnupdb.herokuapp.com/events/all`, {
@@ -135,8 +147,8 @@ function Explore(signOut, user) {
   });
 
   const [userLocation, setUserLocation] = useState({
-    lat: 51.496681,
-    lng: -0.050417,
+    lat: null,
+    lng: null,
   });
   //This state takes in the object of the event clicked in EventOverlay
   const [popUp, setPopUp] = useState(undefined);
@@ -165,43 +177,40 @@ function Explore(signOut, user) {
     setLocation(userLocation);
   }
 
-  window.addEventListener("load", () => {
-    navigator.geolocation.getCurrentPosition(positionFound, positionNotFound);
-    async function positionFound(position) {
-      const lng = position.coords.longitude;
-      const lat = position.coords.latitude;
-      setUserLocation({ lat: lat, lng: lng });
-      setLocation({ lat: lat, lng: lng });
-    }
-    function positionNotFound(err) {
-      console.log(err);
-    }
-  });
+  useEffect(() => {
+    getEvents();
+    loadPosition();
+  }, []);
+
+  // {userLocation.lat ? true : false}
 
   return (
-    <div id="explore-page-main-div">
-      <Navbar />
-      {newUser ? (
+    <>
+      <Mask loaded={userLocation.lat ? true : false} />
+      <div className="explore">
+        <Navbar />
+        {newUser ? (
         <NewInfoBox closingFunction={submitNewUser} newUserEmail={userEmail} />
       ) : null}
-      {console.log("email ", userEmail)}
-      <MapContainer
-        centerObj={location}
-        eventsArr={eventsArr}
-        userLocation={userLocation}
-        markerOnClick={markerClickHandler}
-      ></MapContainer>
-      <EventOverlay
-        onClick={eventClickHandler}
-        xClick={xClickReset}
-        eventsArr={eventsArr}
-        setUserInput={setUserInput}
-        userLoc={userLocation}
-      />
-      {popUp ? (
-        <MainEventCard eventObj={popUp} xClick={xClickReset}></MainEventCard>
-      ) : null}
-    </div>
+        <MapContainer
+          centerObj={location}
+          eventsArr={eventsArr}
+          userLocation={userLocation}
+          markerOnClick={markerClickHandler}
+        ></MapContainer>
+        <EventOverlay
+          onClick={eventClickHandler}
+          xClick={xClickReset}
+          eventsArr={eventsArr}
+          setUserInput={setUserInput}
+          userLoc={userLocation}
+        />
+        {console.log("This is a popUp: ", popUp)}
+        {popUp ? (
+          <MainEventCard eventObj={popUp} xClick={xClickReset}></MainEventCard>
+        ) : null}
+      </div>
+    </>
   );
 }
 

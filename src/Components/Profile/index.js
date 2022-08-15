@@ -5,7 +5,10 @@ import { useEffect, useState } from "react";
 import "./index.css";
 import { Button } from "@mui/material";
 import { withAuthenticator } from "@aws-amplify/ui-react";
+import Mask from "../Mask";
+import "../Mask/styles.css";
 import { Auth } from "aws-amplify";
+
 
 //COMMENT FOR TESTING PURPOSES
 
@@ -165,57 +168,66 @@ function Profile() {
   }
 
   return (
-    <div>
-      <Navbar></Navbar>
-      <div className="profile-container">
-        <div className="profile-left-side">
-          <div className="profile-info">
-            <img
-              src={user.img}
-              alt="users profile"
-              className="profile-pic"
-            ></img>
-            <p>
-              <strong>Username:</strong> {user.username}
-            </p>
-            <p>
-              <strong>Email:</strong> {user.email}
-            </p>
-            <a href="/create-event">
-              <Button variant="contained">Create Event</Button>
-            </a>
-          </div>
-          <div className="friends-list">
-            <FriendsList friendsArr={friends} />
-          </div>
-        </div>
-        <div className="profile-right-side">
-          {organisedButtVariant === "contained" ? (
-            <h2>Events you attend:</h2>
-          ) : (
-            <h2>Events you organise:</h2>
-          )}
 
-          <div className="crea-atten-buttons">
-            <Button variant={attendedButtVariant} onClick={changeToAttended}>
-              Events you attend
-            </Button>
-            <Button variant={organisedButtVariant} onClick={changeToOrganised}>
-              Events you organise
-            </Button>
+
+    <>
+      {/* <Mask loaded={(user.userid === 4) ?  true : false} /> */}
+      <div>
+        <Navbar></Navbar>
+        <div className="profile-container">
+          <div className="profile-left-side">
+            <div className="profile-info">
+              <img
+                src={user.img}
+                alt="users profile"
+                className="profile-pic"
+              ></img>
+              <p>
+                <strong>Username:</strong> {user.username}
+              </p>
+              <p>
+                <strong>Email:</strong> {user.email}
+              </p>
+              <a href="/create-event" style={{ textDecoration: 'none' }}>
+                <Button variant="contained">Create Event</Button>
+              </a>
+            </div>
+            <div className="friends-list">
+              <FriendsList friendsArr={friends} />
+            </div>
           </div>
-          <div className="unleash-the-events">
-            {profileUserLocation === [] ? null : (
-              <EventList
-                eventsArr={listDisplay}
-                onClick={seeYouClicking}
-                userLoc={profileUserLocation}
-              />
+          <div className="profile-right-side">
+            {organisedButtVariant === "contained" ? (
+              <h2>Attending Events:</h2>
+            ) : (
+              <h2>Organised Events:</h2>
+
             )}
+
+            <div className="crea-atten-buttons">
+              <Button variant={attendedButtVariant} onClick={changeToAttended}>
+                Attending Events
+              </Button>
+              <Button
+                variant={organisedButtVariant}
+                onClick={changeToOrganised}
+              >
+                Organised Events
+              </Button>
+            </div>
+            <div className="unleash-the-events">
+              {profileUserLocation === [] ? null : (
+                <EventList
+                  eventsArr={listDisplay}
+                  onClick={seeYouClicking}
+                  userLoc={profileUserLocation}
+                />
+              )}
+            </div>
           </div>
         </div>
       </div>
-    </div>
+    </>
   );
 }
 

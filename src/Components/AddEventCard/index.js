@@ -171,6 +171,7 @@ export default function NewEventForm({ onClick }) {
   return (
     <div className="behind-form">
       <Navbar></Navbar>
+
       <div className="form-container">
         <div className="outer-div">
           <h1>New Event</h1>
@@ -250,10 +251,10 @@ export default function NewEventForm({ onClick }) {
                   renderInput={(params) => (
                     <TextField sx={{ backgroundColor: "white" }} {...params} />
                   )}
-                  // sx={{
-                  //   width: "auto",
-                  //   height: "auto",
-                  // }}
+                // sx={{
+                //   width: "auto",
+                //   height: "auto",
+                // }}
                 />
               </LocalizationProvider>
 
@@ -271,10 +272,10 @@ export default function NewEventForm({ onClick }) {
                   renderInput={(params) => (
                     <TextField sx={{ backgroundColor: "white" }} {...params} />
                   )}
-                  // sx={{
-                  //   width: "auto",
-                  //   height: "auto",
-                  // }}
+                // sx={{
+                //   width: "auto",
+                //   height: "auto",
+                // }}
                 />
               </LocalizationProvider>
             </div>
