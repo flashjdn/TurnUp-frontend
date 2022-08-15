@@ -187,7 +187,7 @@ function Profile() {
               <p>
                 <strong>Email:</strong> {user.email}
               </p>
-              <a href="/create-event">
+              <a href="/create-event" style={{ textDecoration: 'none' }}>
                 <Button variant="contained">Create Event</Button>
               </a>
             </div>
@@ -198,74 +198,21 @@ function Profile() {
           </div>
           <div className="profile-right-side">
             {organisedButtVariant === "contained" ? (
-              <h2>Events you attend:</h2>
+              <h2>Attending Events:</h2>
             ) : (
-              <h2>Events you organise:</h2>
-
-
-{/* Kal's Dev Code 
-    <div>
-      <Navbar></Navbar>
-      <div className="profile-container">
-        <div className="profile-left-side">
-          <div className="profile-info">
-            {console.log("loaded user: ", user)}
-            <img
-              src={user.img}
-              alt="users profile"
-              className="profile-pic"
-            ></img>
-            <p>
-              <strong>Username:</strong> {user.username}
-            </p>
-            <p>
-              <strong>Email:</strong> {user.email}
-            </p>
-            <a href="/create-event" style={{ textDecoration: 'none' }}>
-              <Button variant="contained">Create Event</Button>
-            </a>
-          </div>
-          <div className="friends-list">
-            {console.log("friends array: ", friends)}
-            <FriendsList friendsArr={friends} />
-          </div>
-        </div>
-        <div className="profile-right-side">
-          {organisedButtVariant === "contained" ? (
-            <h2>Attending Events:</h2>
-          ) : (
-            <h2>Organised Events:</h2>
-          )}
-
-          <div className="crea-atten-buttons">
-            <Button variant={attendedButtVariant} onClick={changeToAttended}>
-              Attending Events
-            </Button>
-            <Button variant={organisedButtVariant} onClick={changeToOrganised}>
-              Organised Events
-            </Button>
-          </div>
-          <div className="unleash-the-events">
-            {profileUserLocation === [] ? null : (
-              <EventList
-                eventsArr={listDisplay}
-                onClick={seeYouClicking}
-                userLoc={profileUserLocation}
-              />
-              
- */}
+              <h2>Organised Events:</h2>
 
             )}
 
             <div className="crea-atten-buttons">
               <Button variant={attendedButtVariant} onClick={changeToAttended}>
-                Events you attend
+                Attending Events
               </Button>
               <Button
                 variant={organisedButtVariant}
                 onClick={changeToOrganised}
               >
-                Events you organise
+                Organised Events
               </Button>
             </div>
             <div className="unleash-the-events">
