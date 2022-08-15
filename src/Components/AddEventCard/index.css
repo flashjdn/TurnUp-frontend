@@ -13,6 +13,7 @@
   justify-content: space-around;
   align-items: baseline;
   margin: 30px auto;
+  background-color: white;
 }
 
 .top-left {
@@ -49,8 +50,9 @@
   /* background-color: rgb(15, 138, 132); */
   border: solid;
   border-radius: 0.5rem;
-  /* background-color: var(--secondary); */
+  background-color: white;
   box-shadow: 0px 6px 75px rgba(50, 48, 48, 0.2);
+  text-align: center;
 }
 
 .event-title-box {
@@ -166,6 +168,7 @@
 
 .outer-div > h1 {
   font-size: 70%;
+  align-self: center;
 }
 
 .behind-form {

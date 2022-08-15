@@ -16,6 +16,8 @@
   margin-top: 25px;
   background-color: var(--primary);
   padding: 5px 5px 5px 5px;
+  align-self: center;
+  max-width: 60%;
 }
 
 .attending-btn:hover {
@@ -79,6 +81,10 @@
 
 .main-right-container {
   width: 65%;
+  display: flex;
+  flex-direction: column;
+
+
 }
 
 .main-bottom {
