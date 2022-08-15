@@ -10,11 +10,9 @@
   box-shadow: 0px 6px 10px rgba(0, 0, 0, 0.25);
 }
 
-.event-name-box>h2 {
-margin-left: 12px;
+.event-name-box > h2 {
+  margin-left: 12px;
 }
-
-.card-one-text
 
 .card-one:hover {
   box-shadow: 0px 6px 10px rgba(0, 0, 0, 0.4);
@@ -39,7 +37,7 @@ margin-left: 12px;
   text-overflow: ellipsis;
   font-size: medium;
   display: flex;
-  justify-content: center;
+  justify-content: flex-start;
   margin-left: 25px;
 }
 
