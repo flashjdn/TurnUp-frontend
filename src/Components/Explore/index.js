@@ -28,11 +28,9 @@ function Explore(signOut, user) {
     getUserFromAuth();
   }, []);
 
-  useEffect(() => {
-    isUserNew(userEmail);
-  }, [userEmail]);
   async function isUserNew(email) {
     if (email !== "") {
+      console.log(email)
       const res = await fetch(
         `https://turnupdb.herokuapp.com/events/userem/${email}`,
         {
@@ -47,6 +45,10 @@ function Explore(signOut, user) {
       }
     }
   }
+
+  useEffect(() => {
+    isUserNew(userEmail);
+  }, [userEmail]);
 
   function submitNewUser() {
     setNewUser(false);
