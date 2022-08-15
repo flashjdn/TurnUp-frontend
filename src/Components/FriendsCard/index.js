@@ -5,7 +5,7 @@ import "./index.css";
 export const FriendsCard = ({ friend }) => {
   const [friendData, setFriendData] = useState({
     img: "",
-    username: "asd",
+    username: "",
   });
   async function getOneFriend(friendId) {
     const res = await fetch(
@@ -26,12 +26,7 @@ export const FriendsCard = ({ friend }) => {
   return (
     <>
       <div className="friend-card-one">
-        {console.log(friendData)}
-        <img
-          src={friendData.img}
-          className="friend-pic"
-          alt="friend-img"
-        ></img>{" "}
+        <img src={friendData.img} className="friend-pic" alt="friend-img"></img>{" "}
         <div className="friend-name-div">
           <p className="friend-name">{friendData.username}</p>
         </div>

@@ -1,7 +1,9 @@
 .event-background {
   position: absolute;
+  background-color: var(--supporting-blue-opaque);
+
   display:flex;
-  background-color: #adcad6;
+
   width: 35%;
   height: 96%;
   opacity: 75%;

@@ -9,12 +9,49 @@ import { withAuthenticator } from "@aws-amplify/ui-react";
 import "@aws-amplify/ui-react/styles.css";
 import awsExports from "../../aws-exports";
 import MainEventCard from "../MainEventCard";
+import { Auth } from "aws-amplify";
+import { NewInfoBox } from "../NewInfoBox/index.js";
 import Mask from "../Mask";
 import "./styles.css";
 Amplify.configure(awsExports);
 Amplify.configure(awsconfig);
 
 function Explore(signOut, user) {
+  const [newUser, setNewUser] = useState(false);
+  const [userEmail, setUserEmail] = useState("");
+  async function getUserFromAuth() {
+    let userInfo = await Auth.currentUserInfo();
+    setUserEmail(userInfo.attributes.email);
+  }
+  useEffect(() => {
+    getUserFromAuth();
+  }, []);
+
+  useEffect(() => {
+    isUserNew(userEmail);
+  }, [userEmail]);
+  async function isUserNew(email) {
+    console.log("this is working");
+    if (email !== "") {
+      const res = await fetch(
+        `https://turnupdb.herokuapp.com/events/userem/${email}`,
+        {
+          mode: "cors",
+        }
+      );
+      console.log("user is new");
+      const data = await res.json();
+      if (data.length === 0) {
+        setNewUser(true);
+        console.log("new user:", true);
+      }
+    }
+  }
+
+  function submitNewUser() {
+    setNewUser(false);
+  }
+
   const [eventsArr, setEventsArr] = useState([
     {
       eventId: 10,
@@ -58,9 +95,6 @@ function Explore(signOut, user) {
     },
   ]);
 
-  /**************************DUMMY DATA ALERT***************************** */
-  // const coordinates = { lat: 53.22738449126366, lng: 20.923854902697684 };
-  /*_______________________________________________________________________*/
   useEffect(() => {
     let searchResults = [];
     for (let i = 0; i < loadedEvents.length; i++) {
@@ -102,13 +136,9 @@ function Explore(signOut, user) {
     const res = await fetch(`https://turnupdb.herokuapp.com/events/all`, {
       mode: "cors",
     });
-    console.log(res);
     const data = await res.json();
-    console.log(data);
-
     setEventsArr(data);
     setLoadedEvents(data);
-    console.log("loaded events: ", loadedEvents);
   };
 
   const [location, setLocation] = useState({
@@ -136,15 +166,9 @@ function Explore(signOut, user) {
   function markerClickHandler(markerEventId) {
     for (let i = 0; i < eventsArr.length; i++) {
       if (eventsArr[i].eventid === markerEventId) {
-        console.log(
-          "this is the object that should go to popUp ",
-          eventsArr[i]
-        );
         setPopUp(eventsArr[i]);
-        // setLocation(userLocation);
       }
     }
-    console.log("yes, clicked");
   }
 
   //function to close the pop up
@@ -165,6 +189,9 @@ function Explore(signOut, user) {
       <Mask loaded={userLocation.lat ? true : false} />
       <div className="explore">
         <Navbar />
+        {newUser ? (
+        <NewInfoBox closingFunction={submitNewUser} newUserEmail={userEmail} />
+      ) : null}
         <MapContainer
           centerObj={location}
           eventsArr={eventsArr}

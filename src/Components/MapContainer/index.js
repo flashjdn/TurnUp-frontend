@@ -47,8 +47,6 @@ function MapContainer(props) {
         zoom={15}
         center={props.centerObj}
       >
-        {console.log(props.centerObj)}
-        {console.log(props.userLocation)}
         <CircleF
           // optional
           onLoad={onLoad}
