@@ -10,7 +10,6 @@ import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import { useEffect, useState } from "react";
 import FriendsAttending from "../FriendsAttending/index";
 import dummyFriends from "../../lib/dummyFriends";
-import { Auth } from "aws-amplify";
 import { Button } from "@mui/material";
 
 function MainEventCard({ eventObj, xClick, userId }) {
@@ -21,6 +20,8 @@ function MainEventCard({ eventObj, xClick, userId }) {
     email: "unknown",
   });
 
+  const [attendingButton, setAttendingButton] = useState("contained");
+  const [peopleAttending, setPeopleAttending] = useState(dummyFriends);
   useEffect(() => {
     getTags(eventObj.eventid);
     getOrganiser(eventObj.organiser);
@@ -50,10 +51,11 @@ function MainEventCard({ eventObj, xClick, userId }) {
     setOrganiser(data[0]);
   };
 
+  function checkIfAttending() {}
+
   const handleChange = (panel) => (event, isExpanded) => {
     setExpanded(isExpanded ? panel : false);
   };
-  const [peopleAttending, setPeopleAttending] = useState(dummyFriends);
 
   const getPeopleAttending = async (eventId) => {
     const res = await fetch(
@@ -68,7 +70,7 @@ function MainEventCard({ eventObj, xClick, userId }) {
 
   async function handleAttendance(eventId, userId) {
     if (userId !== undefined && eventId !== undefined) {
-      const attendeeObj = { eventid: eventId, userid: userId };
+      const attendeeObj = { eventid: eventId.eventid, userid: userId.userid };
 
       await fetch(`https://turnupdb.herokuapp.com/events/newatt`, {
         method: "POST",
@@ -79,6 +81,7 @@ function MainEventCard({ eventObj, xClick, userId }) {
       });
     }
   }
+
   return (
     <div className="main-event-card">
       <CloseIcon
@@ -136,8 +139,8 @@ function MainEventCard({ eventObj, xClick, userId }) {
             })}
           </div>
           <Button
-            variant="contained"
-            onClick={handleAttendance}
+            variant={attendingButton}
+            onClick={() => handleAttendance(eventObj, userId)}
             className="attending-btn"
           >
             I'll be there!
