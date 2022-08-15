@@ -22,5 +22,6 @@ function FriendsAttending({ attendingGuests }) {
     </div>
   );
 }
+// comment
 
 export default FriendsAttending;
