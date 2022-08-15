@@ -17,27 +17,32 @@ Amplify.configure(awsconfig);
 
 function Explore(signOut, user) {
   const [newUser, setNewUser] = useState(false);
-  const [userEmail, setUserEmail] = useState("nothing to see");
+  const [userEmail, setUserEmail] = useState("");
   async function getUserFromAuth() {
     let userInfo = await Auth.currentUserInfo();
     setUserEmail(userInfo.attributes.email);
   }
   useEffect(() => {
-    console.log(userEmail);
     getUserFromAuth();
-    isUserNew(userEmail);
   }, []);
+
+  useEffect(() => {
+    isUserNew(userEmail);
+  }, [userEmail]);
   async function isUserNew(email) {
-    if (userEmail !== "nothing to see") {
+    console.log("this is working");
+    if (email !== "") {
       const res = await fetch(
         `https://turnupdb.herokuapp.com/events/userem/${email}`,
         {
           mode: "cors",
         }
       );
+      console.log("user is new");
       const data = await res.json();
       if (data.length === 0) {
         setNewUser(true);
+        console.log("new user:", true);
       }
     }
   }
@@ -179,6 +184,7 @@ function Explore(signOut, user) {
       {newUser ? (
         <NewInfoBox closingFunction={submitNewUser} newUserEmail={userEmail} />
       ) : null}
+      {console.log("email ", userEmail)}
       <MapContainer
         centerObj={location}
         eventsArr={eventsArr}
