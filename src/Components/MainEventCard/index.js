@@ -26,6 +26,8 @@ function MainEventCard({ eventObj, xClick, userId }) {
     getTags(eventObj.eventid);
     getOrganiser(eventObj.organiser);
     getPeopleAttending(eventObj.eventid);
+    setAttendingButton("contained");
+    checkIfAttending(userId, peopleAttending);
   }, [, eventObj.eventid]);
 
   const getTags = async (eventId) => {
@@ -51,7 +53,16 @@ function MainEventCard({ eventObj, xClick, userId }) {
     setOrganiser(data[0]);
   };
 
-  function checkIfAttending() {}
+  function checkIfAttending(userId, attendees) {
+    console.log("userid ", userId);
+    console.log("attendees ", attendees);
+    for (let i = 0; i < attendees.length; i++) {
+      if (attendees[i].userid === userId.userid) {
+        setAttendingButton("disabled");
+        return;
+      }
+    }
+  }
 
   const handleChange = (panel) => (event, isExpanded) => {
     setExpanded(isExpanded ? panel : false);
@@ -79,6 +90,8 @@ function MainEventCard({ eventObj, xClick, userId }) {
         },
         body: JSON.stringify(attendeeObj),
       });
+      setAttendingButton("disabled");
+      getPeopleAttending(eventId.eventid);
     }
   }
 

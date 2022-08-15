@@ -10,13 +10,7 @@ import "../Mask/styles.css";
 import { Auth } from "aws-amplify";
 import { attendedEventsArr, organisedEventsArr } from "../Constants/constants";
 
-//COMMENT FOR TESTING PURPOSES
-
-//HAS TO BE FETCHED FROM THE BACKEND WITH THE HELP OF AUTHENTICATOR, FOR NOW HARDCODED:
-
 function Profile() {
-  //state that holds info about the user
-
   const cors = {
     mode: "cors",
   };
@@ -33,8 +27,6 @@ function Profile() {
       setUser(data[0]);
     }
   };
-
-  const [userEmail, setUserEmail] = useState("");
   async function getUserFromAuth() {
     let userInfo = await Auth.currentUserInfo();
     console.log("user info: ", userInfo);
@@ -52,11 +44,7 @@ function Profile() {
     { lat: 1, lng: 1 },
   ]);
 
-  // const [attendedButtVariant, setAttendedButtVariant] = useState("disabled");
-  const [organisedButtVariant, setOrganisedButtVariant] = useState("contained");
-
   const [listDisplay, setListDisplay] = useState([]);
-  //function that fetches all the user information provided it has the userId, if we want to retrieve the info by email or username, we need to change it in the back end too.
 
   const [friends, setFriends] = useState([{ friend: 1 }]);
 
@@ -83,6 +71,7 @@ function Profile() {
 
     setOrganisedEvents(organisedResData);
     setAttendedEvents(attendedResData);
+    setListDisplay(attendedResData);
     setFriends(friendResData);
   }
   const [toggleVariant, setToggleVariant] = useState(false);
@@ -105,7 +94,7 @@ function Profile() {
   useEffect(() => {
     toggleEvents(false);
     getUserFromAuth();
-    getUser(userEmail);
+    getUser("");
   }, []);
 
   window.addEventListener("load", () => {
