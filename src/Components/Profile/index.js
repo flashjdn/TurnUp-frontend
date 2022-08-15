@@ -7,6 +7,7 @@ import { Button } from "@mui/material";
 import { withAuthenticator } from "@aws-amplify/ui-react";
 import dummyFriends from "../../lib/dummyFriends";
 import Mask from "../Mask";
+import "../Mask/styles.css";
 
 //COMMENT FOR TESTING PURPOSES
 
@@ -157,7 +158,7 @@ function Profile() {
 
   return (
     <>
-      <Mask loaded={user.img ? true : false} />
+      {/* <Mask loaded={(user.userid === 4) ?  true : false} /> */}
       <div>
         <Navbar></Navbar>
         <div className="profile-container">
