@@ -7,7 +7,8 @@ import Profile from "../Profile";
 import NewEventForm from "../AddEventCard";
 // import { eventObject } from "../../lib/dummy.js";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-//aaa
+import Places from "../Places/places";
+
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
           <Route path="/explore" element={<Explore />} />
           <Route path="/profile" element={<Profile />} />
           <Route path="/create-event" element={<NewEventForm></NewEventForm>} />
+          <Route path="/places" element={<Places></Places>} />
         </Routes>
       </BrowserRouter>
       {/* <Card path="/card"
@@ -28,8 +30,6 @@ function App() {
 
 
       /> */}
-
-      {/* </header> */}
     </div>
   );
 }

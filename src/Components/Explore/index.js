@@ -4,78 +4,121 @@ import { useEffect, useState } from "react";
 import EventOverlay from "../EventOverlay/index.js";
 import { Amplify } from "aws-amplify";
 import awsconfig from "../../aws-exports";
-import { dummyEvents } from "../../lib/dummyEvents";
+// import { dummyEvents } from "../../lib/dummyEvents";
 import { withAuthenticator } from "@aws-amplify/ui-react";
 import "@aws-amplify/ui-react/styles.css";
 import awsExports from "../../aws-exports";
 import MainEventCard from "../MainEventCard";
+import { Auth } from "aws-amplify";
+import { NewInfoBox } from "../NewInfoBox/index.js";
+import Mask from "../Mask";
+import "./styles.css";
 Amplify.configure(awsExports);
 Amplify.configure(awsconfig);
 
 function Explore(signOut, user) {
+  const [newUser, setNewUser] = useState(false);
+  const [userEmail, setUserEmail] = useState("");
+  async function getUserFromAuth() {
+    let userInfo = await Auth.currentUserInfo();
+    setUserEmail(userInfo.attributes.email);
+  }
+  useEffect(() => {
+    getUserFromAuth();
+  }, []);
 
-  const [eventsArr, setEventsArr] = useState(dummyEvents);
+  useEffect(() => {
+    isUserNew(userEmail);
+  }, [userEmail]);
+  async function isUserNew(email) {
+    console.log("this is working");
+    if (email !== "") {
+      const res = await fetch(
+        `https://turnupdb.herokuapp.com/events/userem/${email}`,
+        {
+          mode: "cors",
+        }
+      );
+      console.log("user is new");
+      const data = await res.json();
+      if (data.length === 0) {
+        setNewUser(true);
+        console.log("new user:", true);
+      }
+    }
+  }
+
+  function submitNewUser() {
+    setNewUser(false);
+  }
+
+  const [eventsArr, setEventsArr] = useState([
+    {
+      eventId: 10,
+      eventName: "Bank Robbery",
+      eventDescription: "Looking for a crew, hit me up.",
+      mainDescription:
+        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat",
+      eventImg:
+        "https://www.deweybrinkleylaw.com/wp-content/uploads/2016/04/bigstock-Hooded-Robber-With-A-Gun-And-A-78546158-768x513.jpg",
+      eventTags: ["robbery", "accessible", "meeting", "recurring"],
+      date: "2022-08-09",
+      time: "20:00",
+      rating: 1,
+      organiser: "BePhucDat214",
+      email: "bpd@gmail.com",
+      address: "La Caixa Bank",
+      lat: 28.41635985131634,
+      lng: -16.547548522601453,
+    },
+  ]);
   const [userInput, setUserInput] = useState("");
-  const [isLoading, setIsLoading] = useState(false);
 
-  /**************************DUMMY DATA ALERT***************************** */
-  // const coordinates = { lat: 53.22738449126366, lng: 20.923854902697684 };
-  /*_______________________________________________________________________*/
+  //this is the state that holds ALL the events loaded from the database. eventsArr is the one that is getting modified by search
+  const [loadedEvents, setLoadedEvents] = useState([
+    {
+      eventid: 10,
+      eventname: "Bank Robbery",
+      eventdescription: "Looking for a crew, hit me up.",
+      maindescription:
+        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat",
+      img: "https://www.deweybrinkleylaw.com/wp-content/uploads/2016/04/bigstock-Hooded-Robber-With-A-Gun-And-A-78546158-768x513.jpg",
+      eventtags: ["robbery", "accessible", "meeting", "recurring"],
+      date: "2022-08-09",
+      time: "20:00",
+      rating: 1,
+      organiser: "BePhucDat214",
+      email: "bpd@gmail.com",
+      address: "La Caixa Bank",
+      lat: 28.41635985131634,
+      lng: -16.547548522601453,
+    },
+  ]);
+
   useEffect(() => {
     let searchResults = [];
-    for (let i = 0; i < dummyEvents.length; i++) {
-      if (dummyEvents[i].eventName.toLowerCase().includes(userInput) === true) {
-        searchResults.push(dummyEvents[i])
-      } else if (dummyEvents[i].mainDescription.toLowerCase().includes(userInput) === true) {
-        searchResults.push(dummyEvents[i])
-      } else if (dummyEvents[i].eventDescription.toLowerCase().includes(userInput) === true) {
-        searchResults.push(dummyEvents[i])
+    for (let i = 0; i < loadedEvents.length; i++) {
+      if (
+        loadedEvents[i].eventname.toLowerCase().includes(userInput) === true
+      ) {
+        searchResults.push(loadedEvents[i]);
+      } else if (
+        loadedEvents[i].maindescription.toLowerCase().includes(userInput) ===
+        true
+      ) {
+        searchResults.push(loadedEvents[i]);
+      } else if (
+        loadedEvents[i].eventdescription.toLowerCase().includes(userInput) ===
+        true
+      ) {
+        searchResults.push(loadedEvents[i]);
       }
     }
     setEventsArr(searchResults);
   }, [userInput]);
 
-
-
-
-  const [location, setLocation] = useState({
-    lat: 47.60011001977801,
-    lng: 3.533434778585759,
-  });
-
-  const [userLocation, setUserLocation] = useState({
-    lat: 47.60011001977801,
-    lng: 3.533434778585759,
-  });
-  //This state takes in the object of the event clicked in EventOverlay
-  const [popUp, setPopUp] = useState(undefined);
-
-  //This function is passed down the tree to change the index of the even pop up
-  function eventClickHandler(position, eventId) {
-    for (let i = 0; i < eventsArr.length; i++) {
-      if (eventsArr[i].eventId === eventId) {
-        setPopUp(eventsArr[i]);
-        setLocation(position);
-      }
-    }
-  }
-
-  function markerClickHandler(markerEventId) {
-    for (let i = 0; i < eventsArr.length; i++) {
-      if (eventsArr[i].eventId === markerEventId) {
-        setPopUp(eventsArr[i]);
-        setLocation(userLocation);
-      }
-    }
-  }
-
-  //function to close the pop up
-  function xClickReset() {
-    setPopUp(undefined);
-    setLocation(userLocation);
-  }
-
-  window.addEventListener("load", () => {
+  function loadPosition() {
+    console.log("start of function for location");
     navigator.geolocation.getCurrentPosition(positionFound, positionNotFound);
     async function positionFound(position) {
       const lng = position.coords.longitude;
@@ -87,27 +130,87 @@ function Explore(signOut, user) {
     function positionNotFound(err) {
       console.log(err);
     }
+  }
+
+  const getEvents = async () => {
+    const res = await fetch(`https://turnupdb.herokuapp.com/events/all`, {
+      mode: "cors",
+    });
+    const data = await res.json();
+    setEventsArr(data);
+    setLoadedEvents(data);
+  };
+
+  const [location, setLocation] = useState({
+    lat: 51.496681,
+    lng: -0.050417,
   });
 
+  const [userLocation, setUserLocation] = useState({
+    lat: null,
+    lng: null,
+  });
+  //This state takes in the object of the event clicked in EventOverlay
+  const [popUp, setPopUp] = useState(undefined);
+
+  //This function is passed down the tree to change the index of the even pop up
+  function eventClickHandler(position, eventId) {
+    for (let i = 0; i < eventsArr.length; i++) {
+      if (eventsArr[i].eventid === eventId) {
+        setPopUp(eventsArr[i]);
+        setLocation(position);
+      }
+    }
+  }
+
+  function markerClickHandler(markerEventId) {
+    for (let i = 0; i < eventsArr.length; i++) {
+      if (eventsArr[i].eventid === markerEventId) {
+        setPopUp(eventsArr[i]);
+      }
+    }
+  }
+
+  //function to close the pop up
+  function xClickReset() {
+    setPopUp(undefined);
+    setLocation(userLocation);
+  }
+
+  useEffect(() => {
+    getEvents();
+    loadPosition();
+  }, []);
+
+  // {userLocation.lat ? true : false}
+
   return (
-    <div>
-      <Navbar />
-      <MapContainer
-        centerObj={location}
-        eventsArr={eventsArr}
-        userLocation={userLocation}
-        markerOnClick={markerClickHandler}
-      ></MapContainer>
-      <EventOverlay
-        onClick={eventClickHandler}
-        xClick={xClickReset}
-        eventsArr={eventsArr}
-        setUserInput={setUserInput}
-      />
-      {popUp ? (
-        <MainEventCard eventObj={popUp} xClick={xClickReset}></MainEventCard>
+    <>
+      <Mask loaded={userLocation.lat ? true : false} />
+      <div className="explore">
+        <Navbar />
+        {newUser ? (
+        <NewInfoBox closingFunction={submitNewUser} newUserEmail={userEmail} />
       ) : null}
-    </div>
+        <MapContainer
+          centerObj={location}
+          eventsArr={eventsArr}
+          userLocation={userLocation}
+          markerOnClick={markerClickHandler}
+        ></MapContainer>
+        <EventOverlay
+          onClick={eventClickHandler}
+          xClick={xClickReset}
+          eventsArr={eventsArr}
+          setUserInput={setUserInput}
+          userLoc={userLocation}
+        />
+        {console.log("This is a popUp: ", popUp)}
+        {popUp ? (
+          <MainEventCard eventObj={popUp} xClick={xClickReset}></MainEventCard>
+        ) : null}
+      </div>
+    </>
   );
 }
 
@@ -116,3 +219,4 @@ export default withAuthenticator(Explore);
 // test
 // pushing to main
 //oh no
+// oh dear

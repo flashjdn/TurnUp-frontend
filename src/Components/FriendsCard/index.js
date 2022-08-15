@@ -1,17 +1,34 @@
 import { Button } from "@mui/material";
+import { useEffect, useState } from "react";
 import "./index.css";
 
 export const FriendsCard = ({ friend }) => {
+  const [friendData, setFriendData] = useState({
+    img: "",
+    username: "",
+  });
+  async function getOneFriend(friendId) {
+    const res = await fetch(
+      `https://turnupdb.herokuapp.com/events/user/${friendId}`,
+      {
+        mode: "cors",
+      }
+    );
+    const data = await res.json();
+    // further in this function we need to have an if statement that checks if the user has any friends to begin with and if not, use setFriendsList to define it as undefined and offer him an add friend button that can be rendered on a card
+    // if the user has friends it just renders his list of friends
+    setFriendData(data[0]);
+  }
+  useEffect(() => {
+    getOneFriend(friend.friend);
+  }, []);
+
   return (
     <>
       <div className="friend-card-one">
-        <img
-          src={friend.profilePic}
-          className="friend-pic"
-          alt="friend-img"
-        ></img>{" "}
+        <img src={friendData.img} className="friend-pic" alt="friend-img"></img>{" "}
         <div className="friend-name-div">
-          <p className="friend-name">{friend.friendName}</p>
+          <p className="friend-name">{friendData.username}</p>
         </div>
         <Button
           variant="outlined"

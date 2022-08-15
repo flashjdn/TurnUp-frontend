@@ -1,6 +1,8 @@
 import React from "react";
 import { GoogleMap, LoadScript } from "@react-google-maps/api";
 import { CircleF, MarkerF } from "@react-google-maps/api";
+import marker from "../../Assets/marker.png";
+import userLoc from "../../Assets/userLoc.png";
 //import { useState } from "react";
 
 /*passed to props:
@@ -10,9 +12,9 @@ import { CircleF, MarkerF } from "@react-google-maps/api";
 
 function MapContainer(props) {
   const mapStyles = {
-    height: "94vh",
+    height: "96%",
     width: "100%",
-    position: "absolute",
+    position: "relative",
   };
   //const [mapState, setMapState] = useState(null);
 
@@ -26,7 +28,7 @@ function MapContainer(props) {
     draggable: false,
     editable: false,
     visible: true,
-    radius: 4000,
+    radius: 2000,
     zIndex: 1,
   };
 
@@ -42,18 +44,16 @@ function MapContainer(props) {
     <LoadScript googleMapsApiKey="AIzaSyDJresVS0RQllmIQivLkPz5xNeP19P4pOQ">
       <GoogleMap
         mapContainerStyle={mapStyles}
-        zoom={14}
+        zoom={15}
         center={props.centerObj}
       >
-        {console.log(props.centerObj)}
-        {console.log(props.userLocation)}
         <CircleF
           // optional
           onLoad={onLoad}
           // optional
           onUnmount={onUnmount}
           // required
-          center={props.centerObj}
+          center={props.userLocation}
           // required
           options={options}
         />
@@ -61,17 +61,32 @@ function MapContainer(props) {
         <MarkerF
           //onLoad={onLoad}
           position={props.userLocation}
-          icon="https://i.postimg.cc/DfXqkmRL/human-location-svgrepo-com.png"
+
+          icon={userLoc}
+          onClick={() => {
+            props.markerOnClick(console.log("you clicked the user marker!"));
+          }}
+
+          // icon="https://i.postimg.cc/DfXqkmRL/human-location-svgrepo-com.png"
+          //icon="https://i.postimg.cc/vHS5C8xs/user-location-50x50.png"
+
         />
         {props.eventsArr.map(function (item, index) {
           return (
             <MarkerF
               key={index}
-              position={{ lat: item.lat, lng: item.lng }}
+              clickable
+              animation="bounce"
+              position={{ lat: Number(item.lat), lng: Number(item.lng) }}
               //onLoad={onLoad}
-              icon="https://i.postimg.cc/3x9Q98BD/placeholder-svgrepo-com.png"
+
+              icon={marker}
+
+              // icon="https://i.postimg.cc/3x9Q98BD/placeholder-svgrepo-com.png"
+              //icon="https://i.postimg.cc/FHys3D4B/turnuparrow50px.png"
+
               onClick={() => {
-                props.markerOnClick(item.eventId);
+                props.markerOnClick(item.eventid);
               }}
             />
           );

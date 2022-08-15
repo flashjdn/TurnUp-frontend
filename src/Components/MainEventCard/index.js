@@ -7,19 +7,64 @@ import AccordionDetails from "@mui/material/AccordionDetails";
 import AccordionSummary from "@mui/material/AccordionSummary";
 import Typography from "@mui/material/Typography";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import FriendsAttending from "../FriendsAttending/index";
 import dummyFriends from "../../lib/dummyFriends";
 
 function MainEventCard({ eventObj, xClick }) {
   console.log(eventObj);
   const [expanded, setExpanded] = useState(false);
+  const [tags, setTags] = useState(["kids", "dogs", "accessible"]);
+  const [organiser, setOrganiser] = useState({
+    username: "unknown",
+    email: "unknown",
+  });
+
+  useEffect(() => {
+    getTags(eventObj.eventid);
+    getOrganiser(eventObj.organiser);
+    getPeopleAttending(eventObj.eventid);
+  }, [, eventObj.eventid]);
+
+  const getTags = async (eventId) => {
+    const res = await fetch(
+      `https://turnupdb.herokuapp.com/events/tags/${eventId}`,
+      {
+        mode: "cors",
+      }
+    );
+    console.log(res);
+    const data = await res.json();
+    console.log("here are the tags: ", data);
+    setTags(data);
+  };
+
+  const getOrganiser = async (organiserId) => {
+    const res = await fetch(
+      `https://turnupdb.herokuapp.com/events/organiser/${organiserId}`,
+      {
+        mode: "cors",
+      }
+    );
+    const data = await res.json();
+    setOrganiser(data[0]);
+  };
 
   const handleChange = (panel) => (event, isExpanded) => {
     setExpanded(isExpanded ? panel : false);
   };
-  const [friendsAttending, setFriendsAttending] = useState(dummyFriends);
+  const [peopleAttending, setPeopleAttending] = useState(dummyFriends);
 
+  const getPeopleAttending = async (eventId) => {
+    const res = await fetch(
+      `https://turnupdb.herokuapp.com/events/attendees/${eventId}`,
+      {
+        mode: "cors",
+      }
+    );
+    const data = await res.json();
+    setPeopleAttending(data);
+  };
   return (
     <div className="main-event-card">
       <CloseIcon
@@ -28,20 +73,20 @@ function MainEventCard({ eventObj, xClick }) {
       ></CloseIcon>
       <header className="main-card-header">
         <img
-          src={eventObj.eventImg}
+          src={eventObj.img}
           alt="the event"
           className="main-card-image"
         ></img>
 
-        <h2>{eventObj.eventName}</h2>
+        <h2>{eventObj.eventname}</h2>
       </header>
 
       <div className="main-bottom">
         <div className="main-info-bar">
-          <p className="rating-style">{eventObj.eventDistance}</p>
-          <p className="rating-style">{eventObj.eventTime}</p>
-          <p className="rating-style">{eventObj.organiser}</p>
-          <p className="rating-style">{eventObj.email}</p>
+          <p className="rating-style">{eventObj.date.substring(0, 10)}</p>
+          <p className="rating-style">{eventObj.time.substring(0, 5)}</p>
+          <p className="rating-style">{organiser.username}</p>
+          <p className="rating-style">{organiser.email}</p>
           <p className="rating-style">{eventObj.address}</p>
           <div className="rating-style">
             <p>{eventObj.rating}</p>
@@ -63,22 +108,23 @@ function MainEventCard({ eventObj, xClick }) {
               </Typography>
             </AccordionSummary>
             <AccordionDetails>
-              <Typography>{eventObj.mainDescription}</Typography>
+              <Typography>{eventObj.maindescription}</Typography>
             </AccordionDetails>
           </Accordion>
 
           <div className="main-tag-container">
-            {eventObj.eventTags.map((item, index) => {
+            {tags.map((item, index) => {
               return (
                 <div className="main-tag-box" key={index}>
-                  <p>{item}</p>
+                  <p>{item.tagname}</p>
                 </div>
               );
             })}
           </div>
+          <button className="attending-btn">I'll be there!</button>
           <div className="main-friends-container">
             <FriendsAttending
-              attendingFriends={friendsAttending}
+              attendingGuests={peopleAttending}
             ></FriendsAttending>
           </div>
         </div>

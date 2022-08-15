@@ -12,8 +12,22 @@
   box-shadow: 0px 6px 10px rgba(0, 0, 0, 0.25);
 }
 
+.attending-btn {
+  margin-top: 25px;
+  background-color: var(--primary);
+  padding: 5px 5px 5px 5px;
+  align-self: center;
+  max-width: 60%;
+}
+
+.attending-btn:hover {
+  background-color: #dd9c33;
+  transform: translate3d(5px);
+}
+
 .main-tag-container {
   display: flex;
+  height: 2.5rem;
   margin-top: 1rem;
   border: solid;
   border-width: 0.1rem;
@@ -24,8 +38,9 @@
 
 .main-tag-box {
   width: 100%;
-  height: 1rem;
+  height: 2rem;
   display: flex;
+  align-items: center;
   justify-content: space-between;
   align-items: center;
   font-size: x-small;
@@ -51,7 +66,7 @@
   border: none;
   border-radius: 0.5rem;
   border-width: 0.1rem;
-  width: 25%;
+  width: 30%;
   background-color: var(--primary);
   box-shadow: 0px 6px 10px rgba(0, 0, 0, 0.25);
   height: auto;
@@ -66,6 +81,8 @@
 
 .main-right-container {
   width: 65%;
+  display: flex;
+  flex-direction: column;
 }
 
 .main-bottom {

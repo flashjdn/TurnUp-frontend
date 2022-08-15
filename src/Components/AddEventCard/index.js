@@ -1,229 +1,345 @@
 import "./index.css";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+
 import Navbar from "../Navbar";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
-import { Box, FormControlLabel, Checkbox, FormControl, FormLabel, FormGroup } from "@mui/material";
-import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
-import { LocalizationProvider, StaticDatePicker } from '@mui/x-date-pickers';
-import { StaticTimePicker } from '@mui/x-date-pickers/StaticTimePicker';
+import {
+  Box,
+  FormControlLabel,
+  Checkbox,
+  FormControl,
+  FormLabel,
+  FormGroup,
+} from "@mui/material";
+import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
+import { LocalizationProvider, DatePicker } from "@mui/x-date-pickers";
+import { TimePicker } from "@mui/x-date-pickers/TimePicker";
+import { useNavigate } from "react-router-dom";
+import CreateEventTitle from "../CreateEventTitle/index.js";
+
+import { CodeRounded, DocumentScanner } from "@mui/icons-material";
+
+import Places from "../Places/places";
+import ImageUpload from "../ImageUpload";
 
 export default function NewEventForm({ onClick }) {
   //Form submission function that reads each input type and adds it to the object to be sent to the server if needed.
 
-  const [value, setValue] = useState("");
-
   const [tags, setTags] = useState([""]);
-  console.log(tags);
+  const [name, setName] = useState("");
+  const [description, setDescription] = useState("");
+  const [summary, setSummary] = useState("");
+  const [date, setDate] = useState("");
+  const [time, setTime] = useState("");
+  const [coord, setCoord] = useState({ lat: 0, lng: 0 });
+  const [url, setUrl] = useState("");
+
+  // console.log("these are the coords", coord);
+
+  const navigate = useNavigate();
+  // console.log(tags);
+
   const handleTagChange = (e) => {
-    const index = tags.indexOf(e.target.value)
+    const index = tags.indexOf(e.target.value);
     if (index === -1) {
-      setTags([...tags, e.target.value])
+      setTags([...tags, e.target.value]);
     } else {
-      setTags(tags.filter((tag) => tag !== e.target.value))
+      setTags(tags.filter((tag) => tag !== e.target.value));
     }
+  };
+
+  function handleName(event) {
+    // This function tracks the string information typed into the input field.
+    const value = event.target.value;
+    setName(value);
   }
 
-  // function handleDropdownChange(e) {
-  //     setEventValue(e.target.value)
+  function handleDescription(event) {
+    // This function tracks the string information typed into the input field.
+    const value = event.target.value;
+    setDescription(value);
+  }
+
+  function handleSummary(event) {
+    // This function tracks the string information typed into the input field.
+    const value = event.target.value;
+    setSummary(value);
+  }
+
+  function handleDate(event) {
+    // This function tracks the string information typed into the input field.
+    const value = event.target.value;
+    const newVal = Date().toLocaleString(value);
+    setDate(newVal);
+  }
+
+  function handleUrl(event) {
+    // This function tracks the string information typed into the input field.
+    const value = event.target.value;
+    setUrl(value);
+  }
+
+  let user = {
+    userId: 2,
+    username: "Jordan",
+    email: "jordan@jordan.com",
+    img: "https://sm.askmen.com/t/askmen_in/article/f/facebook-p/facebook-profile-picture-affects-chances-of-gettin_fr3n.1200.jpg",
+  };
+
+  async function handleSubmission(e) {
+    e.preventDefault();
+
+    // ADAPT ALL OF THE BELOW TO MATCH OUR DATA
+
+    // console.log(eventObj);
+
+    //    /Grabs the 6 current tags to idenitfy checked status. happy to help checkbox is also included but
+    //is ignored as is handled later.
+    // let tagArr = document.getElementsByClassName("tag-checkbox");
+    // for (let i = 0; i < tagArr.length - 1; i++) {
+    //   if (tagArr[i].checked) {
+    //     noteObj.tags = [...noteObj.tags, tagArr[i].name];
+    //     newResourceObj.tags = [...newResourceObj.tags, tagArr[i].name];
+    //   }
+    // }
+
+    const [day, month, year] = date.toLocaleDateString().split("/");
+
+    const adjustedDate = [year, month, day].join("-");
+    const adjustedTime = time.toLocaleTimeString();
+    //  All elements have been searched, ready to post the data to the server and database.
+
+    let eventObj = {
+      eventName: name,
+      eventDescription: summary,
+      mainDescription: description,
+      date: adjustedDate, //date.toLocaleDateString(),
+      time: adjustedTime, //time.toLocaleTimeString(),
+      organiser: user.userId,
+      lat: coord.lat,
+      lng: coord.lng,
+      address: coord.address,
+      img: url,
+      email: user.email,
+    };
+
+    const response = await fetch(`https://turnupdb.herokuapp.com/events/all`, {
+      //
+      method: "POST", // *GET, POST, PUT, DELETE, etc.
+      mode: "cors",
+      headers: {
+        "Access-Control-Allow-Origin": "*",
+        "Content-Type": "application/json",
+        // 'Content-Type': 'application/x-www-form-urlencoded',
+      },
+      redirect: "follow", // manual, *follow, error
+      referrerPolicy: "no-referrer", // no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
+      body: JSON.stringify(eventObj), // body data type must match "Content-Type" header
+    }).then(navigate("/profile"));
+    console.log("Submission complete");
+
+    return response.json();
+  }
+
+  // function hideForm() {
+  //   document.querySelector(".event-form-container").classList.add("hidden");
   // }
-  // async function handleSubmission(e) {
-  //     e.preventDefault()
-  //     // ADAPT ALL OF THE BELOW TO MATCH OUR DATA 
-  //     document.querySelector(".notes-form-container").classList.add("hidden");
-  //     let noteObj = {
-  //       tags: [],
-  //       week: document.getElementById("week-input").value,
-  //       day: document.getElementById("day-input").value,
-  //       note: document.getElementById("noteArea").value,
-  //     };
-  //     let newResourceObj = {
-  //       topicID: eventValue,
-  //       tags: [],
-  //       link: document.getElementById("resources-input").value,
-  //       rating: 3,
-  //     };
-  // //    /Grabs the 6 current tags to idenitfy checked status. happy to help checkbox is also included but
-  //     //is ignored as is handled later.
-  //     let tagArr = document.getElementsByClassName("tag-checkbox");
-  //     for (let i = 0; i < tagArr.length - 1; i++) {
-  //       if (tagArr[i].checked) {
-  //         noteObj.tags = [...noteObj.tags, tagArr[i].name];
-  //         newResourceObj.tags = [...newResourceObj.tags, tagArr[i].name];
-  //       }
-  //     }
-  //All elements have been searched, ready to post the data to the server and database.
-  // await fetch(`http://localhost:3001/notes?email=${user.email}`, {
-  //   method: "POST",
-  //   headers: {
-  //     "Content-Type": "application/json",
-  //   },
-  //   body: JSON.stringify(noteObj),
-  // });
-  // if (document.getElementById("resources-input").value !== "") {
-  //   await fetch(`http://localhost:3001/resource`, {
-  //     method: "POST",
-  //     headers: {
-  //       "Content-Type": "application/json",
-  //     },
-  //     body: JSON.stringify(newResourceObj),
-  //   });
-  // }
-  // if (document.getElementById("happy-to-help-input").checked) {
-  //   await fetch(`http://localhost:3001/help?email=${user.email}`, {
-  //     method: "POST",
-  //     headers: {
-  //       "Content-Type": "application/json",
-  //     },
-  //     body: JSON.stringify(newResourceObj),
-  //   });
-  // }
-  //Resets form and then reloads page
-  //   document.querySelector("#notes-input-field").reset();
-  //   window.location.reload();
-  // }
-  function hideForm() {
-    document.querySelector(".event-form-container").classList.add("hidden");
+
+  function test() {
+    const [day, month, year] = date.toLocaleDateString().split("/");
+
+    const adjustedDate = [year, month, day].join("-");
+    const adjustedTime = time.toLocaleTimeString();
+
+    let eventObj = {
+      eventName: name,
+      eventDescription: summary,
+      mainDescription: description,
+      date: adjustedDate,
+      time: adjustedTime,
+      organiser: user.username,
+      lat: coord.lat,
+      lng: coord.lng,
+      address: coord.address,
+      img: url,
+      email: user.email,
+    };
+    console.log(eventObj);
   }
 
   return (
-    <div>
+    <div className="behind-form">
       <Navbar></Navbar>
-      <section className="event-form-container">
-        <form
-          id="event-input-field"
-          onSubmit={(e) => {
-            // handleSubmission(e);
-          }}
-        >
-          <div className="create-event-card-container">
-            <div className="title-sum-desc-container">
-              <TextField className="event-title-box"
-                sx={{ width: "40rem", height: "5rem", background: "var(--supporting-blue)", }}
-                label="Event title:"
-                multiline
-                rows={2}
-                cols={100}
-                defaultValue=""
-                id="titleArea"
-                required
-                inputProps={{ maxLength: "40" }}
-              />
 
-              <TextField className="event-summary-box"
-                sx={{ width: "40rem", height: "9.2rem", background: "var(--supporting-blue)", }}
-                label="Event Summary:"
-                multiline
-                rows={5}
-                cols={100}
-                defaultValue=""
-                id="summaryArea"
-                required
-                inputProps={{ maxLength: "80" }}
-              />
+      <div className="form-container">
+        <div className="outer-div">
+          <h1>New Event</h1>
 
-              <TextField className="event-description-box"
-                sx={{ width: "40rem", height: "15rem", background: "var(--supporting-blue)", }}
-                label="Event Description:"
-                multiline
-                rows={9}
-                cols={100}
-                defaultValue=""
-                id="decriptionArea"
-                required
-              />
+          {/* <CreateEventTitle /> */}
+        </div>
+        <Places setCoordFunction={setCoord} />
+        <div className="add-event-card-body">
+          <div className="top-left">
+            <TextField
+              onChange={handleName}
+              className="event-title-box"
+              fullWidth
+              sx={{
+                width: "90%",
+                // background: "var(--supporting-blue)",
+                // margin: "auto",
+                // display: "inline-flex",
+              }}
+              label="Event title"
+              multiline
+              rows={2}
+              defaultValue=""
+              id="titleArea"
+              required
+              inputProps={{ maxLength: "40" }}
+            />
 
-              <Box>
-                <Box className="tag-area-box">
-                  <FormControl>
-                    <FormLabel>Event Tags</FormLabel>
-                    <FormGroup row>
-                      <FormControlLabel
-                        label="Pet-Friendly"
-                        control={<Checkbox value="pet-friendly" />}
-                        onChange={handleTagChange}
-                      />
-                      <FormControlLabel
-                        label="18+"
-                        control={<Checkbox value="18+" />}
-                        onChange={handleTagChange}
-                      />
-                      <FormControlLabel
-                        label="Outdoors"
-                        control={<Checkbox value="outdoors" />}
-                        onChange={handleTagChange}
-                      />
-                      <FormControlLabel
-                        label="Parking"
-                        control={<Checkbox value="parking" />}
-                        onChange={handleTagChange}
-                      />
-                      <FormControlLabel
-                        label="Family-Friendly"
-                        control={<Checkbox value="family-friendly" />}
-                        onChange={handleTagChange}
-                      />
-                    </FormGroup>
-                  </FormControl>
-                </Box>
-              </Box>
-            </div>
+            <TextField
+              onChange={handleSummary}
+              className="event-summary-box"
+              fullWidth
+              sx={{
+                width: "90%",
+                // height: "9.2rem",
+                // background: "var(--supporting-blue)",
+              }}
+              label="Event Summary"
+              multiline
+              rows={3}
+              defaultValue=""
+              id="summaryArea"
+              required
+              inputProps={{ maxLength: "80" }}
+            />
 
+            <TextField
+              onChange={handleDescription}
+              className="event-description-box"
+              fullWidth
+              sx={{
+                width: "90%",
+                // background: "var(--supporting-blue)",
+              }}
+              label="Event Description"
+              multiline
+              rows={5}
+              defaultValue=""
+              id="decriptionArea"
+              required
+            />
+            {/* <div className="buffer"> </div> */}
+          </div>
+          <div className="top-right">
+            {/* <Places setCoordFunction={setCoord} /> */}
             <div className="date-time-container">
-              <div className="date">
-                <LocalizationProvider dateAdapter={AdapterDateFns}>
-                  <StaticDatePicker
-                    orientation="landscape"
-                    openTo="day"
-                    value={value}
-                    onChange={(newValue) => {
-                      setValue(newValue);
-                    }}
-                    renderInput={(params) => <TextField {...params} />}
-                  />
-                </LocalizationProvider>
-              </div>
+              <LocalizationProvider dateAdapter={AdapterDateFns}>
+                <DatePicker
+                  label="Event date"
+                  orientation="portrait"
+                  openTo="day"
+                  value={date}
+                  inputFormat="dd.MM.yyyy"
+                  onChange={(newDate) => {
+                    setDate(newDate);
+                  }}
+                  renderInput={(params) => (
+                    <TextField sx={{ backgroundColor: "white" }} {...params} />
+                  )}
+                // sx={{
+                //   width: "auto",
+                //   height: "auto",
+                // }}
+                />
+              </LocalizationProvider>
 
-              <div className="time">
-                <LocalizationProvider dateAdapter={AdapterDateFns}>
-                  <StaticTimePicker
-                    ampm
-                    orientation="landscape"
-                    openTo="minutes"
-                    value={value}
-                    onChange={(newValue) => {
-                      setValue(newValue);
-                    }}
-                    renderInput={(params) => <TextField {...params}
-                    />}
+              <LocalizationProvider dateAdapter={AdapterDateFns}>
+                <TimePicker
+                  // ampmInClock="false"
+                  label="Start time"
+                  orientation="portrait"
+                  openTo="hours"
+                  inputFormat="hh:mm"
+                  value={time}
+                  onChange={(newTime) => {
+                    setTime(newTime);
+                  }}
+                  renderInput={(params) => (
+                    <TextField sx={{ backgroundColor: "white" }} {...params} />
+                  )}
+                // sx={{
+                //   width: "auto",
+                //   height: "auto",
+                // }}
+                />
+              </LocalizationProvider>
+            </div>
+            <div className="tag-area-box">
+              <FormControl>
+                <FormLabel>Event Tags</FormLabel>
+                <FormGroup row>
+                  <FormControlLabel
+                    label="Pet-Friendly"
+                    control={<Checkbox value="pet-friendly" />}
+                    onChange={handleTagChange}
                   />
-                </LocalizationProvider>
-              </div>
+                  <FormControlLabel
+                    label="18+"
+                    control={<Checkbox value="18+" />}
+                    onChange={handleTagChange}
+                  />
+                  <FormControlLabel
+                    label="Outdoors"
+                    control={<Checkbox value="outdoors" />}
+                    onChange={handleTagChange}
+                  />
+                  <FormControlLabel
+                    label="Parking"
+                    control={<Checkbox value="parking" />}
+                    onChange={handleTagChange}
+                  />
+                  <FormControlLabel
+                    label="Family-Friendly"
+                    control={<Checkbox value="family-friendly" />}
+                    onChange={handleTagChange}
+                  />
+                </FormGroup>
+              </FormControl>
+            </div>
+            <TextField onChange={handleUrl} label="Image URL" />
+            <div className="buttons">
+              <Button
+                sx={{
+                  margin: "auto",
+                }}
+                variant="contained"
+                size="large"
+                color="error"
+                type="submit"
+                onClick={() => navigate("/profile")}
+              >
+                Cancel
+              </Button>
+              <Button
+                sx={{
+                  margin: "auto",
+                }}
+                variant="contained"
+                type="submit"
+                size="large"
+                onClick={handleSubmission}
+              >
+                Submit
+              </Button>
             </div>
           </div>
-
-          <Button
-            sx={{ top: "3rem", left: "3rem" }}
-            variant="contained"
-            type="submit"
-          >
-            Submit
-          </Button>
-        </form>
-        <a href="/profile">
-          <Button
-            sx={{ bottom: "26rem", right: "4.5vh" }}
-            id="exit-button-form"
-            variant="contained"
-            aria-label="Cancel and hide current event submission form"
-            onClick={onClick}
-          >
-            X
-          </Button>
-        </a>
-      </section >
+        </div>
+      </div>
     </div>
   );
 }
-
-// testy

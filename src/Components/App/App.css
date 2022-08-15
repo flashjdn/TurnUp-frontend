@@ -2,6 +2,9 @@
   --primary: #fbb02d;
   --secondary: #006390;
   --supporting-blue: #adcad6;
+  --primary-opaque: rgb(251, 176, 45, 0.75);
+  --secondary-opaque: rgb(0, 99, 144, 0.75);
+  --supporting-blue-opaque: rgb(173, 202, 214, 0.75);
   --fonts: "Raleway", sans-serif;
   --font-colour: white;
   --font-colour-secondary: black;
@@ -9,59 +12,29 @@
 
 * {
   font-family: var(--fonts);
+  margin: 0;
+  padding: 0;
 }
 
 .App {
-  text-align: center;
-}
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  min-height: 100vh;
+  height: 100vh;
+  width: 100vw;
   display: flex;
-  flex-direction: column;
-  align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
 }
 
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-
-  to {
-    transform: rotate(360deg);
-  }
+body {
+  /* background-color: var(--secondary); */
 }
 
 /* amplify styles for auth */
 
 #root {
-  text-align: center;
-  margin: 1.2rem;
-}
-
-nav {
-  display: flex;
-  justify-content: center;
-  gap: 2rem;
-  margin-bottom: 2rem;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
 }
 
 .auth-wrapper {
