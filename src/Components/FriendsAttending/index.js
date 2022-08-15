@@ -3,7 +3,7 @@ import "./index.css";
 function FriendsAttending({ attendingGuests }) {
   return (
     <div>
-      <div className="friends-text">Attending: </div>
+      <div className="friends-text">Friends attending: </div>
       <div className="attending-scrollbar">
         {" "}
         {attendingGuests.map((item, index) => {

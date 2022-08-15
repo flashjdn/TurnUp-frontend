@@ -1,5 +1,14 @@
 .drawer-wrapper {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.about-us {
+  text-align: center;
+  font-size: 1em;
+}
+
+.for-what {
+  padding: 5px;
+  margin-bottom: 10px;
 }

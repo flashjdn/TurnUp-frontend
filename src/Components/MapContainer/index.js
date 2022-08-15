@@ -63,10 +63,15 @@ function MapContainer(props) {
         <MarkerF
           //onLoad={onLoad}
           position={props.userLocation}
+
           icon={userLoc}
           onClick={() => {
             props.markerOnClick(console.log("you clicked the user marker!"));
           }}
+
+          // icon="https://i.postimg.cc/DfXqkmRL/human-location-svgrepo-com.png"
+          //icon="https://i.postimg.cc/vHS5C8xs/user-location-50x50.png"
+
         />
         {props.eventsArr.map(function (item, index) {
           return (
@@ -76,7 +81,12 @@ function MapContainer(props) {
               animation="bounce"
               position={{ lat: Number(item.lat), lng: Number(item.lng) }}
               //onLoad={onLoad}
+
               icon={marker}
+
+              // icon="https://i.postimg.cc/3x9Q98BD/placeholder-svgrepo-com.png"
+              //icon="https://i.postimg.cc/FHys3D4B/turnuparrow50px.png"
+
               onClick={() => {
                 props.markerOnClick(item.eventid);
               }}
