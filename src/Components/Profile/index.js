@@ -151,7 +151,7 @@ function Profile() {
             </div>
           </div>
           <div className="profile-right-side">
-            {toggleEvents ? (
+            {toggleVariant ? (
               <h2>Attending Events:</h2>
             ) : (
               <h2>Organised Events:</h2>
