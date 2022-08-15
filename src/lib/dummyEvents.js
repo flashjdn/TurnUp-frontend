@@ -194,7 +194,7 @@ export const dummyEvents = [
     eventDistance: "5km away",
     eventTime: "in 3 days",
     rating: 1,
-    organiser: "BePhucDat214",
+    organiser: "BPDat214",
     email: "bpd@gmail.com",
     address: "La Caixa Bank",
     lat: 28.41635985131634,

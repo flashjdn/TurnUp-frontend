@@ -9,6 +9,7 @@ import NewEventForm from "../AddEventCard";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Places from "../Places/places";
 
+
 function App() {
   return (
     <div className="App">
