@@ -22,8 +22,10 @@ import { CodeRounded, DocumentScanner } from "@mui/icons-material";
 
 import Places from "../Places/places";
 import ImageUpload from "../ImageUpload";
+import { withAuthenticator } from "@aws-amplify/ui-react";
+import { Auth } from "aws-amplify";
 
-export default function NewEventForm({ onClick }) {
+function NewEventForm(signOut, user) {
   //Form submission function that reads each input type and adds it to the object to be sent to the server if needed.
 
   const [tags, setTags] = useState([""]);
@@ -34,11 +36,43 @@ export default function NewEventForm({ onClick }) {
   const [time, setTime] = useState("");
   const [coord, setCoord] = useState({ lat: 0, lng: 0 });
   const [url, setUrl] = useState("");
-
+  const [authUser, setAuthUser] = useState(null);
+  const [createdEventId, setCreatedEventId] = useState(null);
+  const [userDB, setUserDB] = useState({ userid: 0 });
   // console.log("these are the coords", coord);
 
   const navigate = useNavigate();
   // console.log(tags);
+
+  useEffect(() => {
+    getUserFromAuth();
+  });
+
+  useEffect(() => {
+    sendTags(createdEventId);
+  }, [createdEventId]);
+
+  useEffect(() => {
+    getUserFromDB(authUser);
+  }, [authUser]);
+
+  async function getUserFromAuth() {
+    let userInfo = await Auth.currentUserInfo();
+    setAuthUser(userInfo.attributes.email);
+  }
+
+  async function getUserFromDB(email) {
+    if (authUser !== null) {
+      const res = await fetch(
+        `https://turnupdb.herokuapp.com/events/userem/${email}`,
+        {
+          mode: "cors",
+        }
+      );
+      const data = await res.json();
+      setUserDB(data[0]);
+    }
+  }
 
   const handleTagChange = (e) => {
     const index = tags.indexOf(e.target.value);
@@ -79,30 +113,33 @@ export default function NewEventForm({ onClick }) {
     const value = event.target.value;
     setUrl(value);
   }
-
-  let user = {
-    userId: 2,
-    username: "Jordan",
-    email: "jordan@jordan.com",
-    img: "https://sm.askmen.com/t/askmen_in/article/f/facebook-p/facebook-profile-picture-affects-chances-of-gettin_fr3n.1200.jpg",
-  };
+  async function sendTags(eventId) {
+    //Tag creation
+    if (eventId !== null) {
+      for (let i = 0; i < tags.length; i++) {
+        await fetch("https://turnupdb.herokuapp.com/events/eventTags", {
+          //
+          method: "POST", // *GET, POST, PUT, DELETE, etc.
+          mode: "cors",
+          headers: {
+            "Access-Control-Allow-Origin": "*",
+            "Content-Type": "application/json",
+            // 'Content-Type': 'application/x-www-form-urlencoded',
+          },
+          redirect: "follow", // manual, *follow, error
+          referrerPolicy: "no-referrer", // no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
+          body: JSON.stringify({
+            eventid: eventId,
+            tagid: Number(tags[i]),
+          }), // body data type must match "Content-Type" header
+        });
+      }
+      navigate("/profile");
+    }
+  }
 
   async function handleSubmission(e) {
     e.preventDefault();
-
-    // ADAPT ALL OF THE BELOW TO MATCH OUR DATA
-
-    // console.log(eventObj);
-
-    //    /Grabs the 6 current tags to idenitfy checked status. happy to help checkbox is also included but
-    //is ignored as is handled later.
-    // let tagArr = document.getElementsByClassName("tag-checkbox");
-    // for (let i = 0; i < tagArr.length - 1; i++) {
-    //   if (tagArr[i].checked) {
-    //     noteObj.tags = [...noteObj.tags, tagArr[i].name];
-    //     newResourceObj.tags = [...newResourceObj.tags, tagArr[i].name];
-    //   }
-    // }
 
     const [day, month, year] = date.toLocaleDateString().split("/");
 
@@ -116,13 +153,14 @@ export default function NewEventForm({ onClick }) {
       mainDescription: description,
       date: adjustedDate, //date.toLocaleDateString(),
       time: adjustedTime, //time.toLocaleTimeString(),
-      organiser: user.userId,
+      organiser: userDB.userid,
       lat: coord.lat,
       lng: coord.lng,
       address: coord.address,
       img: url,
-      email: user.email,
+      email: userDB.email,
     };
+    console.log("eventObj: ", eventObj);
 
     const response = await fetch(`https://turnupdb.herokuapp.com/events/all`, {
       //
@@ -136,42 +174,14 @@ export default function NewEventForm({ onClick }) {
       redirect: "follow", // manual, *follow, error
       referrerPolicy: "no-referrer", // no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
       body: JSON.stringify(eventObj), // body data type must match "Content-Type" header
-    }).then(navigate("/profile"));
-    console.log("Submission complete");
-
-    return response.json();
-  }
-
-  // function hideForm() {
-  //   document.querySelector(".event-form-container").classList.add("hidden");
-  // }
-
-  function test() {
-    const [day, month, year] = date.toLocaleDateString().split("/");
-
-    const adjustedDate = [year, month, day].join("-");
-    const adjustedTime = time.toLocaleTimeString();
-
-    let eventObj = {
-      eventName: name,
-      eventDescription: summary,
-      mainDescription: description,
-      date: adjustedDate,
-      time: adjustedTime,
-      organiser: user.username,
-      lat: coord.lat,
-      lng: coord.lng,
-      address: coord.address,
-      img: url,
-      email: user.email,
-    };
-    console.log(eventObj);
+    });
+    const newEventData = await response.json();
+    setCreatedEventId(newEventData.payload[0].eventid);
   }
 
   return (
     <div className="behind-form">
       <Navbar></Navbar>
-
       <div className="form-container">
         <div className="outer-div">
           <h1>New Event</h1>
@@ -251,10 +261,10 @@ export default function NewEventForm({ onClick }) {
                   renderInput={(params) => (
                     <TextField sx={{ backgroundColor: "white" }} {...params} />
                   )}
-                // sx={{
-                //   width: "auto",
-                //   height: "auto",
-                // }}
+                  // sx={{
+                  //   width: "auto",
+                  //   height: "auto",
+                  // }}
                 />
               </LocalizationProvider>
 
@@ -272,10 +282,10 @@ export default function NewEventForm({ onClick }) {
                   renderInput={(params) => (
                     <TextField sx={{ backgroundColor: "white" }} {...params} />
                   )}
-                // sx={{
-                //   width: "auto",
-                //   height: "auto",
-                // }}
+                  // sx={{
+                  //   width: "auto",
+                  //   height: "auto",
+                  // }}
                 />
               </LocalizationProvider>
             </div>
@@ -285,27 +295,37 @@ export default function NewEventForm({ onClick }) {
                 <FormGroup row>
                   <FormControlLabel
                     label="Pet-Friendly"
-                    control={<Checkbox value="pet-friendly" />}
+                    control={<Checkbox value={1} />}
                     onChange={handleTagChange}
                   />
                   <FormControlLabel
                     label="18+"
-                    control={<Checkbox value="18+" />}
+                    control={<Checkbox value={2} />}
                     onChange={handleTagChange}
                   />
                   <FormControlLabel
                     label="Outdoors"
-                    control={<Checkbox value="outdoors" />}
+                    control={<Checkbox value={3} />}
                     onChange={handleTagChange}
                   />
                   <FormControlLabel
                     label="Parking"
-                    control={<Checkbox value="parking" />}
+                    control={<Checkbox value={4} />}
                     onChange={handleTagChange}
                   />
                   <FormControlLabel
                     label="Family-Friendly"
-                    control={<Checkbox value="family-friendly" />}
+                    control={<Checkbox value={5} />}
+                    onChange={handleTagChange}
+                  />
+                  <FormControlLabel
+                    label="Accessible"
+                    control={<Checkbox value={6} />}
+                    onChange={handleTagChange}
+                  />
+                  <FormControlLabel
+                    label="NightLife"
+                    control={<Checkbox value={7} />}
                     onChange={handleTagChange}
                   />
                 </FormGroup>
@@ -343,3 +363,5 @@ export default function NewEventForm({ onClick }) {
     </div>
   );
 }
+
+export default withAuthenticator(NewEventForm);
