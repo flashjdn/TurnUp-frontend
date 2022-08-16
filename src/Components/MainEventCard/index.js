@@ -9,7 +9,6 @@ import Typography from "@mui/material/Typography";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import { useEffect, useState } from "react";
 import FriendsAttending from "../FriendsAttending/index";
-import dummyFriends from "../../lib/dummyFriends";
 import { Button } from "@mui/material";
 
 function MainEventCard({ eventObj, xClick, userId }) {
@@ -21,14 +20,18 @@ function MainEventCard({ eventObj, xClick, userId }) {
   });
 
   const [attendingButton, setAttendingButton] = useState("contained");
-  const [peopleAttending, setPeopleAttending] = useState(dummyFriends);
+  const [peopleAttending, setPeopleAttending] = useState([]);
   useEffect(() => {
     getTags(eventObj.eventid);
     getOrganiser(eventObj.organiser);
     getPeopleAttending(eventObj.eventid);
-    setAttendingButton("contained");
+    console.log("U.I:", userId);
+    console.log("People attending:", peopleAttending);
+  }, [eventObj.eventid]);
+
+  useEffect(() => {
     checkIfAttending(userId, peopleAttending);
-  }, [, eventObj.eventid]);
+  });
 
   const getTags = async (eventId) => {
     const res = await fetch(
@@ -54,12 +57,16 @@ function MainEventCard({ eventObj, xClick, userId }) {
   };
 
   function checkIfAttending(userId, attendees) {
-    console.log("userid ", userId);
-    console.log("attendees ", attendees);
     for (let i = 0; i < attendees.length; i++) {
+      console.log("this is the userid:", userId.userid);
+      console.log("this is attendee id ", attendees);
       if (attendees[i].userid === userId.userid) {
+        console.log("yeah attending");
         setAttendingButton("disabled");
         return;
+      } else {
+        console.log("nah, not attending");
+        setAttendingButton("contained");
       }
     }
   }
@@ -110,7 +117,6 @@ function MainEventCard({ eventObj, xClick, userId }) {
 
         <h2>{eventObj.eventname}</h2>
       </header>
-
       <div className="main-bottom">
         <div className="main-info-bar">
           <p className="rating-style">{eventObj.date.substring(0, 10)}</p>
@@ -122,6 +128,13 @@ function MainEventCard({ eventObj, xClick, userId }) {
             <p>{eventObj.rating}</p>
             <StarIcon />
           </div>
+          <Button
+            variant={attendingButton}
+            onClick={() => handleAttendance(eventObj, userId)}
+            className="attending-btn"
+          >
+            I'll be there!
+          </Button>
         </div>
         <div className="main-right-container">
           <Accordion
@@ -151,13 +164,7 @@ function MainEventCard({ eventObj, xClick, userId }) {
               );
             })}
           </div>
-          <Button
-            variant={attendingButton}
-            onClick={() => handleAttendance(eventObj, userId)}
-            className="attending-btn"
-          >
-            I'll be there!
-          </Button>
+
           <div className="main-friends-container">
             <FriendsAttending
               attendingGuests={peopleAttending}
