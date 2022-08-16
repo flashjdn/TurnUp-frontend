@@ -27,8 +27,11 @@ function MainEventCard({ eventObj, xClick, userId }) {
     getPeopleAttending(eventObj.eventid);
     console.log("U.I:", userId);
     console.log("People attending:", peopleAttending);
-    checkIfAttending(userId, peopleAttending);
   }, [eventObj.eventid]);
+
+  useEffect(() => {
+    checkIfAttending(userId, peopleAttending);
+  });
 
   const getTags = async (eventId) => {
     const res = await fetch(
