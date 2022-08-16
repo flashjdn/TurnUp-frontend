@@ -3,6 +3,7 @@
   justify-content: space-between;
   height: 100%;
   background-color: var(--supporting-blue);
+
 }
 
 .profile-left-side {
@@ -11,6 +12,7 @@
   flex-direction: column;
   align-items: center;
   justify-content: space-around;
+  /* background-color: red; */
 }
 
 .profile-right-side {
@@ -29,11 +31,11 @@
 
 .friends-list {
   width: 70%;
-  max-height: 40vh;
+  max-height: 50%;
   border: solid;
   box-shadow: 0px 6px 10px rgba(0, 0, 0, 0.25);
   border-radius: 0.5rem;
-  background-color: white;
+  background-color: var(--supporting-blue);
 }
 
 .crea-atten-buttons {
@@ -48,8 +50,8 @@
 .profile-pic {
   border-radius: 50%;
   box-shadow: 0px 6px 10px rgba(0, 0, 0, 0.25);
-  height: 20vh;
-  width: 20vh;
+  height: 35vh;
+  width: 35vh;
   object-fit: cover;
   background-position: center, center;
   align-self: center;

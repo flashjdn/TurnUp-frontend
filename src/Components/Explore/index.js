@@ -13,6 +13,7 @@ import { Auth } from "aws-amplify";
 import { NewInfoBox } from "../NewInfoBox/index.js";
 import Mask from "../Mask";
 import "./styles.css";
+
 Amplify.configure(awsExports);
 Amplify.configure(awsconfig);
 
