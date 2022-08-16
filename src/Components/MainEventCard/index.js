@@ -25,13 +25,12 @@ function MainEventCard({ eventObj, xClick, userId }) {
     getTags(eventObj.eventid);
     getOrganiser(eventObj.organiser);
     getPeopleAttending(eventObj.eventid);
-    console.log("U.I:", userId);
-    console.log("People attending:", peopleAttending);
-  }, [eventObj.eventid]);
+    setAttendingButton("contained");
+  }, [, eventObj.eventid]);
 
   useEffect(() => {
     checkIfAttending(userId, peopleAttending);
-  });
+  }, [peopleAttending]);
 
   const getTags = async (eventId) => {
     const res = await fetch(
@@ -97,7 +96,6 @@ function MainEventCard({ eventObj, xClick, userId }) {
         },
         body: JSON.stringify(attendeeObj),
       });
-      setAttendingButton("disabled");
       getPeopleAttending(eventId.eventid);
     }
   }
