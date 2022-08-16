@@ -86,16 +86,7 @@ function Profile() {
       setListDisplay(attendedEvents);
     }
   }
-  useEffect(() => {
-    getOrgansiedAttendedAndFriendsEvents(user.userid);
-    // setListDisplay(organisedEvents);
-  }, [user]);
-
-  useEffect(() => {
-    toggleEvents(false);
-    getUserFromAuth();
-    getUser("");
-  }, []);
+  
 
   window.addEventListener("load", () => {
     navigator.geolocation.getCurrentPosition(positionFound, positionNotFound);
@@ -108,6 +99,17 @@ function Profile() {
       console.log(err);
     }
   });
+
+  useEffect(() => {
+    getOrgansiedAttendedAndFriendsEvents(user.userid);
+    // setListDisplay(organisedEvents);
+  }, [user]);
+
+  useEffect(() => {
+    toggleEvents(false);
+    getUserFromAuth();
+    getUser("");
+  }, []);
 
   // further in this function we need to have an if statement that checks if the user has any friends to begin with and if not, use setFriendsList to define it as undefined and offer him an add friend button that can be rendered on a card
   // if the user has friends it just renders his list of friends
@@ -141,6 +143,7 @@ function Profile() {
               </a>
             </div>
             <div className="friends-list">
+            <h3>Friends List</h3>
               <FriendsList friendsArr={friends} />
             </div>
           </div>
