@@ -86,7 +86,6 @@ function Profile() {
       setListDisplay(attendedEvents);
     }
   }
-  
 
   window.addEventListener("load", () => {
     navigator.geolocation.getCurrentPosition(positionFound, positionNotFound);
@@ -116,7 +115,7 @@ function Profile() {
 
   return (
     <>
-      <Mask loaded={(user.userid === 0) ?  false : true} />
+      <Mask loaded={user.userid === 0 ? false : true} />
       <div>
         <Navbar></Navbar>
         <div className="profile-container">
@@ -133,17 +132,21 @@ function Profile() {
               <p>
                 <strong className="strong">Email:</strong> {user.email}
               </p>
-              <a className="create-button" href="/create-event" style={{ textDecoration: "none" }}>
-                <Button className="create-button" 
-                sx={{backgroundColor: "#fbb02d",
-                color:"black"}}
-                variant="contained">
+              <a
+                className="create-button"
+                href="/create-event"
+                style={{ textDecoration: "none" }}
+              >
+                <Button
+                  className="create-button"
+                  sx={{ backgroundColor: "#fbb02d", color: "black" }}
+                  variant="contained"
+                >
                   Create Event
                 </Button>
               </a>
             </div>
             <div className="friends-list">
-            <h3>Friends List</h3>
               <FriendsList friendsArr={friends} />
             </div>
           </div>
