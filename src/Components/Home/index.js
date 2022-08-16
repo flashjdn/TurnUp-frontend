@@ -1,10 +1,11 @@
 import logo from "../../Assets/turnuplogo.svg";
 import * as React from "react";
-import "./index.css";
+import "./styles.css";
 import Promovid from "../../Assets/turnUp-v5-promo.mp4";
 import Drawer from "../Drawer";
 import { Button } from "@mui/material";
 import HomeMask from "../HomeMask";
+import poster from "../../Assets/poster.jpg"
 
 // Landing page code here
 
@@ -37,10 +38,10 @@ const buttonStyle = {
 export default function LandingPage({ handleOpen }) {
   return (
     <>
-      <HomeMask loaded={Promovid ? true : false}/>
+    <div className="container">
       <div className="homepage">
-        <video loop autoPlay muted className="vid">
-          <source src={Promovid} type="video/mp4" />
+        <video loop autoPlay muted className="vid" poster={poster}>
+          <source src={Promovid} type="video/mp4"  />
         </video>
         <div className="content">
           <img
@@ -61,6 +62,7 @@ export default function LandingPage({ handleOpen }) {
           </a>
         </div>
         <Drawer />
+      </div>
       </div>
     </>
   );
