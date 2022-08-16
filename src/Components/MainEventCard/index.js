@@ -27,8 +27,11 @@ function MainEventCard({ eventObj, xClick, userId }) {
     getOrganiser(eventObj.organiser);
     getPeopleAttending(eventObj.eventid);
     setAttendingButton("contained");
-    checkIfAttending(userId, peopleAttending);
   }, [, eventObj.eventid]);
+
+  useEffect(() => {
+    checkIfAttending(userId, peopleAttending);
+  }, [peopleAttending]);
 
   const getTags = async (eventId) => {
     const res = await fetch(
@@ -90,7 +93,6 @@ function MainEventCard({ eventObj, xClick, userId }) {
         },
         body: JSON.stringify(attendeeObj),
       });
-      setAttendingButton("disabled");
       getPeopleAttending(eventId.eventid);
     }
   }
@@ -122,6 +124,13 @@ function MainEventCard({ eventObj, xClick, userId }) {
             <p>{eventObj.rating}</p>
             <StarIcon />
           </div>
+          <Button
+            variant={attendingButton}
+            onClick={() => handleAttendance(eventObj, userId)}
+            className="attending-btn"
+          >
+            I'll be there!
+          </Button>
         </div>
         <div className="main-right-container">
           <Accordion
@@ -151,13 +160,7 @@ function MainEventCard({ eventObj, xClick, userId }) {
               );
             })}
           </div>
-          <Button
-            variant={attendingButton}
-            onClick={() => handleAttendance(eventObj, userId)}
-            className="attending-btn"
-          >
-            I'll be there!
-          </Button>
+
           <div className="main-friends-container">
             <FriendsAttending
               attendingGuests={peopleAttending}

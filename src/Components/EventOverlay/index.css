@@ -1,12 +1,9 @@
 .event-background {
   position: absolute;
   background-color: var(--supporting-blue-opaque);
-
-  display:flex;
-
+  display: flex;
   width: 35%;
   height: 96%;
-  opacity: 75%;
   border-right: solid;
   box-shadow: 12px 0 15px -4px var(--secondary);
   top: 4%;
@@ -22,7 +19,7 @@
   width: 34.5%;
   height: 96%;
   opacity: 100%;
-  top: 4%; 
+  top: 4%;
   left: 0;
 }
 .event-logo {
