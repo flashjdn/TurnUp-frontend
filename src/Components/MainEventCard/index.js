@@ -9,10 +9,9 @@ import Typography from "@mui/material/Typography";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import { useEffect, useState } from "react";
 import FriendsAttending from "../FriendsAttending/index";
-import dummyFriends from "../../lib/dummyFriends";
+import { Button } from "@mui/material";
 
-function MainEventCard({ eventObj, xClick }) {
-  console.log(eventObj);
+function MainEventCard({ eventObj, xClick, userId }) {
   const [expanded, setExpanded] = useState(false);
   const [tags, setTags] = useState(["kids", "dogs", "accessible"]);
   const [organiser, setOrganiser] = useState({
@@ -20,11 +19,18 @@ function MainEventCard({ eventObj, xClick }) {
     email: "unknown",
   });
 
+  const [attendingButton, setAttendingButton] = useState("contained");
+  const [peopleAttending, setPeopleAttending] = useState([]);
   useEffect(() => {
     getTags(eventObj.eventid);
     getOrganiser(eventObj.organiser);
     getPeopleAttending(eventObj.eventid);
+    setAttendingButton("contained");
   }, [, eventObj.eventid]);
+
+  useEffect(() => {
+    checkIfAttending(userId, peopleAttending);
+  }, [peopleAttending]);
 
   const getTags = async (eventId) => {
     const res = await fetch(
@@ -35,7 +41,6 @@ function MainEventCard({ eventObj, xClick }) {
     );
     console.log(res);
     const data = await res.json();
-    console.log("here are the tags: ", data);
     setTags(data);
   };
 
@@ -50,10 +55,24 @@ function MainEventCard({ eventObj, xClick }) {
     setOrganiser(data[0]);
   };
 
+  function checkIfAttending(userId, attendees) {
+    for (let i = 0; i < attendees.length; i++) {
+      console.log("this is the userid:", userId.userid);
+      console.log("this is attendee id ", attendees);
+      if (attendees[i].userid === userId.userid) {
+        console.log("yeah attending");
+        setAttendingButton("disabled");
+        return;
+      } else {
+        console.log("nah, not attending");
+        setAttendingButton("contained");
+      }
+    }
+  }
+
   const handleChange = (panel) => (event, isExpanded) => {
     setExpanded(isExpanded ? panel : false);
   };
-  const [peopleAttending, setPeopleAttending] = useState(dummyFriends);
 
   const getPeopleAttending = async (eventId) => {
     const res = await fetch(
@@ -65,6 +84,22 @@ function MainEventCard({ eventObj, xClick }) {
     const data = await res.json();
     setPeopleAttending(data);
   };
+
+  async function handleAttendance(eventId, userId) {
+    if (userId !== undefined && eventId !== undefined) {
+      const attendeeObj = { eventid: eventId.eventid, userid: userId.userid };
+
+      await fetch(`https://turnupdb.herokuapp.com/events/newatt`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(attendeeObj),
+      });
+      getPeopleAttending(eventId.eventid);
+    }
+  }
+
   return (
     <div className="main-event-card">
       <CloseIcon
@@ -80,7 +115,6 @@ function MainEventCard({ eventObj, xClick }) {
 
         <h2>{eventObj.eventname}</h2>
       </header>
-
       <div className="main-bottom">
         <div className="main-info-bar">
           <p className="rating-style">{eventObj.date.substring(0, 10)}</p>
@@ -92,6 +126,13 @@ function MainEventCard({ eventObj, xClick }) {
             <p>{eventObj.rating}</p>
             <StarIcon />
           </div>
+          <Button
+            variant={attendingButton}
+            onClick={() => handleAttendance(eventObj, userId)}
+            className="attending-btn"
+          >
+            I'll be there!
+          </Button>
         </div>
         <div className="main-right-container">
           <Accordion
@@ -121,7 +162,7 @@ function MainEventCard({ eventObj, xClick }) {
               );
             })}
           </div>
-          <button className="attending-btn">I'll be there!</button>
+
           <div className="main-friends-container">
             <FriendsAttending
               attendingGuests={peopleAttending}

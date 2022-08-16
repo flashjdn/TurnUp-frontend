@@ -1,8 +1,27 @@
 import "./index.css";
 import haversineDistance from "../../Models/haversineDistance.js";
+import { useEffect, useState } from "react";
 
 export const EventCard = ({ eventObj, onClick, userLoc }) => {
-  const tagsArray = ["kids", "dogs", "accessible"];
+  const [tags, setTags] = useState([]);
+  const getTags = async (eventId) => {
+    const res = await fetch(
+      `https://turnupdb.herokuapp.com/events/tags/${eventId}`,
+      {
+        mode: "cors",
+      }
+    );
+    const data = await res.json();
+    setTags(data);
+  };
+
+  useEffect(() => {
+    //getTags(eventObj.eventid);
+    if (eventObj.eventid !== undefined) {
+      getTags(eventObj.eventid);
+    }
+  }, []);
+
   let userDistance = haversineDistance(
     [eventObj.lng, eventObj.lat],
     [userLoc.lng, userLoc.lat],
@@ -37,10 +56,10 @@ export const EventCard = ({ eventObj, onClick, userLoc }) => {
               </div>
               <div className="tags-div">
                 {" "}
-                {tagsArray.map((item, index) => {
+                {tags.map((item, index) => {
                   return (
                     <div className="tag-box" key={index}>
-                      <p>{item}</p>
+                      <p>{item.tagname}</p>
                     </div>
                   );
                 })}

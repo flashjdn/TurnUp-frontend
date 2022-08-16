@@ -24,7 +24,8 @@
 }
 
 body {
-  /* background-color: var(--secondary); */
+  background-color: var(--secondary);
+  z-index: -2;
 }
 
 /* amplify styles for auth */

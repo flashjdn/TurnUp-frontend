@@ -13,12 +13,14 @@ import { Auth } from "aws-amplify";
 import { NewInfoBox } from "../NewInfoBox/index.js";
 import Mask from "../Mask";
 import "./styles.css";
+
 Amplify.configure(awsExports);
 Amplify.configure(awsconfig);
 
 function Explore(signOut, user) {
   const [newUser, setNewUser] = useState(false);
   const [userEmail, setUserEmail] = useState("");
+  const [loadedUser, setLoadedUser] = useState({ userid: 0 });
   async function getUserFromAuth() {
     let userInfo = await Auth.currentUserInfo();
     setUserEmail(userInfo.attributes.email);
@@ -27,26 +29,27 @@ function Explore(signOut, user) {
     getUserFromAuth();
   }, []);
 
-  useEffect(() => {
-    isUserNew(userEmail);
-  }, [userEmail]);
   async function isUserNew(email) {
-    console.log("this is working");
     if (email !== "") {
+      console.log(email)
       const res = await fetch(
         `https://turnupdb.herokuapp.com/events/userem/${email}`,
         {
           mode: "cors",
         }
       );
-      console.log("user is new");
       const data = await res.json();
       if (data.length === 0) {
         setNewUser(true);
-        console.log("new user:", true);
+      } else {
+        setLoadedUser(data[0]);
       }
     }
   }
+
+  useEffect(() => {
+    isUserNew(userEmail);
+  }, [userEmail]);
 
   function submitNewUser() {
     setNewUser(false);
@@ -123,7 +126,6 @@ function Explore(signOut, user) {
     async function positionFound(position) {
       const lng = position.coords.longitude;
       const lat = position.coords.latitude;
-      console.log("something");
       setUserLocation({ lat: lat, lng: lng });
       setLocation({ lat: lat, lng: lng });
     }
@@ -190,8 +192,11 @@ function Explore(signOut, user) {
       <div className="explore">
         <Navbar />
         {newUser ? (
-        <NewInfoBox closingFunction={submitNewUser} newUserEmail={userEmail} />
-      ) : null}
+          <NewInfoBox
+            closingFunction={submitNewUser}
+            newUserEmail={userEmail}
+          />
+        ) : null}
         <MapContainer
           centerObj={location}
           eventsArr={eventsArr}
@@ -205,9 +210,12 @@ function Explore(signOut, user) {
           setUserInput={setUserInput}
           userLoc={userLocation}
         />
-        {console.log("This is a popUp: ", popUp)}
         {popUp ? (
-          <MainEventCard eventObj={popUp} xClick={xClickReset}></MainEventCard>
+          <MainEventCard
+            eventObj={popUp}
+            xClick={xClickReset}
+            userId={loadedUser}
+          ></MainEventCard>
         ) : null}
       </div>
     </>

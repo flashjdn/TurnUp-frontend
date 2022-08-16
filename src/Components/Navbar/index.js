@@ -59,21 +59,22 @@ function Navbar() {
             fontFamily: '"Raleway", sans-serif',
             fontWeight: "Bold",
           }}
-          size="large"
+          size="medium"
         >
           PROFILE
         </Button>
         <Button
           className="navbutton"
-          onClick=
-          // {() => navigate("/explore")}
-          {redirectExplore}
+          onClick={
+            // {() => navigate("/explore")}
+            redirectExplore
+          }
           sx={{
             color: "white",
             fontFamily: '"Raleway", sans-serif',
             fontWeight: "Bold",
           }}
-          size="large"
+          size="medium"
         >
           EXPLORE
         </Button>
@@ -86,7 +87,7 @@ function Navbar() {
             fontFamily: '"Raleway", sans-serif',
             fontWeight: "Bold",
           }}
-          size="large"
+          size="medium"
         >
           SIGN OUT
         </Button>

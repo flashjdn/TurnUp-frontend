@@ -8,16 +8,25 @@ import { withAuthenticator } from "@aws-amplify/ui-react";
 import Mask from "../Mask";
 import "../Mask/styles.css";
 import { Auth } from "aws-amplify";
-
-
-//COMMENT FOR TESTING PURPOSES
-
-//HAS TO BE FETCHED FROM THE BACKEND WITH THE HELP OF AUTHENTICATOR, FOR NOW HARDCODED:
+import { attendedEventsArr, organisedEventsArr } from "../Constants/constants";
 
 function Profile() {
-  //state that holds info about the user
+  const cors = {
+    mode: "cors",
+  };
 
-  const [userEmail, setUserEmail] = useState("");
+  const getUser = async (email) => {
+    console.log("this is the email ", email);
+    if (email !== undefined && email !== "") {
+      const res = await fetch(
+        `https://turnupdb.herokuapp.com/events/userem/${email}`,
+        cors
+      );
+      const data = await res.json();
+      console.log("this is the data: ", data);
+      setUser(data[0]);
+    }
+  };
   async function getUserFromAuth() {
     let userInfo = await Auth.currentUserInfo();
     console.log("user info: ", userInfo);
@@ -35,73 +44,48 @@ function Profile() {
     { lat: 1, lng: 1 },
   ]);
 
-  const [attendedButtVariant, setAttendedButtVariant] = useState("disabled");
-  const [organisedButtVariant, setOrganisedButtVariant] = useState("contained");
+  const [listDisplay, setListDisplay] = useState([]);
+
   const [friends, setFriends] = useState([{ friend: 1 }]);
 
-  const [organisedEvents, setOrganisedEvents] = useState([
-    {
-      eventid: 1,
-      eventname: "The Melonator World Tour",
-      eventdescription: "Embrace the melon, be the melon.",
-      mainDescription:
-        "At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga. ",
-      img: "https://runt-of-the-web.com/wordpress/wp-content/uploads/2016/04/melonator.jpg",
-      eventtags: ["dog friendly", "lgbt", "clean toilets", "accessibility"],
-      date: "2022-08-11",
-      time: "18:00:00",
-      rating: 4,
-      organiser: 2,
-      email: "sarah@gmail.com",
-      address: "23 Holly Lane",
-      lat: 47.602508712234524,
-      lng: 3.5412595468827868,
-    },
-  ]);
-  const [attendedEvents, setAttendedEvents] = useState([
-    {
-      eventId: 5,
-      eventName: "Landfill sightseeing adventure",
-      eventDescription: "Don't touch anything. Thieves will be prostituted.",
-      mainDescription:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat",
-      img: "https://thumbs.dreamstime.com/b/pollution-concept-garbage-pile-trash-dump-landfill-birds-flying-around-91233936.jpg",
-      eventTags: ["museum", "lgbt", "dog friendly"],
-      date: "2022-08-09",
-      time: "09:00:00",
-      rating: 5,
-      organiser: 3,
-      email: "a.c.DeNaturated@hotmail.com",
-      address: "1 Landfill Alley",
-      lat: 52.23300178597648,
-      lng: 20.904440714145675,
-    },
-  ]);
-  const [listDisplay, setListDisplay] = useState([]);
-  //function that fetches all the user information provided it has the userId, if we want to retrieve the info by email or username, we need to change it in the back end too.
-  const getUser = async (email) => {
-    console.log("this is the email ", email);
-    if (email !== undefined && email !== "") {
-      const res = await fetch(
-        `https://turnupdb.herokuapp.com/events/userem/${email}`,
-        {
-          mode: "cors",
-        }
-      );
-      const data = await res.json();
-      console.log("this is the data: ", data);
-      setUser(data[0]);
+  const [organisedEvents, setOrganisedEvents] = useState(organisedEventsArr);
+  const [attendedEvents, setAttendedEvents] = useState(attendedEventsArr);
+
+  async function getOrgansiedAttendedAndFriendsEvents(userId) {
+    console.log("help me i am sad", userId);
+    const organisedRes = await fetch(
+      `https://turnupdb.herokuapp.com/events/event-org/${userId}`,
+      cors
+    );
+    const attendedRes = await fetch(
+      `https://turnupdb.herokuapp.com/events/att/${userId}`,
+      cors
+    );
+    const friendRes = await fetch(
+      `https://turnupdb.herokuapp.com/events/friends/${userId}`,
+      cors
+    );
+    const organisedResData = await organisedRes.json();
+    const attendedResData = await attendedRes.json();
+    const friendResData = await friendRes.json();
+
+    setOrganisedEvents(organisedResData);
+    setAttendedEvents(attendedResData);
+    setListDisplay(attendedResData);
+    setFriends(friendResData);
+  }
+  const [toggleVariant, setToggleVariant] = useState(false);
+
+  function toggleEvents(bool) {
+    console.log("event toggled", bool);
+    if (bool === true) {
+      setToggleVariant(false);
+      setListDisplay(organisedEvents);
+    } else {
+      setToggleVariant(true);
+      setListDisplay(attendedEvents);
     }
-  };
-  useEffect(() => {
-    getUserFromAuth();
-    getUser(userEmail);
-  }, []);
-  useEffect(() => {
-    getOrganisedEvents(user.userid);
-    getAttendedEvents(user.userid);
-    getFriends(user.userid);
-  }, [user]);
+  }
 
   window.addEventListener("load", () => {
     navigator.geolocation.getCurrentPosition(positionFound, positionNotFound);
@@ -115,63 +99,23 @@ function Profile() {
     }
   });
 
-  const getOrganisedEvents = async (organiserId) => {
-    const res = await fetch(
-      `https://turnupdb.herokuapp.com/events/event-org/${organiserId}`,
-      {
-        mode: "cors",
-      }
-    );
-    const data = await res.json();
-    setOrganisedEvents(data);
-  };
+  useEffect(() => {
+    getOrgansiedAttendedAndFriendsEvents(user.userid);
+    // setListDisplay(organisedEvents);
+  }, [user]);
 
-  const getAttendedEvents = async (attendeeId) => {
-    const res = await fetch(
-      `https://turnupdb.herokuapp.com/events/att/${attendeeId}`,
-      {
-        mode: "cors",
-      }
-    );
-    const data = await res.json();
-    setAttendedEvents(data);
-  };
+  useEffect(() => {
+    toggleEvents(false);
+    getUserFromAuth();
+    getUser("");
+  }, []);
 
-  function changeToAttended() {
-    setListDisplay(attendedEvents);
-    setAttendedButtVariant("disabled");
-    setOrganisedButtVariant("contained");
-  }
-
-  function changeToOrganised() {
-    setListDisplay(organisedEvents);
-    setOrganisedButtVariant("disabled");
-    setAttendedButtVariant("contained");
-  }
-
-  function seeYouClicking() {
-    console.log("I can see you clicking that card. Stop it.");
-  }
-
-  //FUNCTION TEMPLATE TO FETCH FRIENDS
-  async function getFriends(userId) {
-    const res = await fetch(
-      `https://turnupdb.herokuapp.com/events/friends/${userId}`,
-      {
-        mode: "cors",
-      }
-    );
-    const data = await res.json();
-    // further in this function we need to have an if statement that checks if the user has any friends to begin with and if not, use setFriendsList to define it as undefined and offer him an add friend button that can be rendered on a card
-    // if the user has friends it just renders his list of friends
-    setFriends(data);
-  }
+  // further in this function we need to have an if statement that checks if the user has any friends to begin with and if not, use setFriendsList to define it as undefined and offer him an add friend button that can be rendered on a card
+  // if the user has friends it just renders his list of friends
 
   return (
-
-
     <>
-      {/* <Mask loaded={(user.userid === 4) ?  true : false} /> */}
+      <Mask loaded={user.userid === 0 ? false : true} />
       <div>
         <Navbar></Navbar>
         <div className="profile-container">
@@ -183,13 +127,23 @@ function Profile() {
                 className="profile-pic"
               ></img>
               <p>
-                <strong>Username:</strong> {user.username}
+                <strong className="strong">Username:</strong> {user.username}
               </p>
               <p>
-                <strong>Email:</strong> {user.email}
+                <strong className="strong">Email:</strong> {user.email}
               </p>
-              <a href="/create-event" style={{ textDecoration: 'none' }}>
-                <Button variant="contained">Create Event</Button>
+              <a
+                className="create-button"
+                href="/create-event"
+                style={{ textDecoration: "none" }}
+              >
+                <Button
+                  className="create-button"
+                  sx={{ backgroundColor: "#fbb02d", color: "black" }}
+                  variant="contained"
+                >
+                  Create Event
+                </Button>
               </a>
             </div>
             <div className="friends-list">
@@ -197,20 +151,22 @@ function Profile() {
             </div>
           </div>
           <div className="profile-right-side">
-            {organisedButtVariant === "contained" ? (
-              <h2>Attending Events:</h2>
+            {toggleVariant ? (
+              <h3>Attending Events:</h3>
             ) : (
-              <h2>Organised Events:</h2>
-
+              <h3>Organised Events:</h3>
             )}
 
             <div className="crea-atten-buttons">
-              <Button variant={attendedButtVariant} onClick={changeToAttended}>
+              <Button
+                variant={toggleVariant ? "disabled" : "contained"}
+                onClick={() => toggleEvents(false)}
+              >
                 Attending Events
               </Button>
               <Button
-                variant={organisedButtVariant}
-                onClick={changeToOrganised}
+                variant={toggleVariant ? "contained" : "disabled"}
+                onClick={() => toggleEvents(true)}
               >
                 Organised Events
               </Button>
@@ -219,7 +175,6 @@ function Profile() {
               {profileUserLocation === [] ? null : (
                 <EventList
                   eventsArr={listDisplay}
-                  onClick={seeYouClicking}
                   userLoc={profileUserLocation}
                 />
               )}
