@@ -41,7 +41,7 @@
   width: 10rem;
 }
 
-@media only screen and (max-device-width: 375px) {
+@media only screen and (max-device-width: 400px) {
   .friend-card-one {
     height: 4rem;
   }
