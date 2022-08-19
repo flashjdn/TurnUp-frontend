@@ -3,7 +3,7 @@ import EventList from "../EventList/index.js";
 import FriendsList from "../FriendsList";
 import { useEffect, useState } from "react";
 import "./index.css";
-import { Button, CircularProgress } from "@mui/material";
+import { Button, LinearProgress } from "@mui/material";
 import { withAuthenticator } from "@aws-amplify/ui-react";
 import Mask from "../Mask";
 import "../Mask/styles.css";
@@ -89,7 +89,9 @@ function Profile() {
 
   function loadUserPosition() {
     console.log("start of function for location");
-    navigator.geolocation.getCurrentPosition(positionFound, /*positionNotFound*/);
+    navigator.geolocation.getCurrentPosition(
+      positionFound /*positionNotFound*/
+    );
     async function positionFound(position) {
       const lng = position.coords.longitude;
       const lat = position.coords.latitude;
@@ -192,8 +194,13 @@ function Profile() {
                   eventsArr={listDisplay}
                   userLoc={profileUserLocation}
                 />
-              ):
-              <CircularProgress /> }
+              ) : (
+                <LinearProgress
+                  sx={{
+                    selfAlign: "center",
+                  }}
+                />
+              )}
             </div>
           </div>
         </div>
