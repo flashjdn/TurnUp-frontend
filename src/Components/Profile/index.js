@@ -169,9 +169,9 @@ function Profile() {
           </div>
           <div className="profile-right-side">
             {toggleVariant ? (
-              <h3>Attending Events:</h3>
+              <h3>Events you're going to:</h3>
             ) : (
-              <h3>Organised Events:</h3>
+              <h3>Events you organise:</h3>
             )}
 
             <div className="crea-atten-buttons">
@@ -195,11 +195,13 @@ function Profile() {
                   userLoc={profileUserLocation}
                 />
               ) : (
-                <LinearProgress
-                  sx={{
-                    selfAlign: "center",
-                  }}
-                />
+                <div className="loading">
+                  <LinearProgress
+                    sx={{
+                      selfAlign: "center",
+                    }}
+                  />
+                </div>
               )}
             </div>
           </div>

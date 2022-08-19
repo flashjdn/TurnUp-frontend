@@ -84,6 +84,10 @@
   width: 100%;
 }
 
+.loading {
+  display: inherit;
+}
+
 @media screen and (min-device-width: 400px) and (max-width: 850px) {
   .profile-left-side {
     width: 100%;
