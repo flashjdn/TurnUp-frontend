@@ -162,6 +162,7 @@ function Profile() {
                   Create Event
                 </Button>
               </a>
+              {/* <h3>Friends list</h3> */}
             </div>
             <div className="friends-list">
               <FriendsList friendsArr={friends} />
