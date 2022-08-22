@@ -16,7 +16,7 @@
 }
 
 .card-one:hover > img {
-  height: 15rem;
+  height: 12rem;
   transition: height 0.2s ease-out;
 }
 
