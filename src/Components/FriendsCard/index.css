@@ -12,6 +12,7 @@
   align-items: center;
   justify-content: space-around;
   border: none;
+  z-index: 0;
 }
 
 .friend-card-one:hover {

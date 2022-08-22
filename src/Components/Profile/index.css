@@ -65,7 +65,7 @@
   gap: 1rem;
   font-size: 1.5rem;
 }
-.profile-info>h3{
+.profile-info > h3 {
   align-self: center;
   /* margin-top: 1rem; */
 }
@@ -90,6 +90,20 @@
 
 .loading {
   display: inherit;
+}
+
+.friend-search-bar {
+  height: 15%;
+  background-color: var(--primary);
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  box-shadow: rgba(0, 0, 0, 0.6) 0px 4px 8px 0px;
+}
+
+.friend-search-input {
+  padding: 5px 5px;
+  width: 50%;
 }
 
 @media screen and (min-device-width: 400px) and (max-width: 850px) {
