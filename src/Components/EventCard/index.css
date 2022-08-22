@@ -1,140 +1,66 @@
 .card-one {
+  width: 90%;
   background: var(--secondary);
   color: var(--font-colour);
-  font-size: small;
-  width: 90%;
-  height: 12rem;
-  border-radius: 1rem;
-  margin-bottom: 1rem;
-  transition: all 0.5s;
-  box-shadow: 0px 6px 10px rgba(0, 0, 0, 0.25);
+  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+  margin: 1rem;
+  border-radius: 1.5rem;
+}
+.card-one :hover {
+  cursor: pointer;
 }
 
-.event-name-box > h2 {
-  margin-left: 12px;
-}
-
-.card-one:hover {
-  box-shadow: 0px 6px 10px rgba(0, 0, 0, 0.4);
-  transform: scale(1.01);
-  height: 14rem;
-}
-
-.card-one-image {
+.card-one > img {
   width: 100%;
-  height: 40%;
+  height: 9rem;
+  border-radius: 1rem 1rem 0rem 0rem;
   object-fit: cover;
-  background-position: center, center;
-  border-top-right-radius: 0.7rem;
-  border-top-left-radius: 0.7rem;
-  margin-bottom: 0;
+  transition: height 0.2s ease-out;
 }
 
-.card-one-text {
-  overflow-y: hidden;
-  min-height: 1rem;
-  width: 100%;
-  text-overflow: ellipsis;
-  font-size: medium;
-  display: flex;
-  justify-content: flex-start;
-  margin-left: 25px;
+.card-one:hover > img {
+  height: 12rem;
+  transition: height 0.2s ease-out;
 }
 
-.tags-div {
-  width: 100%;
-  height: 1rem;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  font-size: x-small;
-  margin-left: 1rem;
-  margin-bottom: 0;
-  padding: 0.4rem 0.4rem;
-}
-
-.tag-box {
-  background-color: var(--primary);
-  color: var(--font-colour-secondary);
-  height: auto;
-  border-radius: 8%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 0.2rem;
-}
-
-.tag-box p {
-  display: block;
-  font-weight: bold;
-  height: 100%;
+.bottom-event-section {
+  padding: 0 15px 15px;
 }
 
 .event-name-box {
-  overflow-x: auto;
-  max-height: 3.5rem;
+  height: 2.5rem;
+  overflow: hidden;
 }
 
 .left-event-section {
   width: 70%;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-around;
-  align-items: center;
+}
+.right-event-section {
+  width: 30%;
 }
 
 .right-event-section {
-  width: 30%;
-  height: 2rem;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: flex-end;
-  margin-right: 0.5rem;
-}
-
-.right-event-section p {
-  margin-top: 0.5rem;
-  font-weight: bold;
-  justify-self: flex-end;
-}
-
-.bottom-event-section {
-  display: flex;
-  flex-direction: column;
-  height: 53%;
+  text-align: right;
 }
 
 .info-split {
   display: flex;
-  width: 100%;
-  flex-grow: 1;
+  justify-content: space-between;
 }
 
-@media screen and (max-width: 850px) {
-  .card-one {
-    background: var(--secondary);
-    font-size: small;
-    width: 90%;
-    height: 10rem;
-    border-radius: 1rem;
-    margin-bottom: 1rem;
-    transition: all 0.5s;
-    box-shadow: 0px 6px 10px rgba(0, 0, 0, 0.25);
-  }
-  .card-one:hover {
-    box-shadow: 0px 6px 10px rgba(0, 0, 0, 0.4);
-    transform: scale(1.01);
-    height: 12rem;
-  }
+.tags-div {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 20px;
+}
 
-  .event-name-box h2 {
-    font-size: medium;
-  }
-
-  .tags-div {
-    font-size: xx-small;
-  }
+.tags-div > .tag-box > p {
+  background-color: var(--primary);
+  color: var(--font-colour-secondary);
+  padding: 5px;
+  border-radius: 5px;
+  font-size: x-small;
 }
 
 @media only screen and (max-device-width: 375px) {

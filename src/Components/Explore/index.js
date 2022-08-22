@@ -20,7 +20,7 @@ Amplify.configure(awsconfig);
 function Explore(signOut, user) {
   const [newUser, setNewUser] = useState(false);
   const [userEmail, setUserEmail] = useState("");
-  const [loadedUser, setLoadedUser] = useState({ userid: 0 });
+  const [loadedUser, setLoadedUser] = useState({ userid: 28 }); //this should be userid: 0, changed to 28 for the demo
   async function getUserFromAuth() {
     let userInfo = await Auth.currentUserInfo();
     setUserEmail(userInfo.attributes.email);
@@ -31,7 +31,7 @@ function Explore(signOut, user) {
 
   async function isUserNew(email) {
     if (email !== "") {
-      console.log(email)
+      console.log(email);
       const res = await fetch(
         `https://turnupdb.herokuapp.com/events/userem/${email}`,
         {

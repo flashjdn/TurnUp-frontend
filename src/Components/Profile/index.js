@@ -3,12 +3,13 @@ import EventList from "../EventList/index.js";
 import FriendsList from "../FriendsList";
 import { useEffect, useState } from "react";
 import "./index.css";
-import { Button } from "@mui/material";
+import { Button, LinearProgress } from "@mui/material";
 import { withAuthenticator } from "@aws-amplify/ui-react";
 import Mask from "../Mask";
 import "../Mask/styles.css";
 import { Auth } from "aws-amplify";
 import { attendedEventsArr, organisedEventsArr } from "../Constants/constants";
+import Searchbar from "../Searchbar";
 
 function Profile() {
   const cors = {
@@ -41,7 +42,7 @@ function Profile() {
   });
 
   const [profileUserLocation, setProfileUserLocation] = useState([
-    { lat: 1, lng: 1 },
+    { lat: null, lng: null },
   ]);
 
   const [listDisplay, setListDisplay] = useState([]);
@@ -87,20 +88,36 @@ function Profile() {
     }
   }
 
-  window.addEventListener("load", () => {
-    navigator.geolocation.getCurrentPosition(positionFound, positionNotFound);
+  function loadUserPosition() {
+    console.log("start of function for location");
+    navigator.geolocation.getCurrentPosition(
+      positionFound /*positionNotFound*/
+    );
     async function positionFound(position) {
       const lng = position.coords.longitude;
       const lat = position.coords.latitude;
       setProfileUserLocation({ lat: lat, lng: lng });
+
+      function positionNotFound(err) {
+        console.log(err);
+      }
     }
-    function positionNotFound(err) {
-      console.log(err);
-    }
-  });
+  }
+  // window.addEventListener("load", () => {
+  //   navigator.geolocation.getCurrentPosition(positionFound, positionNotFound);
+  //   async function positionFound(position) {
+  //     const lng = position.coords.longitude;
+  //     const lat = position.coords.latitude;
+  //     setProfileUserLocation({ lat: lat, lng: lng });
+  //   }
+  //   function positionNotFound(err) {
+  //     console.log(err);
+  //   }
+  // });
 
   useEffect(() => {
     getOrgansiedAttendedAndFriendsEvents(user.userid);
+    loadUserPosition();
     // setListDisplay(organisedEvents);
   }, [user]);
 
@@ -116,6 +133,7 @@ function Profile() {
   return (
     <>
       <Mask loaded={user.userid === 0 ? false : true} />
+      {/* <Mask loaded={profileUserLocation.lat ? true : false} /> */}
       <div>
         <Navbar></Navbar>
         <div className="profile-container">
@@ -145,16 +163,27 @@ function Profile() {
                   Create Event
                 </Button>
               </a>
+              {/* <h3>Friends list</h3> */}
             </div>
             <div className="friends-list">
+              <div className="friend-search-bar">
+                <input
+                  className="friend-search-input"
+                  placeholder="Add friend"
+                  size="small"
+                ></input>
+                <Button variant="contained" sx={{ backgroundColor: "#006390" }}>
+                  Add
+                </Button>
+              </div>
               <FriendsList friendsArr={friends} />
             </div>
           </div>
           <div className="profile-right-side">
             {toggleVariant ? (
-              <h3>Attending Events:</h3>
+              <h3>Events you're going to:</h3>
             ) : (
-              <h3>Organised Events:</h3>
+              <h3>Events you organise:</h3>
             )}
 
             <div className="crea-atten-buttons">
@@ -172,11 +201,19 @@ function Profile() {
               </Button>
             </div>
             <div className="unleash-the-events">
-              {profileUserLocation === [] ? null : (
+              {profileUserLocation.lat ? (
                 <EventList
                   eventsArr={listDisplay}
                   userLoc={profileUserLocation}
                 />
+              ) : (
+                <div className="loading">
+                  <LinearProgress
+                    sx={{
+                      selfAlign: "center",
+                    }}
+                  />
+                </div>
               )}
             </div>
           </div>

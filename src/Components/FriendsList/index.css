@@ -1,5 +1,5 @@
 .friends-cards-container {
-  height: 100%;
+  height: 85%;
   width: 100%;
   display: flex;
   flex-direction: column;
@@ -8,6 +8,7 @@
   overflow-y: scroll;
   overflow-x: auto;
   border-radius: 1.5%;
+  z-index: 0;
 }
 
 .friends-cards-container::-webkit-scrollbar {
@@ -21,7 +22,7 @@
 }
 
 .friends-cards-container::-webkit-scrollbar-thumb {
-  background-image: linear-gradient(45deg, var(--secondary), var(--primary));
+  background-color: var(--secondary);
   border-radius: 10px;
   -webkit-box-shadow: rgba(0, 0, 0, 0.12) 0 3px 13px 1px;
 }

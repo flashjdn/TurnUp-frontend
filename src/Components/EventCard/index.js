@@ -20,7 +20,7 @@ export const EventCard = ({ eventObj, onClick, userLoc }) => {
     if (eventObj.eventid !== undefined) {
       getTags(eventObj.eventid);
     }
-  }, []);
+  }, [eventObj]);
 
   let userDistance = haversineDistance(
     [eventObj.lng, eventObj.lat],
