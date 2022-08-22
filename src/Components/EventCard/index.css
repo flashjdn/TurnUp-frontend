@@ -6,6 +6,9 @@
   margin: 1rem;
   border-radius: 1.5rem;
 }
+.card-one :hover {
+  cursor: pointer;
+}
 
 .card-one > img {
   width: 100%;

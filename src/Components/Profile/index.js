@@ -9,6 +9,7 @@ import Mask from "../Mask";
 import "../Mask/styles.css";
 import { Auth } from "aws-amplify";
 import { attendedEventsArr, organisedEventsArr } from "../Constants/constants";
+import Searchbar from "../Searchbar";
 
 function Profile() {
   const cors = {
@@ -165,6 +166,16 @@ function Profile() {
               {/* <h3>Friends list</h3> */}
             </div>
             <div className="friends-list">
+              <div className="friend-search-bar">
+                <input
+                  className="friend-search-input"
+                  placeholder="Add friend"
+                  size="small"
+                ></input>
+                <Button variant="contained" sx={{ backgroundColor: "#006390" }}>
+                  Add
+                </Button>
+              </div>
               <FriendsList friendsArr={friends} />
             </div>
           </div>
