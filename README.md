@@ -1,7 +1,7 @@
 
 # TurnUp
 
-TurnUp is an app that allows users to search for free events either nearby or from a search query.
+TurnUp is an app that allows users to search for free events either nearby or from a search query. Click here to see the deployed site: https://production.d3hv43jagk7qg5.amplifyapp.com/
 
 ## Getting Started
 
