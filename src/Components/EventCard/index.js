@@ -12,8 +12,6 @@ export const EventCard = ({ eventObj, onClick, userLoc }) => {
       }
     );
     const data = await res.json();
-    console.log("data ", data);
-    console.log("of event ", eventObj);
     setTags(data);
   };
 
