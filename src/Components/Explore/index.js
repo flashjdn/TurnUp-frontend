@@ -223,6 +223,4 @@ function Explore(signOut, user) {
 // export default Explore;
 export default withAuthenticator(Explore);
 // test
-// pushing to main
-//oh no
-// oh dear
+
