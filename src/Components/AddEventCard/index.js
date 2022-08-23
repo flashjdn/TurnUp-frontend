@@ -31,10 +31,8 @@ function NewEventForm(signOut, user) {
   const [authUser, setAuthUser] = useState(null);
   const [createdEventId, setCreatedEventId] = useState(null);
   const [userDB, setUserDB] = useState({ userid: 0 });
-  // console.log("these are the coords", coord);
 
   const navigate = useNavigate();
-  // console.log(tags);
 
   useEffect(() => {
     getUserFromAuth();
