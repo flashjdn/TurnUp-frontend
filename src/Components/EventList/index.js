@@ -2,7 +2,7 @@ import { EventCard } from "../EventCard";
 import "./index.css";
 import haversineDistance from "../../Models/haversineDistance";
 
-function EventList({ eventsArr, onClick, userLoc }) {
+function EventList({ eventsArr, onClick, userLoc, whatType, user }) {
   const eventsArray = [...eventsArr].sort((a, b) => {
     //this function is going to sort the events based on their distance from the app user
     let userDistanceToA = haversineDistance(
@@ -19,7 +19,7 @@ function EventList({ eventsArr, onClick, userLoc }) {
     return userDistanceToA - userDistanceToB;
   });
 
-// console.log(eventsArr);
+  // console.log(eventsArr);
 
   return (
     <div className="cards-container">
@@ -30,6 +30,8 @@ function EventList({ eventsArr, onClick, userLoc }) {
             key={index}
             onClick={onClick}
             userLoc={userLoc}
+            whatType={whatType}
+            user={user}
           />
         );
       })}

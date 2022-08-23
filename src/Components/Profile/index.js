@@ -9,28 +9,26 @@ import Mask from "../Mask";
 import "../Mask/styles.css";
 import { Auth } from "aws-amplify";
 import { attendedEventsArr, organisedEventsArr } from "../Constants/constants";
-import Searchbar from "../Searchbar";
+import { createContext } from "react";
+
+export const UserContext = createContext();
 
 function Profile() {
   const cors = {
     mode: "cors",
   };
-
   const getUser = async (email) => {
-    console.log("this is the email ", email);
     if (email !== undefined && email !== "") {
       const res = await fetch(
         `https://turnupdb.herokuapp.com/events/userem/${email}`,
         cors
       );
       const data = await res.json();
-      console.log("this is the data: ", data);
       setUser(data[0]);
     }
   };
   async function getUserFromAuth() {
     let userInfo = await Auth.currentUserInfo();
-    console.log("user info: ", userInfo);
     getUser(userInfo.attributes.email);
   }
 
@@ -46,6 +44,7 @@ function Profile() {
   ]);
 
   const [listDisplay, setListDisplay] = useState([]);
+  const [listType, setListType] = useState("");
 
   const [friends, setFriends] = useState([{ friend: 1 }]);
 
@@ -53,7 +52,6 @@ function Profile() {
   const [attendedEvents, setAttendedEvents] = useState(attendedEventsArr);
 
   async function getOrgansiedAttendedAndFriendsEvents(userId) {
-    console.log("help me i am sad", userId);
     const organisedRes = await fetch(
       `https://turnupdb.herokuapp.com/events/event-org/${userId}`,
       cors
@@ -73,23 +71,24 @@ function Profile() {
     setOrganisedEvents(organisedResData);
     setAttendedEvents(attendedResData);
     setListDisplay(attendedResData);
+    setListType("attended");
     setFriends(friendResData);
   }
   const [toggleVariant, setToggleVariant] = useState(false);
 
   function toggleEvents(bool) {
-    console.log("event toggled", bool);
     if (bool === true) {
       setToggleVariant(false);
       setListDisplay(organisedEvents);
+      setListType("organised");
     } else {
       setToggleVariant(true);
       setListDisplay(attendedEvents);
+      setListType("attended");
     }
   }
 
   function loadUserPosition() {
-    console.log("start of function for location");
     navigator.geolocation.getCurrentPosition(
       positionFound /*positionNotFound*/
     );
@@ -103,22 +102,10 @@ function Profile() {
       }
     }
   }
-  // window.addEventListener("load", () => {
-  //   navigator.geolocation.getCurrentPosition(positionFound, positionNotFound);
-  //   async function positionFound(position) {
-  //     const lng = position.coords.longitude;
-  //     const lat = position.coords.latitude;
-  //     setProfileUserLocation({ lat: lat, lng: lng });
-  //   }
-  //   function positionNotFound(err) {
-  //     console.log(err);
-  //   }
-  // });
 
   useEffect(() => {
     getOrgansiedAttendedAndFriendsEvents(user.userid);
     loadUserPosition();
-    // setListDisplay(organisedEvents);
   }, [user]);
 
   useEffect(() => {
@@ -205,6 +192,8 @@ function Profile() {
                 <EventList
                   eventsArr={listDisplay}
                   userLoc={profileUserLocation}
+                  whatType={listType}
+                  user={user}
                 />
               ) : (
                 <div className="loading">
