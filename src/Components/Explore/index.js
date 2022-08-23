@@ -31,7 +31,6 @@ function Explore(signOut, user) {
 
   async function isUserNew(email) {
     if (email !== "") {
-      console.log(email);
       const res = await fetch(
         `https://turnupdb.herokuapp.com/events/userem/${email}`,
         {
@@ -121,7 +120,6 @@ function Explore(signOut, user) {
   }, [userInput]);
 
   function loadPosition() {
-    console.log("start of function for location");
     navigator.geolocation.getCurrentPosition(positionFound, positionNotFound);
     async function positionFound(position) {
       const lng = position.coords.longitude;
