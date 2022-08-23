@@ -1,11 +1,9 @@
 import "./index.css";
 import { useState, useEffect } from "react";
-
 import Navbar from "../Navbar";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import {
-  Box,
   FormControlLabel,
   Checkbox,
   FormControl,
@@ -16,18 +14,12 @@ import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
 import { LocalizationProvider, DatePicker } from "@mui/x-date-pickers";
 import { TimePicker } from "@mui/x-date-pickers/TimePicker";
 import { useNavigate } from "react-router-dom";
-import CreateEventTitle from "../CreateEventTitle/index.js";
-
-import { CodeRounded, DocumentScanner } from "@mui/icons-material";
-
 import Places from "../Places/places";
-import ImageUpload from "../ImageUpload";
 import { withAuthenticator } from "@aws-amplify/ui-react";
 import { Auth } from "aws-amplify";
 
 function NewEventForm(signOut, user) {
-  //Form submission function that reads each input type and adds it to the object to be sent to the server if needed.
-
+  //states keeping track of each aspect of the created event:
   const [tags, setTags] = useState([""]);
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
@@ -49,13 +41,15 @@ function NewEventForm(signOut, user) {
   });
 
   useEffect(() => {
-    sendTags(createdEventId);
-  }, [createdEventId]);
-
-  useEffect(() => {
     getUserFromDB(authUser);
   }, [authUser]);
 
+  //this use effect prompts the page to send tags to the database only after it receives the id of the newly created event
+  useEffect(() => {
+    sendTags(createdEventId);
+  }, [createdEventId]);
+
+  //The functions bellow retrieve user info frim Cognito auth and from turnUp Data Base
   async function getUserFromAuth() {
     let userInfo = await Auth.currentUserInfo();
     setAuthUser(userInfo.attributes.email);
@@ -74,6 +68,7 @@ function NewEventForm(signOut, user) {
     }
   }
 
+  //The functions bellow track user inputs and change the states above accordingly.
   const handleTagChange = (e) => {
     const index = tags.indexOf(e.target.value);
     if (index === -1) {
@@ -84,54 +79,41 @@ function NewEventForm(signOut, user) {
   };
 
   function handleName(event) {
-    // This function tracks the string information typed into the input field.
     const value = event.target.value;
     setName(value);
   }
 
   function handleDescription(event) {
-    // This function tracks the string information typed into the input field.
     const value = event.target.value;
     setDescription(value);
   }
-
   function handleSummary(event) {
-    // This function tracks the string information typed into the input field.
     const value = event.target.value;
     setSummary(value);
   }
 
-  function handleDate(event) {
-    // This function tracks the string information typed into the input field.
-    const value = event.target.value;
-    const newVal = Date().toLocaleString(value);
-    setDate(newVal);
-  }
-
   function handleUrl(event) {
-    // This function tracks the string information typed into the input field.
     const value = event.target.value;
     setUrl(value);
   }
+
+  //the functions below are responsible for sending the new event and tags to relevant tables in the back end
   async function sendTags(eventId) {
-    //Tag creation
     if (eventId !== null) {
       for (let i = 0; i < tags.length; i++) {
         await fetch("https://turnupdb.herokuapp.com/events/eventTags", {
-          //
-          method: "POST", // *GET, POST, PUT, DELETE, etc.
+          method: "POST",
           mode: "cors",
           headers: {
             "Access-Control-Allow-Origin": "*",
             "Content-Type": "application/json",
-            // 'Content-Type': 'application/x-www-form-urlencoded',
           },
-          redirect: "follow", // manual, *follow, error
-          referrerPolicy: "no-referrer", // no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
+          redirect: "follow",
+          referrerPolicy: "no-referrer",
           body: JSON.stringify({
             eventid: eventId,
             tagid: Number(tags[i]),
-          }), // body data type must match "Content-Type" header
+          }),
         });
       }
       navigate("/profile");
@@ -141,18 +123,17 @@ function NewEventForm(signOut, user) {
   async function handleSubmission(e) {
     e.preventDefault();
 
+    //date comes in dd/mm/yyyy format and it has to be rearranged with the code below
     const [day, month, year] = date.toLocaleDateString().split("/");
-
     const adjustedDate = [year, month, day].join("-");
     const adjustedTime = time.toLocaleTimeString();
-    //  All elements have been searched, ready to post the data to the server and database.
 
     let eventObj = {
       eventName: name,
       eventDescription: summary,
       mainDescription: description,
-      date: adjustedDate, //date.toLocaleDateString(),
-      time: adjustedTime, //time.toLocaleTimeString(),
+      date: adjustedDate,
+      time: adjustedTime,
       organiser: userDB.userid,
       lat: coord.lat,
       lng: coord.lng,
@@ -163,17 +144,15 @@ function NewEventForm(signOut, user) {
     };
 
     const response = await fetch(`https://turnupdb.herokuapp.com/events/all`, {
-      //
-      method: "POST", // *GET, POST, PUT, DELETE, etc.
+      method: "POST",
       mode: "cors",
       headers: {
         "Access-Control-Allow-Origin": "*",
         "Content-Type": "application/json",
-        // 'Content-Type': 'application/x-www-form-urlencoded',
       },
-      redirect: "follow", // manual, *follow, error
-      referrerPolicy: "no-referrer", // no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
-      body: JSON.stringify(eventObj), // body data type must match "Content-Type" header
+      redirect: "follow",
+      referrerPolicy: "no-referrer",
+      body: JSON.stringify(eventObj),
     });
     const newEventData = await response.json();
     setCreatedEventId(newEventData.payload[0].eventid);
@@ -184,9 +163,7 @@ function NewEventForm(signOut, user) {
       <Navbar></Navbar>
       <div className="form-container">
         <div className="outer-div">
-          <h1>New Event</h1>
-
-          {/* <CreateEventTitle /> */}
+          <h2>New Event</h2>
         </div>
         <Places setCoordFunction={setCoord} />
         <div className="add-event-card-body">
@@ -197,9 +174,6 @@ function NewEventForm(signOut, user) {
               fullWidth
               sx={{
                 width: "90%",
-                // background: "var(--supporting-blue)",
-                // margin: "auto",
-                // display: "inline-flex",
               }}
               label="Event title"
               multiline
@@ -216,8 +190,6 @@ function NewEventForm(signOut, user) {
               fullWidth
               sx={{
                 width: "90%",
-                // height: "9.2rem",
-                // background: "var(--supporting-blue)",
               }}
               label="Event Summary"
               multiline
@@ -234,7 +206,6 @@ function NewEventForm(signOut, user) {
               fullWidth
               sx={{
                 width: "90%",
-                // background: "var(--supporting-blue)",
               }}
               label="Event Description"
               multiline
@@ -243,10 +214,8 @@ function NewEventForm(signOut, user) {
               id="decriptionArea"
               required
             />
-            {/* <div className="buffer"> </div> */}
           </div>
           <div className="top-right">
-            {/* <Places setCoordFunction={setCoord} /> */}
             <div className="date-time-container">
               <LocalizationProvider dateAdapter={AdapterDateFns}>
                 <DatePicker
@@ -261,16 +230,11 @@ function NewEventForm(signOut, user) {
                   renderInput={(params) => (
                     <TextField sx={{ backgroundColor: "white" }} {...params} />
                   )}
-                  // sx={{
-                  //   width: "auto",
-                  //   height: "auto",
-                  // }}
                 />
               </LocalizationProvider>
 
               <LocalizationProvider dateAdapter={AdapterDateFns}>
                 <TimePicker
-                  // ampmInClock="false"
                   label="Start time"
                   orientation="portrait"
                   openTo="hours"
@@ -282,10 +246,6 @@ function NewEventForm(signOut, user) {
                   renderInput={(params) => (
                     <TextField sx={{ backgroundColor: "white" }} {...params} />
                   )}
-                  // sx={{
-                  //   width: "auto",
-                  //   height: "auto",
-                  // }}
                 />
               </LocalizationProvider>
             </div>

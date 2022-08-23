@@ -12,7 +12,6 @@ export default function Drawer() {
   function handleClose() {
     setDrawerState(false);
   }
-  //something very small, yet again
 
   return (
     <div className="drawer-wrapper">
@@ -42,7 +41,9 @@ export default function Drawer() {
           Find free events near you, invite your friends, turn up!
         </p>
         <p className="about-us">
-          Or if you're looking to put on a free event, set up an account and use our create event form to add the details for other users to find and get in contact with you!
+          Or if you're looking to put on a free event, set up an account and use
+          our create event form to add the details for other users to find and
+          get in contact with you!
         </p>
       </SwipeableDrawer>
       <button className="about-text" onClick={handleOpen}>

@@ -15,8 +15,6 @@ export const FriendsCard = ({ friend }) => {
       }
     );
     const data = await res.json();
-    // further in this function we need to have an if statement that checks if the user has any friends to begin with and if not, use setFriendsList to define it as undefined and offer him an add friend button that can be rendered on a card
-    // if the user has friends it just renders his list of friends
     setFriendData(data[0]);
   }
   useEffect(() => {

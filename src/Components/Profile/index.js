@@ -8,7 +8,10 @@ import { withAuthenticator } from "@aws-amplify/ui-react";
 import Mask from "../Mask";
 import "../Mask/styles.css";
 import { Auth } from "aws-amplify";
-import { attendedEventsArr, organisedEventsArr } from "../Constants/constants";
+import {
+  attendedEventsArr,
+  organisedEventsArr,
+} from "../../lib/Constants/constants";
 import { createContext } from "react";
 
 export const UserContext = createContext();
@@ -17,20 +20,6 @@ function Profile() {
   const cors = {
     mode: "cors",
   };
-  const getUser = async (email) => {
-    if (email !== undefined && email !== "") {
-      const res = await fetch(
-        `https://turnupdb.herokuapp.com/events/userem/${email}`,
-        cors
-      );
-      const data = await res.json();
-      setUser(data[0]);
-    }
-  };
-  async function getUserFromAuth() {
-    let userInfo = await Auth.currentUserInfo();
-    getUser(userInfo.attributes.email);
-  }
 
   const [user, setUser] = useState({
     userid: 0,
@@ -50,6 +39,33 @@ function Profile() {
 
   const [organisedEvents, setOrganisedEvents] = useState(organisedEventsArr);
   const [attendedEvents, setAttendedEvents] = useState(attendedEventsArr);
+  const [toggleVariant, setToggleVariant] = useState(false);
+
+  useEffect(() => {
+    getOrgansiedAttendedAndFriendsEvents(user.userid);
+    loadUserPosition();
+  }, [user]);
+
+  useEffect(() => {
+    toggleEvents(false);
+    getUserFromAuth();
+    getUser("");
+  }, []);
+
+  const getUser = async (email) => {
+    if (email !== undefined && email !== "") {
+      const res = await fetch(
+        `https://turnupdb.herokuapp.com/events/userem/${email}`,
+        cors
+      );
+      const data = await res.json();
+      setUser(data[0]);
+    }
+  };
+  async function getUserFromAuth() {
+    let userInfo = await Auth.currentUserInfo();
+    getUser(userInfo.attributes.email);
+  }
 
   async function getOrgansiedAttendedAndFriendsEvents(userId) {
     const organisedRes = await fetch(
@@ -74,7 +90,6 @@ function Profile() {
     setListType("attended");
     setFriends(friendResData);
   }
-  const [toggleVariant, setToggleVariant] = useState(false);
 
   function toggleEvents(bool) {
     if (bool === true) {
@@ -89,9 +104,7 @@ function Profile() {
   }
 
   function loadUserPosition() {
-    navigator.geolocation.getCurrentPosition(
-      positionFound /*positionNotFound*/
-    );
+    navigator.geolocation.getCurrentPosition(positionFound);
     async function positionFound(position) {
       const lng = position.coords.longitude;
       const lat = position.coords.latitude;
@@ -103,24 +116,9 @@ function Profile() {
     }
   }
 
-  useEffect(() => {
-    getOrgansiedAttendedAndFriendsEvents(user.userid);
-    loadUserPosition();
-  }, [user]);
-
-  useEffect(() => {
-    toggleEvents(false);
-    getUserFromAuth();
-    getUser("");
-  }, []);
-
-  // further in this function we need to have an if statement that checks if the user has any friends to begin with and if not, use setFriendsList to define it as undefined and offer him an add friend button that can be rendered on a card
-  // if the user has friends it just renders his list of friends
-
   return (
     <>
       <Mask loaded={user.userid === 0 ? false : true} />
-      {/* <Mask loaded={profileUserLocation.lat ? true : false} /> */}
       <div>
         <Navbar></Navbar>
         <div className="profile-container">
@@ -150,7 +148,6 @@ function Profile() {
                   Create Event
                 </Button>
               </a>
-              {/* <h3>Friends list</h3> */}
             </div>
             <div className="friends-list">
               <div className="friend-search-bar">

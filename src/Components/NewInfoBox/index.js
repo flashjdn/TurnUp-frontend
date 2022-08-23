@@ -28,7 +28,7 @@ export function NewInfoBox({ closingFunction, newUserEmail }) {
           <h2>...just one more step</h2>
           <p>
             It's great to have you with us! Please provide us with your username
-            and a picture so other users can identify you when they turn up!{" "}
+            and a picture and let's begin.{" "}
           </p>
         </div>
         <form id="new-user-form" onSubmit={handleSubmit}>

@@ -13,7 +13,6 @@
   align-items: center;
   justify-content: space-around;
   max-height: 96%;
-  /* background-color: red; */
 }
 
 .profile-right-side {
@@ -67,7 +66,6 @@
 }
 .profile-info > h3 {
   align-self: center;
-  /* margin-top: 1rem; */
 }
 
 .profile-info p {
@@ -76,7 +74,6 @@
 
 .strong {
   font-weight: bolder;
-  /* color: red */
 }
 
 .create-button {

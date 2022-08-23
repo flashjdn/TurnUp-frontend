@@ -5,6 +5,28 @@ import { Button } from "@mui/material";
 
 export const EventCard = ({ eventObj, onClick, userLoc, whatType, user }) => {
   const [tags, setTags] = useState([]);
+
+  const [isDeleted, setIsDeleted] = useState(false);
+
+  //get tags after event object is loaded, otherwise the tags break
+  useEffect(() => {
+    if (eventObj.eventid !== undefined) {
+      getTags(eventObj.eventid);
+    }
+  }, [eventObj]);
+
+  //the function calculates the distance between user and event in km. More info in the folder Models
+  let userDistance = haversineDistance(
+    [eventObj.lng, eventObj.lat],
+    [userLoc.lng, userLoc.lat],
+    false
+  );
+
+  //eventObj.date comes as yyyy-mm-dd + TIMEZONE. This snippet rearanges it to dd-mm-yyyy
+  const [year, month, day] = eventObj.date.substring(0, 10).split("-");
+  const adjustedDate = [day, month, year].join("-");
+
+  //function definitions for this component:
   const getTags = async (eventId) => {
     const res = await fetch(
       `https://turnupdb.herokuapp.com/events/tags/${eventId}`,
@@ -16,87 +38,64 @@ export const EventCard = ({ eventObj, onClick, userLoc, whatType, user }) => {
     setTags(data);
   };
 
-  const [isDeleted, setIsDeleted] = useState(false);
-
-  useEffect(() => {
-    //getTags(eventObj.eventid);
-    if (eventObj.eventid !== undefined) {
-      getTags(eventObj.eventid);
-    }
-  }, [eventObj]);
-
-  //CALCULATE DISTANCE BETWEEN THE USER AND THE EVENT
-  let userDistance = haversineDistance(
-    [eventObj.lng, eventObj.lat],
-    [userLoc.lng, userLoc.lat],
-    false
-  );
-
   async function deleteAttendedEvent() {
     await fetch("https://turnupdb.herokuapp.com/events/deluserev", {
-      //
-      method: "DELETE", // *GET, POST, PUT, DELETE, etc.
+      method: "DELETE",
       mode: "cors",
       headers: {
         "Access-Control-Allow-Origin": "*",
         "Content-Type": "application/json",
-        // 'Content-Type': 'application/x-www-form-urlencoded',
       },
-      redirect: "follow", // manual, *follow, error
-      referrerPolicy: "no-referrer", // no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
+      redirect: "follow",
+      referrerPolicy: "no-referrer",
       body: JSON.stringify({
         eventid: Number(eventObj.eventid),
         userid: Number(user.userid),
-      }), // body data type must match "Content-Type" header
+      }),
     });
     setIsDeleted(true);
   }
 
   async function deleteEvent() {
     await fetch("https://turnupdb.herokuapp.com/events/delev", {
-      //
-      method: "DELETE", // *GET, POST, PUT, DELETE, etc.
+      method: "DELETE",
       mode: "cors",
       headers: {
         "Access-Control-Allow-Origin": "*",
         "Content-Type": "application/json",
-        // 'Content-Type': 'application/x-www-form-urlencoded',
       },
-      redirect: "follow", // manual, *follow, error
-      referrerPolicy: "no-referrer", // no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
+      redirect: "follow",
+      referrerPolicy: "no-referrer",
       body: JSON.stringify({
         eventid: Number(eventObj.eventid),
-      }), // body data type must match "Content-Type" header
+      }),
     });
     await fetch("https://turnupdb.herokuapp.com/events/deltags", {
       //
-      method: "DELETE", // *GET, POST, PUT, DELETE, etc.
+      method: "DELETE",
       mode: "cors",
       headers: {
         "Access-Control-Allow-Origin": "*",
         "Content-Type": "application/json",
-        // 'Content-Type': 'application/x-www-form-urlencoded',
       },
-      redirect: "follow", // manual, *follow, error
-      referrerPolicy: "no-referrer", // no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
+      redirect: "follow",
+      referrerPolicy: "no-referrer",
       body: JSON.stringify({
         eventid: Number(eventObj.eventid),
-      }), // body data type must match "Content-Type" header
+      }),
     });
     await fetch("https://turnupdb.herokuapp.com/events/delusev", {
-      //
-      method: "DELETE", // *GET, POST, PUT, DELETE, etc.
+      method: "DELETE",
       mode: "cors",
       headers: {
         "Access-Control-Allow-Origin": "*",
         "Content-Type": "application/json",
-        // 'Content-Type': 'application/x-www-form-urlencoded',
       },
-      redirect: "follow", // manual, *follow, error
-      referrerPolicy: "no-referrer", // no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
+      redirect: "follow",
+      referrerPolicy: "no-referrer",
       body: JSON.stringify({
         eventid: Number(eventObj.eventid),
-      }), // body data type must match "Content-Type" header
+      }),
     });
 
     setIsDeleted(true);
@@ -166,6 +165,7 @@ export const EventCard = ({ eventObj, onClick, userLoc, whatType, user }) => {
               <div className="right-event-section">
                 <p>{userDistance.toFixed(1)} km away</p>
                 <p>{eventObj.time.substring(0, 5)}</p>
+                <p>{adjustedDate}</p>
               </div>
             </div>
           </div>

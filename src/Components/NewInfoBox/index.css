@@ -9,8 +9,6 @@
   align-items: center;
   z-index: 3;
   background-color: var(--primary-opaque);
-
-  /* color */
 }
 
 .new-user-inside-box {
@@ -42,8 +40,8 @@
 #new-user-form {
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: space-around;
   width: 30vw;
-  height: 23vh;
+  height: 25vh;
   margin-bottom: 3vh;
 }
