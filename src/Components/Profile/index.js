@@ -9,13 +9,14 @@ import Mask from "../Mask";
 import "../Mask/styles.css";
 import { Auth } from "aws-amplify";
 import { attendedEventsArr, organisedEventsArr } from "../Constants/constants";
-import Searchbar from "../Searchbar";
+import { createContext } from "react";
+
+export const UserContext = createContext();
 
 function Profile() {
   const cors = {
     mode: "cors",
   };
-
   const getUser = async (email) => {
     console.log("this is the email ", email);
     if (email !== undefined && email !== "") {
@@ -46,6 +47,7 @@ function Profile() {
   ]);
 
   const [listDisplay, setListDisplay] = useState([]);
+  const [listType, setListType] = useState("");
 
   const [friends, setFriends] = useState([{ friend: 1 }]);
 
@@ -73,6 +75,7 @@ function Profile() {
     setOrganisedEvents(organisedResData);
     setAttendedEvents(attendedResData);
     setListDisplay(attendedResData);
+    setListType("attended");
     setFriends(friendResData);
   }
   const [toggleVariant, setToggleVariant] = useState(false);
@@ -82,9 +85,11 @@ function Profile() {
     if (bool === true) {
       setToggleVariant(false);
       setListDisplay(organisedEvents);
+      setListType("organised");
     } else {
       setToggleVariant(true);
       setListDisplay(attendedEvents);
+      setListType("attended");
     }
   }
 
@@ -118,7 +123,6 @@ function Profile() {
   useEffect(() => {
     getOrgansiedAttendedAndFriendsEvents(user.userid);
     loadUserPosition();
-    // setListDisplay(organisedEvents);
   }, [user]);
 
   useEffect(() => {
@@ -205,6 +209,8 @@ function Profile() {
                 <EventList
                   eventsArr={listDisplay}
                   userLoc={profileUserLocation}
+                  whatType={listType}
+                  user={user}
                 />
               ) : (
                 <div className="loading">
