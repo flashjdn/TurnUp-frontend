@@ -20,7 +20,7 @@ Amplify.configure(awsconfig);
 function Explore(signOut, user) {
   const [newUser, setNewUser] = useState(false);
   const [userEmail, setUserEmail] = useState("");
-  const [loadedUser, setLoadedUser] = useState({ userid: 28 }); //this should be userid: 0, changed to 28 for the demo
+  const [loadedUser, setLoadedUser] = useState({ userid: 0 }); //this should be userid: 0, changed to 28 for the demo
   async function getUserFromAuth() {
     let userInfo = await Auth.currentUserInfo();
     setUserEmail(userInfo.attributes.email);
@@ -76,7 +76,7 @@ function Explore(signOut, user) {
   ]);
   const [userInput, setUserInput] = useState("");
 
-  //this is the state that holds ALL the events loaded from the database. eventsArr is the one that is getting modified by search
+  //this is the state that holds ALL the events loaded from the database. When user is searching, they're sorting through this array
   const [loadedEvents, setLoadedEvents] = useState([
     {
       eventid: 10,
