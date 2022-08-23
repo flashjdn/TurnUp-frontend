@@ -21,9 +21,17 @@ function MainEventCard({ eventObj, xClick, userId }) {
 
   const [attendingButton, setAttendingButton] = useState("contained");
   const [peopleAttending, setPeopleAttending] = useState([]);
-  
 
- 
+  useEffect(() => {
+    getTags(eventObj.eventid);
+    getOrganiser(eventObj.organiser);
+    getPeopleAttending(eventObj.eventid);
+    setAttendingButton("contained");
+  }, [eventObj.eventid]);
+
+  useEffect(() => {
+    checkIfAttending(userId, peopleAttending);
+  }, [peopleAttending]);
 
   const getTags = async (eventId) => {
     const res = await fetch(
@@ -93,16 +101,6 @@ function MainEventCard({ eventObj, xClick, userId }) {
       setAttendingButton("contained");
     }
   }
-  useEffect(() => {
-    getTags(eventObj.eventid);
-    getOrganiser(eventObj.organiser);
-    getPeopleAttending(eventObj.eventid);
-    setAttendingButton("contained");
-  }, [eventObj.eventid]);
-
-  useEffect(() => {
-    checkIfAttending(userId, peopleAttending);
-  }, [peopleAttending]);
 
   return (
     <div className="main-event-card">

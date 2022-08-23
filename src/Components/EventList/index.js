@@ -19,8 +19,6 @@ function EventList({ eventsArr, onClick, userLoc, whatType, user }) {
     return userDistanceToA - userDistanceToB;
   });
 
-  // console.log(eventsArr);
-
   return (
     <div className="cards-container">
       {eventsArray.map((item, index) => {

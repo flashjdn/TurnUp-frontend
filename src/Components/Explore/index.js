@@ -4,7 +4,6 @@ import { useEffect, useState } from "react";
 import EventOverlay from "../EventOverlay/index.js";
 import { Amplify } from "aws-amplify";
 import awsconfig from "../../aws-exports";
-// import { dummyEvents } from "../../lib/dummyEvents";
 import { withAuthenticator } from "@aws-amplify/ui-react";
 import "@aws-amplify/ui-react/styles.css";
 import awsExports from "../../aws-exports";
@@ -18,42 +17,12 @@ Amplify.configure(awsExports);
 Amplify.configure(awsconfig);
 
 function Explore(signOut, user) {
+  //useffects managing the state of user at different stages of loading (checking if user is in our DB/retrieving from DB, finished loading)
   const [newUser, setNewUser] = useState(false);
   const [userEmail, setUserEmail] = useState("");
-  const [loadedUser, setLoadedUser] = useState({ userid: 0 }); //this should be userid: 0, changed to 28 for the demo
-  async function getUserFromAuth() {
-    let userInfo = await Auth.currentUserInfo();
-    setUserEmail(userInfo.attributes.email);
-  }
-  useEffect(() => {
-    getUserFromAuth();
-  }, []);
+  const [loadedUser, setLoadedUser] = useState({ userid: 0 });
 
-  async function isUserNew(email) {
-    if (email !== "") {
-      const res = await fetch(
-        `https://turnupdb.herokuapp.com/events/userem/${email}`,
-        {
-          mode: "cors",
-        }
-      );
-      const data = await res.json();
-      if (data.length === 0) {
-        setNewUser(true);
-      } else {
-        setLoadedUser(data[0]);
-      }
-    }
-  }
-
-  useEffect(() => {
-    isUserNew(userEmail);
-  }, [userEmail]);
-
-  function submitNewUser() {
-    setNewUser(false);
-  }
-
+  //useeffects for managing displayed events
   const [eventsArr, setEventsArr] = useState([
     {
       eventId: 10,
@@ -97,6 +66,29 @@ function Explore(signOut, user) {
     },
   ]);
 
+  //usestates responsible for managing user and map centering locations
+  const [location, setLocation] = useState({
+    lat: 51.496681,
+    lng: -0.050417,
+  });
+
+  const [userLocation, setUserLocation] = useState({
+    lat: null,
+    lng: null,
+  });
+
+  //This state takes in the object of the event clicked in EventOverlay
+  const [popUp, setPopUp] = useState(undefined);
+
+  //USE EFFECTS start here, they manage user loading and search results
+  useEffect(() => {
+    getUserFromAuth();
+  }, []);
+
+  useEffect(() => {
+    isUserNew(userEmail);
+  }, [userEmail]);
+
   useEffect(() => {
     let searchResults = [];
     for (let i = 0; i < loadedEvents.length; i++) {
@@ -118,6 +110,38 @@ function Explore(signOut, user) {
     }
     setEventsArr(searchResults);
   }, [userInput]);
+
+  useEffect(() => {
+    getEvents();
+    loadPosition();
+  }, []);
+
+  //functions using states at the top, used in useEffects or in the JSX
+  async function getUserFromAuth() {
+    let userInfo = await Auth.currentUserInfo();
+    setUserEmail(userInfo.attributes.email);
+  }
+
+  async function isUserNew(email) {
+    if (email !== "") {
+      const res = await fetch(
+        `https://turnupdb.herokuapp.com/events/userem/${email}`,
+        {
+          mode: "cors",
+        }
+      );
+      const data = await res.json();
+      if (data.length === 0) {
+        setNewUser(true);
+      } else {
+        setLoadedUser(data[0]);
+      }
+    }
+  }
+
+  function submitNewUser() {
+    setNewUser(false);
+  }
 
   function loadPosition() {
     navigator.geolocation.getCurrentPosition(positionFound, positionNotFound);
@@ -141,19 +165,7 @@ function Explore(signOut, user) {
     setLoadedEvents(data);
   };
 
-  const [location, setLocation] = useState({
-    lat: 51.496681,
-    lng: -0.050417,
-  });
-
-  const [userLocation, setUserLocation] = useState({
-    lat: null,
-    lng: null,
-  });
-  //This state takes in the object of the event clicked in EventOverlay
-  const [popUp, setPopUp] = useState(undefined);
-
-  //This function is passed down the tree to change the index of the even pop up
+  //This function is passed down the tree to change the index of the even pop up when EventCard is clicked
   function eventClickHandler(position, eventId) {
     for (let i = 0; i < eventsArr.length; i++) {
       if (eventsArr[i].eventid === eventId) {
@@ -162,7 +174,7 @@ function Explore(signOut, user) {
       }
     }
   }
-
+  //This functions changes pop up at the level of markers in MapContainer
   function markerClickHandler(markerEventId) {
     for (let i = 0; i < eventsArr.length; i++) {
       if (eventsArr[i].eventid === markerEventId) {
@@ -171,18 +183,11 @@ function Explore(signOut, user) {
     }
   }
 
-  //function to close the pop up
+  //function to close the pop up at the level of the MainEventCard
   function xClickReset() {
     setPopUp(undefined);
     setLocation(userLocation);
   }
-
-  useEffect(() => {
-    getEvents();
-    loadPosition();
-  }, []);
-
-  // {userLocation.lat ? true : false}
 
   return (
     <>
@@ -220,7 +225,4 @@ function Explore(signOut, user) {
   );
 }
 
-// export default Explore;
 export default withAuthenticator(Explore);
-// test
-

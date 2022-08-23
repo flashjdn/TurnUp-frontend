@@ -1,15 +1,7 @@
-* {
-  --primary: #fbb02d;
-  --secondary: #006390;
-  --supporting-blue: #adcad6;
-  --fonts: "Raleway", sans-serif;
-}
-
 .add-event-card-body {
   width: 100%;
   height: 90%;
   display: flex;
-  /* background-color: red; */
   justify-content: space-around;
   align-items: baseline;
   margin: 30px auto;
@@ -20,12 +12,10 @@
   justify-content: space-around;
   height: 90%;
   width: 45%;
-  /* position: relative; */
   display: flex;
   flex-direction: column;
   align-content: space-around;
   flex-wrap: wrap;
-  /* gap: 5px 30px; */
   margin-left: 0;
 }
 
@@ -33,11 +23,8 @@
   justify-content: center;
   height: 90%;
   width: 50%;
-  /* position: relative; */
   display: flex;
   flex-direction: column;
-  /* align-items: center; */
-  /* flex-wrap: wrap; */
   gap: 30px;
   margin: auto;
 }
@@ -45,9 +32,7 @@
 .form-container {
   min-height: 60%;
   width: 90vw;
-  /* margin: 4% 4% 4% 5%; */
   margin: 4% auto;
-  /* background-color: rgb(15, 138, 132); */
   border: solid;
   border-radius: 0.5rem;
   background-color: white;
@@ -69,7 +54,6 @@
   border-width: 0.005rem;
   border-radius: 0.3rem;
   border-color: rgba(0, 0, 0, 0.3);
-  /* margin-right: 10vh; */
   top: 3.5vh;
   background-color: white;
 }
@@ -79,7 +63,6 @@
   border-width: 0.005rem;
   border-radius: 0.3rem;
   border-color: rgba(0, 0, 0, 0.3);
-  /* margin-right: 10vh; */
   top: 7.5vh;
   background-color: white;
 }
@@ -93,20 +76,15 @@
   width: 30vw;
   background-color: white;
   padding: 5px;
-  /* display: flex;
-  flex-direction: column;
-  flex-wrap: wrap; */
 }
 
 #event-summary-label {
   font-size: 1.5rem;
-  /* margin-right: 35vh; */
   top: 10vh;
 }
 
 .event-description-label {
   font-size: 1.5rem;
-  /* margin-right: 35vh; */
   top: 50vh;
 }
 
@@ -115,8 +93,6 @@
 }
 
 .date-time-container {
-  /* margin-right: 2vh; */
-  /* top: 20vh; */
   display: flex;
   column-gap: 50px;
   margin: auto;
@@ -126,7 +102,6 @@
   display: flex;
   width: 30rem;
   border: solid;
-  /* margin-left: 60vh; */
   background-color: white;
 }
 
@@ -134,7 +109,6 @@
   display: flex;
   width: 30rem;
   border: solid;
-  /* margin-left: 60vh; */
   background-color: white;
 }
 
@@ -148,13 +122,7 @@
   justify-content: center;
   margin: 0 auto 20px;
   gap: 50px;
-  /* margin-top: 7vh; */
 }
-
-/*
-  .hidden {
-    display: none;
-    /* making it hidden by default */
 
 .outer-div {
   display: flex;
@@ -163,16 +131,14 @@
   height: 13%;
   width: auto;
   color: var(--secondary);
-  /* margin-left: 0; */
 }
 
-.outer-div > h1 {
-  font-size: 70%;
+.outer-div > h2 {
+  font-size: 250%;
   align-self: center;
 }
 
 .behind-form {
-  /* background-color: var(--supporting-blue); */
   position: absolute;
   left: 0;
   right: 0;
