@@ -7,6 +7,7 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Places from "../Places/places";
 
 function App() {
+  //production
   return (
     <div className="App">
       <BrowserRouter>
