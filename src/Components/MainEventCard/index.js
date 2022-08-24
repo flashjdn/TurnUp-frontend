@@ -132,6 +132,7 @@ function MainEventCard({ eventObj, xClick, userId }) {
             variant={attendingButton}
             onClick={() => handleAttendance(eventObj, userId)}
             className="attending-btn"
+            sx={attendingButton==="contained" ? { backgroundColor: "#006390" } : {}}
           >
             I'll be there!
           </Button>

@@ -174,12 +174,14 @@ function Profile() {
               <Button
                 variant={toggleVariant ? "disabled" : "contained"}
                 onClick={() => toggleEvents(false)}
+                sx={toggleVariant ? {} : { backgroundColor: "#006390" }}
               >
                 Attending Events
               </Button>
               <Button
                 variant={toggleVariant ? "contained" : "disabled"}
                 onClick={() => toggleEvents(true)}
+                sx={toggleVariant ? { backgroundColor: "#006390" } : {}}
               >
                 Organised Events
               </Button>
