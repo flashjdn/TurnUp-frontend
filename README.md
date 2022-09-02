@@ -3,59 +3,47 @@
 
 TurnUp is an app that allows users to search for free events either nearby or from a search query. Click here to see the deployed site: https://production.d3hv43jagk7qg5.amplifyapp.com/
 
+## Tech Stack
+
+In this project we used React to take advantage of it's versitality as well as our familiarity with the framework. Due to the time constraint we also sparingly used the Material UI library (mainly for the buttons) and AWS component library to personalise our Cognito log-in page. Google Maps API is used to display the map and introduce the auto-complete for place search when user is creating an event. Cypress is used for end-to-end testing.
+
 ## Getting Started
 
 These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
 
-### Prerequisites
-
-The things you need before installing the software.
-
-* You need this
-* And you need this
-* Oh, and don't forget this
-
 ### Installation
 
-A step by step guide that will tell you how to get the development environment up and running.
+Before starting, you'll need to clone and start a server with [final-project_front-end-slack-ops](https://github.com/SchoolOfCode/final-project_back-end-slack-ops).
+This is a step by step guide that will tell you how to get the development environment up and running.
 
 ```
-$ First step
-$ Another step
-$ Final step
-```
-
-## Usage
-
-A few examples of useful commands and/or tasks.
-
-```
-$ First example
-$ Second example
-$ And keep this in mind
+$ Clone this repository
+$ Change the google API key in src/components/MapContainer.js and src/components/Places.js
+$ npm i to download the necessary libraries
 ```
 
 ## Deployment
 
-Additional notes on how to deploy this on a live or release system. Explaining the most important branches, what pipelines they trigger and how to update the database (if anything special).
+To deploy the website on your machine you need to type the following command into the console after completing the instalation:
+
+```
+$ npm start
+```
 
 ### Server
 
-* Live:
-* Release:
-* Development:
+* Live: https://production.d3hv43jagk7qg5.amplifyapp.com/
+* Development: localhost:3000
 
 ### Branches
 
-* Master:
-* Feature:
-* Bugfix:
-* etc...
+* Master: main
+* Development: dev2-revelations
 
-## Additional Documentation and Acknowledgments
+Any feedback is appreciated. If you have any questions, get in touch with the team: 
 
-* Project folder on server:
-* Confluence link:
-* Asana board:
-* etc...
-
+[Kal Hollywood](https://github.com/kalhollywood)
+[Jordan Flash](https://github.com/flashjdn)
+[Simon Bowen](https://github.com/sibowen535)
+[Owen Bovill](https://github.com/OwenB-HamD)
+[Patryk Kielsa](https://github.com/MightyKielsa)
