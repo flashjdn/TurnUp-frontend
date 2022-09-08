@@ -13,7 +13,7 @@ These instructions will get you a copy of the project up and running on your loc
 
 ### Installation
 
-Before starting, you'll need to clone and start a server with [final-project_front-end-slack-ops](https://github.com/SchoolOfCode/final-project_back-end-slack-ops).
+Before executing the steps below, you'll need to clone and start a server from [final-project_back-end-slack-ops](https://github.com/SchoolOfCode/final-project_back-end-slack-ops).
 This is a step by step guide that will tell you how to get the development environment up and running.
 
 ```
