@@ -65,3 +65,6 @@ Any feedback is appreciated. If you have any questions, get in touch with the te
 [Simon Bowen](https://github.com/sibowen535)
 [Owen Bovill](https://github.com/OwenB-HamD)
 [Patryk Kielsa](https://github.com/MightyKielsa)
+
+
+BACKEND REPO: https://github.com/SchoolOfCode/final-project_back-end-slack-ops
